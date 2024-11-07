@@ -7,8 +7,8 @@ import { Drawer, DrawerChildren } from "@/components/drawer/drawer";
 import { cva } from "cva";
 import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";
 import { useDrawerContext } from "@/components/drawer";
-import InlineComponent from "@/components/deprecated/inline-component";
 import { syncRefs } from "@/lib/utils/sync-refs";
+import InlineComponent from "@/components/inline-component";
 
 const conditionDrawer = cva({
   base: "fixed inset-0 start-[calc(100%-100vw)] z-20 flex max-h-full flex-col justify-end overflow-hidden lg:p-6",

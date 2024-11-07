@@ -6,8 +6,8 @@ import { Drawer, DrawerChildren, DrawerRenderArgs } from "@/components/drawer/dr
 import { useMenuContext } from "@/components/menu/context";
 import { useDrawerContext } from "@/components/drawer";
 import { ScrollArea } from "@/components/scroll-area";
-import InlineComponent from "@/components/deprecated/inline-component";
 import { syncRefs } from "@/lib/utils/sync-refs";
+import InlineComponent from "@/components/inline-component";
 
 const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => {
   const { anchor, className, children, static: staticProp, ...otherProps } = props;
@@ -60,14 +60,12 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
                         anchor={
                           isMobile
                             ? undefined
-                            : typeof anchor === "string"
-                              ? anchor
-                              : {
-                                  to: "bottom start",
-                                  gap: "0.5rem",
-                                  padding: "1.5rem",
-                                  ...anchor,
-                                }
+                            : {
+                                to: typeof anchor == "string" ? anchor : "bottom start",
+                                gap: "0.5rem",
+                                padding: "1.5rem",
+                                ...(typeof anchor == "object" ? anchor : {}),
+                              }
                         }
                         className={cn(
                           "transition duration-300 ease-out lg:duration-200",

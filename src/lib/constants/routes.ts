@@ -8,4 +8,13 @@ export const routes = {
   home: {
     getPath: () => "/",
   },
+  messages: {
+    getPath: () => "/messages",
+  },
+  favorites: {
+    getPath: () => "/favorites",
+  },
+  search: {
+    getPath: () => "/search",
+  },
 } satisfies Route;

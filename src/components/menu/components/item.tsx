@@ -11,8 +11,9 @@ const DEFAULT_ITEM_TAG = "button" as const;
 
 const item = cva({
   base: cn(
-    "w-full group cursor-pointer rounded-rounded px-4 px-3.5 py-1.5 focus:outline-none",
-    "text-start text-sm/7",
+    "w-full group cursor-pointer rounded-rounded px-4 px-3.5 py-2 focus:outline-none",
+    "text-start text-base/6 lg:text-sm/5",
+    "text-fg",
     "forced-colors:text-[CanvasText] data-[focus]:bg-primary data-[focus]:text-primary-fg",
     "data-[disabled]:opacity-50 forced-color-adjust-none col-span-full",
     "data-[disabled]:cursor-not-allowed",
@@ -22,11 +23,11 @@ const item = cva({
     "[&>*[data-slot$=icon]]:stroke-[1.5px]",
     // Start icon
     "[&>[data-slot=start-icon]]:col-start-1 [&>[data-slot=start-icon]]:row-start-1 [&>[data-slot=start-icon]]:row-span-2",
-    "[&>[data-slot=start-icon]]:me-4 lg:[&>[data-slot=start-icon]]:me-2.5 [&>[data-slot=start-icon]]:size-5",
+    "[&>[data-slot=start-icon]]:me-4 lg:[&>[data-slot=start-icon]]:me-2.5 [&>[data-slot=start-icon]]:size-6 lg:[&>[data-slot=start-icon]]:size-5",
     "[&>[data-slot=start-icon]]:data-[focus]:text-primary-fg",
     // End icon
     "[&>[data-slot=end-icon]]:col-start-3 [&>[data-slot=end-icon]]:row-start-1 [&>[data-slot=end-icon]]:row-span-2",
-    "[&>[data-slot=end-icon]]:ms-2.5 [&>[data-slot=end-icon]]:size-5",
+    "[&>[data-slot=end-icon]]:ms-2.5 [&>[data-slot=end-icon]]:size-6 lg:[&>[data-slot=end-icon]]:size-5",
     "[&>[data-slot=end-icon]]:data-[focus]:text-primary-fg"
   ),
   variants: {
