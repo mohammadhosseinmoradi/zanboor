@@ -1,6 +1,6 @@
 import { Listbox } from "@headlessui/react";
 import { forwardRef, Fragment, memo, ReactNode, Ref, useState } from "react";
-import { Button } from "@/components/listbox-dropdown/button";
+import { button, Button } from "@/components/listbox-dropdown/button";
 import { Options } from "@/components/listbox-dropdown/options";
 import useUpdateEffect from "@/hooks/use-update-effect";
 import { TOption } from "@/components/listbox-dropdown/types";
@@ -10,6 +10,7 @@ import {
   ListboxSetContext,
 } from "@/components/listbox-dropdown/context";
 import { toNormalizeOptions } from "@/components/listbox-dropdown/helpers";
+import { VariantProps } from "cva";
 
 export type ListboxDropdownProps = {
   ref?: Ref<HTMLButtonElement>;
@@ -28,7 +29,7 @@ export type ListboxDropdownProps = {
   className?: string;
   autoFocus?: boolean;
   disableAdaptiveWidth?: boolean;
-};
+} & VariantProps<typeof button>;
 
 function ListboxDropdownFn(props: ListboxDropdownProps, ref: Ref<HTMLButtonElement>) {
   const {
@@ -38,6 +39,7 @@ function ListboxDropdownFn(props: ListboxDropdownProps, ref: Ref<HTMLButtonEleme
     value,
     onChange,
     disabled,
+    isLoading,
     options,
     disableAdaptiveWidth,
     ...otherProps
@@ -50,6 +52,7 @@ function ListboxDropdownFn(props: ListboxDropdownProps, ref: Ref<HTMLButtonEleme
     value,
     onChange,
     disabled,
+    isLoading,
     options,
     disableAdaptiveWidth,
     normalizeOptions: toNormalizeOptions(options),
@@ -65,9 +68,10 @@ function ListboxDropdownFn(props: ListboxDropdownProps, ref: Ref<HTMLButtonEleme
       value,
       onChange,
       disabled,
+      isLoading,
       ...otherProps,
     }));
-  }, [name, value, onChange, disabled]);
+  }, [name, value, onChange, disabled, isLoading, JSON.stringify(otherProps)]);
 
   useUpdateEffect(() => {
     setContext((prevState) => ({

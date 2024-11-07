@@ -13,7 +13,7 @@ const tab = cva({
     "px-4 py-3 text-sm/5 data-[selected]:font-bold",
     "text-fg data-[selected]:text-primary",
     "cursor-pointer",
-    "[&>*[data-slot$=icon]]:size-5",
+    "[&>*[data-slot$=icon]]:size-5"
   ),
   variants: {
     variant: {
@@ -63,7 +63,7 @@ const Tab = forwardRef<HTMLDivElement, TabProps<"div">>((props, ref) => {
               variant,
               selected: bag.selected,
             }),
-          typeof className === "function" ? className(bag) : className,
+          typeof className === "function" ? className(bag) : className
         )
       }
       {...otherProps}
@@ -77,7 +77,7 @@ const Tab = forwardRef<HTMLDivElement, TabProps<"div">>((props, ref) => {
                 className={cn(
                   tabIndicator({
                     variant,
-                  }),
+                  })
                 )}
                 style={{ borderRadius: 9999 }}
                 layoutId={id}

@@ -12,18 +12,17 @@ import { ConditionRender } from "@/components/condition-render";
 
 const DEFAULT_PANEL_TAG = "div";
 
-export type TabPanelsProps<
-  TTag extends ElementType = typeof DEFAULT_PANEL_TAG,
-> = HeadlessTabPanelsProps<TTag> & {
-  /**
-   * If true, can swipe panel and navigate between tabs.
-   */
-  swipeable?: boolean;
-};
+export type TabPanelsProps<TTag extends ElementType = typeof DEFAULT_PANEL_TAG> =
+  HeadlessTabPanelsProps<TTag> & {
+    /**
+     * If true, can swipe panel and navigate between tabs.
+     */
+    swipeable?: boolean;
+  };
 
 function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
   props: TabPanelsProps<TTag>,
-  ref: Ref<ComponentRef<TTag>>,
+  ref: Ref<ComponentRef<TTag>>
 ) {
   const {
     as = "div",
@@ -44,27 +43,20 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
       className={(bag) =>
         cn(
           "translate-y-[0px] overflow-hidden",
-          typeof className === "function" ? className(bag) : className,
+          typeof className === "function" ? className(bag) : className
         )
       }
       {...otherProps}
     >
       {(bag) => {
-        let resolvedChildren =
-          typeof children === "function" ? children(bag) : children;
+        let resolvedChildren = typeof children === "function" ? children(bag) : children;
 
         const resolvedChildrenArray = (
-          Array.isArray(resolvedChildren)
-            ? resolvedChildren
-            : [resolvedChildren]
+          Array.isArray(resolvedChildren) ? resolvedChildren : [resolvedChildren]
         ) as ReactNode[];
 
         return (
-          <AnimatePresence
-            initial={false}
-            mode="popLayout"
-            custom={swipeDirection}
-          >
+          <AnimatePresence initial={false} mode="popLayout" custom={swipeDirection}>
             <ConditionRender
               key={selectedIndex}
               if={!!swipeable}
@@ -137,13 +129,11 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
 
 interface _internal_ComponentTabPanels extends HasDisplayName {
   <TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
-    props: TabPanelsProps<TTag> & RefProp<typeof PanelsFn<TTag>>,
+    props: TabPanelsProps<TTag> & RefProp<typeof PanelsFn<TTag>>
   ): ReactNode;
 }
 
-const Panels = forwardRefWithAs(
-  PanelsFn,
-) as unknown as _internal_ComponentTabPanels;
+const Panels = forwardRefWithAs(PanelsFn) as unknown as _internal_ComponentTabPanels;
 
 export { Panels };
 

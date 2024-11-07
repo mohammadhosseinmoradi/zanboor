@@ -5,7 +5,7 @@ import {
 import { ComponentRef, ElementType, Fragment, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
 import { ConditionRender } from "@/components/condition-render";
-import {forwardRefWithAs, HasDisplayName, RefProp} from "@/lib/utils/render";
+import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";
 
 const DEFAULT_PANEL_TAG = "div";
 

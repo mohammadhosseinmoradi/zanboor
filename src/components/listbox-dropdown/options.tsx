@@ -26,7 +26,7 @@ const options = cva({
       anchorSelection: true,
       className: cn(
         "[--anchor-offset:-0.3rem] sm:[--anchor-offset:-1.8rem]",
-        "min-w-[calc(var(--button-width)+0.65rem)] sm:min-w-[calc(var(--button-width)+2rem)]"
+        "min-w-[calc(var(--button-width)+0.65rem)] sm:min-w-[calc(var(--button-width)+2.12rem)]"
       ),
     },
     {

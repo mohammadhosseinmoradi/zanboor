@@ -52,6 +52,18 @@ const button = cva({
         "[&_*[data-slot=badge]]:[--badge-offset:calc(theme(spacing[4])+2px)]"
       ),
     },
+    edge: {
+      all: "-mx-3 -my-2",
+      top: "-mt-2",
+      "top start": "-mt-2 -ms-3",
+      "top end": "-mt-2 -me-3",
+      start: "-ms-3",
+      end: "-me-3",
+      "bottom start": "-mb-2 -ms-3",
+      "bottom end": "-mb-2 -me-3",
+      y: "-my-2",
+      x: "-mx-3",
+    },
     disabled: {
       true: "",
       false: "",
@@ -252,6 +264,7 @@ function ButtonFn<TTag extends ElementType = DEFAULT_BUTTON_TAG>(
     disabled,
     className,
     type = "button",
+    edge,
     ...otherProps
   } = props as ButtonProps<"button">;
 
@@ -264,6 +277,7 @@ function ButtonFn<TTag extends ElementType = DEFAULT_BUTTON_TAG>(
           variant,
           color,
           size,
+          edge,
           disabled,
         }),
         className

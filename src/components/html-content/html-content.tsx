@@ -1,13 +1,7 @@
 import { cn } from "@/lib/utils";
 import parse from "html-react-parser";
 
-export function HtmlContent({
-  className,
-  children,
-}: {
-  className?: string;
-  children?: string;
-}) {
+export function HtmlContent({ className, children }: { className?: string; children?: string }) {
   return (
     <div
       className={cn(
@@ -23,7 +17,7 @@ export function HtmlContent({
         "prose-blockquote:border-fg-muted",
         "prose-li:text-fg-muted",
         "prose-img:mx-auto",
-        className,
+        className
       )}
     >
       {parse(children || "")}

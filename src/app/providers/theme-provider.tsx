@@ -11,12 +11,7 @@ export function ThemeProvider(props: ThemeProviderProps) {
   const { children } = props;
 
   return (
-    <_ThemeProvider
-      attribute="class"
-      enableSystem
-      themes={["light", "dark"]}
-      storageKey="theme"
-    >
+    <_ThemeProvider attribute="class" enableSystem themes={["light", "dark"]} storageKey="theme">
       {children}
     </_ThemeProvider>
   );

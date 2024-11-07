@@ -11,12 +11,7 @@ export function ThemeImage(props: ThemeImageProps) {
 
   return (
     <>
-      <Image
-        className={cn("dark:hidden", className)}
-        src={srcLight}
-        alt={alt}
-        {...otherProps}
-      />
+      <Image className={cn("dark:hidden", className)} src={srcLight} alt={alt} {...otherProps} />
       <Image
         className={cn("[&:not(.dark_*)]:hidden", className)}
         src={srcDark}

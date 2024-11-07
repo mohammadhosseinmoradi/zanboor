@@ -35,9 +35,10 @@ function OptionFn<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(
       as={as as "button"}
       className={(bag) =>
         cn(
-          "group/option cursor-default rounded-lg focus:outline-none",
+          "group/option rounded-lg focus:outline-none",
           "px-3 py-2 text-start text-base/6 sm:text-sm/5",
           "text-fg data-[focus]:bg-primary data-[focus]:text-primary-fg",
+          "cursor-pointer data-[disabled]:cursor-not-allowed",
           "col-span-full forced-color-adjust-none data-[disabled]:opacity-50",
           "grid",
           isAnchorSelection
