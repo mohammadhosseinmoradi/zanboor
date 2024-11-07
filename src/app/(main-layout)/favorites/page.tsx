@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>علاقمندی‌ها</div>;
+  return <div className="flex grow items-center justify-center">علاقمندی‌ها</div>;
 }

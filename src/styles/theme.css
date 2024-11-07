@@ -11,9 +11,9 @@
   --fg-muted: 0 0% 45%;
   --fg-disabled: 0 0% 64%;
 
-  --primary: 149 64% 39%;
-  --primary-50: 143 62% 96%;
-  --primary-border: 141 58% 80%;
+  --primary: 64 64% 50%;
+  --primary-50: 64 64% 96%;
+  --primary-border: 64 58% 80%;
   --primary-fg: 0 0% 100%;
   --primary-fg-hover: 0 0% 100%;
   --primary-fg-muted: 0 0% 100%;
@@ -70,9 +70,9 @@
   --fg-muted: 0 0% 45%;
   --fg-disabled: 0 0% 32%;
 
-  --primary: 150 71% 34%;
-  --primary-50: 154 70% 9%;
-  --primary-border: 153 64% 16%;
+  --primary: 64 64% 40%;
+  --primary-50: 64 64% 10%;
+  --primary-border: 64 64% 16%;
   --primary-fg: 0 0% 100%;
   --primary-fg-hover: 0 0% 100%;
   --primary-fg-muted: 0 0% 100%;

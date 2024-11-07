@@ -4,14 +4,14 @@ import { iranYekan } from "@/styles/fonts/iran-yekan";
 import Providers from "@/app/providers/providers";
 import { cn } from "@/lib/utils";
 
-const APP_NAME = "همسرجو";
+const APP_NAME = "زنبور";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
     applicationName: APP_NAME,
     title: {
       template: `%s | ${APP_NAME}`,
-      default: APP_NAME,
+      default: "زنبور | ازدواج دائم و موقت ،قرار ملاقات، چت، آشنایی با افراد جدید",
     },
     openGraph: {
       siteName: APP_NAME,
