@@ -43,16 +43,16 @@ export default function BottomNavBar(props: MobileBottomNavBarProps) {
         )}
         suppressHydrationWarning
       >
-        <Item href={routes.home.getPath()} icon={SlashIcon} label="ویترین" layoutId={id} />
-        <Item href={routes.search.getPath()} icon={SearchIcon} label="جستجو" layoutId={id} />
+        <Item href={routes.home} icon={SlashIcon} label="ویترین" layoutId={id} />
+        <Item href={routes.search} icon={SearchIcon} label="جستجو" layoutId={id} />
         <Item
-          href={routes.favorites.getPath()}
+          href={routes.favorites}
           icon={HeartIcon}
           label="علاقمندی‌ها"
           layoutId={id}
         />
         <Item
-          href={routes.messages.getPath()}
+          href={routes.messages}
           icon={MessageSquareTextIcon}
           label="پیام‌ها"
           badge={2}

@@ -1,4 +1,4 @@
-export const MOBILE_REGEX =
+export const PHONE_REGEX =
   /^(\+989|00989|989|09|\+۹۸۹|۰۰۹۸۹|۹۸۹|۰۹)[0-9,۰,١,۲,۳,۴,۵,۶,۷,۸,۹]{9,9}$/;
 
 export const NATIONAL_CODE_REGEX = /^[0-9]{10}$/;

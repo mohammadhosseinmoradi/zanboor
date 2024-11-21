@@ -1,20 +1,13 @@
-type Path = `/${string}`;
-
-type Route = {
-  [name: string]: Route | ((...args: any[]) => Path);
-};
-
 export const routes = {
-  home: {
-    getPath: () => "/",
+  home: "/",
+  messages: "/messages",
+  favorites: "/favorites",
+  search: "/search",
+  terms: "/terms",
+  privacy: "/privacy",
+  auth: {
+    getPath: () => "/auth",
+    enterUserId: "/auth/enter-user-id",
+    enterOtp: "/auth/enter-otp",
   },
-  messages: {
-    getPath: () => "/messages",
-  },
-  favorites: {
-    getPath: () => "/favorites",
-  },
-  search: {
-    getPath: () => "/search",
-  },
-} satisfies Route;
+};

@@ -1,23 +1,18 @@
 import { Listbox } from "@headlessui/react";
-import { forwardRef, Fragment, memo, ReactNode, Ref, useState } from "react";
+import { forwardRef, memo, ReactNode, Ref, useMemo, useState } from "react";
 import { button, Button } from "@/components/listbox-dropdown/button";
 import { Options } from "@/components/listbox-dropdown/options";
-import useUpdateEffect from "@/hooks/use-update-effect";
-import { TOption } from "@/components/listbox-dropdown/types";
-import {
-  ListboxContext,
-  ListboxContextProps,
-  ListboxSetContext,
-} from "@/components/listbox-dropdown/context";
+import { Option } from "@/components/listbox-dropdown/types";
+import { ListboxContext, ListboxContextProps } from "@/components/listbox-dropdown/context";
 import { toNormalizeOptions } from "@/components/listbox-dropdown/helpers";
 import { VariantProps } from "cva";
 
 export type ListboxDropdownProps = {
   ref?: Ref<HTMLButtonElement>;
-  value: any | any[] | null | undefined;
-  options: TOption[];
+  value: string | string[] | null | undefined;
+  options: Option[];
   placeholder?: string;
-  onChange?: (value: any | any[] | null | undefined) => void;
+  onChange?: (value: string | string[] | null | undefined) => void;
   children?: ReactNode;
   multiple?: boolean;
   name?: string;
@@ -45,7 +40,7 @@ function ListboxDropdownFn(props: ListboxDropdownProps, ref: Ref<HTMLButtonEleme
     ...otherProps
   } = props;
 
-  const [context, setContext] = useState<ListboxContextProps>({
+  const [state] = useState<ListboxContextProps>({
     children,
     name,
     multiple,
@@ -55,57 +50,34 @@ function ListboxDropdownFn(props: ListboxDropdownProps, ref: Ref<HTMLButtonEleme
     isLoading,
     options,
     disableAdaptiveWidth,
-    normalizeOptions: toNormalizeOptions(options),
-    filteredOptions: options,
-    isButtonAsFragment: false,
+    normalizeOptions: new Map(),
     ...otherProps,
   });
 
-  useUpdateEffect(() => {
-    setContext((prevState) => ({
-      ...prevState,
-      name,
-      value,
-      onChange,
-      disabled,
-      isLoading,
-      ...otherProps,
-    }));
-  }, [name, value, onChange, disabled, isLoading, JSON.stringify(otherProps)]);
-
-  useUpdateEffect(() => {
-    setContext((prevState) => ({
-      ...prevState,
-      multiple,
-      options,
-      disableAdaptiveWidth,
-      normalizeOptions: toNormalizeOptions(options),
-      filteredOptions: options,
-      ...otherProps,
-    }));
-  }, [multiple, options, disableAdaptiveWidth]);
-
   return (
-    <ListboxContext.Provider value={context}>
-      <ListboxSetContext.Provider value={setContext}>
-        <Listbox
-          as={Fragment}
-          value={value}
-          multiple={multiple}
-          name={name}
-          onChange={onChange}
-          disabled={disabled}
-        >
-          {!!children ? (
-            children
-          ) : (
-            <>
-              <Button ref={ref} />
-              <Options />
-            </>
-          )}
-        </Listbox>
-      </ListboxSetContext.Provider>
+    <ListboxContext.Provider
+      value={{
+        ...state,
+        normalizeOptions: useMemo(() => toNormalizeOptions(options), [options]),
+      }}
+    >
+      <Listbox
+        as="div"
+        value={value}
+        multiple={multiple}
+        name={name}
+        onChange={onChange}
+        disabled={disabled}
+      >
+        {!!children ? (
+          children
+        ) : (
+          <>
+            <Button ref={ref} />
+            <Options />
+          </>
+        )}
+      </Listbox>
     </ListboxContext.Provider>
   );
 }

@@ -1,9 +1,9 @@
 import { ListboxOptions, ListboxOptionsProps } from "@headlessui/react";
-import { forwardRef, memo, Ref, useEffect, useState } from "react";
-import { useListboxContext, useListboxSetContext } from "@/components/listbox-dropdown/context";
-import { TOption } from "@/components/listbox-dropdown/types";
+import { forwardRef, memo, Ref } from "react";
+import { useListboxContext } from "@/components/listbox-dropdown/context";
+import { Option } from "@/components/listbox-dropdown/types";
 import { Props } from "@/lib/utils/render/types";
-import { Option } from "@/components/listbox-dropdown/option";
+import { Option as DropdownOption } from "@/components/listbox-dropdown/option";
 import { cn } from "@/lib/utils";
 import { cva } from "cva";
 import { useIsAnchorSelection } from "@/components/listbox-dropdown/use-is-anchor-selection";
@@ -60,32 +60,17 @@ const options = cva({
 
 type ListboxOptionsRenderPropArg = {
   open: boolean;
-  options: TOption[];
+  options: Option[];
 };
 
-type OptionsProps = Props<"div", ListboxOptionsRenderPropArg, never, {}> &
+type OptionsProps = Props<"div", ListboxOptionsRenderPropArg, never> &
   Pick<ListboxOptionsProps<"div">, "anchor">;
 
 function OptionsFn(props: OptionsProps, ref?: Ref<HTMLDivElement>) {
   const { className, children, anchor, ...otherProps } = props;
 
-  const [query, setQuery] = useState("");
-
   const listboxContext = useListboxContext();
   const isAnchorSelection = useIsAnchorSelection();
-  const listboxSetContext = useListboxSetContext();
-
-  useEffect(() => {
-    listboxSetContext((prevState) => ({
-      ...prevState,
-      filteredOptions: listboxContext.options.filter((option) =>
-        (option.text || "")
-          .toLowerCase()
-          .replace(/\s+/g, "")
-          .includes(query.toLowerCase().replace(/\s+/g, ""))
-      ),
-    }));
-  }, [query, listboxContext.options]);
 
   return (
     <ListboxOptions
@@ -105,32 +90,24 @@ function OptionsFn(props: OptionsProps, ref?: Ref<HTMLDivElement>) {
     >
       {(bag) => (
         <>
-          {/*{listboxContext.withSearchBox && <SearchInput value={query} onChange={setQuery} />}*/}
           {(() => {
             if (!listboxContext.options.length)
               return (
-                <Option value="" disabled>
+                <DropdownOption value="" disabled>
                   گزینه‌ای وجود ندارد!
-                </Option>
-              );
-
-            if (!listboxContext.filteredOptions.length)
-              return (
-                <Option value="" disabled>
-                  موردی یافت نشد!
-                </Option>
+                </DropdownOption>
               );
 
             if (typeof children === "function")
               return children({
-                options: listboxContext.filteredOptions,
+                options: listboxContext.options,
                 ...bag,
               });
 
-            return listboxContext.filteredOptions.map((option, index) => (
-              <Option key={index} value={option.value}>
-                {option.text}
-              </Option>
+            return listboxContext.options.map((option, index) => (
+              <DropdownOption key={index} value={option.value} disabled={option?.disabled}>
+                {option.label}
+              </DropdownOption>
             ));
           })()}
         </>

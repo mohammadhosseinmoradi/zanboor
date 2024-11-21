@@ -6,10 +6,7 @@ import { ReactNode } from "react";
 export function SWRProvider({ children }: { children: ReactNode }) {
   return (
     <SWRConfig
-      value={{
-        revalidateOnFocus: false,
-        dedupingInterval: 5000,
-      }}
+      value={{}}
     >
       {children}
     </SWRConfig>

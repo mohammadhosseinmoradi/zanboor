@@ -1,6 +1,6 @@
 import { ListboxButton, ListboxButtonProps } from "@headlessui/react";
-import { ElementType, Fragment, memo, ReactNode, Ref, useLayoutEffect } from "react";
-import { useListboxContext, useListboxSetContext } from "@/components/listbox-dropdown/context";
+import { ElementType, memo, ReactNode, Ref } from "react";
+import { useListboxContext } from "@/components/listbox-dropdown/context";
 import { cn } from "@/lib/utils";
 import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";
 import { Loading } from "@/components/loading";
@@ -63,14 +63,14 @@ export const button = cva({
   },
 });
 
-export type ButtonProps<TTag extends ElementType = typeof DEFAULT_BUTTON_TAG | typeof Fragment> =
+export type ButtonProps<TTag extends ElementType = typeof DEFAULT_BUTTON_TAG> =
   ListboxButtonProps<TTag> &
     VariantProps<typeof button> & {
       placeholder?: string;
       invalid?: boolean;
     };
 
-function ButtonFn<TTag extends ElementType = typeof DEFAULT_BUTTON_TAG | typeof Fragment>(
+function ButtonFn<TTag extends ElementType = typeof DEFAULT_BUTTON_TAG>(
   props: ButtonProps<TTag>,
   ref: Ref<HTMLButtonElement>
 ) {
@@ -87,75 +87,63 @@ function ButtonFn<TTag extends ElementType = typeof DEFAULT_BUTTON_TAG | typeof 
   } = props as ButtonProps<typeof DEFAULT_BUTTON_TAG>;
 
   const listboxContext = useListboxContext();
-  const listboxSetContext = useListboxSetContext();
-
-  useLayoutEffect(() => {
-    listboxSetContext((prevState) => ({
-      ...prevState,
-      isButtonAsFragment: as == (Fragment as any),
-    }));
-  }, [as]);
-
   const resolvedPlaceholder = placeholder || listboxContext.placeholder || "انتخاب";
 
   return (
-    <ListboxButton ref={ref} as={Fragment}>
-      {(bag): any => {
-        if (as == (Fragment as any) && typeof children === "function") return children(bag);
-        if (as == (Fragment as any)) return children;
-        return (
-          <button
-            data-slot="control"
-            autoFocus={listboxContext.autoFocus}
-            className={cn(
-              button({
-                variant: variant || listboxContext.variant,
-                stick: stick || listboxContext.stick,
-                edge: edge || listboxContext.edge,
-              }),
-              listboxContext.className,
-              className
-            )}
-            {...(invalid || listboxContext.invalid ? { "data-invalid": "" } : {})}
-            {...otherProps}
-          >
-            <span className="line-clamp-1 grow text-start">
-              {(() => {
-                const resolvedChildren = typeof children == "function" ? children(bag) : children;
-                if (resolvedChildren) return resolvedChildren;
-                if (
-                  listboxContext.normalizeOptions.has(listboxContext.value) ||
-                  (Array.isArray(listboxContext.value) && listboxContext.value.length > 0)
-                ) {
-                  if (listboxContext.multiple) {
-                    return Array.isArray(listboxContext.value) &&
-                      listboxContext.value.length > 0 ? (
-                      listboxContext.value
-                        .filter((value) => value in listboxContext.normalizeOptions)
-                        .map((value) => {
-                          return listboxContext.normalizeOptions.get(value)?.text;
-                        })
-                        .join(", ")
-                    ) : (
-                      <span>
-                        {listboxContext?.placeholder ? listboxContext.placeholder : "انتخاب"}
-                      </span>
-                    );
-                  } else {
-                    return listboxContext.normalizeOptions.has(listboxContext.value)
-                      ? listboxContext.normalizeOptions.get(listboxContext.value)?.text
-                      : resolvedPlaceholder;
-                  }
+    <ListboxButton
+      ref={ref}
+      as={as}
+      data-slot="control"
+      autoFocus={listboxContext.autoFocus}
+      className={cn(
+        button({
+          variant: variant || listboxContext.variant,
+          stick: stick || listboxContext.stick,
+          edge: edge || listboxContext.edge,
+        }),
+        listboxContext.className,
+        className
+      )}
+      {...(invalid || listboxContext.invalid ? { "data-invalid": "" } : {})}
+      {...otherProps}
+    >
+      {(bag) => (
+        <>
+          <span className="line-clamp-1 grow text-start">
+            {(() => {
+              const resolvedChildren = typeof children == "function" ? children(bag) : children;
+              if (resolvedChildren) return resolvedChildren;
+              if (
+                listboxContext.normalizeOptions.has(listboxContext.value as string) ||
+                (Array.isArray(listboxContext.value) && listboxContext.value.length > 0)
+              ) {
+                if (listboxContext.multiple) {
+                  return Array.isArray(listboxContext.value) && listboxContext.value.length > 0 ? (
+                    listboxContext.value
+                      .filter((value) => listboxContext.normalizeOptions.has(value))
+                      .map((value) => {
+                        return listboxContext.normalizeOptions.get(value)?.label;
+                      })
+                      .join(", ")
+                  ) : (
+                    <span>
+                      {listboxContext?.placeholder ? listboxContext.placeholder : "انتخاب"}
+                    </span>
+                  );
                 } else {
-                  return <span>{resolvedPlaceholder}</span>;
+                  return listboxContext.normalizeOptions.has(listboxContext.value as string)
+                    ? listboxContext.normalizeOptions.get(listboxContext.value as string)?.label
+                    : resolvedPlaceholder;
                 }
-              })()}
-            </span>
-            {listboxContext.isLoading && <Loading />}
-            <ChevronsUpDownIcon data-slot="dropdown-icon" />
-          </button>
-        );
-      }}
+              } else {
+                return <span>{resolvedPlaceholder}</span>;
+              }
+            })()}
+          </span>
+          {listboxContext.isLoading && <Loading />}
+          <ChevronsUpDownIcon data-slot="dropdown-icon" />
+        </>
+      )}
     </ListboxButton>
   );
 }

@@ -1,9 +1,14 @@
-export type TOption = {
-  value: any;
-  text: string;
+import { ReactNode } from "react";
+
+export type Option = {
+  value: string;
+  label: string;
+  icon?: ReactNode;
+  description?: string;
+  disabled?: boolean;
 };
 
 /**
- * Key is TOption's value
+ * Key is Option's value
  */
-export type NormalizeOption = Map<any, TOption>;
+export type NormalizeOptions = Map<string, Option>;

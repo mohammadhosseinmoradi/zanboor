@@ -14,11 +14,12 @@ type OtpInputProps = {
   "onComplete" | "inputMode" | "autoFocus" | "name" | "type" | "required" | "onBlur"
 >;
 
-const OtpInput = forwardRef((props: OtpInputProps) => {
+const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>((props, ref) => {
   const { className, value, invalid, ...otherProps } = props;
 
   return (
     <OTPInput
+      ref={ref}
       data-slot="control"
       maxLength={5}
       containerClassName={cn(
@@ -55,7 +56,7 @@ function Slot(props: SlotProps) {
   return (
     <div
       className={cn(
-        "relative h-10 w-8",
+        "relative h-10 w-8 text-fg",
         "flex items-center justify-center",
         "transition-all duration-300",
         "rounded-rounded border-2",
