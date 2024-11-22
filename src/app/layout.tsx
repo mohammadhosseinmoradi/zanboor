@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import "@/styles/globals.css";
 import { iranYekan } from "@/styles/fonts/iran-yekan";
 import Providers from "@/app/providers/providers";
 import { cn } from "@/lib/utils";
+import "swiper/css";
+import "@/styles/globals.css";
 
 const APP_NAME = "زنبور";
 

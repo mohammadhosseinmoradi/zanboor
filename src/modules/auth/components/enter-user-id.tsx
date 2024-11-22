@@ -5,7 +5,6 @@ import { Button } from "@/components/button";
 import { Loading } from "@/components/loading";
 import { InputField } from "@/components/input-field";
 import { Label } from "@/components/label";
-import { AutoFocus } from "@/components/auto-focus";
 import { Controller, useForm } from "react-hook-form";
 import ErrorMessage from "@/components/error-message";
 import { Divider } from "@/components/divider";
@@ -43,7 +42,7 @@ export function EnterUserId(props: EnterPhoneProps) {
 
   useEffect(() => {
     form.setValue("countryCode", countryOptions[0].value);
-  }, []);
+  }, [form]);
 
   const setAuthContext = useAuthSetContext();
 

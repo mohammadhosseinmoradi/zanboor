@@ -1,2 +1,2 @@
-export * from "./enter-user-id";
-export * from "./enter-otp";
+export * from "./components/enter-user-id";
+export * from "./components/enter-otp";
