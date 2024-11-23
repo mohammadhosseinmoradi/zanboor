@@ -21,15 +21,16 @@ import { useEffect, useTransition } from "react";
 import { sendOtp } from "@/modules/auth/actions/send-otp";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { enterUserIdSchema } from "@/modules/auth/schema";
-import { useAuthSetContext } from "@/modules/auth/context";
 import { useRouter } from "next/navigation";
+import { useAuthActions } from "@/modules/auth";
+import { isOk } from "@/lib/utils/is-ok";
 
 type EnterPhoneProps = {
   logoLink?: string;
   onClose?: () => void;
 };
 
-export function EnterUserId(props: EnterPhoneProps) {
+export function EnterUserIdForm(props: EnterPhoneProps) {
   const { logoLink, onClose } = props;
 
   const router = useRouter();
@@ -37,21 +38,27 @@ export function EnterUserId(props: EnterPhoneProps) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<EnterUserId>({
+    values: {
+      userId: "",
+      countryCode: "",
+    },
     resolver: zodResolver(enterUserIdSchema),
   });
 
   useEffect(() => {
     form.setValue("countryCode", countryOptions[0].value);
+    form.setValue("userId", "");
   }, [form]);
 
-  const setAuthContext = useAuthSetContext();
+  const { setOtp } = useAuthActions();
 
   const handleSubmit = form.handleSubmit((data) => {
     startTransition(async () => {
       const result = await sendOtp(data);
-      if (!result.data) return;
-      setAuthContext({
-        ...data,
+      if (!isOk(result)) return;
+      setOtp({
+        userId: data.userId,
+        countryCode: data.countryCode,
         otpExpiresAt: result.data.expiresAt,
       });
       router.push(routes.auth.enterOtp);
@@ -156,11 +163,7 @@ export function EnterUserId(props: EnterPhoneProps) {
             شرایط زنبور
           </Link>
           <span> و </span>
-          <Link
-            href={routes.privacy}
-            className="font-bold text-primary"
-            onClick={onClose}
-          >
+          <Link href={routes.privacy} className="font-bold text-primary" onClick={onClose}>
             قوانین حریم خصوصی
           </Link>
           <span> است.</span>

@@ -6,8 +6,11 @@ import { EMAIL_REGEX, PHONE_REGEX } from "@/lib/constants/regex";
 import prisma from "@/lib/db";
 import { generateOtp } from "@/lib/utils/generate-otp";
 import { Result } from "@/types/result";
+import { Otp } from "@prisma/client";
 
-export async function sendOtp(params: EnterUserId) {
+export async function sendOtp(
+  params: EnterUserId
+): Promise<Result<Pick<Otp, "id" | "phone" | "email" | "expiresAt">>> {
   const { countryCode, userId } = params;
 
   let phone: string | null = null;
@@ -97,5 +100,5 @@ export async function sendOtp(params: EnterUserId) {
 
   return {
     data: otp,
-  } as Result<typeof otp>;
+  };
 }

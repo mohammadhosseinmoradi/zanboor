@@ -28,7 +28,6 @@ model User {
   emailVerified DateTime?
   phone         String?   @unique
   phoneVerified DateTime?
-  sessions      Session[]
   role          Role      @default(User)
 
   createdAt DateTime @default(now())
@@ -43,14 +42,4 @@ model Otp {
 
   expiresAt DateTime
   createdAt DateTime @default(now())
-}
-
-model Session {
-  sessionToken String   @unique
-  expiresAt    DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }

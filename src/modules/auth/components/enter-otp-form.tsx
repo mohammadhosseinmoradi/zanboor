@@ -3,7 +3,6 @@
 import { Button } from "@/components/button";
 import { Loading } from "@/components/loading";
 import { InputField } from "@/components/input-field";
-import { AutoFocus } from "@/components/auto-focus";
 import { Controller, useForm } from "react-hook-form";
 import ErrorMessage from "@/components/error-message";
 import { Fragment, useLayoutEffect, useState, useTransition } from "react";
@@ -16,20 +15,23 @@ import OtpInput from "@/components/otp-input/otp-input";
 import type { EnterOtp, EnterUserId } from "@/modules/auth/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { enterOtpSchema } from "@/modules/auth/schema";
-import { useAuthContext, useAuthSetContext } from "@/modules/auth/context";
+import { useAuthActions, useAuthData } from "@/modules/auth/context";
 import { redirect, useRouter } from "next/navigation";
 import useLeftTime from "@/hooks/use-left-time";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { sendOtp } from "@/modules/auth/actions/send-otp";
 import { toast } from "sonner";
+import { SignInWithOtp } from "@/modules/auth/actions/sign-in-with-otp";
+import { isOk } from "@/lib/utils/is-ok";
+import { revalidateUseAuth } from "@/modules/auth/use-auth";
 
 type EnterPhoneProps = {
   logoLink?: string;
   onClose?: () => void;
 };
 
-export function EnterOtp(props: EnterPhoneProps) {
+export function EnterOtpForm(props: EnterPhoneProps) {
   const { logoLink, onClose } = props;
 
   const router = useRouter();
@@ -42,7 +44,7 @@ export function EnterOtp(props: EnterPhoneProps) {
 
   const [expiresAt, setExpiresAt] = useState<Date | null>(null);
 
-  const authContext = useAuthContext();
+  const authContext = useAuthData();
 
   useLayoutEffect(() => {
     if (!authContext.countryCode || !authContext?.userId) {
@@ -53,8 +55,18 @@ export function EnterOtp(props: EnterPhoneProps) {
     setExpiresAt(authContext?.otpExpiresAt || null);
   }, [authContext.countryCode, authContext?.otpExpiresAt, authContext.userId, form, router]);
 
-  const handleSubmit = form.handleSubmit(() => {
-    startTransition(async () => {});
+  const handleSubmit = form.handleSubmit((data) => {
+    startTransition(async () => {
+      const session = await SignInWithOtp(data);
+      if (!isOk(session)) {
+        form.setError("otp", {
+          message: session.error.message,
+        });
+        return;
+      }
+      await revalidateUseAuth();
+      router.push(routes.home);
+    });
   });
 
   if (!authContext.countryCode || !authContext?.userId) {
@@ -80,17 +92,15 @@ export function EnterOtp(props: EnterPhoneProps) {
         render={({ field, fieldState }) => {
           return (
             <InputField className="mt-6">
-              <AutoFocus>
-                <OtpInput
-                  autoFocus
-                  className="mx-auto"
-                  onComplete={handleSubmit}
-                  inputMode="numeric"
-                  type="tel"
-                  invalid={!!fieldState.error?.message}
-                  {...field}
-                />
-              </AutoFocus>
+              <OtpInput
+                autoFocus
+                className="mx-auto"
+                onComplete={handleSubmit}
+                inputMode="numeric"
+                type="tel"
+                invalid={!!fieldState.error?.message}
+                {...field}
+              />
               <ErrorMessage className="text-center">{fieldState.error?.message}</ErrorMessage>
             </InputField>
           );
@@ -110,6 +120,11 @@ export function EnterOtp(props: EnterPhoneProps) {
             data={{
               countryCode: authContext.countryCode,
               userId: authContext.userId,
+            }}
+            onSuccess={() => {
+              form.clearErrors();
+              form.setValue("otp", "");
+              form.setFocus("otp");
             }}
           />
         )}
@@ -139,11 +154,7 @@ export function EnterOtp(props: EnterPhoneProps) {
             شرایط زنبور
           </Link>
           <span> و </span>
-          <Link
-            href={routes.privacy}
-            className="font-bold text-primary"
-            onClick={onClose}
-          >
+          <Link href={routes.privacy} className="font-bold text-primary" onClick={onClose}>
             قوانین حریم خصوصی
           </Link>
           <span> است.</span>
@@ -155,28 +166,29 @@ export function EnterOtp(props: EnterPhoneProps) {
 
 type SendOtpButtonProps = {
   data: EnterUserId;
+  onSuccess: () => void;
   className?: string;
 };
 
 function SendOtpButton(props: SendOtpButtonProps) {
-  const { data, className } = props;
+  const { data, onSuccess, className } = props;
 
-  const setAuthContext = useAuthSetContext();
+  const { updateOtpExpiresAt } = useAuthActions();
 
   const [isPending, startTransition] = useTransition();
 
   const handleSendOtp = () =>
     startTransition(async () => {
       const res = await sendOtp(data);
-      if (!res.data) {
+      if (!isOk(res)) {
         toast.error("در ارسال کد یکبار مصرف خطایی رخ داد.");
         return;
       }
+      onSuccess();
       toast.success("کد یکبار مصرف با موفقیت ارسال شد.");
-      setAuthContext((prevState) => ({
-        ...prevState,
+      updateOtpExpiresAt({
         otpExpiresAt: res.data.expiresAt,
-      }));
+      });
     });
 
   return (
