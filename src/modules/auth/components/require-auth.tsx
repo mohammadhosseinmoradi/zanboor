@@ -8,6 +8,7 @@ import { Link } from "@/components/link";
 import { Text } from "@/components/text";
 import { Heading } from "@/components/heading";
 import { routes } from "@/lib/constants/routes";
+import { useAuth } from "@/modules/auth/use-auth";
 
 type RequiredAuthProps = {
   className?: string;
@@ -16,7 +17,11 @@ type RequiredAuthProps = {
 };
 
 export function RequireAuth(props: RequiredAuthProps) {
-  const { className, name } = props;
+  const { className, children, name } = props;
+
+  const { user } = useAuth();
+
+  if (user) return children;
 
   return (
     <div className={cn("flex flex-col items-center justify-center", className)}>
@@ -30,12 +35,7 @@ export function RequireAuth(props: RequiredAuthProps) {
         <span> ابتدا وارد حساب خود شوید.</span>
       </Text>
       <div className="flex items-center gap-2">
-        <Button
-          as={Link}
-          href={routes.home}
-          className="mt-6 self-center"
-          color="secondary"
-        >
+        <Button as={Link} href={routes.home} className="mt-6 self-center" color="secondary">
           صفحه اصلی
         </Button>
         <Button className="mt-6 self-center">ورود / ثبت‌نام</Button>
