@@ -4,13 +4,15 @@ import type { EnterUserId } from "@/modules/auth/types";
 import { getNormalizePhone } from "@/lib/utils/get-normalize-phone";
 import { EMAIL_REGEX, PHONE_REGEX } from "@/lib/constants/regex";
 import prisma from "@/lib/db";
-import { generateOtp } from "@/lib/utils/generate-otp";
 import { Result } from "@/types/result";
-import { Otp } from "@prisma/client";
+import { User } from "@prisma/client";
 
-export async function sendOtp(
-  params: EnterUserId
-): Promise<Result<Pick<Otp, "id" | "phone" | "email" | "expiresAt">>> {
+type SendOtpResponse = {
+  user: User | null;
+  otpExpiresAt: Date;
+};
+
+export async function sendOtp(params: EnterUserId): Promise<Result<SendOtpResponse>> {
   const { countryCode, userId } = params;
 
   let phone: string | null = null;
@@ -23,38 +25,17 @@ export async function sendOtp(
   let email: string | null = null;
   if (userId.match(EMAIL_REGEX)) email = userId;
 
-  let user = await prisma.user.findFirst({
+  const user = await prisma.user.findFirst({
     where: {
-      OR: [
-        {
-          phone,
-        },
-        {
-          email,
-        },
-      ],
+      ...(phone ? { phone } : {}),
+      ...(email ? { email } : {}),
     },
   });
 
-  if (!user) {
-    user = await prisma.user.create({
-      data: {
-        phone,
-        email,
-      },
-    });
-  }
-
   let otp = await prisma.otp.findFirst({
     where: {
-      OR: [
-        {
-          phone,
-        },
-        {
-          email,
-        },
-      ],
+      ...(phone ? { phone } : {}),
+      ...(email ? { email } : {}),
     },
     select: {
       id: true,
@@ -64,7 +45,8 @@ export async function sendOtp(
     },
   });
 
-  const newOtp = generateOtp();
+  // const newOtp = generateOtp();
+  const newOtp = "11111";
   const newOtpExpiresAt = new Date(new Date().setSeconds(new Date().getSeconds() + 60));
 
   if (!otp) {
@@ -99,6 +81,9 @@ export async function sendOtp(
   }
 
   return {
-    data: otp,
+    data: {
+      user,
+      otpExpiresAt: otp.expiresAt,
+    },
   };
 }

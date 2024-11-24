@@ -1,4 +1,16 @@
-export function middleware() {}
+import { NextRequest, NextResponse } from "next/server";
+import { authGuardMiddleware } from "@/modules/auth";
+
+export async function middleware(request: NextRequest) {
+  let response = NextResponse.next();
+
+  response = await authGuardMiddleware(request, response);
+
+  // We add the url to the headers for later use.
+  response.headers.set("x-url", request.url);
+
+  return response;
+}
 
 export const config = {
   matcher: [
@@ -9,6 +21,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    "/((?!api|_next/static|_next/image|images|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!api|_next/static|_next/image|images|favicon.ico|sitemap.xml|icons|images|manifest.webmanifest|robots.txt).*)",
   ],
 };

@@ -1,9 +1,10 @@
-"use server"
+"use server";
 
 import { Session, SessionPayload } from "@/modules/auth/types";
 import { SignJWT, jwtVerify, JWTPayload } from "jose";
 import { cookies } from "next/headers";
 import prisma from "@/lib/db";
+import { cache } from "react";
 
 const secretKey = process.env.AUTH_SECRET;
 const encodedSecretKey = new TextEncoder().encode(secretKey);
@@ -23,7 +24,7 @@ export async function decrypt(session: string) {
     const { payload } = await jwtVerify(session, encodedSecretKey, {
       algorithms: ["HS256"],
     });
-    return payload as SessionPayload & JWTPayload | undefined;
+    return payload as (SessionPayload & JWTPayload) | undefined;
   } catch {
     console.error("Failed to verify session.");
   }
@@ -49,7 +50,7 @@ export async function getSession() {
   return session;
 }
 
-export async function auth(): Promise<Session | null> {
+export const auth = cache(async (): Promise<Session | null> => {
   const session = await getSession();
   if (!session) return null;
   const sessionPayload = await decrypt(session);
@@ -64,4 +65,4 @@ export async function auth(): Promise<Session | null> {
   return {
     user,
   };
-}
+});

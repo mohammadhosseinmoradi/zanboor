@@ -8,6 +8,6 @@ export const routes = {
   auth: {
     getPath: () => "/auth",
     enterUserId: "/auth/enter-user-id",
-    enterOtp: "/auth/enter-otp",
+    signInWithOtp: "/auth/sign-in-with-otp",
   },
 };

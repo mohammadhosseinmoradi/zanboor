@@ -1,12 +1,16 @@
+"use client"
+
 import { match } from "@/lib/utils/match";
 import { createContext, ReactNode, useContext, useReducer } from "react";
 import { useEvent } from "@/hooks/use-event";
+import { User } from "@prisma/client";
 
 /**
  * Auth context is used for share state between sign in and sign up forms
  */
 
 type StateDefinition = {
+  user?: User | null;
   countryCode?: string;
   userId?: string;
   otpExpiresAt?: Date;
@@ -15,11 +19,16 @@ type StateDefinition = {
 const AuthDataContext = createContext<StateDefinition | null>(null);
 
 enum ActionType {
+  SetUser,
   SetOtp,
   UpdateOtpExpiresAt,
 }
 
 type Actions =
+  | {
+      type: ActionType.SetUser;
+      user: User | null;
+    }
   | {
       type: ActionType.SetOtp;
       countryCode: string;
@@ -37,6 +46,12 @@ const reducers: {
     action: Extract<Actions, { type: P }>
   ) => StateDefinition;
 } = {
+  [ActionType.SetUser](state, action) {
+    return {
+      ...state,
+      user: action.user,
+    };
+  },
   [ActionType.SetOtp](state, action) {
     return {
       ...state,
@@ -58,6 +73,7 @@ function stateReducer(state: StateDefinition, action: Actions) {
 }
 
 type AuthActionsContextProps = {
+  setUser(params: Omit<Extract<Actions, { type: ActionType.SetUser }>, "type">): void;
   setOtp(params: Omit<Extract<Actions, { type: ActionType.SetOtp }>, "type">): void;
   updateOtpExpiresAt(
     params: Omit<Extract<Actions, { type: ActionType.UpdateOtpExpiresAt }>, "type">
@@ -95,6 +111,13 @@ export function AuthProvider(props: AuthContextProviderProps) {
 
   const [state, dispatch] = useReducer(stateReducer, {});
 
+  const setUser = useEvent((params: Parameters<AuthActionsContextProps["setUser"]>[0]) => {
+    dispatch({
+      type: ActionType.SetUser,
+      ...params,
+    });
+  });
+
   const setOtp = useEvent((params: Parameters<AuthActionsContextProps["setOtp"]>[0]) => {
     dispatch({
       type: ActionType.SetOtp,
@@ -117,6 +140,7 @@ export function AuthProvider(props: AuthContextProviderProps) {
         value={{
           setOtp,
           updateOtpExpiresAt,
+          setUser,
         }}
       >
         {children}

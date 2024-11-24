@@ -1,11 +1,17 @@
 "use client";
 
 import { EnterUserIdForm } from "@/modules/auth";
+import AuthContainer from "@/app/auth/auth-container";
 
 export default function EnterUserIdPage() {
   return (
-    <div className="my-auto items-center flex min-h-dvh justify-center p-4">
-      <EnterUserIdForm />
-    </div>
+    <AuthContainer
+      title="ورود به حساب"
+      backButton={{
+        disabled: true,
+      }}
+    >
+      <EnterUserIdForm className='lg:mt-2' />
+    </AuthContainer>
   );
 }

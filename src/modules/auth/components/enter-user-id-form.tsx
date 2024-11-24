@@ -24,49 +24,50 @@ import { enterUserIdSchema } from "@/modules/auth/schema";
 import { useRouter } from "next/navigation";
 import { useAuthActions } from "@/modules/auth";
 import { isOk } from "@/lib/utils/is-ok";
+import { cn } from "@/lib/utils";
 
 type EnterPhoneProps = {
   logoLink?: string;
   onClose?: () => void;
+  className?: string;
 };
 
 export function EnterUserIdForm(props: EnterPhoneProps) {
-  const { logoLink, onClose } = props;
+  const { logoLink, onClose, className } = props;
 
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<EnterUserId>({
-    values: {
-      userId: "",
-      countryCode: "",
-    },
+    disabled: isPending,
     resolver: zodResolver(enterUserIdSchema),
   });
 
   useEffect(() => {
     form.setValue("countryCode", countryOptions[0].value);
-    form.setValue("userId", "");
   }, [form]);
 
-  const { setOtp } = useAuthActions();
+  const { setUser, setOtp } = useAuthActions();
 
   const handleSubmit = form.handleSubmit((data) => {
     startTransition(async () => {
       const result = await sendOtp(data);
       if (!isOk(result)) return;
+      setUser({
+        user: result.data.user,
+      });
       setOtp({
         userId: data.userId,
         countryCode: data.countryCode,
-        otpExpiresAt: result.data.expiresAt,
+        otpExpiresAt: result.data.otpExpiresAt,
       });
-      router.push(routes.auth.enterOtp);
+      router.push(routes.auth.signInWithOtp);
     });
   });
 
   return (
-    <form className="pointer-events-auto flex flex-col" onSubmit={handleSubmit}>
+    <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
       <ConditionLink href={logoLink}>
         <ThemeImage
           srcLight="/images/logo.jpg"
@@ -87,6 +88,7 @@ export function EnterUserIdForm(props: EnterPhoneProps) {
               <Label htmlFor="userId">شناسه کاربری</Label>
               <InputGroup>
                 <ListboxDropdown
+                  disabled={form.formState.disabled}
                   variant="plain"
                   className="shrink-0"
                   options={countryOptions}
@@ -128,7 +130,7 @@ export function EnterUserIdForm(props: EnterPhoneProps) {
         {isPending && <Loading />}
       </Button>
       <Divider className="my-6">یا</Divider>
-      <Button color="secondary" type="submit" className="w-full shrink-0" disabled={isPending}>
+      <Button color="secondary" className="w-full shrink-0" disabled={isPending}>
         <svg
           data-slot="icon"
           width="800px"

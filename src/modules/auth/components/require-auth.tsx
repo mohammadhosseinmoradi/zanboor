@@ -8,7 +8,7 @@ import { Link } from "@/components/link";
 import { Text } from "@/components/text";
 import { Heading } from "@/components/heading";
 import { routes } from "@/lib/constants/routes";
-import { useAuth } from "@/modules/auth/use-auth";
+import { useAuth } from "@/modules/auth/hooks/use-auth";
 
 type RequiredAuthProps = {
   className?: string;

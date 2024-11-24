@@ -4,7 +4,7 @@ import { Role, User } from "@prisma/client";
 
 export type EnterUserId = z.infer<typeof enterUserIdSchema>;
 
-export type EnterOtp = z.infer<typeof enterOtpSchema>;
+export type SignInWithOtp = z.infer<typeof enterOtpSchema>;
 
 export type SessionPayload = {
   userId: string;

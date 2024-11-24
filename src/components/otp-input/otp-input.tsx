@@ -11,7 +11,7 @@ type OtpInputProps = {
   invalid?: boolean;
 } & Pick<
   OTPInputProps,
-  "onComplete" | "inputMode" | "autoFocus" | "name" | "type" | "required" | "onBlur"
+  "onComplete" | "inputMode" | "autoFocus" | "name" | "type" | "required" | "onBlur" | "id"
 >;
 
 const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>((props, ref) => {
@@ -27,16 +27,14 @@ const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>((props, ref) => {
         className
       )}
       render={({ slots }) => (
-        <>
-          <div className="flex items-center gap-1.5">
-            {slots.map((slot, index) => (
-              <Fragment key={index}>
-                {index !== 0 && <div className="h-px w-2 rounded-full bg-border" />}
-                <Slot key={index} {...slot} invalid={invalid} />
-              </Fragment>
-            ))}
-          </div>
-        </>
+        <div className="flex items-center gap-1.5">
+          {slots.map((slot, index) => (
+            <Fragment key={index}>
+              {index !== 0 && <div className="h-px w-2 rounded-full bg-border" />}
+              <Slot key={index} {...slot} invalid={invalid} />
+            </Fragment>
+          ))}
+        </div>
       )}
       value={value?.toString()}
       {...otherProps}

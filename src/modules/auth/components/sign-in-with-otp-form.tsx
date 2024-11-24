@@ -5,14 +5,14 @@ import { Loading } from "@/components/loading";
 import { InputField } from "@/components/input-field";
 import { Controller, useForm } from "react-hook-form";
 import ErrorMessage from "@/components/error-message";
-import { Fragment, useLayoutEffect, useState, useTransition } from "react";
+import { Fragment, useEffect, useState, useTransition } from "react";
 import { Text } from "@/components/text";
 import { ConditionLink } from "@/components/condition-link";
 import { ThemeImage } from "@/components/theme-image";
 import { Link } from "@/components/link";
 import { routes } from "@/lib/constants/routes";
 import OtpInput from "@/components/otp-input/otp-input";
-import type { EnterOtp, EnterUserId } from "@/modules/auth/types";
+import type { EnterUserId, SignInWithOtp } from "@/modules/auth/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { enterOtpSchema } from "@/modules/auth/schema";
 import { useAuthActions, useAuthData } from "@/modules/auth/context";
@@ -22,23 +22,27 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { sendOtp } from "@/modules/auth/actions/send-otp";
 import { toast } from "sonner";
-import { SignInWithOtp } from "@/modules/auth/actions/sign-in-with-otp";
+import { signInWithOtp } from "@/modules/auth/actions/sign-in-with-otp";
 import { isOk } from "@/lib/utils/is-ok";
-import { revalidateUseAuth } from "@/modules/auth/use-auth";
+import { Label } from "@/components/label";
+import { Input } from "@/components/input";
+import { ErrorName } from "@/types/error";
 
 type EnterPhoneProps = {
   logoLink?: string;
   onClose?: () => void;
+  className?: string;
 };
 
-export function EnterOtpForm(props: EnterPhoneProps) {
-  const { logoLink, onClose } = props;
+export function SignInWithOtpForm(props: EnterPhoneProps) {
+  const { logoLink, onClose, className } = props;
 
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<EnterOtp>({
+  const form = useForm<SignInWithOtp>({
+    disabled: isPending,
     resolver: zodResolver(enterOtpSchema),
   });
 
@@ -46,35 +50,45 @@ export function EnterOtpForm(props: EnterPhoneProps) {
 
   const authContext = useAuthData();
 
-  useLayoutEffect(() => {
-    if (!authContext.countryCode || !authContext?.userId) {
-      return;
-    }
+  useEffect(() => {
+    if (!authContext.countryCode || !authContext?.userId) return;
     form.setValue("countryCode", authContext.countryCode);
     form.setValue("userId", authContext.userId);
+    if (authContext?.user?.firstName) form.setValue("firstName", authContext?.user?.firstName);
+    if (authContext?.user?.lastName) form.setValue("lastName", authContext?.user?.lastName);
+    if (authContext?.user?.displayName)
+      form.setValue("displayName", authContext?.user?.displayName);
     setExpiresAt(authContext?.otpExpiresAt || null);
-  }, [authContext.countryCode, authContext?.otpExpiresAt, authContext.userId, form, router]);
+  }, [
+    authContext.countryCode,
+    authContext?.otpExpiresAt,
+    authContext.user,
+    authContext.userId,
+    form,
+  ]);
 
   const handleSubmit = form.handleSubmit((data) => {
     startTransition(async () => {
-      const session = await SignInWithOtp(data);
+      const session = await signInWithOtp(data);
       if (!isOk(session)) {
-        form.setError("otp", {
-          message: session.error.message,
-        });
+        switch (session.error.name) {
+          case ErrorName.InvalidOtp: {
+            form.setError("otp", {
+              message: session.error.message,
+            });
+          }
+        }
         return;
       }
-      await revalidateUseAuth();
+      router.refresh();
       router.push(routes.home);
     });
   });
 
-  if (!authContext.countryCode || !authContext?.userId) {
-    redirect(routes.auth.enterUserId);
-  }
+  if (!authContext.countryCode || !authContext?.userId) redirect(routes.auth.enterUserId);
 
   return (
-    <form className="pointer-events-auto flex flex-col" onSubmit={handleSubmit}>
+    <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
       <ConditionLink href={logoLink}>
         <ThemeImage
           srcLight="/images/logo.jpg"
@@ -91,11 +105,18 @@ export function EnterOtpForm(props: EnterPhoneProps) {
         name="otp"
         render={({ field, fieldState }) => {
           return (
-            <InputField className="mt-6">
+            <InputField className="mt-6" required>
+              <Label htmlFor="otp" className="text-center">
+                {["کد یکبار مصرف ارسال شده به", authContext.userId, "را وارد کنید."].join(" ")}
+              </Label>
               <OtpInput
+                id="otp"
                 autoFocus
                 className="mx-auto"
-                onComplete={handleSubmit}
+                onComplete={() => {
+                  if (!form.getValues("displayName")) return;
+                  void handleSubmit();
+                }}
                 inputMode="numeric"
                 type="tel"
                 invalid={!!fieldState.error?.message}
@@ -109,14 +130,13 @@ export function EnterOtpForm(props: EnterPhoneProps) {
       <div className="mt-6 flex h-9 items-center justify-center">
         {expiresAt && (
           <Text className="flex gap-1 text-sm">
-            <strong>
-              <LeftTime deadline={expiresAt} onReachedEnd={() => setExpiresAt(null)} />
-            </strong>
+            <LeftTime deadline={expiresAt} onReachedEnd={() => setExpiresAt(null)} />
             مانده تا دریافت مجدد کد یکبار مصرف
           </Text>
         )}
         {!expiresAt && (
           <SendOtpButton
+            disabled={form.formState.disabled}
             data={{
               countryCode: authContext.countryCode,
               userId: authContext.userId,
@@ -129,6 +149,21 @@ export function EnterOtpForm(props: EnterPhoneProps) {
           />
         )}
       </div>
+      {!authContext?.user?.displayName && (
+        <Controller
+          control={form.control}
+          name="displayName"
+          render={({ field, fieldState }) => {
+            return (
+              <InputField className="mt-4" required>
+                <Label>نام نمایشی</Label>
+                <Input invalid={!!fieldState.error?.message} {...field} />
+                <ErrorMessage>{fieldState.error?.message}</ErrorMessage>
+              </InputField>
+            );
+          }}
+        />
+      )}
       <Button type="submit" className="mt-6 w-full shrink-0" disabled={isPending}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -168,10 +203,11 @@ type SendOtpButtonProps = {
   data: EnterUserId;
   onSuccess: () => void;
   className?: string;
+  disabled?: boolean;
 };
 
 function SendOtpButton(props: SendOtpButtonProps) {
-  const { data, onSuccess, className } = props;
+  const { data, onSuccess, className, disabled } = props;
 
   const { updateOtpExpiresAt } = useAuthActions();
 
@@ -187,7 +223,7 @@ function SendOtpButton(props: SendOtpButtonProps) {
       onSuccess();
       toast.success("کد یکبار مصرف با موفقیت ارسال شد.");
       updateOtpExpiresAt({
-        otpExpiresAt: res.data.expiresAt,
+        otpExpiresAt: res.data.otpExpiresAt,
       });
     });
 
@@ -196,7 +232,7 @@ function SendOtpButton(props: SendOtpButtonProps) {
       variant="plain"
       color="secondary"
       className={className}
-      disabled={isPending}
+      disabled={isPending || disabled}
       onClick={handleSendOtp}
     >
       ارسال مجدد کد یکبار مصرف

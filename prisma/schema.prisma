@@ -19,16 +19,16 @@ enum Role {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  firstName     String?
-  lastName      String?
-  displayName   String?
-  image         String?
-  email         String?   @unique
-  emailVerified DateTime?
-  phone         String?   @unique
-  phoneVerified DateTime?
-  role          Role      @default(User)
+  id              String    @id @default(cuid())
+  firstName       String?
+  lastName        String?
+  displayName     String
+  image           String?
+  email           String?   @unique
+  emailVerifiedAt DateTime?
+  phone           String?   @unique
+  phoneVerifiedAt DateTime?
+  role            Role      @default(User)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

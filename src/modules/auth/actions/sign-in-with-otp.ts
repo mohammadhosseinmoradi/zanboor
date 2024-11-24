@@ -1,6 +1,6 @@
 "use server";
 
-import type { EnterOtp } from "@/modules/auth/types";
+import type { SignInWithOtp } from "@/modules/auth/types";
 import { EMAIL_REGEX, PHONE_REGEX } from "@/lib/constants/regex";
 import { getNormalizePhone } from "@/lib/utils/get-normalize-phone";
 import prisma from "@/lib/db";
@@ -13,8 +13,8 @@ import { createSession } from "@/modules/auth/session";
  * @param params
  * @constructor
  */
-export async function SignInWithOtp(params: EnterOtp): Promise<Result<string>> {
-  const { countryCode, userId, otp: otpCode } = params;
+export async function signInWithOtp(params: SignInWithOtp): Promise<Result<string>> {
+  const { firstName, lastName, displayName, countryCode, userId, otp: otpCode } = params;
 
   let phone: string | null = null;
   if (userId.match(PHONE_REGEX))
@@ -28,20 +28,30 @@ export async function SignInWithOtp(params: EnterOtp): Promise<Result<string>> {
 
   let user = await prisma.user.findFirst({
     where: {
-      OR: [
-        {
-          phone,
-        },
-        {
-          email,
-        },
-      ],
+      ...(phone ? { phone } : {}),
+      ...(email ? { email } : {}),
     },
   });
+
+  if (user) {
+    prisma.user.update({
+      data: {
+        firstName: firstName || null,
+        lastName: lastName || null,
+        displayName,
+      },
+      where: {
+        id: user.id,
+      },
+    });
+  }
 
   if (!user) {
     user = await prisma.user.create({
       data: {
+        firstName: firstName || null,
+        lastName: lastName || null,
+        displayName,
         phone,
         email,
       },
@@ -51,14 +61,8 @@ export async function SignInWithOtp(params: EnterOtp): Promise<Result<string>> {
   const otp = await prisma.otp.findFirst({
     where: {
       code: otpCode,
-      OR: [
-        {
-          phone,
-        },
-        {
-          email,
-        },
-      ],
+      ...(phone ? { phone } : {}),
+      ...(email ? { email } : {}),
     },
   });
 
