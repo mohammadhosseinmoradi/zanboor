@@ -2,6 +2,7 @@ export enum ErrorName {
   InvalidOtp = "invalidOtp",
   Unauthorized = "unauthorized",
   Unknown = "unknown",
+  BadRequest = "badRequest",
 }
 
 export const ErrorStatusMap = {

@@ -16,15 +16,19 @@ import { ConditionLink } from "@/components/condition-link";
 import { ThemeImage } from "@/components/theme-image";
 import { Link } from "@/components/link";
 import { routes } from "@/lib/constants/routes";
-import type { EnterUserId } from "@/modules/auth/types";
+import type { EnterPhone } from "@/modules/auth/types";
 import { useEffect, useTransition } from "react";
 import { sendOtp } from "@/modules/auth/actions/send-otp";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { enterUserIdSchema } from "@/modules/auth/schema";
+import { enterPhoneSchema } from "@/modules/auth/schema";
 import { useRouter } from "next/navigation";
 import { useAuthActions } from "@/modules/auth";
 import { isOk } from "@/lib/utils/is-ok";
 import { cn } from "@/lib/utils";
+import { Heading } from "@/components/heading";
+import { Alert } from "@/components/alert";
+import { CheckboxField } from "@/components/checkbox-field";
+import { Checkbox } from "@/components/checkbox";
 
 type EnterPhoneProps = {
   logoLink?: string;
@@ -32,37 +36,34 @@ type EnterPhoneProps = {
   className?: string;
 };
 
-export function EnterUserIdForm(props: EnterPhoneProps) {
+export function EnterPhoneForm(props: EnterPhoneProps) {
   const { logoLink, onClose, className } = props;
 
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<EnterUserId>({
+  const form = useForm<EnterPhone>({
     disabled: isPending,
-    resolver: zodResolver(enterUserIdSchema),
+    resolver: zodResolver(enterPhoneSchema),
   });
 
   useEffect(() => {
     form.setValue("countryCode", countryOptions[0].value);
   }, [form]);
 
-  const { setUser, setOtp } = useAuthActions();
+  const { setOtp } = useAuthActions();
 
   const handleSubmit = form.handleSubmit((data) => {
     startTransition(async () => {
       const result = await sendOtp(data);
       if (!isOk(result)) return;
-      setUser({
-        user: result.data.user,
-      });
       setOtp({
-        userId: data.userId,
         countryCode: data.countryCode,
+        phone: data.phone,
         otpExpiresAt: result.data.otpExpiresAt,
       });
-      router.push(routes.auth.signInWithOtp);
+      router.push(routes.auth.enterOtp);
     });
   });
 
@@ -70,8 +71,8 @@ export function EnterUserIdForm(props: EnterPhoneProps) {
     <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
       <ConditionLink href={logoLink}>
         <ThemeImage
-          srcLight="/images/logo.jpg"
-          srcDark="/images/logo.jpg"
+          srcLight="/images/logo.png"
+          srcDark="/images/logo.png"
           className="mx-auto size-28 cursor-pointer rounded-rounded object-contain"
           width={200}
           height={200}
@@ -79,13 +80,22 @@ export function EnterUserIdForm(props: EnterPhoneProps) {
           alt=""
         />
       </ConditionLink>
+      <Heading as="h1" variant="h2" className="text-center font-extrabold text-primary">
+        زنـبـــــــــور
+      </Heading>
+      <Text className="mt-4 text-center text-primary">
+        ازدواج دائم و موقت، قرار ملاقات، چت، آشنایی با افراد جدید
+      </Text>
+      <Alert type="warning" className="mt-4">
+        اپلیکیشن زنبور تابع قوانین جمهوری اسلامی ایران است.
+      </Alert>
       <Controller
         control={form.control}
-        name="userId"
+        name="phone"
         render={({ field, fieldState }) => {
           return (
             <InputField className="mt-6">
-              <Label htmlFor="userId">شناسه کاربری</Label>
+              <Label htmlFor="phone">موبایل</Label>
               <InputGroup>
                 <ListboxDropdown
                   disabled={form.formState.disabled}
@@ -97,13 +107,14 @@ export function EnterUserIdForm(props: EnterPhoneProps) {
                 <Divider vertical className="my-2.5" />
                 <Input
                   autoFocus
-                  id="userId"
+                  id="phone"
                   className="[direction:ltr] placeholder:[direction:rtl] rtl:[&_input]:text-right"
                   type="tel"
                   autoComplete="tel"
-                  placeholder="شماره موبایل یا ایمیل"
+                  placeholder="شماره موبایل"
                   invalid={!!fieldState.error?.message}
                   {...field}
+                  value={field.value || ""}
                 />
               </InputGroup>
               <ErrorMessage>{fieldState.error?.message}</ErrorMessage>
@@ -111,6 +122,22 @@ export function EnterUserIdForm(props: EnterPhoneProps) {
           );
         }}
       />
+
+      <Controller
+        control={form.control}
+        name="iAcceptTerms"
+        render={({ field, fieldState }) => {
+          const { value, ...otherProps } = field;
+          return (
+            <CheckboxField className="mt-6">
+              <Label>شرایط و قوانین را مطالعه کردم و می‌پذیرم.</Label>
+              <Checkbox checked={value || false} {...otherProps} />
+              <ErrorMessage>{fieldState.error?.message}</ErrorMessage>
+            </CheckboxField>
+          );
+        }}
+      />
+
       <Button type="submit" className="mt-6 w-full shrink-0" disabled={isPending}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

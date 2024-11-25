@@ -1,7 +1,7 @@
 "use server";
 
-import type { SignInWithOtp } from "@/modules/auth/types";
-import { EMAIL_REGEX, PHONE_REGEX } from "@/lib/constants/regex";
+import type { EnterOtp } from "@/modules/auth/types";
+import { PHONE_REGEX } from "@/lib/constants/regex";
 import { getNormalizePhone } from "@/lib/utils/get-normalize-phone";
 import prisma from "@/lib/db";
 import { Result } from "@/types/result";
@@ -13,57 +13,37 @@ import { createSession } from "@/modules/auth/session";
  * @param params
  * @constructor
  */
-export async function signInWithOtp(params: SignInWithOtp): Promise<Result<string>> {
-  const { firstName, lastName, displayName, countryCode, userId, otp: otpCode } = params;
+export async function signInWithOtp(params: EnterOtp): Promise<Result<string>> {
+  const { countryCode, phone, otp: otpCode } = params;
 
-  let phone: string | null = null;
-  if (userId.match(PHONE_REGEX))
-    phone = getNormalizePhone({
-      countryCode,
-      phone: userId,
-    });
+  if (!phone.match(PHONE_REGEX)) {
+    return {
+      error: {
+        name: ErrorName.BadRequest,
+        message: "شماره موبایل اشتباه می‌باشد.",
+      },
+    };
+  }
 
-  let email: string | null = null;
-  if (userId.match(EMAIL_REGEX)) email = userId;
-
-  let user = await prisma.user.findFirst({
-    where: {
-      ...(phone ? { phone } : {}),
-      ...(email ? { email } : {}),
-    },
+  const normalizePhone = getNormalizePhone({
+    countryCode,
+    phone,
   });
 
-  if (user) {
-    prisma.user.update({
-      data: {
-        firstName: firstName || null,
-        lastName: lastName || null,
-        displayName,
-      },
-      where: {
-        id: user.id,
-      },
-    });
-  }
+  let user = await prisma.user.findFirst({
+    where: { phone: normalizePhone },
+  });
 
   if (!user) {
     user = await prisma.user.create({
       data: {
-        firstName: firstName || null,
-        lastName: lastName || null,
-        displayName,
-        phone,
-        email,
+        displayName: "",
       },
     });
   }
 
-  const otp = await prisma.otp.findFirst({
-    where: {
-      code: otpCode,
-      ...(phone ? { phone } : {}),
-      ...(email ? { email } : {}),
-    },
+  const otp = await prisma.otp.findUnique({
+    where: { code: otpCode, phone: normalizePhone },
   });
 
   if (!otp || otp.expiresAt < new Date())

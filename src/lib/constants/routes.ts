@@ -7,7 +7,7 @@ export const routes = {
   privacy: "/privacy",
   auth: {
     getPath: () => "/auth",
-    enterUserId: "/auth/enter-user-id",
-    signInWithOtp: "/auth/sign-in-with-otp",
+    enterPhone: "/auth/enter-phone",
+    enterOtp: "/auth/enter-otp",
   },
 };

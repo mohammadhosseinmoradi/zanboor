@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     applicationName: APP_NAME,
     title: {
       template: `%s | ${APP_NAME}`,
-      default: "زنبور | ازدواج دائم و موقت ،قرار ملاقات، چت، آشنایی با افراد جدید",
+      default: "زنبور | ازدواج دائم و موقت، قرار ملاقات، چت، آشنایی با افراد جدید",
     },
     openGraph: {
       siteName: APP_NAME,
@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

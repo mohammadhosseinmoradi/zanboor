@@ -1,14 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { authGuardMiddleware } from "@/modules/auth";
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next();
-
-  response = await authGuardMiddleware(request, response);
-
+  const response = NextResponse.next();
   // We add the url to the headers for later use.
   response.headers.set("x-url", request.url);
-
   return response;
 }
 

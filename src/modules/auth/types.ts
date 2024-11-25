@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { enterOtpSchema, enterUserIdSchema } from "@/modules/auth/schema";
+import { enterOtpSchema, enterPhoneSchema } from "@/modules/auth/schema";
 import { Role, User } from "@prisma/client";
 
-export type EnterUserId = z.infer<typeof enterUserIdSchema>;
+export type EnterPhone = z.infer<typeof enterPhoneSchema>;
 
-export type SignInWithOtp = z.infer<typeof enterOtpSchema>;
+export type EnterOtp = z.infer<typeof enterOtpSchema>;
 
 export type SessionPayload = {
   userId: string;

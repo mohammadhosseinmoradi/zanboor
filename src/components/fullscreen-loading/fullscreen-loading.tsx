@@ -46,7 +46,16 @@ export default function FullscreenLoading(props: FullScreenLoadingProps) {
                 scale: 0.9,
               }}
             >
-              <Loading className="text-primary" size="lg" />
+              <ThemeImage
+                className="w-24"
+                srcLight="/images/logo.png"
+                srcDark="/images/logo.png"
+                width={150}
+                height={150}
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
+                alt="logo"
+              />
+              <Loading className="mt-4 text-primary" size="lg" />
             </motion.div>
           </motion.div>
         )}

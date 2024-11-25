@@ -35,9 +35,8 @@ model User {
 }
 
 model Otp {
-  id    String  @id @default(cuid())
-  email String? @unique
-  phone String? @unique
+  id    String @id @default(cuid())
+  phone String @unique
   code  String
 
   expiresAt DateTime

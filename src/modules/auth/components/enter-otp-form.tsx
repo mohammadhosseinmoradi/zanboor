@@ -12,7 +12,7 @@ import { ThemeImage } from "@/components/theme-image";
 import { Link } from "@/components/link";
 import { routes } from "@/lib/constants/routes";
 import OtpInput from "@/components/otp-input/otp-input";
-import type { EnterUserId, SignInWithOtp } from "@/modules/auth/types";
+import type { EnterPhone, EnterOtp } from "@/modules/auth/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { enterOtpSchema } from "@/modules/auth/schema";
 import { useAuthActions, useAuthData } from "@/modules/auth/context";
@@ -25,23 +25,25 @@ import { toast } from "sonner";
 import { signInWithOtp } from "@/modules/auth/actions/sign-in-with-otp";
 import { isOk } from "@/lib/utils/is-ok";
 import { Label } from "@/components/label";
-import { Input } from "@/components/input";
 import { ErrorName } from "@/types/error";
+import { ArrowRightIcon } from "lucide-react";
+import { Heading } from "@/components/heading";
 
 type EnterPhoneProps = {
   logoLink?: string;
   onClose?: () => void;
+  onBack: () => void;
   className?: string;
 };
 
-export function SignInWithOtpForm(props: EnterPhoneProps) {
-  const { logoLink, onClose, className } = props;
+export function EnterOtpForm(props: EnterPhoneProps) {
+  const { logoLink, onClose, onBack, className } = props;
 
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<SignInWithOtp>({
+  const form = useForm<EnterOtp>({
     disabled: isPending,
     resolver: zodResolver(enterOtpSchema),
   });
@@ -51,21 +53,11 @@ export function SignInWithOtpForm(props: EnterPhoneProps) {
   const authContext = useAuthData();
 
   useEffect(() => {
-    if (!authContext.countryCode || !authContext?.userId) return;
+    if (!authContext.countryCode || !authContext?.phone) return;
     form.setValue("countryCode", authContext.countryCode);
-    form.setValue("userId", authContext.userId);
-    if (authContext?.user?.firstName) form.setValue("firstName", authContext?.user?.firstName);
-    if (authContext?.user?.lastName) form.setValue("lastName", authContext?.user?.lastName);
-    if (authContext?.user?.displayName)
-      form.setValue("displayName", authContext?.user?.displayName);
+    form.setValue("phone", authContext.phone);
     setExpiresAt(authContext?.otpExpiresAt || null);
-  }, [
-    authContext.countryCode,
-    authContext?.otpExpiresAt,
-    authContext.user,
-    authContext.userId,
-    form,
-  ]);
+  }, [authContext.countryCode, authContext.phone, authContext?.otpExpiresAt, form]);
 
   const handleSubmit = form.handleSubmit((data) => {
     startTransition(async () => {
@@ -85,14 +77,14 @@ export function SignInWithOtpForm(props: EnterPhoneProps) {
     });
   });
 
-  if (!authContext.countryCode || !authContext?.userId) redirect(routes.auth.enterUserId);
+  if (!authContext.countryCode || !authContext?.phone) redirect(routes.auth.enterPhone);
 
   return (
     <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
       <ConditionLink href={logoLink}>
         <ThemeImage
-          srcLight="/images/logo.jpg"
-          srcDark="/images/logo.jpg"
+          srcLight="/images/logo.png"
+          srcDark="/images/logo.png"
           className="mx-auto size-28 cursor-pointer rounded-rounded object-contain"
           width={200}
           height={200}
@@ -100,6 +92,9 @@ export function SignInWithOtpForm(props: EnterPhoneProps) {
           alt=""
         />
       </ConditionLink>
+      <Heading as="h1" variant="h2" className="text-center font-extrabold text-primary">
+        زنـبـــــــــور
+      </Heading>
       <Controller
         control={form.control}
         name="otp"
@@ -107,16 +102,13 @@ export function SignInWithOtpForm(props: EnterPhoneProps) {
           return (
             <InputField className="mt-6" required>
               <Label htmlFor="otp" className="text-center">
-                {["کد یکبار مصرف ارسال شده به", authContext.userId, "را وارد کنید."].join(" ")}
+                {["کد یکبار مصرف ارسال شده به", authContext.phone, "را وارد کنید."].join(" ")}
               </Label>
               <OtpInput
                 id="otp"
                 autoFocus
                 className="mx-auto"
-                onComplete={() => {
-                  if (!form.getValues("displayName")) return;
-                  void handleSubmit();
-                }}
+                onComplete={handleSubmit}
                 inputMode="numeric"
                 type="tel"
                 invalid={!!fieldState.error?.message}
@@ -131,7 +123,7 @@ export function SignInWithOtpForm(props: EnterPhoneProps) {
         {expiresAt && (
           <Text className="flex gap-1 text-sm">
             <LeftTime deadline={expiresAt} onReachedEnd={() => setExpiresAt(null)} />
-            مانده تا دریافت مجدد کد یکبار مصرف
+            مانده تا دریافت مجدد
           </Text>
         )}
         {!expiresAt && (
@@ -139,7 +131,8 @@ export function SignInWithOtpForm(props: EnterPhoneProps) {
             disabled={form.formState.disabled}
             data={{
               countryCode: authContext.countryCode,
-              userId: authContext.userId,
+              phone: authContext.phone,
+              iAcceptTerms: true,
             }}
             onSuccess={() => {
               form.clearErrors();
@@ -149,39 +142,29 @@ export function SignInWithOtpForm(props: EnterPhoneProps) {
           />
         )}
       </div>
-      {!authContext?.user?.displayName && (
-        <Controller
-          control={form.control}
-          name="displayName"
-          render={({ field, fieldState }) => {
-            return (
-              <InputField className="mt-4" required>
-                <Label>نام نمایشی</Label>
-                <Input invalid={!!fieldState.error?.message} {...field} />
-                <ErrorMessage>{fieldState.error?.message}</ErrorMessage>
-              </InputField>
-            );
-          }}
-        />
-      )}
-      <Button type="submit" className="mt-6 w-full shrink-0" disabled={isPending}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          data-slot="start-icon"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
-          />
-        </svg>
-        ورود
-        {isPending && <Loading />}
-      </Button>
+      <div className="mt-6 flex gap-2">
+        <Button color="secondary" onClick={onBack}>
+          <ArrowRightIcon data-slot="icon" />
+        </Button>
+        <Button type="submit" className="grow" disabled={isPending}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            data-slot="start-icon"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+            />
+          </svg>
+          ورود
+          {isPending && <Loading />}
+        </Button>
+      </div>
       <div className="mt-6 flex flex-col">
         <Text variant="caption">
           <span>ورود شما به معنای پذیرش </span>
@@ -200,7 +183,7 @@ export function SignInWithOtpForm(props: EnterPhoneProps) {
 }
 
 type SendOtpButtonProps = {
-  data: EnterUserId;
+  data: EnterPhone;
   onSuccess: () => void;
   className?: string;
   disabled?: boolean;

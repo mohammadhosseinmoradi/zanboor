@@ -1,48 +1,34 @@
 "use server";
 
-import type { EnterUserId } from "@/modules/auth/types";
+import type { EnterPhone } from "@/modules/auth/types";
 import { getNormalizePhone } from "@/lib/utils/get-normalize-phone";
-import { EMAIL_REGEX, PHONE_REGEX } from "@/lib/constants/regex";
+import { PHONE_REGEX } from "@/lib/constants/regex";
 import prisma from "@/lib/db";
 import { Result } from "@/types/result";
-import { User } from "@prisma/client";
+import { ErrorName } from "@/types/error";
 
 type SendOtpResponse = {
-  user: User | null;
   otpExpiresAt: Date;
 };
 
-export async function sendOtp(params: EnterUserId): Promise<Result<SendOtpResponse>> {
-  const { countryCode, userId } = params;
+export async function sendOtp(params: EnterPhone): Promise<Result<SendOtpResponse>> {
+  const { countryCode, phone } = params;
 
-  let phone: string | null = null;
-  if (userId.match(PHONE_REGEX))
-    phone = getNormalizePhone({
-      countryCode,
-      phone: userId,
-    });
+  if (!phone.match(PHONE_REGEX))
+    return {
+      error: {
+        name: ErrorName.BadRequest,
+        message: "شماره موبایل اشتباه می‌باشد.",
+      },
+    };
 
-  let email: string | null = null;
-  if (userId.match(EMAIL_REGEX)) email = userId;
-
-  const user = await prisma.user.findFirst({
-    where: {
-      ...(phone ? { phone } : {}),
-      ...(email ? { email } : {}),
-    },
+  const normalizePhone = getNormalizePhone({
+    countryCode,
+    phone,
   });
 
   let otp = await prisma.otp.findFirst({
-    where: {
-      ...(phone ? { phone } : {}),
-      ...(email ? { email } : {}),
-    },
-    select: {
-      id: true,
-      phone: true,
-      email: true,
-      expiresAt: true,
-    },
+    where: { phone: normalizePhone },
   });
 
   // const newOtp = generateOtp();
@@ -52,8 +38,7 @@ export async function sendOtp(params: EnterUserId): Promise<Result<SendOtpRespon
   if (!otp) {
     otp = await prisma.otp.create({
       data: {
-        phone,
-        email,
+        phone: normalizePhone,
         code: newOtp,
         expiresAt: newOtpExpiresAt,
       },
@@ -63,26 +48,18 @@ export async function sendOtp(params: EnterUserId): Promise<Result<SendOtpRespon
   if (otp.expiresAt < new Date()) {
     otp = await prisma.otp.update({
       data: {
-        phone,
-        email,
+        phone: normalizePhone,
         code: newOtp,
         expiresAt: newOtpExpiresAt,
       },
       where: {
         id: otp.id,
       },
-      select: {
-        id: true,
-        phone: true,
-        email: true,
-        expiresAt: true,
-      },
     });
   }
 
   return {
     data: {
-      user,
       otpExpiresAt: otp.expiresAt,
     },
   };

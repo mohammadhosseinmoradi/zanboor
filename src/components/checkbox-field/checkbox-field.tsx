@@ -24,6 +24,9 @@ export function CheckboxField(props: CheckboxFieldProps) {
         // Description slot
         "[&>[data-slot=description]]:row-start-2",
         "[&>[data-slot=description]]:col-start-2",
+        // Error slot
+        "[&>[data-slot=error-message]]:row-start-2",
+        "[&>[data-slot=error-message]]:col-start-2",
         className
       )}
       {...otherProps}
