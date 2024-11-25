@@ -33,7 +33,7 @@ export async function sendOtp(params: EnterPhone): Promise<Result<SendOtpRespons
 
   // const newOtp = generateOtp();
   const newOtp = "11111";
-  const newOtpExpiresAt = new Date(new Date().setSeconds(new Date().getSeconds() + 60));
+  const newOtpExpiresAt = new Date(new Date().setSeconds(new Date().getSeconds() + 120));
 
   if (!otp) {
     otp = await prisma.otp.create({

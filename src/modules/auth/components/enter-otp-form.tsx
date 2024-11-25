@@ -26,7 +26,6 @@ import { isOk } from "@/lib/utils/is-ok";
 import { Label } from "@/components/label";
 import { ErrorName } from "@/types/error";
 import { ArrowRightIcon } from "lucide-react";
-import { Heading } from "@/components/heading";
 import { useCallbackUrl } from "@/lib/utils/router";
 
 type EnterPhoneProps = {
@@ -82,19 +81,16 @@ export function EnterOtpForm(props: EnterPhoneProps) {
 
   return (
     <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
-      <Link href="/">
+      <Link href="/" className='mx-auto'>
         <ThemeImage
-          srcLight="/images/logo.png"
-          srcDark="/images/logo.png"
-          className="mx-auto size-28 cursor-pointer rounded-rounded object-contain"
+          srcLight="/images/logo-with-text.png"
+          srcDark="/images/logo-with-text.png"
+          className="size-32 cursor-pointer rounded-rounded object-contain"
           width={200}
           height={200}
           alt="logo"
         />
       </Link>
-      <Heading as="h1" variant="h2" className="text-center font-extrabold text-primary">
-        زنـبـــــــــور
-      </Heading>
       <Controller
         control={form.control}
         name="otp"

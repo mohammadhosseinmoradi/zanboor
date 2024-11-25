@@ -24,10 +24,10 @@ import { useRouter } from "next/navigation";
 import { useAuthActions } from "@/modules/auth";
 import { isOk } from "@/lib/utils/is-ok";
 import { cn } from "@/lib/utils";
-import { Heading } from "@/components/heading";
 import { CheckboxField } from "@/components/checkbox-field";
 import { Checkbox } from "@/components/checkbox";
 import { useCallbackUrl, withCallbackUrl } from "@/lib/utils/router";
+import { SlashIcon } from "lucide-react";
 
 type EnterPhoneProps = {
   className?: string;
@@ -67,19 +67,16 @@ export function EnterPhoneForm(props: EnterPhoneProps) {
 
   return (
     <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
-      <Link href="/">
+      <Link href="/" className="mx-auto">
         <ThemeImage
-          srcLight="/images/logo.png"
-          srcDark="/images/logo.png"
-          className="mx-auto size-28 cursor-pointer rounded-rounded object-contain"
+          srcLight="/images/logo-with-text.png"
+          srcDark="/images/logo-with-text.png"
+          className="size-32 cursor-pointer rounded-rounded object-contain"
           width={200}
           height={200}
           alt="logo"
         />
       </Link>
-      <Heading as="h1" variant="h2" className="text-center font-extrabold text-primary">
-        زنـبـــــــــور
-      </Heading>
       <Controller
         control={form.control}
         name="phone"
@@ -129,24 +126,29 @@ export function EnterPhoneForm(props: EnterPhoneProps) {
         }}
       />
 
-      <Button type="submit" className="mt-6 w-full shrink-0" disabled={isPending}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          data-slot="start-icon"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
-          />
-        </svg>
-        ورود
-        {isPending && <Loading />}
-      </Button>
+      <div className="mt-6 flex gap-2">
+        <Button color="secondary" onClick={() => router.push(routes.home)}>
+          <SlashIcon data-slot="icon" />
+        </Button>
+        <Button type="submit" className="grow" disabled={isPending}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            data-slot="start-icon"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+            />
+          </svg>
+          ورود
+          {isPending && <Loading />}
+        </Button>
+      </div>
       <Divider className="my-6">یا</Divider>
       <Button color="secondary" className="w-full shrink-0" disabled={isPending}>
         <svg
