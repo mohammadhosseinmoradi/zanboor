@@ -1,6 +1,7 @@
 export const routes = {
   home: "/",
   messages: "/messages",
+  profile: "/profile",
   favorites: "/favorites",
   search: "/search",
   terms: "/terms",

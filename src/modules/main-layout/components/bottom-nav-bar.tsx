@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { NavLink } from "@/components/nav-link";
 import {
   BellIcon,
-  EllipsisVerticalIcon,
   HeartIcon,
   LockIcon,
   LucideProps,
@@ -14,15 +13,15 @@ import {
   SettingsIcon,
   SlashIcon,
   UserPenIcon,
+  UserRoundIcon,
   WalletCardsIcon,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/badge";
 import { Menu } from "@/components/menu";
-import { Button } from "@/components/button";
-import { signOut } from "@/modules/auth/actions/sign-out";
 import { useAuth } from "@/modules/auth/hooks/use-auth";
 import FullscreenLoading from "@/components/fullscreen-loading/fullscreen-loading";
+import { Avatar } from "@/components/avatar";
 
 type MobileBottomNavBarProps = {
   className?: string;
@@ -52,7 +51,7 @@ export default function BottomNavBar(props: MobileBottomNavBarProps) {
           badge={2}
           layoutId={id}
         />
-        <MoreMenu className="me-2" />
+        <Item href={routes.profile} icon={UserRoundIcon} label="پروفایل" layoutId={id} />
       </div>
     </>
   );
@@ -123,9 +122,7 @@ function MoreMenu(props: MoreMenuProps) {
       <FullscreenLoading show={isPending} />
       <Menu>
         <Menu.Button as={Fragment}>
-          <Button variant="plain" className={className}>
-            <EllipsisVerticalIcon data-slot="icon" />
-          </Button>
+          <Avatar src="/images/avatar.png" className={cn("size-9", className)} alt="کاربر" />
         </Menu.Button>
         <Menu.Items anchor="top end">
           <Menu.Item>

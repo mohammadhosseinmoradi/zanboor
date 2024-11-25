@@ -12,7 +12,6 @@ import { InputGroup } from "@/components/input-group";
 import ListboxDropdown from "@/components/listbox-dropdown";
 import { countryOptions } from "@/lib/constants/common";
 import { Text } from "@/components/text";
-import { ConditionLink } from "@/components/condition-link";
 import { ThemeImage } from "@/components/theme-image";
 import { Link } from "@/components/link";
 import { routes } from "@/lib/constants/routes";
@@ -26,20 +25,19 @@ import { useAuthActions } from "@/modules/auth";
 import { isOk } from "@/lib/utils/is-ok";
 import { cn } from "@/lib/utils";
 import { Heading } from "@/components/heading";
-import { Alert } from "@/components/alert";
 import { CheckboxField } from "@/components/checkbox-field";
 import { Checkbox } from "@/components/checkbox";
+import { useCallbackUrl, withCallbackUrl } from "@/lib/utils/router";
 
 type EnterPhoneProps = {
-  logoLink?: string;
-  onClose?: () => void;
   className?: string;
 };
 
 export function EnterPhoneForm(props: EnterPhoneProps) {
-  const { logoLink, onClose, className } = props;
+  const { className } = props;
 
   const router = useRouter();
+  const callbackUrl = useCallbackUrl();
 
   const [isPending, startTransition] = useTransition();
 
@@ -63,32 +61,25 @@ export function EnterPhoneForm(props: EnterPhoneProps) {
         phone: data.phone,
         otpExpiresAt: result.data.otpExpiresAt,
       });
-      router.push(routes.auth.enterOtp);
+      router.push(withCallbackUrl(routes.auth.enterOtp, callbackUrl));
     });
   });
 
   return (
     <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
-      <ConditionLink href={logoLink}>
+      <Link href="/">
         <ThemeImage
           srcLight="/images/logo.png"
           srcDark="/images/logo.png"
           className="mx-auto size-28 cursor-pointer rounded-rounded object-contain"
           width={200}
           height={200}
-          onClick={onClose}
-          alt=""
+          alt="logo"
         />
-      </ConditionLink>
+      </Link>
       <Heading as="h1" variant="h2" className="text-center font-extrabold text-primary">
         زنـبـــــــــور
       </Heading>
-      <Text className="mt-4 text-center text-primary">
-        ازدواج دائم و موقت، قرار ملاقات، چت، آشنایی با افراد جدید
-      </Text>
-      <Alert type="warning" className="mt-4">
-        اپلیکیشن زنبور تابع قوانین جمهوری اسلامی ایران است.
-      </Alert>
       <Controller
         control={form.control}
         name="phone"
@@ -188,11 +179,11 @@ export function EnterPhoneForm(props: EnterPhoneProps) {
       <div className="mt-6 flex flex-col">
         <Text variant="caption">
           <span>ورود شما به معنای پذیرش </span>
-          <Link href={routes.terms} className="font-bold text-primary" onClick={onClose}>
+          <Link href={routes.terms} className="font-bold text-primary">
             شرایط زنبور
           </Link>
           <span> و </span>
-          <Link href={routes.privacy} className="font-bold text-primary" onClick={onClose}>
+          <Link href={routes.privacy} className="font-bold text-primary">
             قوانین حریم خصوصی
           </Link>
           <span> است.</span>

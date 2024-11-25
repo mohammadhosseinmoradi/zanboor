@@ -7,7 +7,6 @@ import { Controller, useForm } from "react-hook-form";
 import ErrorMessage from "@/components/error-message";
 import { Fragment, useEffect, useState, useTransition } from "react";
 import { Text } from "@/components/text";
-import { ConditionLink } from "@/components/condition-link";
 import { ThemeImage } from "@/components/theme-image";
 import { Link } from "@/components/link";
 import { routes } from "@/lib/constants/routes";
@@ -28,18 +27,18 @@ import { Label } from "@/components/label";
 import { ErrorName } from "@/types/error";
 import { ArrowRightIcon } from "lucide-react";
 import { Heading } from "@/components/heading";
+import { useCallbackUrl } from "@/lib/utils/router";
 
 type EnterPhoneProps = {
-  logoLink?: string;
-  onClose?: () => void;
-  onBack: () => void;
   className?: string;
 };
 
 export function EnterOtpForm(props: EnterPhoneProps) {
-  const { logoLink, onClose, onBack, className } = props;
+  const { className } = props;
 
   const router = useRouter();
+
+  const callbackUrl = useCallbackUrl();
 
   const [isPending, startTransition] = useTransition();
 
@@ -56,10 +55,12 @@ export function EnterOtpForm(props: EnterPhoneProps) {
     if (!authContext.countryCode || !authContext?.phone) return;
     form.setValue("countryCode", authContext.countryCode);
     form.setValue("phone", authContext.phone);
+    form.setValue("iAcceptTerms", true);
     setExpiresAt(authContext?.otpExpiresAt || null);
   }, [authContext.countryCode, authContext.phone, authContext?.otpExpiresAt, form]);
 
   const handleSubmit = form.handleSubmit((data) => {
+    console.log("hi")
     startTransition(async () => {
       const session = await signInWithOtp(data);
       if (!isOk(session)) {
@@ -73,7 +74,7 @@ export function EnterOtpForm(props: EnterPhoneProps) {
         return;
       }
       router.refresh();
-      router.push(routes.home);
+      router.push(callbackUrl || routes.home);
     });
   });
 
@@ -81,17 +82,16 @@ export function EnterOtpForm(props: EnterPhoneProps) {
 
   return (
     <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
-      <ConditionLink href={logoLink}>
+      <Link href="/">
         <ThemeImage
           srcLight="/images/logo.png"
           srcDark="/images/logo.png"
           className="mx-auto size-28 cursor-pointer rounded-rounded object-contain"
           width={200}
           height={200}
-          onClick={onClose}
-          alt=""
+          alt="logo"
         />
-      </ConditionLink>
+      </Link>
       <Heading as="h1" variant="h2" className="text-center font-extrabold text-primary">
         زنـبـــــــــور
       </Heading>
@@ -143,7 +143,7 @@ export function EnterOtpForm(props: EnterPhoneProps) {
         )}
       </div>
       <div className="mt-6 flex gap-2">
-        <Button color="secondary" onClick={onBack}>
+        <Button color="secondary" onClick={router.back}>
           <ArrowRightIcon data-slot="icon" />
         </Button>
         <Button type="submit" className="grow" disabled={isPending}>
@@ -168,11 +168,11 @@ export function EnterOtpForm(props: EnterPhoneProps) {
       <div className="mt-6 flex flex-col">
         <Text variant="caption">
           <span>ورود شما به معنای پذیرش </span>
-          <Link href={routes.terms} className="font-bold text-primary" onClick={onClose}>
+          <Link href={routes.terms} className="font-bold text-primary">
             شرایط زنبور
           </Link>
           <span> و </span>
-          <Link href={routes.privacy} className="font-bold text-primary" onClick={onClose}>
+          <Link href={routes.privacy} className="font-bold text-primary">
             قوانین حریم خصوصی
           </Link>
           <span> است.</span>

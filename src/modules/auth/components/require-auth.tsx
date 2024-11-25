@@ -19,7 +19,7 @@ type RequiredAuthProps = {
 export function RequireAuth(props: RequiredAuthProps) {
   const { className, children, name } = props;
 
-  const { user } = useAuth();
+  const { user, signIn } = useAuth();
 
   if (user) return children;
 
@@ -38,7 +38,9 @@ export function RequireAuth(props: RequiredAuthProps) {
         <Button as={Link} href={routes.home} className="mt-6 self-center" color="secondary">
           صفحه اصلی
         </Button>
-        <Button className="mt-6 self-center">ورود / ثبت‌نام</Button>
+        <Button className="mt-6 self-center" onClick={signIn}>
+          ورود / ثبت‌نام
+        </Button>
       </div>
     </div>
   );
