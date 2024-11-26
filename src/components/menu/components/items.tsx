@@ -63,7 +63,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
                             : {
                                 to: typeof anchor == "string" ? anchor : "bottom start",
                                 gap: "0.5rem",
-                                padding: "1.5rem",
+                                padding: "1rem",
                                 ...(typeof anchor == "object" ? anchor : {}),
                               }
                         }
