@@ -59,15 +59,18 @@ export function EnterOtpForm(props: EnterPhoneProps) {
   }, [authContext.countryCode, authContext.phone, authContext?.otpExpiresAt, form]);
 
   const handleSubmit = form.handleSubmit((data) => {
-    console.log("hi")
     startTransition(async () => {
       const session = await signInWithOtp(data);
       if (!isOk(session)) {
         switch (session.error.name) {
           case ErrorName.InvalidOtp: {
+            form.setValue("otp", "");
             form.setError("otp", {
               message: session.error.message,
             });
+            setTimeout(() => {
+              form.setFocus("otp")
+            }, 50);
           }
         }
         return;

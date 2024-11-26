@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { PHONE_REGEX } from "@/lib/constants/regex";
+import { toEnglishDigits } from "@/lib/utils/to-english-digits";
 
 export const enterPhoneSchema = z.object({
   countryCode: z.string(),
@@ -7,11 +8,13 @@ export const enterPhoneSchema = z.object({
     .string({
       required_error: "شماره موبایل خود را وارد نکرده‌اید.",
     })
-    .and(
-      z.string().regex(PHONE_REGEX, {
-        message: "شماره موبایل وارد شده اشتباه می‌باشد.",
-      })
-    ),
+    .transform((value) => {
+      const normalized = toEnglishDigits(value.trim());
+      return normalized.length === 10 ? `0${normalized}` : normalized;
+    })
+    .refine((value) => PHONE_REGEX.test(value), {
+      message: "شماره موبایل وارد شده اشتباه می‌باشد.",
+    }),
   iAcceptTerms: z
     .boolean({
       required_error: "شرایط را نپذیرفته‌اید.",
@@ -29,6 +32,6 @@ export const enterOtpSchema = z
       })
       .length(5, {
         message: "کد یکبار مصرف را کامل وارد نکرده‌اید.",
-      }),
+      }).transform(value => toEnglishDigits(value)),
   })
   .merge(enterPhoneSchema);
