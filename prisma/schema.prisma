@@ -37,39 +37,48 @@ model User {
   role            Role      @default(User)
   profile         Profile?
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  lastVisitedAt DateTime @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastVisitedAt DateTime  @default(now())
+  Location      Location?
 }
 
 model Profile {
-  id                 String              @id @default(cuid())
-  personal           Personal
-  educationAndCareer EducationAndCareer?
-  physicalAttributes PhysicalAttributes?
+  id                   String              @id @default(cuid())
+  personal             Personal            @relation(fields: [personalId], references: [id])
+  personalId           String              @unique
+  educationAndCareer   EducationAndCareer? @relation(fields: [educationAndCareerId], references: [id])
+  educationAndCareerId String?             @unique
+  physicalAttributes   PhysicalAttributes? @relation(fields: [physicalAttributesId], references: [id])
+  physicalAttributesId String?             @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @unique
+  user     User      @relation(fields: [userId], references: [id])
+  userId   String    @unique
+  Location Location?
 }
 
 model Personal {
+  id            String        @id @default(cuid())
   firstName     String
   lastName      String
   displayName   String
   image         String?
   gender        Gender        @default(Other)
   birthdate     DateTime
-  location      Location?
+  location      Location?     @relation(fields: [locationId], references: [id])
+  locationId    String?       @unique
   maritalStatus MaritalStatus
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Profile   Profile?
 }
 
 model EducationAndCareer {
+  id               String           @id @default(cuid())
   educationLevel   EducationLevel
   fieldOfStudy     String
   employmentStatus EmploymentStatus
@@ -77,15 +86,18 @@ model EducationAndCareer {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Profile   Profile?
 }
 
 model PhysicalAttributes {
+  id        String    @id @default(cuid())
   height    Int // Example: 167 (in cm)
   weight    Int // Example: 60 (in kg)
   skinColor SkinColor // Example: white
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Profile   Profile[]
 }
 
 enum MaritalStatus {
@@ -121,14 +133,16 @@ model Location {
   id          String       @id @default(cuid())
   userId      String       @unique
   user        User         @relation(fields: [userId], references: [id])
-  city        City
+  city        City         @relation(fields: [cityId], references: [id])
   geolocation Geolocation?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String  @unique
+  profile   Profile    @relation(fields: [profileId], references: [id])
+  profileId String     @unique
+  Personal  Personal[]
+  cityId    String
 }
 
 model Geolocation {
@@ -167,8 +181,9 @@ model Province {
 }
 
 model City {
-  id         String   @id @default(cuid())
+  id         String     @id @default(cuid())
   name       String
   provinceId String
-  province   Province @relation(fields: [provinceId], references: [id])
+  province   Province   @relation(fields: [provinceId], references: [id])
+  Location   Location[]
 }
