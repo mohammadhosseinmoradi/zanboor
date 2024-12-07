@@ -74,13 +74,13 @@ function Item(props: ItemProps) {
         <>
           <div className="relative flex w-full items-center gap-4 px-4 py-2.5">
             <span className="relative">
-              <Icon className="size-6 text-on-surface-variant transition group-data-[active]:text-on-surface-hover" />
+              <Icon className="size-6 text-on-surface-variant transition group-data-[active]:text-on-surface" />
               {!!badge && <Badge anchor="topEnd">{badge}</Badge>}
             </span>
-            <span className="line-clamp-2 text-center text-sm font-bold">{label}</span>
+            <span className="line-clamp-2 text-center text-on-surface-variant group-data-[active]:text-on-surface text-sm font-bold">{label}</span>
             {active && (
               <motion.span
-                className="absolute inset-0 flex rounded-[calc(var(--rounded)+0.8rem)] bg-primary/20"
+                className="absolute inset-0 flex rounded-4xl bg-primary/20"
                 initial={false}
                 layoutId={layoutId}
                 transition={{

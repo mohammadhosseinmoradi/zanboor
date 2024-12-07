@@ -73,8 +73,7 @@ function Item(props: ItemProps) {
           </div>
           {active && (
             <motion.span
-              className="absolute top-2 flex h-10 w-[calc(100%-theme(spacing[4]))] bg-primary/20"
-              style={{ borderRadius: "calc(var(--rounded) + 0.8rem)" }}
+              className="absolute top-2 flex h-10 w-[calc(100%-theme(spacing[4]))] rounded-4xl bg-primary/20"
               initial={false}
               layoutId={layoutId}
               transition={{

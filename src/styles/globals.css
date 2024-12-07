@@ -11,6 +11,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
+    outline: none;
     border-color: var(--color-border);
   }
 

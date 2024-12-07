@@ -65,8 +65,8 @@ const button = cva({
       x: "-mx-3",
     },
     disabled: {
-      true: "",
-      false: "",
+      true: "cursor-not-allowed",
+      false: "cursor-pointer",
     },
   },
   compoundVariants: [

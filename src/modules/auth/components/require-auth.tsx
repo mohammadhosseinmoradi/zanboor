@@ -25,7 +25,7 @@ export function RequireAuth(props: RequiredAuthProps) {
 
   return (
     <div className={cn("flex flex-col items-center justify-center", className)}>
-      <ShieldAlertIcon className="size-10 text-on-surface-disabled" />
+      <ShieldAlertIcon className="size-10 text-on-surface-variant" />
       <Heading as="h4" variant="h4" className="mt-6 text-center">
         نیاز به احراز هویت
       </Heading>
