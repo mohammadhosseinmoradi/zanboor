@@ -24,8 +24,8 @@ export function Toaster(props: ToasterProps) {
       }}
       toastOptions={{
         classNames: {
-          title: "text-fg",
-          toast: "shadow rounded-rounded select-none",
+          title: "text-on-surface",
+          toast: "shadow rounded-lg select-none",
         },
       }}
       {...props}

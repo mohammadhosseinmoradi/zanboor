@@ -8,7 +8,7 @@ const link = cva({
   variants: {
     color: {
       primary: "text-primary",
-      secondary: "text-fg",
+      secondary: "text-on-surface",
       error: "text-error",
       warning: "text-warning",
       success: "text-success",

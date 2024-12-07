@@ -29,7 +29,7 @@ export default function FullscreenLoading(props: FullScreenLoadingProps) {
             }}
           >
             <motion.div
-              className="flex flex-col items-center justify-center rounded-rounded bg-bg p-4 shadow"
+              className="flex flex-col items-center justify-center rounded-lg bg-surface p-4 shadow"
               initial={{
                 opacity: 0,
                 scale: 0.9,

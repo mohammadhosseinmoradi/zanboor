@@ -10,12 +10,12 @@ export function HtmlContent({ className, children }: { className?: string; child
         "prose-a:text-primary",
         "prose-img:rounded-md",
         "prose-p:text-justify",
-        "prose-p:text-fg",
-        "prose-headings:text-fg-hover",
-        "prose-strong:text-fg-hover",
-        "prose-blockquote:text-fg-muted",
+        "prose-p:text-on-surface",
+        "prose-headings:text-on-surface-hover",
+        "prose-strong:text-on-surface-hover",
+        "prose-blockquote:text-on-surface-variant",
         "prose-blockquote:border-fg-muted",
-        "prose-li:text-fg-muted",
+        "prose-li:text-on-surface-variant",
         "prose-img:mx-auto",
         className
       )}

@@ -11,7 +11,7 @@ const tab = cva({
     "relative w-auto transition-all duration-300",
     "flex gap-2 justify-center items-center",
     "px-4 py-3 text-sm/5 data-[selected]:font-bold",
-    "text-fg data-[selected]:text-primary",
+    "text-on-surface data-[selected]:text-primary",
     "cursor-pointer",
     "[&>*[data-slot$=icon]]:size-5"
   ),
@@ -30,7 +30,7 @@ const tab = cva({
     {
       variant: "highlight",
       selected: false,
-      className: "text-fg-muted",
+      className: "text-on-surface-variant",
     },
   ],
 });

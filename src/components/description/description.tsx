@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { cva } from "cva";
 
 const description = cva({
-  base: "leading-relaxed text-fg-muted data-[disabled]:opacity-50 text-sm",
+  base: "leading-relaxed text-on-surface-variant data-[disabled]:opacity-50 text-sm",
   variants: {
     variant: {
       regular: "text-sm",

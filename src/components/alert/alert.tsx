@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { CheckCircleIcon, CircleXIcon, InfoIcon, TriangleAlertIcon } from "lucide-react";
 
 const alert = cva({
-  base: "text-sm flex gap-2 border rounded-rounded [&>[data-slot=icon]]:shrink-0",
+  base: "text-sm flex gap-2 border rounded-lg [&>[data-slot=icon]]:shrink-0",
   variants: {
     variant: {
       filled: "",

@@ -12,7 +12,7 @@ export default function Layout(props: Props) {
 
   return (
     <AuthProvider>
-      <div className="my-auto flex min-h-dvh items-center justify-center bg-bg p-4 lg:p-6">
+      <div className="my-auto flex min-h-dvh items-center justify-center bg-surface p-4 lg:p-6">
         {children}
       </div>
     </AuthProvider>

@@ -12,7 +12,7 @@ const Shortcut = forwardRef<HTMLElement, ShortcutProps>((props, ref) => {
   return (
     <kbd
       ref={ref}
-      className={cn("col-start-5 row-start-1 flex justify-self-end text-fg-muted", className)}
+      className={cn("col-start-5 row-start-1 flex justify-self-end text-on-surface-variant", className)}
       {...otherProps}
     >
       {keys.split("").map((key, index) => {

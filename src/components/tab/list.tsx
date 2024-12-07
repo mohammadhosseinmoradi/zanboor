@@ -10,7 +10,7 @@ const list = cva({
   variants: {
     variant: {
       underline: "border-b",
-      highlight: "bg-bg rounded-full py-1 px-4 shadow-[0_0_4px_rgba(0,0,0,0.2)]",
+      highlight: "bg-surface rounded-full py-1 px-4 shadow-[0_0_4px_rgba(0,0,0,0.2)]",
       none: "",
     },
   },

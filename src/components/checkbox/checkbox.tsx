@@ -24,7 +24,7 @@ const checkbox = cva({
       disabled: false,
       className: cn(
         "border-primary",
-        "data-[checked]:bg-primary data-[checked]:text-primary-fg",
+        "data-[checked]:bg-primary data-[checked]:text-on-primary",
         // data-slot=check
         "[&>[data-slot=check]]:hidden",
         "[&>[data-slot=check]]:text-primary/40",

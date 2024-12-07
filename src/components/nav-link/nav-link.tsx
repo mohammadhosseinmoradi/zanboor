@@ -21,7 +21,7 @@ export type NavLinkProps = {
  * @component
  * @example
  * // Example usage:
- * <NavLink href="/example" className={({ active }) => active ? 'bg-blue-500' : 'bg-bg-500'}>
+ * <NavLink href="/example" className={({ active }) => active ? 'bg-blue-500' : 'bg-surface-500'}>
  *   Example Link
  * </NavLink>
  *

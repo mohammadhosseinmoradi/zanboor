@@ -8,7 +8,7 @@ import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";
 
 const button = cva({
   base: cn(
-    "relative flex justify-center items-center rounded-rounded",
+    "relative flex justify-center items-center rounded-lg",
     "transition-colors select-none",
     "data-[focus]:ring-2 focus:ring-offset-2",
 
@@ -65,8 +65,8 @@ const button = cva({
       x: "-mx-3",
     },
     disabled: {
-      true: "",
-      false: "",
+      true: "cursor-not-allowed",
+      false: "cursor-pointer",
     },
   },
   compoundVariants: [
@@ -76,84 +76,84 @@ const button = cva({
       color: "primary",
       disabled: false,
       className:
-        "bg-primary text-primary-fg [&_div[data-slot=loading]]:text-primary-fg [&_*[data-slot=dropdown-icon]]:text-primary-fg-muted",
+        "bg-primary text-on-primary [&_div[data-slot=loading]]:text-on-primary [&_*[data-slot=dropdown-icon]]:text-on-primary-muted",
     },
     {
       variant: "filled",
       color: "primary",
       disabled: true,
       className:
-        "bg-primary/60 text-primary-fg-disabled [&_div[data-slot=loading]]:text-primary-fg cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-primary-fg-disabled",
+        "bg-primary/60 text-on-primary-disabled [&_div[data-slot=loading]]:text-on-primary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-primary-disabled",
     },
     {
       variant: "filled",
       color: "secondary",
       disabled: false,
       className:
-        "bg-secondary text-secondary-fg [&_div[data-slot=loading]]:text-secondary-fg [&_*[data-slot=dropdown-icon]]:text-secondary-fg-muted",
+        "bg-secondary text-on-secondary [&_div[data-slot=loading]]:text-on-secondary [&_*[data-slot=dropdown-icon]]:text-on-secondary-muted",
     },
     {
       variant: "filled",
       color: "secondary",
       disabled: true,
       className:
-        "bg-secondary/60 text-secondary-fg-disabled [&_div[data-slot=loading]]:text-secondary-fg cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-secondary-fg-disabled",
+        "bg-secondary/60 text-on-secondary-disabled [&_div[data-slot=loading]]:text-on-secondary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-secondary-disabled",
     },
     {
       variant: "filled",
       color: "error",
       disabled: false,
       className:
-        "bg-error text-error-fg [&_div[data-slot=loading]]:text-error-fg [&_*[data-slot=dropdown-icon]]:text-error-fg-muted",
+        "bg-error text-on-error [&_div[data-slot=loading]]:text-on-error [&_*[data-slot=dropdown-icon]]:text-on-error-muted",
     },
     {
       variant: "filled",
       color: "error",
       disabled: true,
       className:
-        "bg-error/60 text-error-fg-disabled [&_div[data-slot=loading]]:text-error-fg cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-error-fg-disabled",
+        "bg-error/60 text-on-error-disabled [&_div[data-slot=loading]]:text-on-error cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-error-disabled",
     },
     {
       variant: "filled",
       color: "warning",
       disabled: false,
       className:
-        "bg-warning text-warning-fg [&_div[data-slot=loading]]:text-warning-fg [&_*[data-slot=dropdown-icon]]:text-warning-fg-muted",
+        "bg-warning text-on-warning [&_div[data-slot=loading]]:text-on-warning [&_*[data-slot=dropdown-icon]]:text-on-warning-muted",
     },
     {
       variant: "filled",
       color: "warning",
       disabled: true,
       className:
-        "bg-warning/60 text-warning-fg-disabled [&_div[data-slot=loading]]:text-warning-fg cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-warning-fg-disabled",
+        "bg-warning/60 text-on-warning-disabled [&_div[data-slot=loading]]:text-on-warning cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-warning-disabled",
     },
     {
       variant: "filled",
       color: "success",
       disabled: false,
       className:
-        "bg-success text-success-fg [&_div[data-slot=loading]]:text-success-fg [&_*[data-slot=dropdown-icon]]:text-success-fg-muted",
+        "bg-success text-on-success [&_div[data-slot=loading]]:text-on-success [&_*[data-slot=dropdown-icon]]:text-on-success-muted",
     },
     {
       variant: "filled",
       color: "success",
       disabled: true,
       className:
-        "bg-success/60 text-success-fg-disabled [&_div[data-slot=loading]]:text-success-fg cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-success-fg-disabled",
+        "bg-success/60 text-on-success-disabled [&_div[data-slot=loading]]:text-on-success cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-success-disabled",
     },
     {
       variant: "filled",
       color: "info",
       disabled: false,
       className:
-        "bg-info text-info-fg [&_div[data-slot=loading]]:text-info-fg [&_*[data-slot=dropdown-icon]]:text-info-fg-muted",
+        "bg-info text-on-info [&_div[data-slot=loading]]:text-on-info [&_*[data-slot=dropdown-icon]]:text-on-info-muted",
     },
     {
       variant: "filled",
       color: "info",
       disabled: true,
       className:
-        "bg-info/60 text-info-fg-disabled [&_div[data-slot=loading]]:text-info-fg cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-info-fg-disabled",
+        "bg-info/60 text-on-info-disabled [&_div[data-slot=loading]]:text-on-info cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-info-disabled",
     },
     // -----------------------------------------------------------------------------------------------------------------
     {
@@ -175,14 +175,14 @@ const button = cva({
       color: "secondary",
       disabled: false,
       className:
-        "text-fg [&_div[data-slot=loading]]:text-fg [&_*[data-slot=dropdown-icon]]:text-fg-muted",
+        "text-on-surface [&_div[data-slot=loading]]:text-on-surface [&_*[data-slot=dropdown-icon]]:text-on-surface-variant",
     },
     {
       variant: "plain",
       color: "secondary",
       disabled: true,
       className:
-        "text-fg-disabled [&_div[data-slot=loading]]:text-fg cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-fg-disabled",
+        "text-on-surface-disabled [&_div[data-slot=loading]]:text-on-surface cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-surface-disabled",
     },
     {
       variant: "plain",

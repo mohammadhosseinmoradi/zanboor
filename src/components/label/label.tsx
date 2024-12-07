@@ -7,7 +7,7 @@ export function Label(props: LabelProps<"label">) {
   return (
     <HeadlessLabel
       data-slot="label"
-      className={cn("cursor-pointer select-none text-sm text-fg", className)}
+      className={cn("cursor-pointer select-none text-sm text-on-surface", className)}
       {...otherProps}
     />
   );

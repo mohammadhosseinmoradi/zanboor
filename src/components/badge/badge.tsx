@@ -6,7 +6,7 @@ import { Props } from "@/lib/utils/render/types";
 
 const badge = cva({
   base: cn(
-    "relative flex z-10 justify-center min-w-max items-center shrink-0 rounded-rounded font-bold",
+    "relative flex z-10 justify-center min-w-max items-center shrink-0 rounded-lg font-bold",
     "[--badge-offset:theme(spacing[2.5])]"
   ),
   variants: {
@@ -14,7 +14,7 @@ const badge = cva({
       filled: "",
       filledTonal: "",
       outlined:
-        "after:pointer-events-none after:absolute after:inset-0 after:border after:rounded-rounded",
+        "after:pointer-events-none after:absolute after:inset-0 after:border after:rounded-lg",
     },
     color: {
       primary: "",
@@ -86,22 +86,22 @@ const badge = cva({
     {
       variant: "filled",
       color: "primary",
-      className: "bg-primary text-primary-fg",
+      className: "bg-primary text-on-primary",
     },
     {
       variant: "filled",
       color: "success",
-      className: "bg-success text-success-fg",
+      className: "bg-success text-on-success",
     },
     {
       variant: "filled",
       color: "warning",
-      className: "bg-warning text-warning-fg",
+      className: "bg-warning text-on-warning",
     },
     {
       variant: "filled",
       color: "error",
-      className: "bg-error text-error-fg",
+      className: "bg-error text-on-error",
     },
     // -----------------------------------------------------------------------------------------------------------------
     {

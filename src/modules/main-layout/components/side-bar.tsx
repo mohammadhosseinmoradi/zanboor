@@ -26,13 +26,13 @@ export default function SideBar(props: SideBarProps) {
 
   return (
     <div
-      className={cn("flex h-dvh w-72 flex-col overflow-y-auto border-e bg-bg px-4 py-6", className)}
+      className={cn("flex h-dvh w-72 flex-col overflow-y-auto border-e bg-surface px-4 py-6", className)}
     >
       <Link href="/" className="mx-auto">
         <ThemeImage
           srcLight="/images/logo-with-text.png"
           srcDark="/images/logo-with-text.png"
-          className="size-32 cursor-pointer rounded-rounded object-contain"
+          className="size-32 cursor-pointer rounded-lg object-contain"
           width={200}
           height={200}
           alt="logo"
@@ -65,7 +65,7 @@ function Item(props: ItemProps) {
     <NavLink
       href={href}
       className={cn(
-        "group relative transition hover:text-fg data-[active]:text-fg-hover",
+        "group relative transition hover:text-on-surface data-[active]:text-on-surface-hover",
         "flex items-center justify-start gap-4",
         "py-1"
       )}
@@ -74,13 +74,13 @@ function Item(props: ItemProps) {
         <>
           <div className="relative flex w-full items-center gap-4 px-4 py-2.5">
             <span className="relative">
-              <Icon className="size-6 text-fg-muted transition group-data-[active]:text-fg-hover" />
+              <Icon className="size-6 text-on-surface-variant transition group-data-[active]:text-on-surface" />
               {!!badge && <Badge anchor="topEnd">{badge}</Badge>}
             </span>
-            <span className="line-clamp-2 text-center text-sm font-bold">{label}</span>
+            <span className="line-clamp-2 text-center text-on-surface-variant group-data-[active]:text-on-surface text-sm font-bold">{label}</span>
             {active && (
               <motion.span
-                className="absolute inset-0 flex rounded-[calc(var(--rounded)+0.8rem)] bg-primary/20"
+                className="absolute inset-0 flex rounded-4xl bg-primary/20"
                 initial={false}
                 layoutId={layoutId}
                 transition={{

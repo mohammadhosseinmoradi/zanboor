@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const descriptionDetails = cva({
-  base: "font-bold text-fg",
+  base: "font-bold text-on-surface",
 });
 
 type DescriptionDetailsProps = {

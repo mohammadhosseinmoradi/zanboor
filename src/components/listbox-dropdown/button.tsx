@@ -12,9 +12,9 @@ const DEFAULT_BUTTON_TAG = "button";
 export const button = cva({
   base: cn(
     "relative flex items-center gap-2",
-    "after:pointer-events-none after:absolute after:inset-0 after:rounded-rounded after:border after:border-border after:transition after:focus-within:border-2 after:focus-within:border-primary after:has-[[data-invalid]]:border-error after:has-[[data-invalid]]:focus-within:border-error",
+    "after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:border after:border-border after:transition after:focus-within:border-2 after:focus-within:border-primary after:has-[[data-invalid]]:border-error after:has-[[data-invalid]]:focus-within:border-error",
     "min-w-0 px-3 py-2 text-base/6 disabled:cursor-not-allowed sm:text-sm/5",
-    "rounded-rounded focus:border-transparent text-fg disabled:text-fg-disabled",
+    "rounded-lg focus:border-transparent text-on-surface disabled:text-on-surface-disabled",
     "[&>*[data-slot$=icon]]:size-6 [&>*[data-slot$=icon]]:stroke-[1.5px] sm:[&>*[data-slot$=icon]]:size-5 [&>*[data-slot=dropdown-icon]]:size-4",
 
     // If loading indicator is child
@@ -25,13 +25,13 @@ export const button = cva({
     // Hidden all button content expect loading indicator
     "[&:has([data-slot=loading])]:text-transparent",
     "[&:has([data-slot=loading])>*:not([data-slot=loading])]:opacity-0",
-    "[&_div[data-slot=loading]]:text-secondary-fg",
+    "[&_div[data-slot=loading]]:text-on-secondary",
     // Badge offset
     "[&_*[data-slot=badge]]:[--badge-offset:calc(theme(spacing[4])+2px)]"
   ),
   variants: {
     variant: {
-      secondary: "bg-bg-50 dark:bg-black/10 data-[invalid]:after:border-error",
+      secondary: "bg-surface-bright dark:bg-black/10 data-[invalid]:after:border-error",
       plain:
         "after:border-transparent after:focus-within:border-transparent bg-transparent data-[invalid]:text-error",
     },

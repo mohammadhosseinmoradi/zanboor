@@ -28,7 +28,7 @@ export default function List({ className, children, ...otherProps }: ListProps) 
   return (
     <div
       {...otherProps}
-      className={clsx("sticky flex w-full border-b border-border bg-bg", className)}
+      className={clsx("sticky flex w-full border-b border-border bg-surface", className)}
     >
       <Swiper
         onSwiper={(_swiper) => (swiper.current = _swiper)}
@@ -43,8 +43,8 @@ export default function List({ className, children, ...otherProps }: ListProps) 
               <SwiperSlide
                 key={index}
                 className={clsx("relative !w-auto", {
-                  "text-fg-hover": index === activeIndex,
-                  "hover:text-fg-hover": index !== activeIndex,
+                  "text-on-surface-hover": index === activeIndex,
+                  "hover:text-on-surface-hover": index !== activeIndex,
                 })}
               >
                 <Tab
