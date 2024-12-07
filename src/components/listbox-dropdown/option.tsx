@@ -37,7 +37,7 @@ function OptionFn<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(
         cn(
           "group/option rounded-lg focus:outline-none",
           "px-3 py-2 text-start text-base/6 sm:text-sm/5",
-          "text-on-surface data-[focus]:bg-primary data-[focus]:text-primary-fg",
+          "text-on-surface data-[focus]:bg-primary data-[focus]:text-on-primary",
           "cursor-pointer data-[disabled]:cursor-not-allowed",
           "col-span-full forced-color-adjust-none data-[disabled]:opacity-50",
           "grid",
@@ -48,7 +48,7 @@ function OptionFn<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(
           "[&>[data-slot=icon]]:col-start-1 [&>[data-slot=icon]]:row-start-1",
           "[&>[data-slot=icon]]:me-2.5 [&>[data-slot=icon]]:size-5 sm:[&>[data-slot=icon]]:me-2",
           "[&>[data-slot=icon]]:sm:size-4",
-          "[&>[data-slot=icon]]:text-on-surface-variant [&>[data-slot=icon]]:data-[focus]:text-primary-fg-muted",
+          "[&>[data-slot=icon]]:text-on-surface-variant [&>[data-slot=icon]]:data-[focus]:text-on-primary-muted",
           typeof className === "function" ? className(bag) : className
         )
       }

@@ -86,22 +86,22 @@ const badge = cva({
     {
       variant: "filled",
       color: "primary",
-      className: "bg-primary text-primary-fg",
+      className: "bg-primary text-on-primary",
     },
     {
       variant: "filled",
       color: "success",
-      className: "bg-success text-success-fg",
+      className: "bg-success text-on-success",
     },
     {
       variant: "filled",
       color: "warning",
-      className: "bg-warning text-warning-fg",
+      className: "bg-warning text-on-warning",
     },
     {
       variant: "filled",
       color: "error",
-      className: "bg-error text-error-fg",
+      className: "bg-error text-on-error",
     },
     // -----------------------------------------------------------------------------------------------------------------
     {

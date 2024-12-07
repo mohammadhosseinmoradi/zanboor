@@ -25,7 +25,7 @@ export const button = cva({
     // Hidden all button content expect loading indicator
     "[&:has([data-slot=loading])]:text-transparent",
     "[&:has([data-slot=loading])>*:not([data-slot=loading])]:opacity-0",
-    "[&_div[data-slot=loading]]:text-secondary-fg",
+    "[&_div[data-slot=loading]]:text-on-secondary",
     // Badge offset
     "[&_*[data-slot=badge]]:[--badge-offset:calc(theme(spacing[4])+2px)]"
   ),
