@@ -88,7 +88,7 @@ export function EnterOtpForm(props: EnterPhoneProps) {
         <ThemeImage
           srcLight="/images/logo-with-text.png"
           srcDark="/images/logo-with-text.png"
-          className="size-32 cursor-pointer rounded-rounded object-contain"
+          className="size-32 cursor-pointer rounded-lg object-contain"
           width={200}
           height={200}
           alt="logo"

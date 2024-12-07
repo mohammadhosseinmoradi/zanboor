@@ -91,7 +91,7 @@ const PopoverPanel = forwardRef<HTMLDivElement, PopoverPanelProps>((props, ref) 
                       "z-50 flex max-h-full flex-col overflow-hidden bg-bg dark:bg-bg-50",
                       "pointer-events-auto border lg:shadow",
                       {
-                        "max-lg:rounded-t-xl lg:rounded-rounded": !isFullscreen,
+                        "max-lg:rounded-t-xl lg:rounded-lg": !isFullscreen,
                       },
                       className
                     )}

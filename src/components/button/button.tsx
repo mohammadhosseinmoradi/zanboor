@@ -8,7 +8,7 @@ import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";
 
 const button = cva({
   base: cn(
-    "relative flex justify-center items-center rounded-rounded",
+    "relative flex justify-center items-center rounded-lg",
     "transition-colors select-none",
     "data-[focus]:ring-2 focus:ring-offset-2",
 

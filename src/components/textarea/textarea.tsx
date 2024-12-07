@@ -13,7 +13,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
       className={cn(
         "relative flex w-full",
         !isInputGroup &&
-          "after:pointer-events-none after:absolute after:inset-0 after:rounded-rounded after:border-2 after:border-transparent after:transition focus-within:after:border-primary",
+          "after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:border-2 after:border-transparent after:transition focus-within:after:border-primary",
         !isInputGroup && invalid && "focus-within:after:border-error"
       )}
       style={style}
@@ -21,7 +21,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
       <_Textarea
         ref={ref}
         className={cn(
-          "w-full min-w-0 appearance-none rounded-rounded bg-transparent px-3 py-2 text-base/6 placeholder:text-fg-disabled sm:text-sm/5",
+          "w-full min-w-0 appearance-none rounded-lg bg-transparent px-3 py-2 text-base/6 placeholder:text-fg-disabled sm:text-sm/5",
           !isInputGroup &&
             "border bg-bg-50 focus:border-transparent data-[invalid]:border-error dark:bg-black/10"
         )}

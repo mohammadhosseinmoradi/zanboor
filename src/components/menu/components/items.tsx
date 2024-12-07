@@ -90,7 +90,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
                           "z-50 flex flex-col overflow-hidden bg-bg max-lg:max-h-full lg:dark:bg-bg-200",
                           "pointer-events-auto border lg:shadow",
                           {
-                            "max-lg:rounded-t-xl lg:rounded-rounded": !isFullscreen,
+                            "max-lg:rounded-t-xl lg:rounded-lg": !isFullscreen,
                           },
                           className
                         )}

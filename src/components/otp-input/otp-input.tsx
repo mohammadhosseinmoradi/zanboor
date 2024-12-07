@@ -57,7 +57,7 @@ function Slot(props: SlotProps) {
         "relative h-10 w-8 text-fg",
         "flex items-center justify-center",
         "transition-all duration-300",
-        "rounded-rounded border-2",
+        "rounded-lg border-2",
         {
           "group-hover:border-border": !props.isActive && !props.invalid,
           "border-primary": props.isActive && !props.invalid,

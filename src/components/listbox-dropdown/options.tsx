@@ -11,7 +11,7 @@ import { useIsAnchorSelection } from "@/components/listbox-dropdown/use-is-ancho
 const options = cva({
   base: cn(
     "grid grid-cols-[auto_auto_auto] p-1",
-    "z-50 rounded-rounded border bg-bg transition data-[closed]:opacity-0 shadow data-[transition]:pointer-events-none",
+    "z-50 rounded-lg border bg-bg transition data-[closed]:opacity-0 shadow data-[transition]:pointer-events-none",
     "isolate scroll-py-1 select-none overflow-y-scroll overscroll-contain",
     "[--anchor-padding:theme(spacing.2)]"
   ),
