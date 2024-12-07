@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "cva";
 
 const legend = cva({
-  base: "font-bold text-fg text-sm",
+  base: "font-bold text-on-surface text-sm",
 });
 
 type LegendProps = HeadlessLegendProps & VariantProps<typeof legend>;

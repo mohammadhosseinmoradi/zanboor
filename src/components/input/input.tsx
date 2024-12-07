@@ -23,9 +23,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
       <HeadlessInput
         ref={ref}
         className={cn(
-          "w-full min-w-0 appearance-none bg-transparent px-3 py-2 text-fg text-base/6 placeholder:text-fg-disabled disabled:cursor-not-allowed sm:text-sm/5",
+          "w-full min-w-0 appearance-none bg-transparent px-3 py-2 text-on-surface text-base/6 placeholder:text-on-surface-disabled disabled:cursor-not-allowed sm:text-sm/5",
           !isInInputGroup &&
-            "rounded-lg bg-bg-50 focus:border-transparent disabled:text-fg-disabled data-[invalid]:border-error dark:bg-black/10"
+            "rounded-lg bg-surface-bright focus:border-transparent disabled:text-on-surface-disabled data-[invalid]:border-error dark:bg-black/10"
         )}
         invalid={invalid}
         {...otherProps}

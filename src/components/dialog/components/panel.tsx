@@ -21,7 +21,7 @@ const conditionDrawer = cva({
 });
 
 const panel = cva({
-  base: "transition-all duration-300 data-[closed]:opacity-0 h-full max-h-full max-lg:data-[closed]:translate-y-10 overflow-hidden lg:h-auto mt-auto lg:my-auto z-50 flex shrink-0 flex-col bg-bg lg:shadow",
+  base: "transition-all duration-300 data-[closed]:opacity-0 h-full max-h-full max-lg:data-[closed]:translate-y-10 overflow-hidden lg:h-auto mt-auto lg:my-auto z-50 flex shrink-0 flex-col bg-surface lg:shadow",
   variants: {
     variant: {
       [DialogVariant.Center]: "lg:data-[closed]:scale-95",

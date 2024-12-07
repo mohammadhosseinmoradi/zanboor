@@ -8,7 +8,7 @@ const Cell = forwardRef<HTMLTableCellElement, CellProps>(
     return (
       <td
         ref={ref}
-        className={cn("px-4 py-3 text-start text-fg", className)}
+        className={cn("px-4 py-3 text-start text-on-surface", className)}
         {...otherProps}
       />
     );

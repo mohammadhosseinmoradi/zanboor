@@ -88,7 +88,7 @@ const PopoverPanel = forwardRef<HTMLDivElement, PopoverPanelProps>((props, ref) 
                       "data-[anchor~=left]:data-[anchor~=start]:origin-top-right",
                       "data-[anchor~=left]:data-[anchor~=end]:origin-bottom-right",
 
-                      "z-50 flex max-h-full flex-col overflow-hidden bg-bg dark:bg-bg-50",
+                      "z-50 flex max-h-full flex-col overflow-hidden bg-surface dark:bg-surface-bright",
                       "pointer-events-auto border lg:shadow",
                       {
                         "max-lg:rounded-t-xl lg:rounded-lg": !isFullscreen,

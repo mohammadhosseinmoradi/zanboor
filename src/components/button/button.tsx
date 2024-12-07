@@ -175,14 +175,14 @@ const button = cva({
       color: "secondary",
       disabled: false,
       className:
-        "text-fg [&_div[data-slot=loading]]:text-fg [&_*[data-slot=dropdown-icon]]:text-fg-muted",
+        "text-on-surface [&_div[data-slot=loading]]:text-on-surface [&_*[data-slot=dropdown-icon]]:text-on-surface-variant",
     },
     {
       variant: "plain",
       color: "secondary",
       disabled: true,
       className:
-        "text-fg-disabled [&_div[data-slot=loading]]:text-fg cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-fg-disabled",
+        "text-on-surface-disabled [&_div[data-slot=loading]]:text-on-surface cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-surface-disabled",
     },
     {
       variant: "plain",

@@ -3,7 +3,7 @@ import { cva, VariantProps } from "cva";
 import { cn } from "@/lib/utils";
 
 const divider = cva({
-  base: "text-fg-muted text-sm border-border",
+  base: "text-on-surface-variant text-sm border-border",
   variants: {
     vertical: {
       true: "",

@@ -7,7 +7,7 @@ import { forwardRefWithAs, HasDisplayName, RefProp, render } from "@/lib/utils/r
 import { Props } from "@/lib/utils/render/types";
 
 const heading = cva({
-  base: "leading-relaxed text-fg font-bold",
+  base: "leading-relaxed text-on-surface font-bold",
   variants: {
     variant: {
       h1: "text-3xl",

@@ -24,8 +24,8 @@
   --color-surface: var(--color-white);
   --color-surface-bright: var(--color-white);
 
-  --color-on-surface: var(--color-neutral-900);
-  --color-on-surface-variant: var(--color-neutral-800);
+  --color-on-surface: var(--color-neutral-800);
+  --color-on-surface-variant: var(--color-neutral-600);
 
   --color-surface-container-lowest: var(--color-white);
   --color-surface-container-low: var(--color-neutral-50);

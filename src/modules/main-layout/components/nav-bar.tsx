@@ -26,7 +26,7 @@ export default function NavBar(props: MobileBottomNavBarProps) {
     <>
       <div
         className={cn(
-          "flex items-center justify-center overflow-hidden border-t bg-bg text-fg",
+          "flex items-center justify-center overflow-hidden border-t bg-surface text-on-surface",
           className
         )}
         suppressHydrationWarning
@@ -56,7 +56,7 @@ function Item(props: ItemProps) {
     <NavLink
       href={href}
       className={cn(
-        "group relative flex size-full grow flex-col items-center justify-start transition hover:text-fg-hover data-[active]:text-fg-hover",
+        "group relative flex size-full grow flex-col items-center justify-start transition hover:text-on-surface-hover data-[active]:text-on-surface-hover",
         "pb-4 pt-4"
       )}
     >
@@ -64,7 +64,7 @@ function Item(props: ItemProps) {
         <>
           <div className="relative z-10 flex flex-col items-center justify-center gap-2">
             <span className="relative">
-              <Icon className="size-6 text-fg-muted group-data-[active]:text-fg-hover" />
+              <Icon className="size-6 text-on-surface-variant group-data-[active]:text-on-surface-hover" />
               {!!badge && <Badge anchor="topEnd">{badge}</Badge>}
             </span>
             <span className="line-clamp-2 text-center text-2xs font-bold transition group-data-[active]:translate-y-1.5">

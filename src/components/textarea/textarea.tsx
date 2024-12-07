@@ -21,9 +21,9 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, ref) => 
       <_Textarea
         ref={ref}
         className={cn(
-          "w-full min-w-0 appearance-none rounded-lg bg-transparent px-3 py-2 text-base/6 placeholder:text-fg-disabled sm:text-sm/5",
+          "w-full min-w-0 appearance-none rounded-lg bg-transparent px-3 py-2 text-base/6 placeholder:text-on-surface-disabled sm:text-sm/5",
           !isInputGroup &&
-            "border bg-bg-50 focus:border-transparent data-[invalid]:border-error dark:bg-black/10"
+            "border bg-surface-bright focus:border-transparent data-[invalid]:border-error dark:bg-black/10"
         )}
         invalid={invalid}
         {...otherProps}

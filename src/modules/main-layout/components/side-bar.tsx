@@ -26,7 +26,7 @@ export default function SideBar(props: SideBarProps) {
 
   return (
     <div
-      className={cn("flex h-dvh w-72 flex-col overflow-y-auto border-e bg-bg px-4 py-6", className)}
+      className={cn("flex h-dvh w-72 flex-col overflow-y-auto border-e bg-surface px-4 py-6", className)}
     >
       <Link href="/" className="mx-auto">
         <ThemeImage
@@ -65,7 +65,7 @@ function Item(props: ItemProps) {
     <NavLink
       href={href}
       className={cn(
-        "group relative transition hover:text-fg data-[active]:text-fg-hover",
+        "group relative transition hover:text-on-surface data-[active]:text-on-surface-hover",
         "flex items-center justify-start gap-4",
         "py-1"
       )}
@@ -74,7 +74,7 @@ function Item(props: ItemProps) {
         <>
           <div className="relative flex w-full items-center gap-4 px-4 py-2.5">
             <span className="relative">
-              <Icon className="size-6 text-fg-muted transition group-data-[active]:text-fg-hover" />
+              <Icon className="size-6 text-on-surface-variant transition group-data-[active]:text-on-surface-hover" />
               {!!badge && <Badge anchor="topEnd">{badge}</Badge>}
             </span>
             <span className="line-clamp-2 text-center text-sm font-bold">{label}</span>

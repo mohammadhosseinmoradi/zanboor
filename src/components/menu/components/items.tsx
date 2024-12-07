@@ -87,7 +87,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
                           "data-[anchor~=left]:data-[anchor~=start]:origin-top-right",
                           "data-[anchor~=left]:data-[anchor~=end]:origin-bottom-right",
 
-                          "z-50 flex flex-col overflow-hidden bg-bg max-lg:max-h-full lg:dark:bg-bg-200",
+                          "z-50 flex flex-col overflow-hidden bg-surface max-lg:max-h-full lg:dark:bg-surface-200",
                           "pointer-events-auto border lg:shadow",
                           {
                             "max-lg:rounded-t-xl lg:rounded-lg": !isFullscreen,

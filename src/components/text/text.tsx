@@ -7,7 +7,7 @@ import { forwardRefWithAs, HasDisplayName, RefProp, render } from "@/lib/utils/r
 import { Props } from "@/lib/utils/render/types";
 
 const text = cva({
-  base: "leading-relaxed text-fg-muted",
+  base: "leading-relaxed text-on-surface-variant",
   variants: {
     variant: {
       body: "text-base",
