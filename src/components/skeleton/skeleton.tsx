@@ -9,7 +9,7 @@ const Skeleton = forwardRef<HTMLSpanElement, SkeletonProps>((props, ref) => {
   return (
     <span
       ref={ref}
-      className={cn("relative block overflow-hidden bg-fg/5", styles.animateSkeleton, className)}
+      className={cn("bg-fg/5 relative block overflow-hidden", styles.animateSkeleton, className)}
       {...otherProps}
     />
   );

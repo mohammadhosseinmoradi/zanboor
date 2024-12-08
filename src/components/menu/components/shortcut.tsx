@@ -12,14 +12,17 @@ const Shortcut = forwardRef<HTMLElement, ShortcutProps>((props, ref) => {
   return (
     <kbd
       ref={ref}
-      className={cn("col-start-5 row-start-1 flex justify-self-end text-on-surface-variant", className)}
+      className={cn(
+        "text-on-surface-variant col-start-5 row-start-1 flex justify-self-end",
+        className
+      )}
       {...otherProps}
     >
       {keys.split("").map((key, index) => {
         return (
           <kbd
             key={index}
-            className="text-zinc-400 group-data-[focus]:text-white min-w-[2ch] text-center font-sans capitalize"
+            className="min-w-[2ch] text-center font-sans text-zinc-400 capitalize group-data-[focus]:text-white"
           >
             {key}
           </kbd>

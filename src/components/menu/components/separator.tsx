@@ -6,7 +6,7 @@ export function Separator(props: MenuSeparatorProps<"div">) {
 
   return (
     <HeadlessMenuSeparator
-      className={cn("col-span-5 col-start-1 mx-2 my-1 border-t border-border", className)}
+      className={cn("border-border col-span-5 col-start-1 mx-2 my-1 border-t", className)}
       {...otherProps}
     />
   );

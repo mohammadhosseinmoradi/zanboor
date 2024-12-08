@@ -40,7 +40,7 @@ const PopoverPanel = forwardRef<HTMLDivElement, PopoverPanelProps>((props, ref) 
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <PopoverBackdrop className="fixed inset-0 z-10 bg-fg/50" />
+              <PopoverBackdrop className="bg-fg/50 fixed inset-0 z-10" />
             </TransitionChild>
           ) : undefined
         }
@@ -88,7 +88,7 @@ const PopoverPanel = forwardRef<HTMLDivElement, PopoverPanelProps>((props, ref) 
                       "data-[anchor~=left]:data-[anchor~=start]:origin-top-right",
                       "data-[anchor~=left]:data-[anchor~=end]:origin-bottom-right",
 
-                      "z-50 flex max-h-full flex-col overflow-hidden bg-surface dark:bg-surface-bright",
+                      "bg-surface dark:bg-surface-bright z-50 flex max-h-full flex-col overflow-hidden",
                       "pointer-events-auto border lg:shadow",
                       {
                         "max-lg:rounded-t-xl lg:rounded-lg": !isFullscreen,

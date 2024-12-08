@@ -56,7 +56,7 @@ export function ShowMore(props: ShowMoreProps) {
             <DisclosurePanel static>{children}</DisclosurePanel>
             <div
               className={cn(
-                "to-white pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-transparent transition-opacity duration-300",
+                "pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-transparent to-white transition-opacity duration-300",
                 {
                   "opacity-0": open,
                 },
@@ -66,7 +66,7 @@ export function ShowMore(props: ShowMoreProps) {
           </motion.div>
           <DisclosureButton
             className={cn(
-              "group flex items-center gap-1 self-start text-sm text-info",
+              "group text-info flex items-center gap-1 self-start text-sm",
               buttonClassName
             )}
             onClick={() => setClosed(false)}

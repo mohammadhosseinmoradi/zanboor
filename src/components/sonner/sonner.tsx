@@ -19,8 +19,8 @@ export function Toaster(props: ToasterProps) {
       cn={cn}
       dir="rtl"
       icons={{
-        success: <CircleCheckIcon className="size-5 text-success" />,
-        error: <CircleAlertIcon className="size-5 text-error" />,
+        success: <CircleCheckIcon className="text-success size-5" />,
+        error: <CircleAlertIcon className="text-error size-5" />,
       }}
       toastOptions={{
         classNames: {

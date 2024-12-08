@@ -30,7 +30,7 @@ export function Loading({ size = "md", className }: LoadingProps) {
   const renderDot = ({ className }: { className?: string }) => (
     <span
       className={cn(
-        "rounded-full bg-current duration-500 animate-in fill-mode-backwards direction-alternate repeat-infinite",
+        "animate-in fill-mode-backwards direction-alternate repeat-infinite rounded-full bg-current duration-500",
         sizes[size],
         className
       )}

@@ -51,7 +51,7 @@ export function PriceField(props: PasswordFieldProps) {
           invalid={!!error}
           {...otherProps}
         />
-        <div className="m-2 flex items-center justify-center text-on-surface-variant">تومان</div>
+        <div className="text-on-surface-variant m-2 flex items-center justify-center">تومان</div>
       </InputGroup>
       <ErrorMessage>{error}</ErrorMessage>
     </InputField>

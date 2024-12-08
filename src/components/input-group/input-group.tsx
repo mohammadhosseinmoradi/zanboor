@@ -18,8 +18,8 @@ export function InputGroup(props: InputGroupProps) {
         data-slot="control"
         className={cn(
           "relative flex overflow-hidden",
-          "rounded-lg bg-surface-bright dark:bg-black/10",
-          "after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:border after:border-border after:transition after:focus-within:border-2 after:focus-within:border-primary after:has-[[data-invalid]]:border-error after:has-[[data-invalid]]:focus-within:border-error",
+          "bg-surface-bright rounded-lg dark:bg-black/10",
+          "after:border-border after:focus-within:border-primary after:has-[[data-invalid]]:border-error after:has-[[data-invalid]]:focus-within:border-error after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:border after:transition after:focus-within:border-2",
           className
         )}
         {...otherProps}

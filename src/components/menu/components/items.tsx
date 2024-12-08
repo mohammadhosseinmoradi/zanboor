@@ -40,7 +40,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 z-10 bg-backdrop backdrop-blur-sm" />
+              <div className="bg-backdrop fixed inset-0 z-10 backdrop-blur-sm" />
             </TransitionChild>
           ) : undefined
         }
@@ -87,7 +87,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
                           "data-[anchor~=left]:data-[anchor~=start]:origin-top-right",
                           "data-[anchor~=left]:data-[anchor~=end]:origin-bottom-right",
 
-                          "z-50 flex flex-col overflow-hidden bg-surface max-lg:max-h-full lg:dark:bg-surface-200",
+                          "bg-surface lg:dark:bg-surface-200 z-50 flex flex-col overflow-hidden max-lg:max-h-full",
                           "pointer-events-auto border lg:shadow",
                           {
                             "max-lg:rounded-t-xl lg:rounded-lg": !isFullscreen,
@@ -105,7 +105,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
                                 "shadow-lg": isScrolled,
                               })}
                             >
-                              <div className="absolute left-1/2 top-2 h-1 w-6 -translate-x-1/2 rounded-full bg-fg/50 lg:hidden" />
+                              <div className="bg-fg/50 absolute top-2 left-1/2 h-1 w-6 -translate-x-1/2 rounded-full lg:hidden" />
                             </div>
                             <div
                               ref={setNodeRef}

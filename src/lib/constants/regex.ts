@@ -1,5 +1,4 @@
-export const PHONE_REGEX =
-  /^(\+989|09)[0-9]{9}$/;
+export const PHONE_REGEX = /^(\+989|09)[0-9]{9}$/;
 
 export const NATIONAL_CODE_REGEX = /^[0-9]{10}$/;
 

@@ -181,11 +181,11 @@ export function EnterPhoneForm(props: EnterPhoneProps) {
       <div className="mt-6 flex flex-col">
         <Text variant="caption">
           <span>ورود شما به معنای پذیرش </span>
-          <Link href={routes.terms} className="font-bold text-primary">
+          <Link href={routes.terms} className="text-primary font-bold">
             شرایط زنبور
           </Link>
           <span> و </span>
-          <Link href={routes.privacy} className="font-bold text-primary">
+          <Link href={routes.privacy} className="text-primary font-bold">
             قوانین حریم خصوصی
           </Link>
           <span> است.</span>

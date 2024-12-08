@@ -32,7 +32,7 @@ export default function ErrorMessage(props: ErrorMessageProps) {
             duration: 0.1,
           }}
         >
-          <p className="text-sm text-error">{children}</p>
+          <p className="text-error text-sm">{children}</p>
         </motion.div>
       )}
     </AnimatePresence>

@@ -17,7 +17,7 @@ export default function FullscreenLoading(props: FullScreenLoadingProps) {
       <AnimatePresence initial={true}>
         {show && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-backdrop backdrop-blur-sm"
+            className="bg-backdrop fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
             initial={{
               opacity: 0,
             }}
@@ -29,7 +29,7 @@ export default function FullscreenLoading(props: FullScreenLoadingProps) {
             }}
           >
             <motion.div
-              className="flex flex-col items-center justify-center rounded-lg bg-surface p-4 shadow"
+              className="bg-surface flex flex-col items-center justify-center rounded-lg p-4 shadow"
               initial={{
                 opacity: 0,
                 scale: 0.9,
@@ -55,7 +55,7 @@ export default function FullscreenLoading(props: FullScreenLoadingProps) {
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 33vw"
                 alt="logo"
               />
-              <Loading className="mt-4 text-primary" size="lg" />
+              <Loading className="text-primary mt-4" size="lg" />
             </motion.div>
           </motion.div>
         )}

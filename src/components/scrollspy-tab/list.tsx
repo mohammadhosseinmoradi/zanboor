@@ -28,7 +28,7 @@ export default function List({ className, children, ...otherProps }: ListProps) 
   return (
     <div
       {...otherProps}
-      className={clsx("sticky flex w-full border-b border-border bg-surface", className)}
+      className={clsx("border-border bg-surface sticky flex w-full border-b", className)}
     >
       <Swiper
         onSwiper={(_swiper) => (swiper.current = _swiper)}
@@ -58,7 +58,7 @@ export default function List({ className, children, ...otherProps }: ListProps) 
                   {tab.props?.children}
                 </Tab>
                 {index === activeIndex && (
-                  <motion.div layoutId={id} className="absolute bottom-0 h-0.5 w-full bg-primary" />
+                  <motion.div layoutId={id} className="bg-primary absolute bottom-0 h-0.5 w-full" />
                 )}
               </SwiperSlide>
             );

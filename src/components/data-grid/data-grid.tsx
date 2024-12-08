@@ -38,7 +38,7 @@ export function DataGrid<T extends RowData>(props: DataGridProps<T>) {
   });
 
   return (
-    <div className={cn("grid grid-cols-1 overflow-auto max-w-full", className)}>
+    <div className={cn("grid max-w-full grid-cols-1 overflow-auto", className)}>
       <Table className="w-full">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -54,9 +54,9 @@ export function DataGrid<T extends RowData>(props: DataGridProps<T>) {
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows.map(row => (
+          {table.getRowModel().rows.map((row) => (
             <TableRow key={row.id}>
-              {row.getVisibleCells().map(cell => (
+              {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>

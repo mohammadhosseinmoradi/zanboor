@@ -24,7 +24,7 @@ const Switch = forwardRef<HTMLButtonElement, SwitchProps<"button">>((props, ref)
       }
       {...otherProps}
     >
-      <span className="size-5 rounded-full bg-surface shadow-[0_0_0_1px_rgba(0,0,0,0.05)] transition-all duration-200 lg:size-4" />
+      <span className="bg-surface size-5 rounded-full shadow-[0_0_0_1px_rgba(0,0,0,0.05)] transition-all duration-200 lg:size-4" />
     </HeadlessSwitch>
   );
 });

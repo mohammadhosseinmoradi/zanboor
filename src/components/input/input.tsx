@@ -15,7 +15,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
       className={cn(
         "relative flex w-full",
         !isInInputGroup &&
-          "after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:border after:border-border after:transition after:focus-within:border-2 after:focus-within:border-primary after:has-[[data-invalid]]:border-error after:has-[[data-invalid]]:focus-within:border-error",
+          "after:border-border after:focus-within:border-primary after:has-[[data-invalid]]:border-error after:has-[[data-invalid]]:focus-within:border-error after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:border after:transition after:focus-within:border-2",
         className
       )}
       style={style}
@@ -23,9 +23,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
       <HeadlessInput
         ref={ref}
         className={cn(
-          "w-full min-w-0 appearance-none bg-transparent px-3 py-2 text-on-surface text-base/6 placeholder:text-on-surface-disabled disabled:cursor-not-allowed sm:text-sm/5",
+          "text-on-surface placeholder:text-on-surface-disabled w-full min-w-0 appearance-none bg-transparent px-3 py-2 text-base/6 disabled:cursor-not-allowed sm:text-sm/5",
           !isInInputGroup &&
-            "rounded-lg bg-surface-bright focus:border-transparent disabled:text-on-surface-disabled data-[invalid]:border-error dark:bg-black/10"
+            "bg-surface-bright disabled:text-on-surface-disabled data-[invalid]:border-error rounded-lg focus:border-transparent dark:bg-black/10"
         )}
         invalid={invalid}
         {...otherProps}

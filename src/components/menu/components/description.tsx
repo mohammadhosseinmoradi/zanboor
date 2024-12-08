@@ -10,7 +10,7 @@ const Description = forwardRef<
     ref={ref}
     data-slot="description"
     className={cn(
-      "text-zinc-500 group-data-[focus]:text-white dark:text-zinc-400 col-span-2 col-start-2 row-start-2 text-start text-sm/5 lg:text-xs/5",
+      "col-span-2 col-start-2 row-start-2 text-start text-sm/5 text-zinc-500 group-data-[focus]:text-white lg:text-xs/5 dark:text-zinc-400",
       className
     )}
     {...otherProps}

@@ -32,6 +32,7 @@ export const enterOtpSchema = z
       })
       .length(5, {
         message: "کد یکبار مصرف را کامل وارد نکرده‌اید.",
-      }).transform(value => toEnglishDigits(value)),
+      })
+      .transform((value) => toEnglishDigits(value)),
   })
   .merge(enterPhoneSchema);

@@ -21,7 +21,7 @@ const PopoverHeader = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<"div">
       )}
       {...otherProps}
     >
-      <div className="bg-neutral-400 absolute left-1/2 top-2 h-1 w-6 -translate-x-1/2 rounded-full lg:hidden" />
+      <div className="absolute top-2 left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-neutral-400 lg:hidden" />
       {children}
     </div>
   );

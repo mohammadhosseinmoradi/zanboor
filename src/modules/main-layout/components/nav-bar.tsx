@@ -26,7 +26,7 @@ export default function NavBar(props: MobileBottomNavBarProps) {
     <>
       <div
         className={cn(
-          "flex items-center justify-center overflow-hidden border-t bg-surface text-on-surface",
+          "bg-surface text-on-surface flex items-center justify-center overflow-hidden border-t",
           className
         )}
         suppressHydrationWarning
@@ -56,24 +56,24 @@ function Item(props: ItemProps) {
     <NavLink
       href={href}
       className={cn(
-        "group relative flex size-full grow flex-col items-center justify-start transition hover:text-on-surface-hover data-[active]:text-on-surface-hover",
-        "pb-4 pt-4"
+        "group hover:text-on-surface-hover data-[active]:text-on-surface-hover relative flex size-full grow flex-col items-center justify-start transition",
+        "pt-4 pb-4"
       )}
     >
       {({ active }) => (
         <>
           <div className="relative z-10 flex flex-col items-center justify-center gap-2">
             <span className="relative">
-              <Icon className="size-6 text-on-surface-variant group-data-[active]:text-on-surface-hover" />
+              <Icon className="text-on-surface-variant group-data-[active]:text-on-surface-hover size-6" />
               {!!badge && <Badge anchor="topEnd">{badge}</Badge>}
             </span>
-            <span className="line-clamp-2 text-center text-2xs font-bold transition group-data-[active]:translate-y-1.5">
+            <span className="text-2xs line-clamp-2 text-center font-bold transition group-data-[active]:translate-y-1.5">
               {label}
             </span>
           </div>
           {active && (
             <motion.span
-              className="absolute top-2 flex h-10 w-[calc(100%-theme(spacing[4]))] rounded-4xl bg-primary/20"
+              className="bg-primary/20 absolute top-2 flex h-10 w-[calc(100%-theme(spacing[4]))] rounded-4xl"
               initial={false}
               layoutId={layoutId}
               transition={{

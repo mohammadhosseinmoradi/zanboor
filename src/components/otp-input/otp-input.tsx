@@ -30,7 +30,7 @@ const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>((props, ref) => {
         <div className="flex items-center gap-1.5">
           {slots.map((slot, index) => (
             <Fragment key={index}>
-              {index !== 0 && <div className="h-px w-2 rounded-full bg-border" />}
+              {index !== 0 && <div className="bg-border h-px w-2 rounded-full" />}
               <Slot key={index} {...slot} invalid={invalid} />
             </Fragment>
           ))}
@@ -54,7 +54,7 @@ function Slot(props: SlotProps) {
   return (
     <div
       className={cn(
-        "relative h-10 w-8 text-on-surface",
+        "text-on-surface relative h-10 w-8",
         "flex items-center justify-center",
         "transition-all duration-300",
         "rounded-lg border-2",
@@ -75,8 +75,8 @@ function Slot(props: SlotProps) {
 
 function FakeCaret() {
   return (
-    <div className="pointer-events-none absolute inset-0 flex animate-caret-blink items-center justify-center">
-      <div className="h-4 w-px bg-fg-muted" />
+    <div className="animate-caret-blink pointer-events-none absolute inset-0 flex items-center justify-center">
+      <div className="bg-fg-muted h-4 w-px" />
     </div>
   );
 }

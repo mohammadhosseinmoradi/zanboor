@@ -30,7 +30,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
         )}
         {...otherProps}
       >
-        <div className="absolute left-1/2 top-2 h-1 w-6 -translate-x-1/2 rounded-full bg-fg-disabled lg:hidden" />
+        <div className="bg-fg-disabled absolute top-2 left-1/2 h-1 w-6 -translate-x-1/2 rounded-full lg:hidden" />
         {children}
       </div>
     );

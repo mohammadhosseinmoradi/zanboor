@@ -23,7 +23,7 @@ export function SwitchField(props: InputFieldProps) {
         "[&>[data-slot=control]]:row-start-1",
         "[&>[data-slot=description]]:col-span-full [&>[data-slot=description]]:row-start-2",
         required &&
-          "[&>[data-slot=label]]:after:ms-0.5 [&>[data-slot=label]]:after:text-error [&>[data-slot=label]]:after:content-['*']",
+          "[&>[data-slot=label]]:after:text-error [&>[data-slot=label]]:after:ms-0.5 [&>[data-slot=label]]:after:content-['*']",
         className
       )}
       {...otherProps}

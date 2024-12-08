@@ -23,7 +23,7 @@ export function InputField(props: InputFieldProps) {
         "[&>[data-slot=control]]:row-start-2",
         "[&>[data-slot=input-group]]:row-start-2",
         required &&
-          "[&>[data-slot=label]]:after:ms-0.5 [&>[data-slot=label]]:after:text-error [&>[data-slot=label]]:after:content-['*']",
+          "[&>[data-slot=label]]:after:text-error [&>[data-slot=label]]:after:ms-0.5 [&>[data-slot=label]]:after:content-['*']",
         className
       )}
       {...otherProps}
