@@ -9,11 +9,16 @@ import {
 } from "lucide-react";
 import { ReactNode, useId } from "react";
 import { NavLink } from "@/components/nav-link";
-import { Badge } from "@/components/badge";
 import { motion } from "framer-motion";
 import { routes } from "@/lib/constants/routes";
 import { Link } from "@/components/link";
 import { ThemeImage } from "@/components/theme-image";
+import MenuItem from "@/components/menu-item";
+import dynamic from "next/dynamic";
+
+const ThemeSwitcher = dynamic(() =>
+  import("@/components/theme-switcher").then((mod) => mod.ThemeSwitcher)
+);
 
 type SideBarProps = {
   className?: string;
@@ -27,7 +32,7 @@ export default function SideBar(props: SideBarProps) {
   return (
     <div
       className={cn(
-        "bg-surface flex h-dvh w-72 flex-col overflow-y-auto border-e px-4 py-6",
+        "bg-surface-container flex w-72 flex-col overflow-y-auto border-e p-4",
         className
       )}
     >
@@ -48,6 +53,12 @@ export default function SideBar(props: SideBarProps) {
         <Item href={routes.messages} icon={MessageSquareTextIcon} label="پیام‌ها" layoutId={id} />
         <Item href={routes.profile} icon={UserRoundIcon} label="پروفایل" layoutId={id} />
       </div>
+      <MenuItem
+        as="label"
+        title="زمینه"
+        className="mt-4 ps-2 lg:h-9"
+        endSlot={(props) => <ThemeSwitcher {...props} />}
+      />
     </div>
   );
 }
@@ -68,34 +79,29 @@ function Item(props: ItemProps) {
     <NavLink
       href={href}
       className={cn(
-        "group hover:text-on-surface data-[active]:text-on-surface-hover relative transition",
-        "flex items-center justify-start gap-4",
-        "py-1"
+        "group relative",
+        "text-on-surface-variant data-active:text-on-surface transition",
+        "hover:text-on-surface px-4 py-3"
       )}
     >
       {({ active }) => (
         <>
-          <div className="relative flex w-full items-center gap-4 px-4 py-2.5">
-            <span className="relative">
-              <Icon className="text-on-surface-variant group-data-[active]:text-on-surface size-6 transition" />
-              {!!badge && <Badge anchor="topEnd">{badge}</Badge>}
-            </span>
-            <span className="text-on-surface-variant group-data-[active]:text-on-surface line-clamp-2 text-center text-sm font-bold">
-              {label}
-            </span>
-            {active && (
-              <motion.span
-                className="bg-primary/20 absolute inset-0 flex rounded-4xl"
-                initial={false}
-                layoutId={layoutId}
-                transition={{
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 20,
-                }}
-              />
-            )}
+          <div className="relative z-1 flex items-center justify-start gap-4">
+            <Icon className="size-6" />
+            <span className="line-clamp-1 text-start text-sm font-bold">{label}</span>
           </div>
+          {active && (
+            <motion.span
+              className="bg-primary/25 absolute inset-x-0 inset-y-0.5 flex rounded-4xl"
+              initial={false}
+              layoutId={layoutId}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 20,
+              }}
+            />
+          )}
         </>
       )}
     </NavLink>

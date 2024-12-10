@@ -53,11 +53,7 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
           <ChevronDownIcon data-slot="dropdown-icon" />
         </Button>
       </Menu.Button>
-      <Menu.Items
-        anchor={{
-          to: "bottom end",
-        }}
-      >
+      <Menu.Items anchor="bottom end">
         <Menu.Item aria-label="light" onClick={() => setTheme("light")}>
           <SunIcon data-slot="start-icon" />
           <Menu.Label>روشن</Menu.Label>

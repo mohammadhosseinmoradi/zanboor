@@ -33,7 +33,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="fa-IR" dir="rtl" suppressHydrationWarning>
-      <body className={cn("antialiased", iranYekan.className)}>
+      <body className={cn("bg-surface antialiased", iranYekan.className)}>
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -38,8 +38,8 @@ const NavLink = forwardRef<ComponentRef<typeof Link>, NavLinkProps>((props, ref)
 
   const dataProps = useMemo(() => {
     return {
-      ...(active ? { "data-active": active } : {}),
-      ...(activeChildren ? { "data-active-children": activeChildren } : {}),
+      ...(active ? { "data-active": "" } : {}),
+      ...(activeChildren ? { "data-active-children": "" } : {}),
     };
   }, [active, activeChildren]);
 
