@@ -10,7 +10,7 @@ import { syncRefs } from "@/lib/utils/sync-refs";
 import InlineComponent from "@/components/inline-component";
 
 const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => {
-  const { anchor, className, children, static: staticProp, ...otherProps } = props;
+  const { anchor, className, children, ...otherProps } = props;
 
   const isMobile = useBreakpoint("max-lg");
   const { open, snapPoint, close } = useMenuContext();
@@ -18,6 +18,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
   return (
     <Transition as={Fragment} show={open}>
       <ConditionDrawer
+        ref={ref}
         snapPoint={snapPoint}
         open={open}
         onClose={close}
@@ -44,10 +45,12 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
             </TransitionChild>
           ) : undefined
         }
+        {...otherProps}
       >
         {({ isFullscreen, ref, forwardedProps }) => (
           <InlineComponent>
             {() => {
+              // eslint-disable-next-line react-hooks/rules-of-hooks
               const drawer = useDrawerContext();
 
               return (
@@ -143,7 +146,7 @@ const ConditionDrawer = forwardRef<
     children?: (
       args: DrawerRenderArgs & {
         ref: ForwardedRef<HTMLDivElement>;
-        forwardedProps: any;
+        forwardedProps: object;
       }
     ) => ReactNode;
     className?: string;

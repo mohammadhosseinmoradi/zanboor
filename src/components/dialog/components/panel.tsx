@@ -89,7 +89,7 @@ function PanelFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
               return (
                 <DialogPanel
                   transition
-                  ref={syncRefs(ref, drawer?.dragHandler.setNodeRef!)}
+                  ref={syncRefs(ref, drawer?.dragHandler.setNodeRef)}
                   as={as}
                   className={cn(
                     panel({

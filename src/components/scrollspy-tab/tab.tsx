@@ -18,7 +18,7 @@ export default function Tab({ className, index, onClick, disable, ...otherProps 
     <button
       {...otherProps}
       onClick={(event) => {
-        onClick && onClick(event);
+        if (onClick) onClick(event);
 
         if (disable) return;
         const element = document.getElementById(id);

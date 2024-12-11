@@ -23,6 +23,7 @@ const PopoverPanel = forwardRef<HTMLDivElement, PopoverPanelProps>((props, ref) 
   return (
     <Transition as={Fragment} show={open}>
       <ConditionDrawer
+        ref={ref}
         snapPoint={snapPoint}
         open={open}
         onClose={close}
@@ -44,6 +45,7 @@ const PopoverPanel = forwardRef<HTMLDivElement, PopoverPanelProps>((props, ref) 
             </TransitionChild>
           ) : undefined
         }
+        {...otherProps}
       >
         {({ isFullscreen, ref, forwardedProps }) => (
           <InlineComponent>
@@ -122,7 +124,7 @@ const ConditionDrawer = forwardRef<
     children?: (
       args: DrawerRenderArgs & {
         ref: ForwardedRef<HTMLDivElement>;
-        forwardedProps: any;
+        forwardedProps: object;
       }
     ) => ReactNode;
     className?: string;
@@ -132,7 +134,7 @@ const ConditionDrawer = forwardRef<
     overlay?: ReactNode;
   }
 >((props, ref) => {
-  const { isDrawer, children, open, onClose, snapPoint, className, ...otherProps } = props as any;
+  const { isDrawer, children, open, onClose, snapPoint, className, ...otherProps } = props;
 
   return isDrawer ? (
     <Drawer

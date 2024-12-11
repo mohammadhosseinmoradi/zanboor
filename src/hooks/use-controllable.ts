@@ -6,12 +6,12 @@ export function useControllable<T>(
   onChange?: (value: T) => void,
   defaultValue?: T
 ) {
-  let [internalValue, setInternalValue] = useState(defaultValue);
+  const [internalValue, setInternalValue] = useState(defaultValue);
 
-  let isControlled = controlledValue !== undefined;
-  let wasControlled = useRef(isControlled);
-  let didWarnOnUncontrolledToControlled = useRef(false);
-  let didWarnOnControlledToUncontrolled = useRef(false);
+  const isControlled = controlledValue !== undefined;
+  const wasControlled = useRef(isControlled);
+  const didWarnOnUncontrolledToControlled = useRef(false);
+  const didWarnOnControlledToUncontrolled = useRef(false);
 
   if (isControlled && !wasControlled.current && !didWarnOnUncontrolledToControlled.current) {
     didWarnOnUncontrolledToControlled.current = true;

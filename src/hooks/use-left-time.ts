@@ -29,13 +29,13 @@ export default function useLeftTime({ deadline, onReachedEnd }: UseLeftTimeProps
         setLeftTime(calculateLeftTime(deadline));
       } else {
         clearInterval(timer);
-        onReachedEnd && onReachedEnd();
+        if (onReachedEnd) onReachedEnd();
       }
     }, 1000);
 
     // Clean up the interval when the component unmounts or when the 'deadline' prop changes.
     return () => clearInterval(timer);
-  }, [deadline]);
+  }, [deadline, onReachedEnd]);
 
   // Function to calculate the time left.
   function calculateLeftTime(deadline: Date): LeftTime {

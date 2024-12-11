@@ -157,14 +157,14 @@ const DEFAULT_BADGE_TAG = "div";
 
 export type BadgeProps<TTag extends ElementType = typeof DEFAULT_BADGE_TAG> = Props<
   TTag,
-  {},
+  object,
   never,
   {
     children?: ReactNode;
   } & VariantProps<typeof badge>
 >;
 
-type BadgeRenderPropArg = {};
+type BadgeRenderPropArg = object;
 
 function BadgeFn<TTag extends ElementType = typeof DEFAULT_BADGE_TAG>(
   props: BadgeProps<TTag>,

@@ -25,7 +25,7 @@ export default function useBreakpoint(breakpoint: string, options?: Options) {
   const query = useMemo(() => {
     const breakpoints = breakpoint.split(":");
     return breakpoints
-      .reduce<string[]>((previousValue, currentValue, currentIndex, array) => {
+      .reduce<string[]>((previousValue, currentValue) => {
         return [...previousValue, breakpointMap[currentValue as keyof typeof breakpointMap]];
       }, [])
       .join(" and ");

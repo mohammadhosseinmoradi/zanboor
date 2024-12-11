@@ -24,14 +24,14 @@ const DEFAULT_TEXT_TAG = "p";
 
 export type TextProps<TTag extends ElementType = typeof DEFAULT_TEXT_TAG> = Props<
   TTag,
-  {},
+  object,
   never,
   {
     children: ReactNode;
   } & VariantProps<typeof text>
 >;
 
-type TextRenderPropArg = {};
+type TextRenderPropArg = object;
 
 function TextFn<TTag extends ElementType = typeof DEFAULT_TEXT_TAG>(
   props: TextProps<TTag>,

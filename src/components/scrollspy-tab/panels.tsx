@@ -24,7 +24,7 @@ export default function Panels({ className, children, ...otherProps }: PanelsPro
         break;
       }
     }
-  }, [entries]);
+  }, [dispatch, entries]);
 
   return (
     <div {...otherProps} className={`flex flex-col ${className}`}>
@@ -32,7 +32,6 @@ export default function Panels({ className, children, ...otherProps }: PanelsPro
         .filter((child) => !!child)
         .map((panel, index) => {
           return (
-            // @ts-ignore
             <InView
               key={index}
               threshold={state.threshold}

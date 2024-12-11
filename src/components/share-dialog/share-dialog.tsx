@@ -11,20 +11,20 @@ export interface ShareModel {
 }
 
 export default function ShareDialog({
-  visible,
-  setVisible,
+  open,
+  onClose,
   shareItem = {
     link: "",
     title: "",
     text: "",
   },
 }: {
-  visible: boolean;
-  setVisible: Function;
+  open: boolean;
+  onClose: () => void;
   shareItem: ShareModel;
 }) {
   const shareButtonRef = useRef<HTMLButtonElement | null>(null);
-  const closeModal = () => setVisible(false);
+  const closeModal = () => onClose();
   const [hasCopied, setCopy] = useState(false);
 
   const handleShareClick = () => {
@@ -35,13 +35,13 @@ export default function ShareDialog({
     });
   };
 
-  const handleCopyClick = () => {
-    navigator.clipboard.writeText(shareItem.link);
+  const handleCopyClick = async () => {
+    await navigator.clipboard.writeText(shareItem.link);
     setCopy(true);
   };
 
   return (
-    <Dialog open={visible} onOpenChange={closeModal}>
+    <Dialog open={open} onOpenChange={closeModal}>
       <Dialog.Panel className="w-full lg:max-w-md">
         <Dialog.Header className="flex items-center gap-2">
           <Dialog.Title className="grow">اشتراک گذاری</Dialog.Title>

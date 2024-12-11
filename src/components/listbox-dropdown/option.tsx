@@ -1,7 +1,7 @@
 "use client";
 
 import { ListboxOption, ListboxOptionProps } from "@headlessui/react";
-import { ElementType, forwardRef, Fragment, memo, ReactNode, Ref } from "react";
+import { ElementType, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
 import { CheckIcon } from "lucide-react";
 import { useIsAnchorSelection } from "@/components/listbox-dropdown/use-is-anchor-selection";
@@ -11,23 +11,21 @@ const DEFAULT_OPTION_TAG = "button";
 
 type OptionProps<TTag extends ElementType = typeof DEFAULT_OPTION_TAG> = ListboxOptionProps<
   TTag,
-  any
+  object
 >;
 
 function OptionFn<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(
   props: OptionProps<TTag>,
   ref: Ref<HTMLElement>
 ) {
-  const { className, as = "button", children, ...otherProps } = props as OptionProps<"button">;
+  const {
+    className,
+    as = DEFAULT_OPTION_TAG,
+    children,
+    ...otherProps
+  } = props as OptionProps<typeof DEFAULT_OPTION_TAG>;
 
   const isAnchorSelection = useIsAnchorSelection();
-
-  if (as == (Fragment as any))
-    return (
-      <ListboxOption ref={ref} as={as} {...otherProps}>
-        {children}
-      </ListboxOption>
-    );
 
   return (
     <ListboxOption
@@ -93,7 +91,7 @@ interface _internal_ComponentOption extends HasDisplayName {
   ): ReactNode;
 }
 
-const Option = memo(forwardRefWithAs(OptionFn) as unknown as _internal_ComponentOption);
+const Option = forwardRefWithAs(OptionFn) as unknown as _internal_ComponentOption;
 
 Option.displayName = ListboxOption.displayName;
 

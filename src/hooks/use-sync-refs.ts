@@ -1,23 +1,23 @@
-import { useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import { useEvent } from "./use-event";
 
-let Optional = Symbol();
+const Optional = Symbol();
 
 export function optionalRef<T>(cb: (ref: T) => void, isOptional = true) {
   return Object.assign(cb, { [Optional]: isOptional });
 }
 
 export function useSyncRefs<TType>(
-  ...refs: (React.MutableRefObject<TType | null> | ((instance: TType) => void) | null)[]
+  ...refs: (RefObject<TType | null> | ((instance: TType) => void) | null)[]
 ) {
-  let cache = useRef(refs);
+  const cache = useRef(refs);
 
   useEffect(() => {
     cache.current = refs;
   }, [refs]);
 
-  let syncRefs = useEvent((value: TType) => {
-    for (let ref of cache.current) {
+  const syncRefs = useEvent((value: TType) => {
+    for (const ref of cache.current) {
       if (ref == null) continue;
       if (typeof ref === "function") ref(value);
       else ref.current = value;
@@ -27,7 +27,7 @@ export function useSyncRefs<TType>(
   return refs.every(
     (ref) =>
       ref == null ||
-      // @ts-expect-error
+      // @ts-expect-error ...
       ref?.[Optional]
   )
     ? undefined

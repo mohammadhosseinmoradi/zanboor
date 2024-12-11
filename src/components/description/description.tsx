@@ -22,14 +22,14 @@ const description = cva({
  * UI elements where an auxiliary description is required. It utilizes the HeadlessDescription component
  * and applies specific styling.
  */
-export function Description(props: DescriptionProps) {
+export function Description(props: DescriptionProps<"p">) {
   const { as, className, children, ...otherProps } = props;
 
   if (!children) return null;
 
   return (
     <HeadlessDescription
-      as="p"
+      as={as}
       data-slot="description"
       className={cn(description({}), className)}
       {...otherProps}

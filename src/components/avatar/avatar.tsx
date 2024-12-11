@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentRef, ElementType, ReactNode, Ref, useEffect, useState } from "react";
+import { ElementType, ReactNode, Ref, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "cva";
 import { forwardRefWithAs, HasDisplayName, RefProp, render } from "@/lib/utils/render";
@@ -18,7 +18,7 @@ const DEFAULT_AVATAR_TAG = "span";
 
 export type AvatarProps<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG> = Props<
   TTag,
-  {},
+  object,
   never,
   {
     initials?: string;
@@ -32,7 +32,7 @@ export type AvatarProps<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG> = 
 
 function AvatarFn<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG>(
   props: AvatarProps<TTag>,
-  ref: Ref<ComponentRef<TTag>>
+  ref: Ref<HTMLElement>
 ) {
   const [imageError, setImageError] = useState(false);
 
@@ -52,6 +52,7 @@ function AvatarFn<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG>(
       <>
         {((initials && !src) || (src && imageError)) && (
           <svg
+            ref={ref as Ref<SVGSVGElement>}
             className="fill-current text-4xl font-medium tracking-wide uppercase select-none"
             viewBox="0 0 100 100"
             aria-hidden="true"
@@ -70,6 +71,7 @@ function AvatarFn<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG>(
         )}
         {src && !imageError && (
           <Image
+            ref={ref as Ref<HTMLImageElement>}
             onError={() => {
               setImageError(true);
             }}

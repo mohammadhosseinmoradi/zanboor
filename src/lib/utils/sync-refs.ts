@@ -1,14 +1,14 @@
-import { LegacyRef, MutableRefObject, RefCallback } from "react";
+import { Ref, RefCallback, RefObject } from "react";
 
-export function syncRefs<T = any>(
-  ...refs: (MutableRefObject<T> | LegacyRef<T> | undefined | null)[]
+export function syncRefs<T = never>(
+  ...refs: (RefObject<T> | Ref<T> | undefined | null)[]
 ): RefCallback<T> {
   return (value) => {
     refs.forEach((ref) => {
       if (typeof ref === "function") {
         ref(value);
       } else if (ref != null) {
-        (ref as MutableRefObject<T | null>).current = value;
+        (ref as RefObject<T | null>).current = value;
       }
     });
   };

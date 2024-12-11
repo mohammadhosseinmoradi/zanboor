@@ -5,8 +5,10 @@ import { formatNumber } from "@/lib/utils/format-number";
 import { toEnglishDigits } from "@/lib/utils/to-english-digits";
 import { cn } from "@/lib/utils";
 
-const NumberInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { value, onChange, inputMode, type, className, ...otherProps } = props;
+type NumberInputProps = Omit<InputProps, "type" | "inputMode">;
+
+const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>((props, ref) => {
+  const { value, onChange, className, ...otherProps } = props;
 
   return (
     <Input
@@ -17,7 +19,7 @@ const NumberInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       onChange={(event) => {
         const newEvent = { ...event };
         newEvent.target.value = newEvent.target.value.replaceAll(",", "");
-        onChange && onChange(newEvent);
+        if (onChange) onChange(newEvent);
       }}
       inputMode="numeric"
       {...otherProps}

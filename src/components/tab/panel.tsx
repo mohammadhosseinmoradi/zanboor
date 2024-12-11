@@ -2,9 +2,8 @@ import {
   TabPanel as HeadlessTabPanel,
   TabPanelProps as HeadlessPanelProps,
 } from "@headlessui/react";
-import { ComponentRef, ElementType, Fragment, ReactNode, Ref } from "react";
+import { ElementType, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
-import { ConditionRender } from "@/components/condition-render";
 import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";
 
 const DEFAULT_PANEL_TAG = "div";
@@ -14,25 +13,20 @@ export type TabPanelProps<TTag extends ElementType = typeof DEFAULT_PANEL_TAG> =
 
 function PanelFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
   props: TabPanelProps<TTag>,
-  ref: Ref<ComponentRef<TTag>>
+  ref: Ref<HTMLDivElement>
 ) {
-  const { className, unmount, as, ...otherProps } = props as TabPanelProps<"div">;
+  const {
+    className,
+    as = DEFAULT_PANEL_TAG,
+    ...otherProps
+  } = props as TabPanelProps<typeof DEFAULT_PANEL_TAG>;
 
   return (
-    <ConditionRender
-      if={(as as any) === Fragment}
-      then={(props) => <HeadlessTabPanel as={as} static ref={ref} {...props} />}
-      else={(props) => {
-        return (
-          <HeadlessTabPanel
-            as={as}
-            static
-            ref={ref}
-            className={cn("w-full", className)}
-            {...props}
-          />
-        );
-      }}
+    <HeadlessTabPanel
+      ref={ref}
+      as={as}
+      static
+      className={cn("w-full", className)}
       {...otherProps}
     />
   );

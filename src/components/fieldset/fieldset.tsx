@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 
 const fieldset = cva({});
 
-type FieldsetProps = HeadlessFieldsetProps & VariantProps<typeof fieldset>;
+type FieldsetProps = HeadlessFieldsetProps<"fieldset"> & VariantProps<typeof fieldset>;
 
 export function Fieldset(props: FieldsetProps) {
   const { as, className, ...otherProps } = props;
 
-  return <HeadlessFieldset as="fieldset" className={cn(fieldset({}), className)} {...otherProps} />;
+  return <HeadlessFieldset as={as} className={cn(fieldset({}), className)} {...otherProps} />;
 }

@@ -2,9 +2,9 @@ import { useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/button";
 import { CircleStencil, Cropper, CropperRef } from "react-mobile-cropper";
-import "react-mobile-cropper/dist/style.css";
 import { CropIcon, Maximize2Icon, Minimize2Icon } from "lucide-react";
 import { Dialog } from "@/components/dialog";
+import "react-mobile-cropper/dist/style.css";
 
 export type CropDialogProps = {
   open: boolean;
@@ -15,7 +15,7 @@ export type CropDialogProps = {
 
 export function CropDialog(props: CropDialogProps) {
   const { open, onClose, imageFile, onCrop } = props;
-  const imageSrc = useMemo(() => (open ? URL.createObjectURL(imageFile) : ""), [imageFile]);
+  const imageSrc = useMemo(() => (open ? URL.createObjectURL(imageFile) : ""), [imageFile, open]);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const cropperRef = useRef<CropperRef>(null);
@@ -31,7 +31,7 @@ export function CropDialog(props: CropDialogProps) {
         (blob) => {
           if (!blob) return;
           const file = new File([blob], imageFile.name);
-          onCrop && onCrop(file);
+          if (onCrop) onCrop(file);
           onClose();
         },
         "image/jpeg",

@@ -1,5 +1,5 @@
 import { useMotionValueEvent, useScroll } from "framer-motion";
-import { MutableRefObject, ReactNode, useMemo, useRef, useState } from "react";
+import { RefObject, ReactNode, useMemo, useRef, useState } from "react";
 
 export type ScrollStateProps = {
   isScrolled: boolean;
@@ -8,7 +8,7 @@ export type ScrollStateProps = {
 };
 
 export type ScrollAreaRenderPropArg = ScrollStateProps & {
-  setNodeRef: MutableRefObject<any> | ((node: HTMLElement | null) => void);
+  setNodeRef: RefObject<HTMLElement | null> | ((node: HTMLElement | null) => void);
 };
 
 export type ScrollAreaProps = {
@@ -32,19 +32,21 @@ export function ScrollArea({ children, threshold = 0, onScroll }: ScrollAreaProp
     return scrollY.get() <= threshold;
   });
   const [isEnd, setIsEnd] = useState(() => {
-    return scrollY.get() >= (ref?.current?.clientHeight! || 0) - threshold;
+    return scrollY.get() >= (ref?.current?.clientHeight || 0) - threshold;
   });
 
   useMotionValueEvent(scrollY, "change", (latestValue) => {
+    if (!ref?.current?.clientHeight) return;
     const isBeginning = latestValue <= threshold;
     setIsBeginning(isBeginning);
-    const isEnd = latestValue >= ref?.current?.clientHeight! - threshold;
+    const isEnd = latestValue >= ref.current.clientHeight - threshold;
     setIsEnd(isEnd);
-    const isScrollable = ref?.current?.scrollHeight! > ref?.current?.clientHeight!;
+    if (!ref?.current?.scrollHeight) return;
+    const isScrollable = ref.current.scrollHeight > ref.current.clientHeight;
     const isScrolled = ref.current ? latestValue > 0 && isScrollable : latestValue > 0;
     setIsScrolled(isScrolled);
 
-    onScroll &&
+    if (onScroll)
       onScroll({
         isScrolled,
         isBeginning,

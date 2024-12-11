@@ -6,7 +6,6 @@ import { Fragment, useMemo, useState } from "react";
 
 type ShowMoreProps = DisclosureProps<"div"> & {
   overlayClassName?: string;
-  ellipsisClassName?: string;
   buttonClassName?: string;
 };
 
@@ -15,7 +14,6 @@ export function ShowMore(props: ShowMoreProps) {
     className,
     children,
     overlayClassName,
-    ellipsisClassName,
     buttonClassName,
     defaultOpen,
     onTransitionEnd,
@@ -35,7 +33,7 @@ export function ShowMore(props: ShowMoreProps) {
         <div
           className={cn("flex flex-col gap-1.5 [--closed:3.25rem]", className)}
           onTransitionEnd={(e) => {
-            onTransitionEnd && onTransitionEnd(e);
+            if (onTransitionEnd) onTransitionEnd(e);
             setClosed(!open);
           }}
           {...ourProps}

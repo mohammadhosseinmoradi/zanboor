@@ -2,13 +2,12 @@ import {
   TabPanels as HeadlessTabPanels,
   TabPanelsProps as HeadlessTabPanelsProps,
 } from "@headlessui/react";
-import { ComponentRef, ElementType, forwardRef, ReactNode, Ref } from "react";
+import { ElementType, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTabContext } from "./context";
 import { usePrevious } from "@/hooks/use-previous";
 import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";
-import { ConditionRender } from "@/components/condition-render";
 
 const DEFAULT_PANEL_TAG = "div";
 
@@ -22,10 +21,10 @@ export type TabPanelsProps<TTag extends ElementType = typeof DEFAULT_PANEL_TAG> 
 
 function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
   props: TabPanelsProps<TTag>,
-  ref: Ref<ComponentRef<TTag>>
+  ref: Ref<HTMLElement>
 ) {
   const {
-    as = "div",
+    as = DEFAULT_PANEL_TAG,
     className,
     children,
     swipeable,
@@ -49,46 +48,68 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
       {...otherProps}
     >
       {(bag) => {
-        let resolvedChildren = typeof children === "function" ? children(bag) : children;
+        const resolvedChildren = typeof children === "function" ? children(bag) : children;
 
         const resolvedChildrenArray = (
           Array.isArray(resolvedChildren) ? resolvedChildren : [resolvedChildren]
         ) as ReactNode[];
 
+        if (selectedIndex >= resolvedChildrenArray.length) return <></>;
+        const selectedChild = resolvedChildrenArray[selectedIndex];
+
         return (
           <AnimatePresence initial={false} mode="popLayout" custom={swipeDirection}>
-            <ConditionRender
-              key={selectedIndex}
-              if={!!swipeable}
-              then={(props) => (
+            {(() => {
+              if (swipeable) {
+                return (
+                  <motion.div
+                    custom={swipeDirection}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    variants={variants}
+                    drag="x"
+                    dragConstraints={{
+                      left: 0,
+                      right: 0,
+                    }}
+                    dragElastic={1}
+                    onDragEnd={(e, { offset, velocity }) => {
+                      const swipeConfidenceThreshold = 10000;
+
+                      const swipePower = (offset: number, velocity: number) => {
+                        return Math.abs(offset) * velocity;
+                      };
+
+                      const swipe = swipePower(offset.x, velocity.x);
+
+                      if (swipe > swipeConfidenceThreshold) {
+                        if (selectedIndex < resolvedChildrenArray.length - 1)
+                          onChange(selectedIndex + 1);
+                      } else if (swipe < -swipeConfidenceThreshold) {
+                        if (selectedIndex > 0) onChange(selectedIndex - 1);
+                      }
+                    }}
+                    className="w-full"
+                    transition={{
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 22,
+                    }}
+                    {...props}
+                  >
+                    {selectedChild}
+                  </motion.div>
+                );
+              }
+
+              return (
                 <motion.div
                   custom={swipeDirection}
                   initial="enter"
                   animate="center"
                   exit="exit"
                   variants={variants}
-                  drag="x"
-                  dragConstraints={{
-                    left: 0,
-                    right: 0,
-                  }}
-                  dragElastic={1}
-                  onDragEnd={(e, { offset, velocity }) => {
-                    const swipeConfidenceThreshold = 10000;
-
-                    const swipePower = (offset: number, velocity: number) => {
-                      return Math.abs(offset) * velocity;
-                    };
-
-                    const swipe = swipePower(offset.x, velocity.x);
-
-                    if (swipe > swipeConfidenceThreshold) {
-                      if (selectedIndex < resolvedChildrenArray.length - 1)
-                        onChange(selectedIndex + 1);
-                    } else if (swipe < -swipeConfidenceThreshold) {
-                      if (selectedIndex > 0) onChange(selectedIndex - 1);
-                    }
-                  }}
                   className="w-full"
                   transition={{
                     type: "spring",
@@ -96,30 +117,11 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
                     damping: 22,
                   }}
                   {...props}
-                />
-              )}
-              else={(props) => (
-                <motion.div
-                  custom={swipeDirection}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  variants={variants}
-                  className="w-full"
-                  transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 22,
-                  }}
-                  {...props}
-                />
-              )}
-            >
-              {(() => {
-                if (selectedIndex >= resolvedChildrenArray.length) return null;
-                return resolvedChildrenArray[selectedIndex];
-              })()}
-            </ConditionRender>
+                >
+                  {selectedChild}
+                </motion.div>
+              );
+            })()}
           </AnimatePresence>
         );
       }}

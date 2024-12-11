@@ -9,5 +9,5 @@ export default function useUpdateEffect(effect: EffectCallback, deps: Dependency
       return;
     }
     return effect();
-  }, deps);
+  }, deps); // eslint-disable-line
 }

@@ -11,7 +11,7 @@ const PopoverBody = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<"div">>(
     useEffect(() => {
       if (!open) return;
       setBodyScrollState(null);
-    }, [open]);
+    }, [open, setBodyScrollState]);
 
     return (
       <ScrollArea onScroll={(data) => setBodyScrollState(data)}>

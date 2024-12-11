@@ -6,7 +6,7 @@ const legend = cva({
   base: "font-bold text-on-surface text-sm",
 });
 
-type LegendProps = HeadlessLegendProps & VariantProps<typeof legend>;
+type LegendProps = HeadlessLegendProps<"legend"> & VariantProps<typeof legend>;
 
 /**
  * Legend component for use within a fieldset.
@@ -23,7 +23,7 @@ export function Legend(props: LegendProps) {
 
   return (
     <HeadlessLegend
-      as="legend"
+      as={as}
       data-slot="legend"
       className={cn(legend({}), className)}
       {...otherProps}

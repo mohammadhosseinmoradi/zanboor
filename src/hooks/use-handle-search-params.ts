@@ -29,13 +29,7 @@ export class TypeSafeSearchParams<T extends Record<string, string>> extends URLS
   }
 }
 
-type UseHandleSearchParamsOptions<T extends Record<string, string>> = {
-  middleware?: (draftSearchParams: TypeSafeSearchParams<T>) => void;
-};
-
-export default function useHandleSearchParams<T extends Record<string, any>>(
-  config?: UseHandleSearchParamsOptions<T>
-) {
+export default function useHandleSearchParams<T extends Record<string, string>>() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams() as TypeSafeSearchParams<T>;
@@ -55,8 +49,6 @@ export default function useHandleSearchParams<T extends Record<string, any>>(
 
         cb(updatedSearchParams);
 
-        config?.middleware && config?.middleware(updatedSearchParams);
-
         const queryString = updatedSearchParams.toString();
 
         const href = pathname + (queryString ? `?${queryString}` : "");
@@ -70,7 +62,7 @@ export default function useHandleSearchParams<T extends Record<string, any>>(
 
         window.history[options?.push ? "pushState" : "replaceState"](null, "", href);
       }),
-    [searchParams]
+    [pathname, router, searchParams]
   );
 
   return { searchParams, setSearchParams, isPending };

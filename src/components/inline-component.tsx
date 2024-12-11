@@ -1,7 +1,9 @@
+import { ReactNode } from "react";
+
 /**
  * This component accept a function as children and render it as component.
  */
-export default function InlineComponent({ children }: { children: () => any }) {
+export default function InlineComponent({ children }: { children: () => ReactNode }) {
   return children();
 }
 

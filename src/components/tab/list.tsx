@@ -1,6 +1,6 @@
 import { TabList as HeadlessTabList, TabListProps } from "@headlessui/react";
 import { Swiper, SwiperClass } from "swiper/react";
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useTabContext } from "./context";
 import { cva } from "cva";
@@ -28,6 +28,7 @@ const List = forwardRef<HTMLDivElement, TabListProps<"div">>((props, ref) => {
 
   return (
     <HeadlessTabList
+      ref={ref}
       className={(bag) =>
         cn(
           list({

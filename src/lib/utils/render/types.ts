@@ -1,4 +1,6 @@
-import type { JSXElementConstructor, ReactElement, ReactNode } from "react";
+import { JSX, JSXElementConstructor, ReactElement, ReactNode } from "react";
+
+/* eslint-disable */
 
 export type ReactTag = keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
 

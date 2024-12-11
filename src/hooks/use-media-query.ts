@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
+/* eslint-disable */
+
 type MediaQueryCallback = (event: { matches: boolean; media: string }) => void;
 
 /**
@@ -36,7 +38,7 @@ export type Options = {
  */
 export default function useMediaQuery(query: string, options?: Options) {
   const [matches, setMatches] = useState(getInitialValue(query, options?.ssr));
-  const queryRef = useRef<MediaQueryList>();
+  const queryRef = useRef<MediaQueryList>(null);
 
   useEffect(() => {
     if ("matchMedia" in window) {

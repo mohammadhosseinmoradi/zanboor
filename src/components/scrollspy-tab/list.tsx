@@ -1,6 +1,6 @@
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { CSSProperties, ReactNode, useEffect, useId, useRef, useState } from "react";
+import { CSSProperties, ReactNode, useEffect, useId, useRef } from "react";
 import { useTabContext } from "@/components/scrollspy-tab/group";
 import Tab from "@/components/scrollspy-tab/tab";
 import clsx from "clsx";

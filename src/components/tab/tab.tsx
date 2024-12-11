@@ -53,7 +53,7 @@ const Tab = forwardRef<HTMLDivElement, TabProps<"div">>((props, ref) => {
   return (
     <HeadlessTab
       as={SwiperSlide}
-      // @ts-ignore
+      // @ts-expect-error ...
       tag="div"
       ref={ref}
       className={(bag) =>

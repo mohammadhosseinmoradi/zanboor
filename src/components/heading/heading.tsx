@@ -27,14 +27,14 @@ const DEFAULT_HEADING_TAG = "h1";
 
 export type HeadingProps<TTag extends ElementType = typeof DEFAULT_HEADING_TAG> = Props<
   TTag,
-  {},
+  object,
   never,
   {
     children?: ReactNode;
   } & VariantProps<typeof heading>
 >;
 
-type HeadingRenderPropArg = {};
+type HeadingRenderPropArg = object;
 
 function HeadingFn<TTag extends ElementType = typeof DEFAULT_HEADING_TAG>(
   props: HeadingProps<TTag>,

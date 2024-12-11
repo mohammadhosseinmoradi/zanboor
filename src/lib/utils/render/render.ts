@@ -15,6 +15,8 @@ import type { Expand, Props, XOR, __ } from "./types";
 import { match } from "@/lib/utils/match";
 import { cn } from "@/lib/utils/cn";
 
+/* eslint-disable */
+
 export enum RenderFeatures {
   /** No features at all */
   None = 0,

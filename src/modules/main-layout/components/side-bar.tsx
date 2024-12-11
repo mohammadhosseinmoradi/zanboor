@@ -73,7 +73,7 @@ type ItemProps = {
 };
 
 function Item(props: ItemProps) {
-  const { icon: Icon, label, href, layoutId, badge } = props;
+  const { icon: Icon, label, href, layoutId } = props;
 
   return (
     <NavLink

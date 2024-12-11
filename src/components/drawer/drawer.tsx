@@ -45,12 +45,6 @@ type DrawerStateProps = {
 
 const DrawerStateContext = createContext<DrawerStateProps | null>(null);
 
-function useDrawerStateContext() {
-  const context = useContext(DrawerStateContext);
-  if (context === null) throw new Error("You must use useDrawerStateContext in DrawerStateContext");
-  return context;
-}
-
 const modifiers = [restrictToVerticalAxis];
 
 export enum DrawerState {
@@ -87,7 +81,7 @@ const Drawer = forwardRef<
     if (state === DrawerState.Closed) {
       onClose();
     }
-  }, [state]);
+  }, [onClose, state]);
 
   const tracked = useRef({
     distance: 0,
@@ -207,6 +201,7 @@ const Sheet = forwardRef<
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(ref.current);
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       if (ref?.current) resizeObserver.unobserve(ref.current);
     };
   }, []);
@@ -225,7 +220,7 @@ const Sheet = forwardRef<
   useEffect(() => {
     if (isDragging) return;
     setAllowDrag(false);
-  }, [isDragging]);
+  }, [isDragging, setAllowDrag]);
 
   useEffect(() => {
     let element = activatorEvent?.target as Element;
@@ -264,7 +259,7 @@ const Sheet = forwardRef<
       }
       element = element.parentElement as HTMLElement;
     }
-  }, [direction, allowDrag]);
+  }, [direction, allowDrag, activatorEvent?.target, setAllowDrag]);
 
   return (
     <DrawerContext.Provider
