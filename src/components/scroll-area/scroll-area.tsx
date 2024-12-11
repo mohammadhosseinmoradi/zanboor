@@ -1,5 +1,5 @@
 import { useMotionValueEvent, useScroll } from "framer-motion";
-import { RefObject, ReactNode, useMemo, useRef, useState } from "react";
+import { ReactNode, useMemo, useRef, useState, RefObject } from "react";
 
 export type ScrollStateProps = {
   isScrolled: boolean;
@@ -8,7 +8,7 @@ export type ScrollStateProps = {
 };
 
 export type ScrollAreaRenderPropArg = ScrollStateProps & {
-  setNodeRef: RefObject<HTMLElement | null> | ((node: HTMLElement | null) => void);
+  setNodeRef: RefObject<any> | ((node: HTMLElement | null) => void); // eslint-disable-line
 };
 
 export type ScrollAreaProps = {

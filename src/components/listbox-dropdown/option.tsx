@@ -1,24 +1,23 @@
 "use client";
 
 import { ListboxOption, ListboxOptionProps } from "@headlessui/react";
-import { ElementType, ReactNode, Ref } from "react";
+import { ElementType, Ref } from "react";
 import { cn } from "@/lib/utils";
 import { CheckIcon } from "lucide-react";
 import { useIsAnchorSelection } from "@/components/listbox-dropdown/use-is-anchor-selection";
-import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";
 
 const DEFAULT_OPTION_TAG = "button";
 
 type OptionProps<TTag extends ElementType = typeof DEFAULT_OPTION_TAG> = ListboxOptionProps<
   TTag,
-  object
->;
+  any // eslint-disable-line
+> & {
+  ref?: Ref<HTMLElement>;
+};
 
-function OptionFn<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(
-  props: OptionProps<TTag>,
-  ref: Ref<HTMLElement>
-) {
+function Option<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(props: OptionProps<TTag>) {
   const {
+    ref,
     className,
     as = DEFAULT_OPTION_TAG,
     children,
@@ -30,7 +29,7 @@ function OptionFn<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(
   return (
     <ListboxOption
       ref={ref}
-      as={as as "button"}
+      as={as}
       className={(bag) =>
         cn(
           "group/option rounded-lg focus:outline-none",
@@ -83,15 +82,6 @@ function OptionFn<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(
     </ListboxOption>
   );
 }
-
-interface _internal_ComponentOption extends HasDisplayName {
-  <TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(
-    props: OptionProps<TTag>,
-    ref: RefProp<typeof OptionFn<TTag>>
-  ): ReactNode;
-}
-
-const Option = forwardRefWithAs(OptionFn) as unknown as _internal_ComponentOption;
 
 Option.displayName = ListboxOption.displayName;
 
