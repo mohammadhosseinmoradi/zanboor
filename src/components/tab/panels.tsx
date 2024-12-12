@@ -63,6 +63,7 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
               if (swipeable) {
                 return (
                   <motion.div
+                    key={selectedIndex}
                     custom={swipeDirection}
                     initial="enter"
                     animate="center"
@@ -105,6 +106,7 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
 
               return (
                 <motion.div
+                  key={selectedIndex}
                   custom={swipeDirection}
                   initial="enter"
                   animate="center"

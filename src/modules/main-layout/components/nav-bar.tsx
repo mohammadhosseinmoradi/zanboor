@@ -26,7 +26,7 @@ export default function NavBar(props: MobileBottomNavBarProps) {
     <>
       <div
         className={cn(
-          "bg-surface text-on-surface flex items-center justify-center overflow-hidden border-t",
+          "bg-surface-bright text-on-surface flex items-center justify-center overflow-hidden border-t",
           className
         )}
         suppressHydrationWarning

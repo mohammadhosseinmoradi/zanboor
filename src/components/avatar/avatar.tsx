@@ -6,6 +6,7 @@ import { cva, VariantProps } from "cva";
 import { forwardRefWithAs, HasDisplayName, RefProp, render } from "@/lib/utils/render";
 import { Props } from "@/lib/utils/render/types";
 import Image, { ImageProps } from "next/image";
+import { AVATAR_IMG } from "@/lib/constants/common";
 
 const avatar = cva({
   base: "inline-grid shrink-0 align-middle *:col-start-1 *:row-start-1 rounded-full *:rounded-full",
@@ -50,40 +51,57 @@ function AvatarFn<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG>(
     className: cn(avatar({}), resolvedClassName),
     children: (
       <>
-        {((initials && !src) || (src && imageError)) && (
-          <svg
-            ref={ref as Ref<SVGSVGElement>}
-            className="fill-current text-4xl font-medium tracking-wide uppercase select-none"
-            viewBox="0 0 100 100"
-            aria-hidden="true"
-          >
-            <text
-              x="50%"
-              y="50%"
-              alignmentBaseline="middle"
-              dominantBaseline="middle"
-              textAnchor="middle"
-              dy="0.125em"
-            >
-              {initials}
-            </text>
-          </svg>
-        )}
-        {src && !imageError && (
-          <Image
-            ref={ref as Ref<HTMLImageElement>}
-            onError={() => {
-              setImageError(true);
-            }}
-            className="aspect-square size-full object-cover"
-            src={src}
-            width={width || 500}
-            height={height || 500}
-            quality={75}
-            sizes={sizes}
-            alt={alt || ""}
-          />
-        )}
+        {(() => {
+          if (src && !imageError) {
+            return (
+              <Image
+                ref={ref as Ref<HTMLImageElement>}
+                onError={() => {
+                  setImageError(true);
+                }}
+                className="aspect-square size-full object-cover"
+                src={src}
+                width={width || 500}
+                height={height || 500}
+                quality={75}
+                sizes={sizes}
+                alt={alt || ""}
+              />
+            );
+          } else if (initials) {
+            return (
+              <svg
+                ref={ref as Ref<SVGSVGElement>}
+                className="fill-current text-4xl font-medium tracking-wide uppercase select-none"
+                viewBox="0 0 100 100"
+                aria-hidden="true"
+              >
+                <text
+                  x="50%"
+                  y="50%"
+                  alignmentBaseline="middle"
+                  dominantBaseline="middle"
+                  textAnchor="middle"
+                  dy="0.125em"
+                >
+                  {initials}
+                </text>
+              </svg>
+            );
+          } else {
+            return (
+              <Image
+                ref={ref as Ref<HTMLImageElement>}
+                className="aspect-square size-full object-cover"
+                src={AVATAR_IMG}
+                width={width || 500}
+                height={height || 500}
+                sizes={sizes}
+                alt={alt || ""}
+              />
+            );
+          }
+        })()}
       </>
     ),
   };

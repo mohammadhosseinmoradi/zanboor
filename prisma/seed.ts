@@ -27,6 +27,7 @@ async function main() {
               lastName: "مرادی",
               displayName: "محمد",
               image: "",
+              bio: "دنبال همسری هستم خوب، خوشکل، باوفا، مهربون، خانواده‌دوست و اهل زندگی مشترک که در کنار هم با عشق و احترام یه زندگی فوق‌العاده‌ای بسازیم.",
               gender: Gender.Male,
               birthdate: new Date(),
               maritalStatus: MaritalStatus.Single,

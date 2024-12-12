@@ -36,9 +36,7 @@ export async function signInWithOtp(params: EnterOtp): Promise<Result<string>> {
 
   if (!user) {
     user = await prisma.user.create({
-      data: {
-        displayName: "",
-      },
+      data: {},
     });
   }
 

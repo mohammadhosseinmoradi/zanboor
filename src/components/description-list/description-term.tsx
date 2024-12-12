@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const descriptionTerm = cva({
-  base: "text-on-surface-disabled",
+  base: "text-on-surface-variant",
 });
 
 type DescriptionTermProps = {

@@ -16,3 +16,5 @@ export const countryOptions: Option[] = [
     disabled: true,
   },
 ];
+
+export const AVATAR_IMG = "/images/avatar.png";
