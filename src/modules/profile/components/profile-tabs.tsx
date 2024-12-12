@@ -16,13 +16,13 @@ export function ProfileTabs(props: ProfileTabsProps) {
   const { data, className } = props;
 
   return (
-    <TabGroup className={cn("", className)}>
+    <TabGroup className={cn("grow", className)}>
       <TabList className="[&>*]:w-full">
         <Tab className="!w-auto text-center max-lg:grow">مشخصات عمومی</Tab>
         <Tab className="!w-auto text-center max-lg:grow">مشخصات ظاهری</Tab>
         <Tab className="!w-auto text-center max-lg:grow">تحصیلات و شغل</Tab>
       </TabList>
-      <TabPanels>
+      <TabPanels className="bg-surface flex grow flex-col p-4" swipeable>
         <TabPanel>
           <Personal data={data.personal} />
         </TabPanel>

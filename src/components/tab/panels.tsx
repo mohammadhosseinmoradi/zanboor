@@ -97,7 +97,6 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
                       stiffness: 200,
                       damping: 22,
                     }}
-                    {...props}
                   >
                     {selectedChild}
                   </motion.div>
@@ -118,7 +117,6 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
                     stiffness: 200,
                     damping: 22,
                   }}
-                  {...props}
                 >
                   {selectedChild}
                 </motion.div>

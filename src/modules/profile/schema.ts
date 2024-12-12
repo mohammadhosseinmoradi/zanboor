@@ -33,6 +33,7 @@ export const personalDtoCreateInputParamsSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   displayName: z.string(),
+  bio: z.string(),
   gender: z.nativeEnum(Gender),
   image: z.string(),
   maritalStatus: z.nativeEnum(MaritalStatus),

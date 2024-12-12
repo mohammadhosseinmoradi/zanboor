@@ -10,8 +10,8 @@ export async function Profile() {
   if (!isOk(profile)) return null;
 
   return (
-    <div className="w-full">
-      <div>
+    <div className="bg-surface-container flex w-full grow flex-col">
+      <div className="px-4 pt-4">
         <Button color="secondary">
           <svg
             data-slot="icon"
@@ -26,7 +26,7 @@ export async function Profile() {
           </svg>
         </Button>
       </div>
-      <ProfileHeader className="mt-6" data={profile.data.personal} />
+      <ProfileHeader className="mt-6 px-4" data={profile.data.personal} />
       <ProfileTabs className="mt-6" data={profile.data} />
     </div>
   );

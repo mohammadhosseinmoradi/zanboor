@@ -2,9 +2,11 @@
 
 import { cn } from "@/lib/utils";
 import { PersonalDto } from "@/modules/profile/types";
-import { CoinsIcon } from "lucide-react";
+import { CoinsIcon, UserRoundPenIcon } from "lucide-react";
 import { Avatar } from "@/components/avatar";
 import { Heading } from "@/components/heading";
+import { Text } from "@/components/text";
+import { Button } from "@/components/button";
 
 type ProfileHeaderProps = {
   data: PersonalDto;
@@ -35,6 +37,17 @@ export function ProfileHeader(props: ProfileHeaderProps) {
       <Heading as="h4" variant="h4" className="mt-4">
         {[data.firstName, data.lastName].join(" ")}
       </Heading>
+      <Text className="mt-2">{data.bio}</Text>
+
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        <Button size="sm" color="secondary">
+          خرید سکه
+        </Button>
+        <Button size="sm" color="secondary">
+          <UserRoundPenIcon data-slot="start-icon" />
+          ویرایش پروفایل
+        </Button>
+      </div>
     </div>
   );
 }

@@ -19,7 +19,7 @@ export function Personal(props: PersonalProps) {
 
   return (
     <div className={cn("flex w-full flex-col", className)}>
-      <DescriptionList className="mt-6 grid w-full grid-cols-2 gap-x-4 gap-y-4 lg:grid-cols-[auto_1fr_auto_1fr]">
+      <DescriptionList className="grid w-full grid-cols-2 gap-x-4 gap-y-4 lg:grid-cols-[auto_1fr_auto_1fr]">
         <DescriptionTerm>نام</DescriptionTerm>
         <DescriptionDetails>{data.firstName}</DescriptionDetails>
         <DescriptionTerm>نام خانوادگی</DescriptionTerm>
