@@ -43,12 +43,14 @@ model User {
 }
 
 model Profile {
-  id                 String              @id @default(cuid())
-  personal           Personal            @relation(fields: [personalId], references: [id])
-  personalId         String              @unique
-  educationAndCareer EducationAndCareer?
-  physicalAttributes PhysicalAttributes?
-  financialStatus    FinancialStatus?
+  id                  String               @id @default(cuid())
+  personal            Personal             @relation(fields: [personalId], references: [id])
+  personalId          String               @unique
+  educationAndCareer  EducationAndCareer?
+  physicalAttributes  PhysicalAttributes?
+  familyInfo          FamilyInfo?
+  financialStatus     FinancialStatus?
+  marriagePreferences MarriagePreferences?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -57,25 +59,96 @@ model Profile {
   userId String @unique
 }
 
+model FamilyInfo {
+  id                 String         @id @default(cuid())
+  fatherEducation    EducationLevel
+  motherEducation    EducationLevel
+  fatherEthnicity    Ethnicity
+  motherEthnicity    Ethnicity
+  siblingPosition    Int
+  brothersCount      Int
+  sistersCount       Int
+  hasMarriedSiblings Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String  @unique
+}
+
+enum Ethnicity {
+  Persian // فارس
+  Turkish // ترک
+  Kurdish // کرد
+  Baluchi // بلوچ
+  Arab // عرب
+  Lor // لر
+  Gilaki // گیلک
+  Mazandarani // مازندرانی
+  Talysh // تالشی
+  Armenian // ارمنی
+  Ashuri // آشوری
+  Turkmen // ترکمن
+  Qashqai // قشقایی
+  Afghani // افغان
+  Azeri // آذری
+  Sistani // سیستانی
+  Other // سایر
+}
+
+model MarriagePreferences {
+  id                        String            @id @default(cuid())
+  ageMin                    Int
+  ageMax                    Int
+  maritalStatuses           MaritalStatus[]
+  childrenStatus            ChildrenStatus? // Preference for partner's children status
+  educationLevels           EducationLevel[]
+  heightMin                 Int?
+  heightMax                 Int?
+  skinColors                SkinColor[]
+  healthStatuses            HealthStatus[]
+  incomeMin                 Int?
+  incomeMax                 Int?
+  housingStatus             HousingStatus[]
+  carStatus                 CarStatus[]
+  preferredPersonalityTypes PersonalityType[]
+
+  additionalNotes String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String  @unique
+}
+
 model Personal {
-  id                String         @id @default(cuid())
+  id                String          @id @default(cuid())
   firstName         String
   lastName          String
   displayName       String
   bio               String
   image             String?
-  gender            Gender         @default(Other)
+  gender            Gender          @default(Other)
   birthdate         DateTime
   maritalStatus     MaritalStatus
   healthStatus      HealthStatus
   healthDescription String?
-  childrenStatus    ChildrenStatus @default(None)
+  childrenStatus    ChildrenStatus  @default(None)
   greatestChildAge  Int?
   location          Location?
+  personalityType   PersonalityType
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Profile   Profile?
+}
+
+enum PersonalityType {
+  Introvert
+  Extrovert
+  Ambivert
 }
 
 enum ChildrenStatus {
