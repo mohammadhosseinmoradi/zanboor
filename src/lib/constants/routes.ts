@@ -5,6 +5,7 @@ export const routes = {
   counselor: "/counselor",
   terms: "/terms",
   privacy: "/privacy",
+  statistics: "/statistics",
   auth: {
     getPath: () => "/auth",
     enterPhone: "/auth/enter-phone",

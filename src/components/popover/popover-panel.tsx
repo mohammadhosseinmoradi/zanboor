@@ -41,7 +41,7 @@ const PopoverPanel = forwardRef<HTMLDivElement, PopoverPanelProps>((props, ref) 
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <PopoverBackdrop className="bg-fg/50 fixed inset-0 z-10" />
+              <PopoverBackdrop className="bg-on-surface/50 fixed inset-0 z-10" />
             </TransitionChild>
           ) : undefined
         }

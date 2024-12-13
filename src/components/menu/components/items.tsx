@@ -108,7 +108,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
                                 "shadow-lg": isScrolled,
                               })}
                             >
-                              <div className="bg-fg/50 absolute top-2 left-1/2 h-1 w-6 -translate-x-1/2 rounded-full lg:hidden" />
+                              <div className="bg-on-surface/50 absolute top-2 left-1/2 h-1 w-6 -translate-x-1/2 rounded-full lg:hidden" />
                             </div>
                             <div
                               ref={setNodeRef}

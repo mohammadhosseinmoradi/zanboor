@@ -75,10 +75,6 @@ function ProfileAvatar(props: ProfileAvatarProps) {
           "cursor-pointer": data.src,
         })}
         onClick={() => data.src && setOpen(true)}
-        transition={{
-          ease: "easeInOut",
-          duration: 0.35,
-        }}
         onLayoutAnimationStart={() => setIsTransition(true)}
         onLayoutAnimationComplete={() => setIsTransition(false)}
       >
@@ -136,10 +132,6 @@ function ProfileAvatar(props: ProfileAvatarProps) {
                   layoutId={id}
                   className="w-full p-4 lg:max-w-96"
                   onClick={() => setOpen(true)}
-                  transition={{
-                    ease: "easeInOut",
-                    duration: 0.35,
-                  }}
                 >
                   <Avatar className="size-full" src={data.src} />
                 </motion.div>
