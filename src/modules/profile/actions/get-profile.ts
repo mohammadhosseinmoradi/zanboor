@@ -21,9 +21,14 @@ export async function getProfile(): Promise<Result<ProfileDto>> {
       userId: session.user.id,
     },
     include: {
-      personal: true,
+      personal: {
+        include: {
+          location: true,
+        },
+      },
       educationAndCareer: true,
       physicalAttributes: true,
+      financialStatus: true,
     },
   });
 

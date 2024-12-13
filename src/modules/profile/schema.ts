@@ -66,7 +66,7 @@ export const personalDtoCreateInputParamsSchema = z.object({
   healthDescription: z.string().nullable().optional(),
   childrenStatus: z.nativeEnum(ChildrenStatus),
   greatestChildAge: z.number().nullable().optional(),
-  location: LocationDtoCreateInputParamsSchema,
+  location: LocationDtoCreateInputParamsSchema.nullable().optional(),
 });
 
 export const personalDtoSchema = personalDtoCreateInputParamsSchema.extend({

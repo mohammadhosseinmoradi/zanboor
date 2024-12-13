@@ -1,15 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { PersonalDto } from "@/modules/profile/types";
-import { CoinsIcon, UserRoundPenIcon } from "lucide-react";
+import { ProfileDto } from "@/modules/profile/types";
 import { Avatar } from "@/components/avatar";
-import { Heading } from "@/components/heading";
 import { Text } from "@/components/text";
-import { Button } from "@/components/button";
 
 type ProfileHeaderProps = {
-  data: PersonalDto;
+  data: ProfileDto;
   className?: string;
 };
 
@@ -20,34 +17,27 @@ export function ProfileHeader(props: ProfileHeaderProps) {
     <div className={cn("flex flex-col", className)}>
       <div className="flex items-center gap-4">
         <ProfileAvatar
-          className="size-16"
+          className="size-16 shrink-0"
           data={{
             personalId: data.id,
-            src: data.image,
+            src: data.personal.image,
           }}
         />
-        <div className="gird-cols-3 grid items-center">
-          <button className="hover:bg-surface-bright flex flex-col items-center gap-2 rounded-lg px-4 py-2">
-            <CoinsIcon className="text-yellow-500/50" />
-            50
-          </button>
+        <div className="gird-cols-3 grid w-full place-items-end items-center">
+          {/*<button className="hover:bg-surface-bright flex flex-col items-center gap-1 rounded-lg px-4 py-2">*/}
+          {/*  <span className='font-bold'>50</span>*/}
+          {/*  <div className='flex gap-2 text-sm'>*/}
+          {/*    /!*<CircleDollarSignIcon className="size-5 text-yellow-500/50" />*!/*/}
+          {/*    <div className='text-on-surface-variant text-xs'>*/}
+          {/*      سکه*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</button>*/}
         </div>
       </div>
+      <Text className="mt-2">{data.personal.bio}</Text>
 
-      <Heading as="h4" variant="h4" className="mt-4">
-        {[data.firstName, data.lastName].join(" ")}
-      </Heading>
-      <Text className="mt-2">{data.bio}</Text>
-
-      <div className="mt-4 grid grid-cols-2 gap-2">
-        <Button size="sm" color="secondary">
-          خرید سکه
-        </Button>
-        <Button size="sm" color="secondary">
-          <UserRoundPenIcon data-slot="start-icon" />
-          ویرایش پروفایل
-        </Button>
-      </div>
+      <div className="mt-4 grid grid-cols-1 gap-2"></div>
     </div>
   );
 }

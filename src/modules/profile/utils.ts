@@ -1,4 +1,14 @@
-import { EducationLevel, EmploymentStatus, Gender, MaritalStatus, SkinColor } from "@prisma/client";
+import {
+  BeautyLevel,
+  CarStatus,
+  EducationLevel,
+  EmploymentStatus,
+  Gender,
+  HousingStatus,
+  MaritalStatus,
+  SkinColor,
+  StyleLevel,
+} from "@prisma/client";
 
 export function getGenderTranslated(gender: Gender): string {
   switch (gender) {
@@ -81,6 +91,74 @@ export function getEducationLevelTranslated(educationLevel: EducationLevel): str
     }
     case EducationLevel.Doctorate: {
       return "دکترا";
+    }
+  }
+}
+
+export function getBeautyLevelTranslated(beautyLevel: BeautyLevel): string {
+  switch (beautyLevel) {
+    case BeautyLevel.VeryLow: {
+      return "خیلی کم";
+    }
+    case BeautyLevel.Low: {
+      return "کم";
+    }
+    case BeautyLevel.Medium: {
+      return "متوسط";
+    }
+    case BeautyLevel.High: {
+      return "زیاد";
+    }
+    case BeautyLevel.VeryHigh: {
+      return "خیلی زیاد";
+    }
+  }
+}
+
+export function getStyleLevelTranslated(styleLevel: StyleLevel): string {
+  switch (styleLevel) {
+    case StyleLevel.VeryLow: {
+      return "خیلی کم";
+    }
+    case StyleLevel.Low: {
+      return "کم";
+    }
+    case StyleLevel.Medium: {
+      return "متوسط";
+    }
+    case StyleLevel.High: {
+      return "زیاد";
+    }
+    case StyleLevel.VeryHigh: {
+      return "خیلی زیاد";
+    }
+  }
+}
+
+export function getCarStatusTranslated(carStatus: CarStatus): string {
+  switch (carStatus) {
+    case CarStatus.NoCar: {
+      return "ندارم";
+    }
+    case CarStatus.HasCar: {
+      return "دارم";
+    }
+  }
+}
+
+export function getHousingStatusTranslated(housingStatus: HousingStatus): string {
+  switch (housingStatus) {
+    case HousingStatus.NoHouse: {
+      return "ندارم";
+    }
+    case HousingStatus.RentedHouse: {
+      return "اجاره‌ای";
+    }
+    case HousingStatus.OwnHouse: {
+      return "دارم";
+    }
+    case HousingStatus.WithFamily: {
+      return "با خانواده";
     }
   }
 }

@@ -56,7 +56,7 @@ function Item(props: ItemProps) {
     <NavLink
       href={href}
       className={cn(
-        "group hover:text-on-surface-hover data-[active]:text-on-surface-hover relative flex size-full grow flex-col items-center justify-start transition",
+        "group text-on-surface-variant data-[active]:text-on-surface relative flex size-full grow flex-col items-center justify-start transition",
         "pt-4 pb-4"
       )}
     >
@@ -64,7 +64,7 @@ function Item(props: ItemProps) {
         <>
           <div className="relative z-10 flex flex-col items-center justify-center gap-2">
             <span className="relative">
-              <Icon className="text-on-surface-variant group-data-[active]:text-on-surface-hover size-6" />
+              <Icon className="size-6" />
               {!!badge && <Badge anchor="topEnd">{badge}</Badge>}
             </span>
             <span className="text-2xs line-clamp-2 text-center font-bold transition group-data-[active]:translate-y-1.5">
