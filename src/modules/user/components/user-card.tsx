@@ -18,7 +18,7 @@ export function UserCard(props: UserCardProps) {
 
   return (
     <Link
-      href={routes.users.show(data.id)}
+      href={routes.profile.index(data.id)}
       className={cn("bg-surface-bright overflow-hidden rounded-lg border", className)}
     >
       <div className="relative">
@@ -34,7 +34,7 @@ export function UserCard(props: UserCardProps) {
       <div className="flex items-center p-2">
         <Heading as="h4" variant="h5" className="grow truncate">
           {data.profile.personal.displayName}
-          <BadgeCheckIcon className="text-success ms-1 inline-block size-5 rounded-full p-0.5" />
+          <BadgeCheckIcon className="text-surface-bright fill-success ms-1 inline-block size-5 rounded-full p-0.5" />
         </Heading>
         <Text>شیراز</Text>
       </div>

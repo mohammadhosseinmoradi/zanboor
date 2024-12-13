@@ -1,9 +1,8 @@
 export const routes = {
   home: "/",
   messages: "/messages",
-  profile: "/profile",
   favorites: "/favorites",
-  search: "/search",
+  counselor: "/counselor",
   terms: "/terms",
   privacy: "/privacy",
   auth: {
@@ -11,8 +10,10 @@ export const routes = {
     enterPhone: "/auth/enter-phone",
     enterOtp: "/auth/enter-otp",
   },
-  users: {
-    index: "/users",
-    show: (id: string) => `/users/${id}`,
+  me: {
+    index: "/me",
+  },
+  profile: {
+    index: (id: string) => `/${id}`,
   },
 };

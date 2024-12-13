@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      disallow: [routes.profile, routes.messages, routes.favorites, routes.search],
+      disallow: [routes.me.index, routes.messages, routes.favorites, routes.counselor],
     },
   };
 }

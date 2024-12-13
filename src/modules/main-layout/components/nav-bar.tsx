@@ -3,10 +3,10 @@ import { routes } from "@/lib/constants/routes";
 import { cn } from "@/lib/utils";
 import { NavLink } from "@/components/nav-link";
 import {
+  HeadsetIcon,
   HeartIcon,
   LucideProps,
   MessageSquareTextIcon,
-  SearchIcon,
   SlashIcon,
   UserRoundIcon,
 } from "lucide-react";
@@ -32,10 +32,10 @@ export default function NavBar(props: MobileBottomNavBarProps) {
         suppressHydrationWarning
       >
         <Item href={routes.home} icon={SlashIcon} label="ویترین" layoutId={id} />
-        <Item href={routes.search} icon={SearchIcon} label="جستجو" layoutId={id} />
+        <Item href={routes.counselor} icon={HeadsetIcon} label="مشاور" layoutId={id} />
         <Item href={routes.favorites} icon={HeartIcon} label="علاقمندی‌ها" layoutId={id} />
         <Item href={routes.messages} icon={MessageSquareTextIcon} label="پیام‌ها" layoutId={id} />
-        <Item href={routes.profile} icon={UserRoundIcon} label="پروفایل" layoutId={id} />
+        <Item href={routes.me.index} icon={UserRoundIcon} label="پروفایل" layoutId={id} />
       </div>
     </>
   );

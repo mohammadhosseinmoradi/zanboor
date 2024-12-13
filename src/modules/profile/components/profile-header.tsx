@@ -4,6 +4,10 @@ import { cn } from "@/lib/utils";
 import { ProfileDto } from "@/modules/profile/types";
 import { Avatar } from "@/components/avatar";
 import { Text } from "@/components/text";
+import { BadgeCheckIcon, CircleDollarSignIcon, UserRoundPenIcon } from "lucide-react";
+import { Heading } from "@/components/heading";
+import { Button } from "@/components/button";
+import { getGenderTranslated } from "@/modules/utils";
 
 type ProfileHeaderProps = {
   data: ProfileDto;
@@ -23,21 +27,26 @@ export function ProfileHeader(props: ProfileHeaderProps) {
             src: data.personal.image,
           }}
         />
-        <div className="gird-cols-3 grid w-full place-items-end items-center">
-          {/*<button className="hover:bg-surface-bright flex flex-col items-center gap-1 rounded-lg px-4 py-2">*/}
-          {/*  <span className='font-bold'>50</span>*/}
-          {/*  <div className='flex gap-2 text-sm'>*/}
-          {/*    /!*<CircleDollarSignIcon className="size-5 text-yellow-500/50" />*!/*/}
-          {/*    <div className='text-on-surface-variant text-xs'>*/}
-          {/*      سکه*/}
-          {/*    </div>*/}
-          {/*  </div>*/}
-          {/*</button>*/}
-        </div>
+        <Heading as="h4" variant="h4">
+          {[data.personal.displayName].join(" ")}
+          <span className="text-on-surface/50 ms-1">
+            / {getGenderTranslated(data.personal.gender)}
+          </span>
+          <BadgeCheckIcon className="fill-on-surface text-surface ms-1 mb-0.5 inline-block size-5 rounded-full" />
+        </Heading>
       </div>
-      <Text className="mt-2">{data.personal.bio}</Text>
+      <Text className="mt-4">{data.personal.bio}</Text>
 
-      <div className="mt-4 grid grid-cols-1 gap-2"></div>
+      <div className="mt-4 grid grid-cols-[auto_1fr] gap-2 lg:grid-cols-[auto_auto]">
+        <Button variant="outlined" color="secondary">
+          <UserRoundPenIcon data-slot="icon" />
+          <span className="max-lg:hidden">ویرایش</span>
+        </Button>
+        <Button variant="outlined" color="secondary">
+          <CircleDollarSignIcon data-slot="start-icon" />
+          دعوت دیگران
+        </Button>
+      </div>
     </div>
   );
 }

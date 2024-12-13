@@ -299,7 +299,7 @@ const Sheet = forwardRef<
             : children}
         </div>
         {value !== DrawerState.Closed && (
-          <div className="bg-surface absolute top-full z-10 h-dvh w-full" />
+          <div className="bg-surface-bright absolute top-full z-10 h-dvh w-full" />
         )}
       </motion.div>
     </DrawerContext.Provider>

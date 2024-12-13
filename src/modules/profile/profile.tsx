@@ -1,19 +1,19 @@
 import { isOk } from "@/lib/utils/is-ok";
-import { getProfile } from "@/modules/profile/actions/get-profile";
+import { getMe } from "@/modules/profile/actions/get-me";
 import { Button } from "@/components/button";
 import { ProfileTabs } from "@/modules/profile/components/profile-tabs";
 import { ProfileHeader } from "@/modules/profile/components/profile-header";
-import { CircleDollarSignIcon } from "lucide-react";
-import { Heading } from "@/components/heading";
+import { ChartNoAxesColumnIcon, CircleDollarSignIcon } from "lucide-react";
+import { Divider } from "@/components/divider";
 
 export async function Profile() {
-  const profile = await getProfile();
+  const me = await getMe();
 
-  if (!isOk(profile)) return null;
+  if (!isOk(me)) return null;
 
   return (
     <div className="flex w-full grow flex-col">
-      <div className="flex gap-2 px-4 pt-4">
+      <div className="flex items-center gap-2 px-2 pt-2">
         <div className="flex grow items-center gap-2">
           <Button variant="plain" color="secondary">
             <svg
@@ -28,17 +28,19 @@ export async function Profile() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
             </svg>
           </Button>
-          <Heading as="h4" variant="h4">
-            {[profile.data.personal.firstName, profile.data.personal.lastName].join(" ")}
-          </Heading>
+          پروفایل
         </div>
+        <Button variant="plain" color="secondary">
+          <ChartNoAxesColumnIcon data-slot="icon" />
+        </Button>
+        <Divider vertical className="h-4" />
         <Button variant="plain">
-          <CircleDollarSignIcon data-slot="icon-start" />
-          <span className="font-bold">25</span>
+          <CircleDollarSignIcon data-slot="start-icon" />
+          <span>25</span>
         </Button>
       </div>
-      <ProfileHeader className="mt-6 px-4" data={profile.data} />
-      <ProfileTabs className="mt-2" data={profile.data} />
+      <ProfileHeader className="mt-4 px-4" data={me.data.profile} />
+      <ProfileTabs className="mt-2" data={me.data.profile} />
     </div>
   );
 }

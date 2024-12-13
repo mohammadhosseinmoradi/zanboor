@@ -71,6 +71,59 @@ async function main() {
 
   await prisma.user.upsert({
     where: {
+      phone: "+989362364694",
+    },
+    update: {
+      phone: "+989362364694",
+    },
+    create: {
+      phone: "+989362364694",
+      profile: {
+        create: {
+          personal: {
+            create: {
+              firstName: "امین",
+              lastName: "شیبانیان",
+              displayName: "کهرو",
+              image: "",
+              bio: "دنبال یه پارتنر خیلی خوشکل و داغ هستم که پایه همه حالی باشه.",
+              gender: Gender.Male,
+              birthdate: new Date(),
+              maritalStatus: MaritalStatus.Single,
+              healthStatus: HealthStatus.Healthy,
+            },
+          },
+          physicalAttributes: {
+            create: {
+              height: 178,
+              skinColor: SkinColor.Wheatish,
+              weight: 65,
+              beautyLevel: BeautyLevel.VeryHigh,
+              styleLevel: StyleLevel.VeryHigh,
+            },
+          },
+          educationAndCareer: {
+            create: {
+              educationLevel: EducationLevel.Bachelors,
+              employmentStatus: EmploymentStatus.Employed,
+              jobTitle: "توسعه دهنده وب",
+              fieldOfStudy: "کامپیوتر",
+            },
+          },
+          financialStatus: {
+            create: {
+              personalIncome: 100_000_000,
+              carStatus: CarStatus.HasCar,
+              housingStatus: HousingStatus.OwnHouse,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  await prisma.user.upsert({
+    where: {
       phone: "+989333660137",
     },
     update: {

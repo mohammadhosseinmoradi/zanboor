@@ -20,6 +20,7 @@ export const userProfilePersonalDtoSchema = z.object({
   displayName: z.string(),
   gender: z.nativeEnum(Gender),
   image: z.string().nullable().optional(),
+  bio: z.string(),
   maritalStatus: z.nativeEnum(MaritalStatus),
   healthStatus: z.nativeEnum(HealthStatus),
   healthDescription: z.string().nullable().optional(),

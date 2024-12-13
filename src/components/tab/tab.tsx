@@ -10,8 +10,8 @@ const tab = cva({
   base: cn(
     "relative w-auto transition-all duration-300",
     "!flex gap-2 justify-center items-center",
-    "px-4 py-3 text-sm/5 data-[selected]:font-bold",
-    "text-on-surface data-[selected]:text-primary",
+    "px-4 py-3 text-sm/5",
+    "text-on-surface data-[selected]:text-on-surface",
     "cursor-pointer",
     "[&>*[data-slot$=icon]]:size-5"
   ),
@@ -36,7 +36,7 @@ const tab = cva({
 });
 
 const tabIndicator = cva({
-  base: "absolute bottom-0 inset-x-0 h-0.5 bg-primary",
+  base: "absolute bottom-0 inset-x-0 h-0.5 bg-on-surface",
   variants: {
     variant: {
       highlight: "bg-primary-200 h-full z-[-1]",

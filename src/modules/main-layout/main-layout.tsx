@@ -17,7 +17,7 @@ export function MainLayout(props: MainLayoutProps) {
   return (
     <div className={cn("flex min-h-dvh grow flex-col", className)}>
       <div className="flex grow">
-        <SideBar className="sticky top-0 shrink-0 max-lg:hidden" />
+        <SideBar className="sticky top-0 h-dvh shrink-0 max-lg:hidden" />
         <main className="flex grow flex-col">{children}</main>
       </div>
       <Footer />

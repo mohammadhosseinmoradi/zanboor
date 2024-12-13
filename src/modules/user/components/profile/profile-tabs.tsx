@@ -1,13 +1,13 @@
 "use client";
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@/components/tab";
-import { Specification } from "@/modules/profile/components/specification";
 import { cn } from "@/lib/utils";
-import { ProfileDto } from "@/modules/profile/types";
 import { CircleUserRoundIcon, ListTodoIcon } from "lucide-react";
+import { UserProfileDto } from "@/modules/user/types";
+import { Specification } from "@/modules/user/components/profile/specification";
 
 type ProfileTabsProps = {
-  data: ProfileDto;
+  data: UserProfileDto;
   className?: string;
 };
 

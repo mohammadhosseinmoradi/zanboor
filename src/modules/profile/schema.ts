@@ -96,3 +96,8 @@ export const profileDtoSchema = z.object({
   educationAndCareer: educationAndCareerDtoSchema,
   financialStatus: financialStatusDtoSchema,
 });
+
+export const userDtoSchema = z.object({
+  id: z.string(),
+  profile: profileDtoSchema,
+});

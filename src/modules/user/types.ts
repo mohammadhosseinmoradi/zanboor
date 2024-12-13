@@ -1,4 +1,6 @@
 import { z } from "zod";
-import { userDtoSchema } from "@/modules/user/schema";
+import { userDtoSchema, userProfileDtoSchema } from "@/modules/user/schema";
 
 export type UserDto = z.infer<typeof userDtoSchema>;
+
+export type UserProfileDto = z.infer<typeof userProfileDtoSchema>;

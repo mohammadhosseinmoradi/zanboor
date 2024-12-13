@@ -29,7 +29,7 @@ const button = cva({
     variant: {
       filled: "",
       filledTonal: "",
-      outlined: "",
+      outlined: "after:absolute after:inset-0 after:border after:rounded-lg",
       plain: "focus:ring-offset-0",
     },
     color: {
@@ -239,6 +239,21 @@ const button = cva({
       disabled: true,
       className:
         "text-info/60 [&_div[data-slot=loading]]:text-info cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-info/60",
+    },
+    // -----------------------------------------------------------------------------------------------------------------
+    {
+      variant: "outlined",
+      color: "secondary",
+      disabled: false,
+      className:
+        "text-on-secondary after:border-secondary [&_div[data-slot=loading]]:text-secondary [&_*[data-slot=dropdown-icon]]:text-secondary/60",
+    },
+    {
+      variant: "outlined",
+      color: "secondary",
+      disabled: true,
+      className:
+        "text-secondary/60 [&_div[data-slot=loading]]:text-secondary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-secondary/60",
     },
   ],
   defaultVariants: {
