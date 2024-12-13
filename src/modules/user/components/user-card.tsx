@@ -29,12 +29,12 @@ export function UserCard(props: UserCardProps) {
           height={500}
           alt=""
         />
-        <div className="bg-success absolute end-2 bottom-2 size-3 rounded-full" />
+        <div className="bg-success absolute end-2 top-2 size-3 rounded-full shadow" />
       </div>
       <div className="flex items-center p-2">
         <Heading as="h4" variant="h5" className="grow truncate">
           {data.profile.personal.displayName}
-          <BadgeCheckIcon className="text-surface-bright fill-success ms-1 inline-block size-5 rounded-full p-0.5" />
+          <BadgeCheckIcon className="text-surface-bright fill-on-surface ms-1 inline-block size-5 rounded-full p-0.5" />
         </Heading>
         <Text>شیراز</Text>
       </div>
