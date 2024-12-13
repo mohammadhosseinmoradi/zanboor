@@ -11,6 +11,7 @@ import {
   BeautyLevel,
   StyleLevel,
   ChildrenStatus,
+  PersonalityType,
 } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -38,6 +39,7 @@ async function main() {
               birthdate: new Date(),
               maritalStatus: MaritalStatus.Single,
               healthStatus: HealthStatus.Healthy,
+              personalityType: PersonalityType.Ambivert,
             },
           },
           physicalAttributes: {
@@ -91,6 +93,7 @@ async function main() {
               birthdate: new Date(),
               maritalStatus: MaritalStatus.Single,
               healthStatus: HealthStatus.Healthy,
+              personalityType: PersonalityType.Extrovert,
             },
           },
           physicalAttributes: {
@@ -144,6 +147,7 @@ async function main() {
               birthdate: new Date(),
               maritalStatus: MaritalStatus.Single,
               healthStatus: HealthStatus.Healthy,
+              personalityType: PersonalityType.Extrovert,
             },
           },
           physicalAttributes: {
@@ -199,6 +203,7 @@ async function main() {
               healthStatus: HealthStatus.Healthy,
               childrenStatus: ChildrenStatus.One,
               greatestChildAge: 4,
+              personalityType: PersonalityType.Extrovert,
             },
           },
           physicalAttributes: {
@@ -253,6 +258,7 @@ async function main() {
               maritalStatus: MaritalStatus.Single,
               healthStatus: HealthStatus.Healthy,
               childrenStatus: ChildrenStatus.None,
+              personalityType: PersonalityType.Introvert,
             },
           },
           physicalAttributes: {
@@ -306,6 +312,7 @@ async function main() {
               maritalStatus: MaritalStatus.Divorced,
               healthStatus: HealthStatus.Healthy,
               childrenStatus: ChildrenStatus.None,
+              personalityType: PersonalityType.Introvert,
             },
           },
           physicalAttributes: {
@@ -361,6 +368,7 @@ async function main() {
               healthStatus: HealthStatus.Healthy,
               childrenStatus: ChildrenStatus.Two,
               greatestChildAge: 6,
+              personalityType: PersonalityType.Extrovert,
             },
           },
           physicalAttributes: {
@@ -418,6 +426,7 @@ async function main() {
               healthDescription: "قند خون دارم یکم",
               childrenStatus: ChildrenStatus.Four,
               greatestChildAge: 36,
+              personalityType: PersonalityType.Ambivert,
             },
           },
           physicalAttributes: {
@@ -473,6 +482,7 @@ async function main() {
               healthStatus: HealthStatus.Healthy,
               childrenStatus: ChildrenStatus.One,
               greatestChildAge: 8,
+              personalityType: PersonalityType.Extrovert,
             },
           },
           physicalAttributes: {
