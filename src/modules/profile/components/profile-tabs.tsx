@@ -31,7 +31,6 @@ export function ProfileTabs(props: ProfileTabsProps) {
           <Specification data={data} />
         </TabPanel>
         <TabPanel></TabPanel>
-        <TabPanel></TabPanel>
       </TabPanels>
     </TabGroup>
   );
