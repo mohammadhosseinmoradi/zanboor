@@ -17,12 +17,9 @@ import { LocationDtoCreateInputParamsSchema } from "@/modules/profile/schema";
 
 export const userProfilePersonalDtoSchema = z.object({
   id: z.string(),
-  firstName: z.string(),
-  lastName: z.string(),
   displayName: z.string(),
-  bio: z.string(),
   gender: z.nativeEnum(Gender),
-  image: z.string(),
+  image: z.string().nullable().optional(),
   maritalStatus: z.nativeEnum(MaritalStatus),
   healthStatus: z.nativeEnum(HealthStatus),
   healthDescription: z.string().nullable().optional(),

@@ -11,4 +11,8 @@ export const routes = {
     enterPhone: "/auth/enter-phone",
     enterOtp: "/auth/enter-otp",
   },
+  users: {
+    index: "/users",
+    show: (id: string) => `/users/${id}`,
+  },
 };

@@ -71,6 +71,59 @@ async function main() {
 
   await prisma.user.upsert({
     where: {
+      phone: "+989333660137",
+    },
+    update: {
+      phone: "+989333660137",
+    },
+    create: {
+      phone: "+989333660137",
+      profile: {
+        create: {
+          personal: {
+            create: {
+              firstName: "حسین",
+              lastName: "آذرشین",
+              displayName: "جینگفانگ",
+              image: "",
+              bio: "خوشگل پایه سفر شاد  قد بلند فقط صیغه",
+              gender: Gender.Male,
+              birthdate: new Date(),
+              maritalStatus: MaritalStatus.Single,
+              healthStatus: HealthStatus.Healthy,
+            },
+          },
+          physicalAttributes: {
+            create: {
+              height: 180,
+              skinColor: SkinColor.Wheatish,
+              weight: 54,
+              beautyLevel: BeautyLevel.VeryHigh,
+              styleLevel: StyleLevel.VeryHigh,
+            },
+          },
+          educationAndCareer: {
+            create: {
+              educationLevel: EducationLevel.Diploma,
+              employmentStatus: EmploymentStatus.Employed,
+              jobTitle: "کافی‌نت",
+              fieldOfStudy: "عمران",
+            },
+          },
+          financialStatus: {
+            create: {
+              personalIncome: 40_000_000,
+              carStatus: CarStatus.HasCar,
+              housingStatus: HousingStatus.NoHouse,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  await prisma.user.upsert({
+    where: {
       phone: "+989922819368",
     },
     update: {
@@ -85,7 +138,7 @@ async function main() {
               firstName: "زهرا",
               lastName: "کریمی",
               displayName: "زهرا",
-              image: "",
+              image: "/images/users/01.jpg",
               bio: "دنبال همسری هستم خوب، خوشکل، باوفا، مهربون، خانواده‌دوست و اهل زندگی مشترک که در کنار هم با عشق و احترام یه زندگی فوق‌العاده‌ای بسازیم.",
               gender: Gender.Female,
               birthdate: new Date(),
@@ -115,6 +168,280 @@ async function main() {
           financialStatus: {
             create: {
               personalIncome: 60_000_000,
+              carStatus: CarStatus.HasCar,
+              housingStatus: HousingStatus.OwnHouse,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  await prisma.user.upsert({
+    where: {
+      phone: "+989922819369",
+    },
+    update: {
+      phone: "+989922819369",
+    },
+    create: {
+      phone: "+989922819369",
+      profile: {
+        create: {
+          personal: {
+            create: {
+              firstName: "مهسا",
+              lastName: "مرادی",
+              displayName: "مهسا",
+              image: "/images/users/02.jpg",
+              bio: "عاشق خانواده و زندگی آرام هستم و به دنبال فردی مهربان و مسئولیت‌پذیر می‌گردم.",
+              gender: Gender.Female,
+              birthdate: new Date(),
+              maritalStatus: MaritalStatus.Single,
+              healthStatus: HealthStatus.Healthy,
+              childrenStatus: ChildrenStatus.None,
+            },
+          },
+          physicalAttributes: {
+            create: {
+              height: 158,
+              skinColor: SkinColor.Olive,
+              weight: 60,
+              beautyLevel: BeautyLevel.High,
+              styleLevel: StyleLevel.High,
+            },
+          },
+          educationAndCareer: {
+            create: {
+              educationLevel: EducationLevel.Masters,
+              employmentStatus: EmploymentStatus.Employed,
+              jobTitle: "مهندس نرم‌افزار",
+              fieldOfStudy: "کامپیوتر",
+            },
+          },
+          financialStatus: {
+            create: {
+              personalIncome: 50_000_000,
+              carStatus: CarStatus.NoCar,
+              housingStatus: HousingStatus.WithFamily,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  await prisma.user.upsert({
+    where: {
+      phone: "+989922819370",
+    },
+    update: {
+      phone: "+989922819370",
+    },
+    create: {
+      phone: "+989922819370",
+      profile: {
+        create: {
+          personal: {
+            create: {
+              firstName: "سارا",
+              lastName: "احمدی",
+              displayName: "سارا",
+              bio: "به دنبال آرامش، زندگی مشترک عاشقانه و احترام متقابل هستم.",
+              gender: Gender.Female,
+              birthdate: new Date(),
+              maritalStatus: MaritalStatus.Divorced,
+              healthStatus: HealthStatus.Healthy,
+              childrenStatus: ChildrenStatus.None,
+            },
+          },
+          physicalAttributes: {
+            create: {
+              height: 165,
+              skinColor: SkinColor.Black,
+              weight: 65,
+              beautyLevel: BeautyLevel.Medium,
+              styleLevel: StyleLevel.High,
+            },
+          },
+          educationAndCareer: {
+            create: {
+              educationLevel: EducationLevel.Bachelors,
+              employmentStatus: EmploymentStatus.Unemployed,
+              jobTitle: "خانه‌دار",
+              fieldOfStudy: "علوم اجتماعی",
+            },
+          },
+          financialStatus: {
+            create: {
+              personalIncome: 25_000_000,
+              carStatus: CarStatus.NoCar,
+              housingStatus: HousingStatus.NoHouse,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  await prisma.user.upsert({
+    where: {
+      phone: "+989922819371",
+    },
+    update: {
+      phone: "+989922819371",
+    },
+    create: {
+      phone: "+989922819371",
+      profile: {
+        create: {
+          personal: {
+            create: {
+              firstName: "مریم",
+              lastName: "حسینی",
+              displayName: "مریم",
+              image: "/images/users/06.jpg",
+              bio: "دوست دارم در کنار فردی متعهد و صادق زندگی کنم و خانواده‌ای شاد بسازم.",
+              gender: Gender.Female,
+              birthdate: new Date(),
+              maritalStatus: MaritalStatus.Divorced,
+              healthStatus: HealthStatus.Healthy,
+              childrenStatus: ChildrenStatus.Two,
+              greatestChildAge: 6,
+            },
+          },
+          physicalAttributes: {
+            create: {
+              height: 160,
+              skinColor: SkinColor.White,
+              weight: 58,
+              beautyLevel: BeautyLevel.High,
+              styleLevel: StyleLevel.VeryHigh,
+            },
+          },
+          educationAndCareer: {
+            create: {
+              educationLevel: EducationLevel.Bachelors,
+              employmentStatus: EmploymentStatus.Employed,
+              jobTitle: "معلم خصوصی",
+              fieldOfStudy: "ریاضی",
+            },
+          },
+          financialStatus: {
+            create: {
+              personalIncome: 30_000_000,
+              carStatus: CarStatus.HasCar,
+              housingStatus: HousingStatus.RentedHouse,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  // Seed 2 Male Users
+  await prisma.user.upsert({
+    where: {
+      phone: "+989922819372",
+    },
+    update: {
+      phone: "+989922819372",
+    },
+    create: {
+      phone: "+989922819372",
+      profile: {
+        create: {
+          personal: {
+            create: {
+              firstName: "علی",
+              lastName: "محمدی",
+              displayName: "علی",
+              image: "/images/users/03.jpg",
+              bio: "به دنبال فردی صادق و خانواده‌دوست برای زندگی مشترک هستم.",
+              gender: Gender.Male,
+              birthdate: new Date(),
+              maritalStatus: MaritalStatus.Single,
+              healthStatus: HealthStatus.ChronicCondition,
+              healthDescription: "قند خون دارم یکم",
+              childrenStatus: ChildrenStatus.Four,
+              greatestChildAge: 36,
+            },
+          },
+          physicalAttributes: {
+            create: {
+              height: 175,
+              skinColor: SkinColor.Wheatish,
+              weight: 72,
+              beautyLevel: BeautyLevel.High,
+              styleLevel: StyleLevel.Medium,
+            },
+          },
+          educationAndCareer: {
+            create: {
+              educationLevel: EducationLevel.Masters,
+              employmentStatus: EmploymentStatus.Employed,
+              jobTitle: "مهندس عمران",
+              fieldOfStudy: "عمران",
+            },
+          },
+          financialStatus: {
+            create: {
+              personalIncome: 70_000_000,
+              carStatus: CarStatus.HasCar,
+              housingStatus: HousingStatus.OwnHouse,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  await prisma.user.upsert({
+    where: {
+      phone: "+989922819373",
+    },
+    update: {
+      phone: "+989922819373",
+    },
+    create: {
+      phone: "+989922819373",
+      profile: {
+        create: {
+          personal: {
+            create: {
+              firstName: "محمد",
+              lastName: "رضایی",
+              displayName: "محمد",
+              image: "/images/users/04.jpg",
+              bio: "به دنبال شریکی برای ساختن زندگی توام با احترام و عشق هستم.",
+              gender: Gender.Male,
+              birthdate: new Date(),
+              maritalStatus: MaritalStatus.Widowed,
+              healthStatus: HealthStatus.Healthy,
+              childrenStatus: ChildrenStatus.One,
+              greatestChildAge: 8,
+            },
+          },
+          physicalAttributes: {
+            create: {
+              height: 180,
+              skinColor: SkinColor.White,
+              weight: 80,
+              beautyLevel: BeautyLevel.Medium,
+              styleLevel: StyleLevel.Medium,
+            },
+          },
+          educationAndCareer: {
+            create: {
+              educationLevel: EducationLevel.Bachelors,
+              employmentStatus: EmploymentStatus.Employed,
+              jobTitle: "بازرگان",
+              fieldOfStudy: "مدیریت بازرگانی",
+            },
+          },
+          financialStatus: {
+            create: {
+              personalIncome: 100_000_000,
               carStatus: CarStatus.HasCar,
               housingStatus: HousingStatus.OwnHouse,
             },
