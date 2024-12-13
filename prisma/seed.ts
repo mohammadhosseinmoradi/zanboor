@@ -7,6 +7,10 @@ import {
   EmploymentStatus,
   CarStatus,
   HousingStatus,
+  HealthStatus,
+  BeautyLevel,
+  StyleLevel,
+  ChildrenStatus,
 } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -33,6 +37,7 @@ async function main() {
               gender: Gender.Male,
               birthdate: new Date(),
               maritalStatus: MaritalStatus.Single,
+              healthStatus: HealthStatus.Healthy,
             },
           },
           physicalAttributes: {
@@ -40,6 +45,8 @@ async function main() {
               height: 167,
               skinColor: SkinColor.Wheatish,
               weight: 54,
+              beautyLevel: BeautyLevel.High,
+              styleLevel: StyleLevel.High,
             },
           },
           educationAndCareer: {
@@ -60,10 +67,58 @@ async function main() {
         },
       },
     },
-    include: {
+  });
+
+  await prisma.user.upsert({
+    where: {
+      phone: "+989922819368",
+    },
+    update: {
+      phone: "+989922819368",
+    },
+    create: {
+      phone: "+989922819368",
       profile: {
-        include: {
-          personal: true,
+        create: {
+          personal: {
+            create: {
+              firstName: "زهرا",
+              lastName: "کریمی",
+              displayName: "زهرا",
+              image: "",
+              bio: "دنبال همسری هستم خوب، خوشکل، باوفا، مهربون، خانواده‌دوست و اهل زندگی مشترک که در کنار هم با عشق و احترام یه زندگی فوق‌العاده‌ای بسازیم.",
+              gender: Gender.Female,
+              birthdate: new Date(),
+              maritalStatus: MaritalStatus.Divorced,
+              healthStatus: HealthStatus.Healthy,
+              childrenStatus: ChildrenStatus.One,
+              greatestChildAge: 4,
+            },
+          },
+          physicalAttributes: {
+            create: {
+              height: 162,
+              skinColor: SkinColor.White,
+              weight: 62,
+              beautyLevel: BeautyLevel.VeryHigh,
+              styleLevel: StyleLevel.VeryHigh,
+            },
+          },
+          educationAndCareer: {
+            create: {
+              educationLevel: EducationLevel.Doctorate,
+              employmentStatus: EmploymentStatus.Employed,
+              jobTitle: "دکتر پوست",
+              fieldOfStudy: "پوست",
+            },
+          },
+          financialStatus: {
+            create: {
+              personalIncome: 60_000_000,
+              carStatus: CarStatus.HasCar,
+              housingStatus: HousingStatus.OwnHouse,
+            },
+          },
         },
       },
     },
