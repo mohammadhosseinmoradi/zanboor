@@ -9,7 +9,7 @@ import { cva } from "cva";
 const tab = cva({
   base: cn(
     "relative w-auto transition-all duration-300",
-    "flex gap-2 justify-center items-center",
+    "!flex gap-2 justify-center items-center",
     "px-4 py-3 text-sm/5 data-[selected]:font-bold",
     "text-on-surface data-[selected]:text-primary",
     "cursor-pointer",
