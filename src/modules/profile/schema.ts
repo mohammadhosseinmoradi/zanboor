@@ -1,5 +1,28 @@
-import { EducationLevel, EmploymentStatus, Gender, MaritalStatus, SkinColor } from "@prisma/client";
+import {
+  BeautyLevel,
+  CarStatus,
+  ChildrenStatus,
+  EducationLevel,
+  EmploymentStatus,
+  Gender,
+  HealthStatus,
+  HousingStatus,
+  MaritalStatus,
+  SkinColor,
+  StyleLevel,
+} from "@prisma/client";
 import { z } from "zod";
+
+// Location ----------------------------------------------------------------------------------------
+export const LocationDtoCreateInputParamsSchema = z.object({
+  cityId: z.string(),
+});
+
+export const LocationDtoSchema = LocationDtoCreateInputParamsSchema.extend({
+  id: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
 
 // Education and career ----------------------------------------------------------------------------
 export const educationAndCareerDtoCreateInputParamsSchema = z.object({
@@ -17,9 +40,11 @@ export const educationAndCareerDtoSchema = educationAndCareerDtoCreateInputParam
 
 // Physical attributes -----------------------------------------------------------------------------
 export const physicalAttributesDtoCreateInputParamsSchema = z.object({
-  skinColor: z.nativeEnum(SkinColor),
-  weight: z.number(),
   height: z.number(),
+  weight: z.number(),
+  skinColor: z.nativeEnum(SkinColor),
+  beautyLevel: z.nativeEnum(BeautyLevel),
+  styleLevel: z.nativeEnum(StyleLevel),
 });
 
 export const physicalAttributesDtoSchema = physicalAttributesDtoCreateInputParamsSchema.extend({
@@ -37,9 +62,27 @@ export const personalDtoCreateInputParamsSchema = z.object({
   gender: z.nativeEnum(Gender),
   image: z.string(),
   maritalStatus: z.nativeEnum(MaritalStatus),
+  healthStatus: z.nativeEnum(HealthStatus),
+  healthDescription: z.string().nullable().optional(),
+  childrenStatus: z.nativeEnum(ChildrenStatus),
+  greatestChildAge: z.number().nullable().optional(),
+  location: LocationDtoCreateInputParamsSchema,
 });
 
 export const personalDtoSchema = personalDtoCreateInputParamsSchema.extend({
+  id: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+// FinancialStatus ----------------------------------------------------------------------------------------
+export const financialStatusDtoCreateInputParamsSchema = z.object({
+  personalIncome: z.number(),
+  housingStatus: z.nativeEnum(HousingStatus),
+  carStatus: z.nativeEnum(CarStatus),
+});
+
+export const financialStatusDtoSchema = financialStatusDtoCreateInputParamsSchema.extend({
   id: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
@@ -51,4 +94,5 @@ export const profileDtoSchema = z.object({
   personal: personalDtoSchema,
   physicalAttributes: physicalAttributesDtoSchema,
   educationAndCareer: educationAndCareerDtoSchema,
+  financialStatus: financialStatusDtoSchema,
 });
