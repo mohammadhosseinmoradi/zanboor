@@ -306,6 +306,7 @@ async function main() {
               firstName: "سارا",
               lastName: "احمدی",
               displayName: "سارا",
+              image: "/images/users/07.jpg",
               bio: "به دنبال آرامش، زندگی مشترک عاشقانه و احترام متقابل هستم.",
               gender: Gender.Female,
               birthdate: new Date(),
