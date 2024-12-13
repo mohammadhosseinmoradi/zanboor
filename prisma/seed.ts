@@ -5,6 +5,8 @@ import {
   SkinColor,
   EducationLevel,
   EmploymentStatus,
+  CarStatus,
+  HousingStatus,
 } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -46,6 +48,13 @@ async function main() {
               employmentStatus: EmploymentStatus.Employed,
               jobTitle: "توسعه دهنده وب",
               fieldOfStudy: "کامپیوتر",
+            },
+          },
+          financialStatus: {
+            create: {
+              personalIncome: 30_000_000,
+              carStatus: CarStatus.HasCar,
+              housingStatus: HousingStatus.OwnHouse,
             },
           },
         },

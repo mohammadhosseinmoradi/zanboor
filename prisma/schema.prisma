@@ -43,13 +43,12 @@ model User {
 }
 
 model Profile {
-  id                   String              @id @default(cuid())
-  personal             Personal            @relation(fields: [personalId], references: [id])
-  personalId           String              @unique
-  educationAndCareer   EducationAndCareer? @relation(fields: [educationAndCareerId], references: [id])
-  educationAndCareerId String?             @unique
-  physicalAttributes   PhysicalAttributes? @relation(fields: [physicalAttributesId], references: [id])
-  physicalAttributesId String?             @unique
+  id                 String              @id @default(cuid())
+  personal           Personal            @relation(fields: [personalId], references: [id])
+  personalId         String              @unique
+  educationAndCareer EducationAndCareer?
+  physicalAttributes PhysicalAttributes?
+  financialStatus    FinancialStatus?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -84,7 +83,9 @@ model EducationAndCareer {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Profile   Profile?
+
+  profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String  @unique
 }
 
 model PhysicalAttributes {
@@ -93,9 +94,35 @@ model PhysicalAttributes {
   weight    Int // Example: 60 (in kg)
   skinColor SkinColor // Example: white
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Profile   Profile[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String  @unique
+}
+
+model FinancialStatus {
+  id             String        @id @default(cuid())
+  personalIncome Int
+  housingStatus  HousingStatus
+  carStatus      CarStatus
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String  @unique
+}
+
+enum HousingStatus {
+  NoHouse
+  RentedHouse
+  OwnHouse
+  WithFamily
+}
+
+enum CarStatus {
+  NoCar
+  HasCar
 }
 
 enum MaritalStatus {
