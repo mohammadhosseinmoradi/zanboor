@@ -1,43 +1,75 @@
-import { ReactNode } from "react";
+import { ElementType, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
-import { Heading } from "@/components/heading";
 import { Text } from "@/components/text";
+import { Props } from "@/lib/utils/render/types";
+import { render } from "@/lib/utils/render";
+
+const DEFAULT_MENU_ITEM_TAG = "div";
 
 type MenuItemRenderPropArg = {
   className?: string;
 };
 
-type MenuItemProps = {
-  as?: "div" | "label";
-  title: string;
-  description?: string;
-  startSlot?: (props: MenuItemRenderPropArg) => ReactNode;
-  endSlot?: (props: MenuItemRenderPropArg) => ReactNode;
-  className?: string;
-};
+export type MenuItemProps<TTag extends ElementType = typeof DEFAULT_MENU_ITEM_TAG> = Props<
+  TTag,
+  object,
+  never,
+  {
+    ref?: Ref<HTMLElement>;
+    title: string;
+    description?: string;
+    startSlot?: (props: MenuItemRenderPropArg) => ReactNode;
+    endSlot?: (props: MenuItemRenderPropArg) => ReactNode;
+    className?: string;
+  }
+>;
 
-export default function MenuItem(props: MenuItemProps) {
-  const { as = "div", title, description, startSlot, endSlot, className } = props;
+export default function MenuItem<TTag extends ElementType = typeof DEFAULT_MENU_ITEM_TAG>(
+  props: MenuItemProps<TTag>
+) {
+  const {
+    ref,
+    as = DEFAULT_MENU_ITEM_TAG,
+    title,
+    description,
+    startSlot,
+    endSlot,
+    className,
+    ...theirProps
+  } = props;
 
-  const Comp = as;
+  const ourProps = {
+    ref,
+    as: as as ElementType,
+    className: cn(
+      "hover:bg-surface-container grid [&>svg]:stroke-[1.5px] grid-cols-[auto_1fr_auto] items-center rounded-xl transition select-none",
+      "cursor-pointer",
+      className
+    ),
+    children: (
+      <>
+        {startSlot && startSlot({ className: "col-start-1 row-span-2 me-4" })}
+        <div
+          className={cn(
+            "text-on-surface col-start-2 flex items-center text-base",
+            !description && "row-span-2"
+          )}
+        >
+          {title}
+        </div>
+        {description && (
+          <Text className="col-start-2 row-start-2 mt-1 line-clamp-1 text-sm">{description}</Text>
+        )}
+        {endSlot && endSlot({ className: "col-start-3 row-span-2 ms-2" })}
+      </>
+    ),
+  };
 
-  return (
-    <Comp
-      className={cn(
-        "grid grid-cols-[auto_1fr_auto] rounded-lg transition select-none hover:bg-white/10",
-        className
-      )}
-    >
-      {startSlot && startSlot({ className: "col-start-1 me-4" })}
-      <Heading
-        as="h5"
-        variant="h6"
-        className={cn("col-start-2 flex items-center", !description && "row-span-2")}
-      >
-        {title}
-      </Heading>
-      {description && <Text className="col-start-2 row-start-2 line-clamp-1">{description}</Text>}
-      {endSlot && endSlot({ className: "col-start-3 row-span-2 ms-2" })}
-    </Comp>
-  );
+  return render({
+    ourProps,
+    theirProps,
+    slot: {},
+    defaultTag: DEFAULT_MENU_ITEM_TAG,
+    name: "MenuItem",
+  });
 }

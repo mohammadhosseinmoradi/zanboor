@@ -16,10 +16,10 @@ const Switch = forwardRef<HTMLButtonElement, SwitchProps<typeof DEFAULT_SWITCH_T
         data-slot="control"
         className={(bag) =>
           cn(
-            "flex w-10 shrink-0 cursor-pointer rounded-full p-0.5 transition-all lg:w-9",
-            "data-[focus]:ring-2 data-[focus]:ring-offset-2",
-            "bg-surface-100 data-[checked]:bg-primary dark:bg-surface-200 dark:data-[checked]:bg-primary",
-            "shadow-[inset_0_0_0_1px_rgba(0,0,0,0.05)]",
+            "relative flex w-10 shrink-0 cursor-pointer rounded-full p-0.5 transition-all lg:w-9",
+            "ring-offset-surface ring-primary data-[focus]:ring-2 data-[focus]:ring-offset-1",
+            "bg-surface-container-highest data-[checked]:bg-primary",
+            "after:border-surface after:absolute after:-inset-0.5 after:rounded-full after:border-2",
             "[&[data-checked]>span]:-translate-x-4",
             "lg:[&[data-checked]>span]:-translate-x-4",
             typeof className === "function" ? className(bag) : className

@@ -34,10 +34,6 @@ export function MarriagePreferences(props: MarriagePreferencesProps) {
         <DescriptionDetails>{[data.ageMin, "تا", data.ageMax].join(" ")}</DescriptionDetails>
         <DescriptionTerm>قد</DescriptionTerm>
         <DescriptionDetails>{[data.heightMin, "تا", data.heightMax].join(" ")}</DescriptionDetails>
-        <DescriptionTerm>جنسیت</DescriptionTerm>
-        <DescriptionDetails>
-          {data.maritalStatuses.map(getMaritalStatusTranslated).join("، ")}
-        </DescriptionDetails>
         <DescriptionTerm>رنگ پوست</DescriptionTerm>
         <DescriptionDetails>
           {data.skinColors.map(getSkinColorTranslated).join("، ")}

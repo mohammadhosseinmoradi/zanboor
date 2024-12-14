@@ -8,6 +8,8 @@ import { BadgeCheckIcon, CircleDollarSignIcon, UserRoundPenIcon } from "lucide-r
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/button";
 import { getGenderTranslated } from "@/modules/utils";
+import Link from "next/link";
+import { routes } from "@/lib/constants/routes";
 
 type ProfileHeaderProps = {
   data: ProfileDto;
@@ -36,9 +38,8 @@ export function ProfileHeader(props: ProfileHeaderProps) {
         </Heading>
       </div>
       <Text className="mt-4">{data.personal.bio}</Text>
-
       <div className="mt-4 grid grid-cols-[auto_1fr] gap-2 lg:grid-cols-[auto_auto]">
-        <Button variant="outlined" color="secondary">
+        <Button as={Link} href={routes.profile.edit} variant="outlined" color="secondary">
           <UserRoundPenIcon data-slot="icon" />
           <span className="max-lg:hidden">ویرایش</span>
         </Button>

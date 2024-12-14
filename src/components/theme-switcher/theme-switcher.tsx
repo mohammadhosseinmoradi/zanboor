@@ -2,16 +2,14 @@ import { Menu } from "@/components/menu";
 import { Fragment } from "react";
 import { ChevronDownIcon, MonitorSmartphoneIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/button";
+import { Button, ButtonProps } from "@/components/button";
 
-type ThemeSwitcherProps = {
+type ThemeSwitcherProps = Pick<ButtonProps, "size" | "variant" | "edge"> & {
   className?: string;
-  variant?: "filled" | "plain";
-  size?: "sm" | "md";
 };
 
 export function ThemeSwitcher(props: ThemeSwitcherProps) {
-  const { className, variant = "plain", size = "sm" } = props;
+  const { className, variant = "plain", size = "sm", edge } = props;
 
   const { theme, setTheme } = useTheme();
 
@@ -24,6 +22,7 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
           variant={variant}
           color="secondary"
           size={size}
+          edge={edge}
         >
           {(() => {
             switch (theme) {

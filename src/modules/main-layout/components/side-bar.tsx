@@ -51,7 +51,7 @@ export default function SideBar(props: SideBarProps) {
         <Item href={routes.counselor} icon={HeadsetIcon} label="مشاور" layoutId={id} />
         <Item href={routes.favorites} icon={HeartIcon} label="علاقمندی‌ها" layoutId={id} />
         <Item href={routes.messages} icon={MessageSquareTextIcon} label="پیام‌ها" layoutId={id} />
-        <Item href={routes.me.index} icon={UserRoundIcon} label="پروفایل" layoutId={id} />
+        <Item href={routes.profile.index} icon={UserRoundIcon} label="پروفایل" layoutId={id} />
       </div>
       <MenuItem
         as="label"

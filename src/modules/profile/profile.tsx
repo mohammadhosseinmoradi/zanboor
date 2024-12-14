@@ -5,6 +5,8 @@ import { ProfileTabs } from "@/modules/profile/components/profile-tabs";
 import { ProfileHeader } from "@/modules/profile/components/profile-header";
 import { ChartNoAxesColumnIcon, CircleDollarSignIcon } from "lucide-react";
 import { Divider } from "@/components/divider";
+import { routes } from "@/lib/constants/routes";
+import Link from "next/link";
 
 export async function Profile() {
   const me = await getMe();
@@ -15,7 +17,7 @@ export async function Profile() {
     <div className="flex w-full grow flex-col">
       <div className="flex items-center gap-2 px-2 pt-2">
         <div className="flex grow items-center gap-2">
-          <Button variant="plain" color="secondary">
+          <Button as={Link} href={routes.settings.index} variant="plain" color="secondary">
             <svg
               data-slot="icon"
               xmlns="http://www.w3.org/2000/svg"
@@ -30,11 +32,11 @@ export async function Profile() {
           </Button>
           پروفایل
         </div>
-        <Button variant="plain" color="secondary">
+        <Button as={Link} href={routes.statistics} variant="plain" color="secondary">
           <ChartNoAxesColumnIcon data-slot="icon" />
         </Button>
         <Divider vertical className="h-4" />
-        <Button variant="plain">
+        <Button as={Link} href={routes.wallet} variant="plain">
           <CircleDollarSignIcon data-slot="start-icon" />
           <span>25</span>
         </Button>
