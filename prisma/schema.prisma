@@ -68,7 +68,7 @@ model FamilyInfo {
   siblingPosition    Int
   brothersCount      Int
   sistersCount       Int
-  hasMarriedSiblings Boolean
+  hasMarriedSiblings Boolean?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -110,11 +110,11 @@ model MarriagePreferences {
   healthStatuses            HealthStatus[]
   incomeMin                 Int?
   incomeMax                 Int?
-  housingStatus             HousingStatus[]
-  carStatus                 CarStatus[]
+  housingStatuses           HousingStatus[]
+  carStatuses               CarStatus[]
   preferredPersonalityTypes PersonalityType[]
 
-  additionalNotes String?
+  additionalNote String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

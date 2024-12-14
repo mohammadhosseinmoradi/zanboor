@@ -16,7 +16,7 @@ import {
   getMaritalStatusTranslated,
   getSkinColorTranslated,
   getStyleLevelTranslated,
-} from "@/modules/profile/utils";
+} from "@/modules/utils";
 import { UserProfileDto } from "@/modules/user/types";
 
 type PersonalProps = {

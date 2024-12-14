@@ -29,7 +29,7 @@ export function ProfileHeader(props: ProfileHeaderProps) {
         />
         <Heading as="h4" variant="h4">
           {[data.personal.displayName].join(" ")}
-          <span className="text-on-surface/50 ms-1">
+          <span className="text-on-surface/50 ms-1.5">
             / {getGenderTranslated(data.personal.gender)}
           </span>
           <BadgeCheckIcon className="fill-on-surface text-surface ms-1 mb-0.5 inline-block size-5 rounded-full" />
