@@ -17,7 +17,6 @@ import { z } from "zod";
 
 // Marriage preferences ----------------------------------------------------------------------------------------
 export const marriagePreferencesDtoCreateInputParamsSchema = z.object({
-  id: z.string(),
   ageMin: z.number().int().min(0),
   ageMax: z.number().int().min(0),
   maritalStatuses: z.array(z.nativeEnum(MaritalStatus)),

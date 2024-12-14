@@ -6,14 +6,14 @@ import { Text } from "@/components/text";
 import { BadgeCheckIcon, HeartIcon, MessagesSquareIcon, XIcon } from "lucide-react";
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/button";
-import { UserProfileDto } from "@/modules/user/types";
+import { ProfileUserDto } from "@/modules/user/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { Fragment, useId, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { getGenderTranslated } from "@/modules/utils";
 
 type ProfileHeaderProps = {
-  data: UserProfileDto;
+  data: ProfileUserDto;
   className?: string;
 };
 
@@ -105,7 +105,7 @@ function ProfileAvatar(props: ProfileAvatarProps) {
                 exit={{
                   opacity: 0,
                 }}
-                className="bg-surface-bright fixed inset-0 z-30 flex items-center justify-center"
+                className="bg-surface-bright fixed inset-0 z-30 flex items-center justify-center p-4"
               >
                 <motion.div
                   initial={{
@@ -133,7 +133,7 @@ function ProfileAvatar(props: ProfileAvatarProps) {
 
                 <motion.div
                   layoutId={id}
-                  className="w-full p-4 lg:max-w-96"
+                  className="bg-surface-container relative aspect-square w-full rounded-full sm:max-w-96"
                   onClick={() => setOpen(true)}
                 >
                   <Avatar className="size-full" src={data.src} />

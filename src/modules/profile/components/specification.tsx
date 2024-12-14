@@ -12,6 +12,7 @@ import {
   getCarStatusTranslated,
   getEducationLevelTranslated,
   getEmploymentStatusTranslated,
+  getEthnicityTranslated,
   getGenderTranslated,
   getHousingStatusTranslated,
   getMaritalStatusTranslated,
@@ -55,7 +56,7 @@ export function Specification(props: PersonalProps) {
         <DescriptionDetails>
           {getBeautyLevelTranslated(data.physicalAttributes.beautyLevel)}
         </DescriptionDetails>
-        <DescriptionTerm>میزان تیب و استایل</DescriptionTerm>
+        <DescriptionTerm>تیب و استایل</DescriptionTerm>
         <DescriptionDetails>
           {getStyleLevelTranslated(data.physicalAttributes.styleLevel)}
         </DescriptionDetails>
@@ -85,6 +86,31 @@ export function Specification(props: PersonalProps) {
         <DescriptionDetails>
           {getHousingStatusTranslated(data.financialStatus.housingStatus)}
         </DescriptionDetails>
+        <div className="col-span-full border-b" />
+        <DescriptionTerm>تحصیلات پدر</DescriptionTerm>
+        <DescriptionDetails>
+          {getEducationLevelTranslated(data.familyInfo.fatherEducation)}
+        </DescriptionDetails>
+        <DescriptionTerm>تحصیلات مادر</DescriptionTerm>
+        <DescriptionDetails>
+          {getEducationLevelTranslated(data.familyInfo.motherEducation)}
+        </DescriptionDetails>
+        <DescriptionTerm>قومیت پدر</DescriptionTerm>
+        <DescriptionDetails>
+          {getEthnicityTranslated(data.familyInfo.fatherEthnicity)}
+        </DescriptionDetails>
+        <DescriptionTerm>قومیت مادر</DescriptionTerm>
+        <DescriptionDetails>
+          {getEthnicityTranslated(data.familyInfo.motherEthnicity)}
+        </DescriptionDetails>
+        <DescriptionTerm>فرزند</DescriptionTerm>
+        <DescriptionDetails>{data.familyInfo.siblingPosition}</DescriptionDetails>
+        <DescriptionTerm>تعداد برادر</DescriptionTerm>
+        <DescriptionDetails>{data.familyInfo.brothersCount}</DescriptionDetails>
+        <DescriptionTerm>تعداد خواهر</DescriptionTerm>
+        <DescriptionDetails>{data.familyInfo.sistersCount}</DescriptionDetails>
+        <DescriptionTerm>خواهر یا برادر متاهل</DescriptionTerm>
+        <DescriptionDetails>{data.familyInfo.hasMarriedSiblings || "نامشخص"}</DescriptionDetails>
       </DescriptionList>
     </div>
   );

@@ -5,6 +5,7 @@ import { Specification } from "@/modules/profile/components/specification";
 import { cn } from "@/lib/utils";
 import { ProfileDto } from "@/modules/profile/types";
 import { CircleUserRoundIcon, ListTodoIcon } from "lucide-react";
+import { MarriagePreferences } from "@/modules/profile/components/marriage-preferences";
 
 type ProfileTabsProps = {
   data: ProfileDto;
@@ -30,7 +31,9 @@ export function ProfileTabs(props: ProfileTabsProps) {
         <TabPanel>
           <Specification data={data} />
         </TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel>
+          <MarriagePreferences data={data.marriagePreferences} />
+        </TabPanel>
       </TabPanels>
     </TabGroup>
   );

@@ -246,14 +246,14 @@ const button = cva({
       color: "secondary",
       disabled: false,
       className:
-        "text-on-secondary after:border-secondary [&_div[data-slot=loading]]:text-secondary [&_*[data-slot=dropdown-icon]]:text-secondary/60",
+        "text-on-secondary after:border-on-secondary/15 [&_div[data-slot=loading]]:text-secondary [&_*[data-slot=dropdown-icon]]:text-secondary/60",
     },
     {
       variant: "outlined",
       color: "secondary",
       disabled: true,
       className:
-        "text-secondary/60 [&_div[data-slot=loading]]:text-secondary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-secondary/60",
+        "text-secondary/60 after:border-secondary/15 [&_div[data-slot=loading]]:text-secondary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-secondary/60",
     },
   ],
   defaultVariants: {

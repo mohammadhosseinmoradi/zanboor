@@ -17,10 +17,10 @@ import {
   getTheirHousingStatusTranslated,
   hasChildrenStatus,
 } from "@/modules/utils";
-import { MarriagePreferencesDto } from "@/modules/profile/types";
+import { MarriagePreferencesUserDto } from "@/modules/user/types";
 
 type MarriagePreferencesProps = {
-  data: MarriagePreferencesDto;
+  data: MarriagePreferencesUserDto;
   className?: string;
 };
 

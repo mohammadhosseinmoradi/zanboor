@@ -1,6 +1,7 @@
 import { z } from "zod";
 import {
   educationAndCareerDtoSchema,
+  marriagePreferencesDtoSchema,
   personalDtoSchema,
   physicalAttributesDtoSchema,
   profileDtoSchema,
@@ -16,3 +17,5 @@ export type PersonalDto = z.infer<typeof personalDtoSchema>;
 export type PhysicalAttributesDto = z.infer<typeof physicalAttributesDtoSchema>;
 
 export type EducationAndCareerDto = z.infer<typeof educationAndCareerDtoSchema>;
+
+export type MarriagePreferencesDto = z.infer<typeof marriagePreferencesDtoSchema>;

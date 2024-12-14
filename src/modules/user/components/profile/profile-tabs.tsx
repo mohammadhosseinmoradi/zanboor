@@ -3,11 +3,12 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@/components/tab";
 import { cn } from "@/lib/utils";
 import { CircleUserRoundIcon, ListTodoIcon } from "lucide-react";
-import { UserProfileDto } from "@/modules/user/types";
+import { ProfileUserDto } from "@/modules/user/types";
 import { Specification } from "@/modules/user/components/profile/specification";
+import { MarriagePreferences } from "@/modules/user/components/profile/marriage-preferences";
 
 type ProfileTabsProps = {
-  data: UserProfileDto;
+  data: ProfileUserDto;
   className?: string;
 };
 
@@ -30,7 +31,9 @@ export function ProfileTabs(props: ProfileTabsProps) {
         <TabPanel>
           <Specification data={data} />
         </TabPanel>
-        <TabPanel></TabPanel>
+        <TabPanel>
+          <MarriagePreferences data={data.marriagePreferences} />
+        </TabPanel>
       </TabPanels>
     </TabGroup>
   );

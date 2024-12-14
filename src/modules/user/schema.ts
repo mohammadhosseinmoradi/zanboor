@@ -4,10 +4,12 @@ import {
   ChildrenStatus,
   EducationLevel,
   EmploymentStatus,
+  Ethnicity,
   Gender,
   HealthStatus,
   HousingStatus,
   MaritalStatus,
+  PersonalityType,
   Role,
   SkinColor,
   StyleLevel,
@@ -15,7 +17,42 @@ import {
 import { z } from "zod";
 import { LocationDtoCreateInputParamsSchema } from "@/modules/profile/schema";
 
-export const userProfilePersonalDtoSchema = z.object({
+export const familyInfoUserDtoSchema = z.object({
+  id: z.string(),
+  fatherEducation: z.nativeEnum(EducationLevel),
+  motherEducation: z.nativeEnum(EducationLevel),
+  fatherEthnicity: z.nativeEnum(Ethnicity),
+  motherEthnicity: z.nativeEnum(Ethnicity),
+  siblingPosition: z.number().int(),
+  brothersCount: z.number().int(),
+  sistersCount: z.number().int(),
+  hasMarriedSiblings: z.boolean().nullable().optional(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export const marriagePreferencesUserDtoSchema = z.object({
+  id: z.string(),
+  ageMin: z.number().int(),
+  ageMax: z.number().int(),
+  maritalStatuses: z.array(z.nativeEnum(MaritalStatus)),
+  childrenStatus: z.nativeEnum(ChildrenStatus).nullable().optional(),
+  educationLevels: z.array(z.nativeEnum(EducationLevel)),
+  heightMin: z.number().int().nullable().optional(),
+  heightMax: z.number().int().nullable().optional(),
+  skinColors: z.array(z.nativeEnum(SkinColor)),
+  healthStatuses: z.array(z.nativeEnum(HealthStatus)),
+  incomeMin: z.number().nullable().optional(),
+  incomeMax: z.number().nullable().optional(),
+  housingStatuses: z.array(z.nativeEnum(HousingStatus)),
+  carStatuses: z.array(z.nativeEnum(CarStatus)),
+  preferredPersonalityTypes: z.array(z.nativeEnum(PersonalityType)),
+  additionalNote: z.string().nullable().optional(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export const profilePersonalUserDtoSchema = z.object({
   id: z.string(),
   displayName: z.string(),
   gender: z.nativeEnum(Gender),
@@ -31,7 +68,7 @@ export const userProfilePersonalDtoSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const userProfileEducationAndCareerDtoSchema = z.object({
+export const profileEducationAndCareerUserDtoSchema = z.object({
   id: z.string(),
   educationLevel: z.nativeEnum(EducationLevel),
   employmentStatus: z.nativeEnum(EmploymentStatus),
@@ -41,7 +78,7 @@ export const userProfileEducationAndCareerDtoSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const userProfilePhysicalAttributesDtoSchema = z.object({
+export const profilePhysicalAttributesUserDtoSchema = z.object({
   id: z.string(),
   height: z.number(),
   weight: z.number(),
@@ -52,7 +89,7 @@ export const userProfilePhysicalAttributesDtoSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const userProfileFinancialStatusDtoSchema = z.object({
+export const profileFinancialStatusUserDtoSchema = z.object({
   id: z.string(),
   personalIncome: z.number(),
   housingStatus: z.nativeEnum(HousingStatus),
@@ -61,12 +98,14 @@ export const userProfileFinancialStatusDtoSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const userProfileDtoSchema = z.object({
+export const profileUserDtoSchema = z.object({
   id: z.string(),
-  personal: userProfilePersonalDtoSchema,
-  educationAndCareer: userProfileEducationAndCareerDtoSchema,
-  physicalAttributes: userProfilePhysicalAttributesDtoSchema,
-  financialStatus: userProfileFinancialStatusDtoSchema,
+  personal: profilePersonalUserDtoSchema,
+  educationAndCareer: profileEducationAndCareerUserDtoSchema,
+  physicalAttributes: profilePhysicalAttributesUserDtoSchema,
+  familyInfo: familyInfoUserDtoSchema,
+  financialStatus: profileFinancialStatusUserDtoSchema,
+  marriagePreferences: marriagePreferencesUserDtoSchema,
   createdAt: z.date(),
   updatedAt: z.date(),
 });
@@ -75,5 +114,5 @@ export const userDtoSchema = z.object({
   id: z.string(),
   phoneVerifiedAt: z.date().nullable().optional(),
   role: z.nativeEnum(Role),
-  profile: userProfileDtoSchema,
+  profile: profileUserDtoSchema,
 });
