@@ -11,7 +11,7 @@ const DEFAULT_ITEM_TAG = "button" as const;
 
 const item = cva({
   base: cn(
-    "w-full group cursor-pointer rounded-lg px-4 px-3.5 py-2 focus:outline-none",
+    "w-full group cursor-pointer rounded-lg px-4 px-3.5 py-2.5 focus:outline-none",
     "text-start text-base/6 lg:text-sm/5",
     "text-on-surface",
     "forced-colors:text-[CanvasText] data-[focus]:bg-primary data-[focus]:text-on-primary",

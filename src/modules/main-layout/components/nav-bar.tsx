@@ -72,13 +72,13 @@ function Item(props: ItemProps) {
               <Icon className="size-6" />
               {!!badge && <Badge anchor="topEnd">{badge}</Badge>}
             </span>
-            <span className="text-2xs line-clamp-2 text-center font-bold transition group-data-[active]:translate-y-1.5">
+            <span className="line-clamp-2 text-center text-xs font-bold transition group-data-[active]:translate-y-1.5">
               {label}
             </span>
           </div>
           {active && (
             <motion.span
-              className="bg-primary/20 absolute top-2 flex h-10 w-[calc(100%-theme(spacing[4]))] rounded-4xl"
+              className="dark:bg-primary-900 bg-primary-200 absolute top-2 flex h-10 w-[calc(100%-theme(spacing[4]))] rounded-4xl shadow-sm"
               initial={false}
               layoutId={layoutId}
               transition={{

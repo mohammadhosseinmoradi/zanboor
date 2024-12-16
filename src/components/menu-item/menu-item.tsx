@@ -42,7 +42,7 @@ export default function MenuItem<TTag extends ElementType = typeof DEFAULT_MENU_
     ref,
     as: as as ElementType,
     className: cn(
-      "hover:bg-surface-container grid [&>svg]:stroke-[1.5px] grid-cols-[auto_1fr_auto] items-center rounded-xl transition select-none",
+      "hover:bg-surface-container-highest grid [&>svg]:stroke-[1.5px] grid-cols-[auto_1fr_auto] items-center rounded-xl transition select-none",
       "cursor-pointer",
       className
     ),

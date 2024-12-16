@@ -19,15 +19,15 @@ export function ChatBubble(props: ChatBubbleProps) {
   return (
     <div
       className={cn("group relative grow px-2 py-2 drop-shadow-sm", {
-        "dark:bg-primary-600 bg-primary-400 order-3 rounded-e-lg rounded-t-lg not-last:rounded-b-lg":
+        "dark:bg-primary-700 bg-primary-200 order-3 rounded-e-lg rounded-t-lg not-last:rounded-b-lg":
           type == "sender",
-        "bg-surface-bright rounded-s-lg rounded-t-lg not-last:rounded-b-lg": type == "receiver",
+        "bg-surface-container rounded-s-lg rounded-t-lg not-last:rounded-b-lg": type == "receiver",
         className,
       })}
     >
       <Corner
         className={cn("invisible group-last:visible", "absolute size-6", {
-          "fill-primary-400 dark:fill-primary-600 -start-3.5 bottom-0 scale-x-[-1]":
+          "fill-primary-200 dark:fill-primary-700 -start-3.5 bottom-0 scale-x-[-1]":
             type == "sender",
           "fill-surface-bright -end-4 bottom-0": type == "receiver",
         })}

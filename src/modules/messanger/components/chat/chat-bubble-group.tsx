@@ -21,8 +21,8 @@ export function ChatBubbleGroup(props: ChatBubbleGroupProps) {
       {type == "receiver" && (
         <Avatar
           className={cn(
-            "sticky bottom-4",
-            "bg-bg bg-surface-bright size-10 shrink-0 self-end border drop-shadow-sm"
+            "sticky bottom-0",
+            "bg-bg bg-surface-bright size-12 shrink-0 self-end border drop-shadow-xs lg:size-11"
           )}
           width={50}
           height={50}

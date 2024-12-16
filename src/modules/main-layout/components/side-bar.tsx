@@ -5,6 +5,7 @@ import {
   LucideProps,
   MessageSquareTextIcon,
   SlashIcon,
+  SunMoonIcon,
   UserRoundIcon,
 } from "lucide-react";
 import { ReactNode, useId } from "react";
@@ -60,9 +61,15 @@ export default function SideBar(props: SideBarProps) {
       </div>
       <MenuItem
         as="label"
+        className="-mx-2 p-2"
         title="زمینه"
-        className="mt-4 ps-2 lg:h-9"
-        endSlot={(props) => <ThemeSwitcher {...props} />}
+        startSlot={({ className, ...otherProps }) => (
+          <SunMoonIcon
+            className={cn("text-on-surface-variant size-6", className)}
+            {...otherProps}
+          />
+        )}
+        endSlot={(props) => <ThemeSwitcher edge="end" {...props} />}
       />
     </div>
   );
@@ -85,19 +92,19 @@ function Item(props: ItemProps) {
       href={href}
       className={cn(
         "group relative",
-        "text-on-surface-variant data-active:text-on-surface transition",
+        "text-on-surface-variant data-active:text-on-surface data-active-children:text-on-surface transition",
         "hover:text-on-surface px-4 py-3"
       )}
     >
-      {({ active }) => (
+      {({ active, activeChildren }) => (
         <>
           <div className="relative z-1 flex items-center justify-start gap-4">
             <Icon className="size-6" />
             <span className="line-clamp-1 text-start text-sm font-bold">{label}</span>
           </div>
-          {active && (
+          {(active || (activeChildren && href != "/")) && (
             <motion.span
-              className="bg-primary/25 absolute inset-x-0 inset-y-0.5 flex rounded-4xl"
+              className="dark:bg-primary-900 bg-primary-200 absolute inset-x-0 inset-y-0.5 flex rounded-4xl shadow-sm"
               initial={false}
               layoutId={layoutId}
               transition={{

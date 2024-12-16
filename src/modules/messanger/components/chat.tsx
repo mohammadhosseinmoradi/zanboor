@@ -3,6 +3,7 @@ import { ChatInfo } from "@/modules/messanger/components/chat/chat-info";
 import { ChatBody } from "@/modules/messanger/components/chat/chat-body";
 import { ChatActions } from "@/modules/messanger/components/chat/chat-actions";
 import { PageLayout } from "@/components/page-layout";
+import { ChatInput } from "@/modules/messanger/components/chat/chat-input";
 
 type ChatProps = {
   id: string;
@@ -16,7 +17,7 @@ export function Chat(props: ChatProps) {
     <PageLayout
       className={cn(
         "h-full",
-        "bg-primary-100 dark:bg-surface bg-[url('/images/bg-pattern.svg')] dark:bg-[url('/images/bg-pattern-dark.svg')]",
+        "bg-neutral-300 bg-[url('/images/bg-pattern.svg')] dark:bg-black dark:bg-[url('/images/bg-pattern-dark.svg')]",
         className
       )}
       header={{
@@ -25,12 +26,8 @@ export function Chat(props: ChatProps) {
         className: "border-b bg-surface-container",
       }}
     >
-      <div className="h-0 grow overflow-auto">
-        <div className="mx-auto flex w-full max-w-200 flex-col">
-          <ChatBody />
-          <ChatActions />
-        </div>
-      </div>
+      <ChatBody className="h-0 grow overflow-auto" />
+      <ChatInput className="mx-auto w-full max-w-200 p-2 lg:mb-2" />
     </PageLayout>
   );
 }

@@ -18,7 +18,7 @@
   .dark {
     --color-surface-dim: oklch(20% 0 0);
     --color-surface: oklch(20% 0 0);
-    --color-surface-bright: oklch(30% 0 0);
+    --color-surface-bright: oklch(24% 0 0);
 
     --color-on-surface: var(--color-neutral-300);
     --color-on-surface-variant: var(--color-neutral-400);
@@ -148,7 +148,7 @@
   --color-info-900: var(--color-sky-900);
   --color-info-950: var(--color-sky-950);
 
-  --color-surface-dim: oklch(88% 0 0);
+  --color-surface-dim: oklch(96% 0 0);
   --color-surface: oklch(98% 0 0);
   --color-surface-bright: oklch(98% 0 0);
 
@@ -156,10 +156,10 @@
   --color-on-surface-variant: var(--color-neutral-600);
 
   --color-surface-container-lowest: oklch(100% 0 0);
-  --color-surface-container-low: oklch(96% 0 0);
-  --color-surface-container: oklch(94% 0 0);
-  --color-surface-container-high: oklch(92% 0 0);
-  --color-surface-container-highest: oklch(90% 0 0);
+  --color-surface-container-low: oklch(98% 0 0);
+  --color-surface-container: oklch(96% 0 0);
+  --color-surface-container-high: oklch(94% 0 0);
+  --color-surface-container-highest: oklch(92% 0 0);
 
   --color-primary: var(--color-primary-400);
   --color-primary-container: var(--color-primary-200);

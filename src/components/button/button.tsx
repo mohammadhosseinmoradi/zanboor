@@ -51,6 +51,11 @@ const button = cva({
         // Badge offset
         "[&_*[data-slot=badge]]:[--badge-offset:calc(theme(spacing[4])+2px)]"
       ),
+      lg: cn(
+        "px-4 py-3 text-base/6 sm:text-sm/5 gap-2 [&:has([data-slot=icon])]:px-3 [&>*[data-slot=dropdown-icon]]:size-4 [&>*[data-slot$=icon]]:size-6 sm:[&>*[data-slot$=icon]]:size-5 [&>*[data-slot$=icon]]:stroke-[1.5px]",
+        // Badge offset
+        "[&_*[data-slot=badge]]:[--badge-offset:calc(theme(spacing[4])+2px)]"
+      ),
     },
     edge: {
       all: "-mx-3 -my-2",

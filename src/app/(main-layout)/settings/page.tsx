@@ -87,7 +87,7 @@ export default function Page() {
             as={Link}
             href={routes.wallet}
             className="px-2 py-2.5"
-            title="سکه"
+            title="کیف پول"
             description="۲۶ سکه"
             startSlot={({ className, ...otherProps }) => (
               <CircleDollarSignIcon
