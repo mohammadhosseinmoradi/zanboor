@@ -1,5 +1,11 @@
 import { PageLayout } from "@/components/page-layout";
 
 export default function Home() {
-  return <PageLayout title="علاقمندی‌ها"></PageLayout>;
+  return (
+    <PageLayout
+      header={{
+        title: "علاقمندی‌ها",
+      }}
+    ></PageLayout>
+  );
 }

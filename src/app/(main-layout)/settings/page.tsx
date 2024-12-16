@@ -24,7 +24,12 @@ import { routes } from "@/lib/constants/routes";
 
 export default function Page() {
   return (
-    <PageLayout title="تنظیمات" className="grow">
+    <PageLayout
+      header={{
+        title: "تنظیمات",
+      }}
+      className="grow"
+    >
       <div className="flex flex-col gap-2">
         <div className="p-2">
           <MenuItem

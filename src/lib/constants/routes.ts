@@ -1,6 +1,9 @@
 export const routes = {
   home: "/",
-  messages: "/messages",
+  messages: {
+    index: "/messages",
+    chat: (id: string) => `/messages/${id}`,
+  },
   favorites: "/favorites",
   blockedUsers: "/blocked-users",
   counselor: "/counselor",

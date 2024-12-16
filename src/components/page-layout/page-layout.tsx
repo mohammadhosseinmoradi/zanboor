@@ -8,29 +8,36 @@ import { Heading } from "@/components/heading";
 import { useRouter } from "next/navigation";
 
 type PageLayoutProps = {
-  title: string;
-  actions?: ReactNode;
+  header: {
+    title: string | ReactNode;
+    actions?: ReactNode;
+    className?: string;
+  };
   className?: string;
   children?: ReactNode;
 };
 
 export function PageLayout(props: PageLayoutProps) {
-  const { title, actions, className, children } = props;
+  const { header, className, children } = props;
 
   const router = useRouter();
 
   return (
     <div className={cn("flex flex-col", className)}>
-      <div className="flex items-center gap-2 p-2">
-        <div className="flex grow items-center gap-2">
+      <div className={cn("flex items-center gap-2 p-2", header.className)}>
+        <div className="flex shrink-0 grow items-center gap-2">
           <Button variant="plain" color="secondary" onClick={() => router.back()}>
             <ArrowRightIcon data-slot="icon" />
           </Button>
-          <Heading as="h2" variant="h5">
-            {title}
-          </Heading>
+          {typeof header.title == "string" ? (
+            <Heading as="h2" variant="h5">
+              {header.title}
+            </Heading>
+          ) : (
+            header.title
+          )}
         </div>
-        {actions}
+        {header.actions}
       </div>
       <div className="flex grow flex-col">{children}</div>
     </div>

@@ -19,7 +19,13 @@ export async function Profile(props: ProfileProps) {
   if (!isOk(user)) return null;
 
   return (
-    <PageLayout title="پروفایل" actions={<Actions />} className={cn("grow", className)}>
+    <PageLayout
+      header={{
+        title: "پروفایل",
+        actions: <Actions />,
+      }}
+      className={cn("grow", className)}
+    >
       <ProfileHeader className="mt-2 px-4" data={user.data.profile} />
       <ProfileTabs className="mt-2 grow" data={user.data.profile} />
     </PageLayout>

@@ -1,5 +1,11 @@
 import { PageLayout } from "@/components/page-layout";
 
 export default function Page() {
-  return <PageLayout title="آمار"></PageLayout>;
+  return (
+    <PageLayout
+      header={{
+        title: "آمار",
+      }}
+    ></PageLayout>
+  );
 }
