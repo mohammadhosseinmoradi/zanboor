@@ -47,7 +47,7 @@ function ChatContent(props: ChatContentProps) {
   return (
     <div className={className}>
       <div className="grid grid-cols-1">
-        <div className="text-sm leading-relaxed break-words">این متن پیام هست</div>
+        <div className="text-on-surface text-sm leading-relaxed break-words">این متن پیام هست</div>
       </div>
       <div
         className={cn("mt-1 flex items-center gap-1", {
@@ -55,10 +55,10 @@ function ChatContent(props: ChatContentProps) {
         })}
       >
         <div className="relative">
-          <CheckIcon className="text-fg-disabled size-3 stroke-[3px]" />
-          <CheckIcon className="text-fg-disabled absolute start-1 top-0 size-3 stroke-[3px]" />
+          <CheckIcon className="text-on-surface-variant size-3 stroke-[3px]" />
+          <CheckIcon className="text-on-surface-variant/50 absolute start-1 top-0 size-3 stroke-[3px]" />
         </div>
-        <div className="text-2xs text-fg-disabled text-start"></div>
+        <div className="text-2xs text-on-surface-variant text-start"></div>
       </div>
     </div>
   );

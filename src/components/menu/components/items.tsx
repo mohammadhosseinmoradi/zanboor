@@ -24,7 +24,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
         onClose={close}
         isDrawer={isMobile}
         // Only on small screens
-        className="z-50 flex h-dvh flex-col transition duration-300 ease-in-out data-[closed]:opacity-0"
+        className="z-50 flex h-dvh flex-col"
         onClick={(e) => {
           if (!isMobile) return;
           e.preventDefault();
@@ -41,7 +41,7 @@ const Items = forwardRef<HTMLDivElement, MenuItemsProps<"div">>((props, ref) => 
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="bg-backdrop fixed inset-0 z-10 backdrop-blur-sm" />
+              <div className="bg-backdrop fixed inset-0 z-10 backdrop-blur-xs" />
             </TransitionChild>
           ) : undefined
         }

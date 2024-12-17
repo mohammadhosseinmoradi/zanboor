@@ -66,7 +66,7 @@ function PanelFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
       <DialogBackdrop
         transition
         as="div"
-        className="bg-backdrop fixed inset-0 z-10 backdrop-blur-sm transition duration-300 data-[closed]:opacity-0"
+        className="bg-backdrop fixed inset-0 z-10 backdrop-blur-xs transition duration-300 data-[closed]:opacity-0"
       />
       <ConditionDrawer
         open={state.open}

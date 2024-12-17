@@ -24,7 +24,7 @@ export function ChatBody(props: ChatBodyProps) {
 
   return (
     <div ref={bodyRef} className={cn("relative", className)}>
-      <div className="mx-auto flex w-full max-w-200 flex-col gap-2 p-2 ps-3.5">
+      <div className="mx-auto flex w-full max-w-200 flex-col gap-2">
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />
         <ChatBubbleGroup type="receiver" className="max-w-[calc(100%-4rem)] self-end" />
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />

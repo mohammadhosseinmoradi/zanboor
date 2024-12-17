@@ -17,16 +17,16 @@ export function Chat(props: ChatProps) {
     <PageLayout
       className={cn(
         "h-full",
-        "bg-neutral-300 bg-[url('/images/bg-pattern.svg')] dark:bg-black dark:bg-[url('/images/bg-pattern-dark.svg')]",
+        "bg-surface-dim bg-[url('/images/bg-pattern.svg')] dark:bg-[url('/images/bg-pattern-dark.svg')]",
         className
       )}
       header={{
         title: <ChatInfo />,
         actions: <ChatActions />,
-        className: "border-b bg-surface-container",
+        className: "border-b bg-surface-bright",
       }}
     >
-      <ChatBody className="h-0 grow overflow-auto" />
+      <ChatBody className="h-0 grow overflow-auto px-2 ps-3.5 pt-2 pb-0.5" />
       <ChatInput className="mx-auto w-full max-w-200 p-2 lg:mb-2" />
     </PageLayout>
   );

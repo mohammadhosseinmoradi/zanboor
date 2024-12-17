@@ -17,7 +17,7 @@ export default function FullscreenLoading(props: FullScreenLoadingProps) {
       <AnimatePresence initial={true}>
         {show && (
           <motion.div
-            className="bg-backdrop fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
+            className="bg-backdrop fixed inset-0 z-50 flex items-center justify-center backdrop-blur-xs"
             initial={{
               opacity: 0,
             }}

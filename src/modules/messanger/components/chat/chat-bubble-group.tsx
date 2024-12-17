@@ -26,7 +26,7 @@ export function ChatBubbleGroup(props: ChatBubbleGroupProps) {
           )}
           width={50}
           height={50}
-          initials={getInitials("محمد حسین")}
+          initials={getInitials("زهرا کریمی")}
         />
       )}
     </div>
