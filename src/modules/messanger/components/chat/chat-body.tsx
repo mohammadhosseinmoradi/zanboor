@@ -4,6 +4,7 @@ import { ChatBubbleGroup } from "@/modules/messanger/components/chat/chat-bubble
 import { cn } from "@/lib/utils";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useRef } from "react";
+import { Badge } from "@/components/badge";
 
 type ChatBodyProps = {
   className?: string;
@@ -23,8 +24,11 @@ export function ChatBody(props: ChatBodyProps) {
   });
 
   return (
-    <div ref={bodyRef} className={cn("relative", className)}>
+    <div ref={bodyRef} className={cn("relative flex flex-col", className)}>
       <div className="mx-auto flex w-full max-w-200 flex-col gap-2">
+        <Badge variant="filledTonal" className="sticky top-0 self-center shadow">
+          امروز
+        </Badge>
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />
         <ChatBubbleGroup type="receiver" className="max-w-[calc(100%-4rem)] self-end" />
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />

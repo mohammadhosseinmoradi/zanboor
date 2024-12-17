@@ -19,6 +19,7 @@ import {
   getSkinColorTranslated,
   getStyleLevelTranslated,
 } from "@/modules/utils";
+import { differenceInYears } from "date-fns";
 
 type PersonalProps = {
   data: ProfileDto;
@@ -39,6 +40,11 @@ export function Specification(props: PersonalProps) {
         <DescriptionDetails>{data.personal.displayName}</DescriptionDetails>
         <DescriptionTerm>جنسیت</DescriptionTerm>
         <DescriptionDetails>{getGenderTranslated(data.personal.gender)}</DescriptionDetails>
+        <DescriptionTerm>سن</DescriptionTerm>
+        <DescriptionDetails>
+          {differenceInYears(new Date(), data.personal.birthdate)}
+          <span> سال</span>
+        </DescriptionDetails>
         <DescriptionTerm>وضعیت تاهل</DescriptionTerm>
         <DescriptionDetails>
           {getMaritalStatusTranslated(data.personal.maritalStatus)}

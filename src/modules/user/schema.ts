@@ -55,9 +55,10 @@ export const marriagePreferencesUserDtoSchema = z.object({
 export const profilePersonalUserDtoSchema = z.object({
   id: z.string(),
   displayName: z.string(),
-  gender: z.nativeEnum(Gender),
   image: z.string().nullable().optional(),
   bio: z.string(),
+  gender: z.nativeEnum(Gender),
+  birthdate: z.date(),
   maritalStatus: z.nativeEnum(MaritalStatus),
   healthStatus: z.nativeEnum(HealthStatus),
   healthDescription: z.string().nullable().optional(),

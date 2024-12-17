@@ -19,7 +19,7 @@ export function ChatBubble(props: ChatBubbleProps) {
   return (
     <div
       className={cn("group relative grow px-2 py-2 drop-shadow-sm", {
-        "dark:bg-primary-700 bg-primary-200 order-3 rounded-e-lg rounded-t-lg not-last:rounded-b-lg":
+        "dark:bg-primary-700 bg-primary-200 order-3 ms-2.5 rounded-e-lg rounded-t-lg not-last:rounded-b-lg":
           type == "sender",
         "bg-surface-container rounded-s-lg rounded-t-lg not-last:rounded-b-lg": type == "receiver",
         className,

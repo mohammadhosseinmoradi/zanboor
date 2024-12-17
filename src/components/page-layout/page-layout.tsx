@@ -11,6 +11,9 @@ type PageLayoutProps = {
   header: {
     title: string | ReactNode;
     actions?: ReactNode;
+    backButton?: {
+      className?: string;
+    };
     className?: string;
   };
   className?: string;
@@ -26,7 +29,12 @@ export function PageLayout(props: PageLayoutProps) {
     <div className={cn("flex flex-col", className)}>
       <div className={cn("flex items-center gap-2 p-2", header.className)}>
         <div className="flex shrink-0 grow items-center gap-2">
-          <Button variant="plain" color="secondary" onClick={() => router.back()}>
+          <Button
+            variant="plain"
+            color="secondary"
+            onClick={() => router.back()}
+            className={header?.backButton?.className}
+          >
             <ArrowRightIcon data-slot="icon" />
           </Button>
           {typeof header.title == "string" ? (

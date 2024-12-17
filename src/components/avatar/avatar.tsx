@@ -72,7 +72,7 @@ function AvatarFn<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG>(
             return (
               <svg
                 ref={ref as Ref<SVGSVGElement>}
-                className="fill-current text-4xl font-medium tracking-wide uppercase select-none"
+                className="text-on-surface fill-current text-4xl font-medium tracking-wide uppercase select-none"
                 viewBox="0 0 100 100"
                 aria-hidden="true"
               >

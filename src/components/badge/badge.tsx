@@ -1,3 +1,5 @@
+"use client";
+
 import { ElementType, ReactNode, Ref, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "cva";

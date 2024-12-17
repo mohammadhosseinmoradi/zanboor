@@ -12,17 +12,19 @@ export function ChatInput(props: ChatInputProps) {
   const { className } = props;
 
   return (
-    <div className={cn("flex items-end gap-2", className)}>
-      <div className="bg-surface-container relative flex grow rounded-s-full rounded-se-full shadow lg:rounded-s-lg lg:rounded-se-lg">
-        <Textarea
-          placeholder="پیام"
-          className="text-on-surface field-sizing-content grow resize-none bg-transparent px-4 py-3 text-sm text-sm/6"
-        />
-        <Corner className="fill-surface-container absolute -end-2 bottom-0" />
+    <div className={cn("flex", className)}>
+      <div className="mx-auto flex w-full max-w-200 items-end gap-2">
+        <div className="bg-surface-container relative flex grow rounded-s-full rounded-se-full shadow lg:rounded-s-lg lg:rounded-se-lg">
+          <Textarea
+            placeholder="پیام"
+            className="text-on-surface field-sizing-content max-h-96 grow resize-none bg-transparent px-4 py-3 text-sm text-sm/6"
+          />
+          <Corner className="fill-surface-container absolute -end-2 bottom-0" />
+        </div>
+        <Button size="lg" className="shrink-0 rounded-full shadow">
+          <SendHorizontalIcon data-slot="icon" className="scale-x-[-1]" />
+        </Button>
       </div>
-      <Button size="lg" className="shrink-0 rounded-full shadow">
-        <SendHorizontalIcon data-slot="icon" className="scale-x-[-1]" />
-      </Button>
     </div>
   );
 }
