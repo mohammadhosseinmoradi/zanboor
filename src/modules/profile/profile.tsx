@@ -38,7 +38,7 @@ export async function Profile() {
         <Divider vertical className="h-4" />
         <Button as={Link} href={routes.wallet} variant="plain">
           <CircleDollarSignIcon data-slot="start-icon" />
-          <span>25</span>
+          <span>{(50000).toLocaleString("fa-IR")}</span>
         </Button>
       </div>
       <ProfileHeader className="mt-4 px-4" data={me.data.profile} />

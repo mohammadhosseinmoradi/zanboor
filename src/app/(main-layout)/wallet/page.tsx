@@ -1,4 +1,5 @@
 import { PageLayout } from "@/components/page-layout";
+import { Wallet } from "@/modules/wallet";
 
 export default function Page() {
   return (
@@ -6,6 +7,8 @@ export default function Page() {
       header={{
         title: "کیف پول",
       }}
-    ></PageLayout>
+    >
+      <Wallet />
+    </PageLayout>
   );
 }

@@ -267,9 +267,9 @@ enum SkinColor {
 
 model Location {
   id          String       @id @default(cuid())
+  geolocation Geolocation?
   city        City         @relation(fields: [cityId], references: [id])
   cityId      String
-  geolocation Geolocation?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -308,15 +308,15 @@ model Country {
 model Province {
   id        String  @id @default(cuid())
   name      String
-  countryId String
-  country   Country @relation(fields: [countryId], references: [id])
   cities    City[]
+  country   Country @relation(fields: [countryId], references: [id])
+  countryId String
 }
 
 model City {
   id         String     @id @default(cuid())
   name       String
-  provinceId String
-  province   Province   @relation(fields: [provinceId], references: [id])
   Location   Location[]
+  province   Province   @relation(fields: [provinceId], references: [id])
+  provinceId String
 }
