@@ -40,6 +40,7 @@ model User {
   Message         Message[]
   ChatMembers     ChatMembers[]
   Chat            Chat[]
+  Wallet          Wallet?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 }
@@ -338,4 +339,29 @@ model Message {
   chatId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Wallet {
+  id           String        @id @default(cuid())
+  balance      Float         @default(0.0)
+  owner        User          @relation(fields: [ownerId], references: [id])
+  ownerId      String        @unique
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Transaction {
+  id        String          @id @default(cuid())
+  amount    Float
+  type      TransactionType
+  wallet    Wallet          @relation(fields: [walletId], references: [id])
+  walletId  String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+enum TransactionType {
+  Deposit
+  Withdrawal
 }
