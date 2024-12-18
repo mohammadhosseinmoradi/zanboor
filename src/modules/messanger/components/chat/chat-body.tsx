@@ -26,7 +26,7 @@ export function ChatBody(props: ChatBodyProps) {
   return (
     <div ref={bodyRef} className={cn("relative flex flex-col", className)}>
       <div className="mx-auto flex w-full max-w-200 flex-col gap-2">
-        <Badge variant="filledTonal" className="sticky top-0 self-center shadow">
+        <Badge variant="filled" size="lg" className="sticky top-0 self-center shadow">
           امروز
         </Badge>
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />

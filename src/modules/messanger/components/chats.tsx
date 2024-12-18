@@ -13,9 +13,9 @@ export function Chats(props: ChatsProps) {
   const { className } = props;
 
   return (
-    <div className={cn("bg-surface-container flex flex-col", className)}>
+    <div className={cn("bg-surface lg:bg-surface-container flex flex-col", className)}>
       <TabGroup className="grow">
-        <TabList className="[&>*]:w-full">
+        <TabList className="bg-surface-container [&>*]:w-full">
           <Tab className="text-on-surface-variant !w-auto text-center max-lg:grow">
             همه
             <Badge>1</Badge>

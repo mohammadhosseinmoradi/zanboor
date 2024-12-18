@@ -1,8 +1,9 @@
-import { Avatar } from "@/components/avatar";
 import { cn } from "@/lib/utils";
 import { Heading } from "@/components/heading";
 import { Text } from "@/components/text";
 import { getInitials } from "@/lib/utils/get-initials";
+import Link from "next/link";
+import { AvatarZoomable } from "@/components/avatar-zoomable/avatar-zoomable";
 
 type ChatHeaderProps = {
   className?: string;
@@ -13,18 +14,21 @@ export function ChatInfo(props: ChatHeaderProps) {
 
   return (
     <div className={cn("flex items-center", className)}>
-      <Avatar
-        className="bg-surface-container size-10 border"
+      <AvatarZoomable
+        src="/images/users/07.jpg"
+        avatar={{
+          className: "bg-surface-container border size-10",
+        }}
         initials={getInitials("زهرا کریمی")}
       />
-      <div className="ms-4">
+      <Link href="" className="ms-4">
         <Heading as="h4" variant="h5">
           زهرا کریمی
         </Heading>
         <Text variant="caption" className="mt-0.5">
           آخرین بازدید اخیر
         </Text>
-      </div>
+      </Link>
     </div>
   );
 }

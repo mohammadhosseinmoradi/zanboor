@@ -21,12 +21,12 @@ export function ChatItem(props: ChatItemProps) {
         "flex w-full items-center gap-4 select-none",
         "cursor-pointer rounded-lg p-2",
         "not-data-selected:hover:bg-surface-container-highest",
-        "data-selected:bg-primary-900",
+        "dark:data-selected:bg-primary-900 data-selected:bg-primary-500/25",
         className
       )}
       {...(selected && { "data-selected": "" })}
     >
-      <Avatar className="size-12" />
+      <Avatar src="/images/users/07.jpg" className="border-surface-container size-12 border-2" />
       <div className="flex grow flex-col">
         <div className="flex gap-2">
           <Heading as="h3" variant="h5" className="line-clamp-1 grow">

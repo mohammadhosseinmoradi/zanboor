@@ -17,7 +17,7 @@ export async function Profile() {
     <div className="flex w-full grow flex-col">
       <div className="flex items-center gap-2 px-2 pt-2">
         <div className="flex grow items-center gap-2">
-          <Button as={Link} href={routes.settings.index} variant="plain" color="secondary">
+          <Button as={Link} href={routes.profile.settings.index} variant="plain" color="secondary">
             <svg
               data-slot="icon"
               xmlns="http://www.w3.org/2000/svg"

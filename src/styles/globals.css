@@ -149,8 +149,8 @@
   --color-info-950: var(--color-sky-950);
 
   --color-surface-dim: oklch(94% 0 0);
-  --color-surface: oklch(98% 0 0);
-  --color-surface-bright: oklch(98% 0 0);
+  --color-surface: oklch(100% 0 0);
+  --color-surface-bright: oklch(100% 0 0);
 
   --color-on-surface: var(--color-neutral-800);
   --color-on-surface-variant: var(--color-neutral-600);

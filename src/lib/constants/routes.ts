@@ -12,9 +12,6 @@ export const routes = {
   statistics: "/statistics",
   about: "/about",
   changePhone: "/change-phone",
-  settings: {
-    index: "/settings",
-  },
   wallet: "/wallet",
   auth: {
     getPath: () => "/auth",
@@ -24,6 +21,9 @@ export const routes = {
   profile: {
     index: "/profile",
     edit: "/profile/edit",
+    settings: {
+      index: "/profile/settings",
+    },
   },
   user: {
     index: (id: string) => `/${id}`,

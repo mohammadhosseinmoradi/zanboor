@@ -33,7 +33,7 @@ export default function SideBar(props: SideBarProps) {
   return (
     <div
       className={cn(
-        "bg-surface-container-low flex w-72 flex-col overflow-y-auto border-e p-4",
+        "bg-surface-container flex w-72 flex-col overflow-y-auto border-e p-4",
         className
       )}
     >
