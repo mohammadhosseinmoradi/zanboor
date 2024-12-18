@@ -8,6 +8,8 @@ import { Button } from "@/components/button";
 import { ProfileUserDto } from "@/modules/user/types";
 import { getGenderTranslated } from "@/modules/utils";
 import { AvatarZoomable } from "@/components/avatar-zoomable/avatar-zoomable";
+import Link from "next/link";
+import { routes } from "@/lib/constants/routes";
 
 type ProfileHeaderProps = {
   data: ProfileUserDto;
@@ -30,13 +32,12 @@ export function ProfileHeader(props: ProfileHeaderProps) {
         </Heading>
       </div>
       <Text className="mt-4">{data.personal.bio}</Text>
-
       <div className="mt-4 grid grid-cols-[auto_1fr] gap-2 lg:grid-cols-[auto_auto]">
         <Button variant="outlined" color="secondary">
           <HeartIcon data-slot="icon" />
           <span className="max-lg:hidden">افزودن به علاقمندی‌ها</span>
         </Button>
-        <Button variant="outlined" color="secondary">
+        <Button as={Link} href={routes.messages.chat("1")} variant="outlined" color="secondary">
           <MessagesSquareIcon data-slot="start-icon" />
           درخواست علاقمندی
         </Button>
