@@ -32,7 +32,7 @@ export async function Profile() {
           </Button>
           پروفایل
         </div>
-        <Button as={Link} href={routes.statistics} variant="plain" color="secondary">
+        <Button as={Link} href={routes.profile.statistics} variant="plain" color="secondary">
           <ChartNoAxesColumnIcon data-slot="icon" />
         </Button>
         <Divider vertical className="h-4" />

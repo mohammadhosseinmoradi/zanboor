@@ -9,7 +9,6 @@ export const routes = {
   counselor: "/counselor",
   terms: "/terms",
   privacy: "/privacy",
-  statistics: "/statistics",
   about: "/about",
   changePhone: "/change-phone",
   wallet: "/wallet",
@@ -24,6 +23,7 @@ export const routes = {
     settings: {
       index: "/profile/settings",
     },
+    statistics: "/profile/statistics",
   },
   user: {
     index: (id: string) => `/${id}`,
