@@ -29,17 +29,19 @@ enum Gender {
 }
 
 model User {
-  id              String    @id @default(cuid())
-  phone           String?   @unique
+  id              String        @id @default(cuid())
+  phone           String?       @unique
   phoneVerifiedAt DateTime?
-  email           String?   @unique
+  email           String?       @unique
   emailVerifiedAt DateTime?
-  role            Role      @default(User)
+  role            Role          @default(User)
   profile         Profile?
-  lastVisitedAt   DateTime  @default(now())
+  lastVisitedAt   DateTime      @default(now())
   Message         Message[]
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  ChatMembers     ChatMembers[]
+  Chat            Chat[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }
 
 model Profile {
@@ -304,10 +306,27 @@ model City {
 }
 
 model Chat {
-  id        String    @id @default(cuid())
-  messages  Message[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id          String        @id @default(cuid())
+  type        ChatType      @default(Direct)
+  members     User[]
+  messages    Message[]
+  ChatMembers ChatMembers[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+enum ChatType {
+  Group
+  Channel
+  Direct
+}
+
+model ChatMembers {
+  id       String @id @default(cuid())
+  chat     Chat   @relation(fields: [chatId], references: [id])
+  chatId   String
+  member   User   @relation(fields: [memberId], references: [id])
+  memberId String
 }
 
 model Message {
