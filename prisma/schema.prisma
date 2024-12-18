@@ -36,10 +36,10 @@ model User {
   emailVerifiedAt DateTime?
   role            Role      @default(User)
   profile         Profile?
-
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  lastVisitedAt DateTime @default(now())
+  lastVisitedAt   DateTime  @default(now())
+  Message         Message[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 }
 
 model Profile {
@@ -51,12 +51,10 @@ model Profile {
   familyInfo          FamilyInfo?
   financialStatus     FinancialStatus?
   marriagePreferences MarriagePreferences?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @unique
+  user                User                 @relation(fields: [userId], references: [id])
+  userId              String               @unique
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
 }
 
 model FamilyInfo {
@@ -69,12 +67,10 @@ model FamilyInfo {
   brothersCount      Int
   sistersCount       Int
   hasMarriedSiblings Boolean?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String  @unique
+  profile            Profile        @relation(fields: [profileId], references: [id])
+  profileId          String         @unique
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
 }
 
 enum Ethnicity {
@@ -113,14 +109,11 @@ model MarriagePreferences {
   housingStatuses           HousingStatus[]
   carStatuses               CarStatus[]
   preferredPersonalityTypes PersonalityType[]
-
-  additionalNote String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String  @unique
+  additionalNote            String?
+  profile                   Profile           @relation(fields: [profileId], references: [id])
+  profileId                 String            @unique
+  createdAt                 DateTime          @default(now())
+  updatedAt                 DateTime          @updatedAt
 }
 
 model Personal {
@@ -139,10 +132,9 @@ model Personal {
   greatestChildAge  Int?
   location          Location?
   personalityType   PersonalityType
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Profile   Profile?
+  Profile           Profile?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
 }
 
 enum PersonalityType {
@@ -172,12 +164,10 @@ model EducationAndCareer {
   fieldOfStudy     String
   employmentStatus EmploymentStatus
   jobTitle         String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String  @unique
+  profile          Profile          @relation(fields: [profileId], references: [id])
+  profileId        String           @unique
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 }
 
 model PhysicalAttributes {
@@ -187,12 +177,10 @@ model PhysicalAttributes {
   skinColor   SkinColor
   beautyLevel BeautyLevel @default(Medium)
   styleLevel  StyleLevel  @default(Medium)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String  @unique
+  profile     Profile     @relation(fields: [profileId], references: [id])
+  profileId   String      @unique
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }
 
 enum BeautyLevel {
@@ -216,12 +204,10 @@ model FinancialStatus {
   personalIncome Int
   housingStatus  HousingStatus
   carStatus      CarStatus
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String  @unique
+  profile        Profile       @relation(fields: [profileId], references: [id])
+  profileId      String        @unique
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 }
 
 enum HousingStatus {
@@ -270,24 +256,20 @@ model Location {
   geolocation Geolocation?
   city        City         @relation(fields: [cityId], references: [id])
   cityId      String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  Personal   Personal @relation(fields: [id], references: [id])
-  personalId String   @unique
+  Personal    Personal     @relation(fields: [id], references: [id])
+  personalId  String       @unique
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
 model Geolocation {
-  id        String @id @default(cuid())
-  latitude  String
-  longitude String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id         String   @id @default(cuid())
+  latitude   String
+  longitude  String
   location   Location @relation(fields: [locationId], references: [id])
   locationId String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Otp {
@@ -319,4 +301,22 @@ model City {
   Location   Location[]
   province   Province   @relation(fields: [provinceId], references: [id])
   provinceId String
+}
+
+model Chat {
+  id        String    @id @default(cuid())
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  content   String
+  sender    User     @relation(fields: [senderId], references: [id])
+  senderId  String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
