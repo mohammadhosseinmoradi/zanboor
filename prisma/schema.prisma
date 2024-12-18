@@ -37,10 +37,10 @@ model User {
   role            Role          @default(User)
   profile         Profile?
   lastVisitedAt   DateTime      @default(now())
-  Message         Message[]
-  ChatMembers     ChatMembers[]
-  Chat            Chat[]
-  Wallet          Wallet?
+  message         Message[]
+  chatMembers     ChatMembers[]
+  chat            Chat[]
+  wallet          Wallet?
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 }
@@ -135,7 +135,7 @@ model Personal {
   greatestChildAge  Int?
   location          Location?
   personalityType   PersonalityType
-  Profile           Profile?
+  profile           Profile?
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 }
@@ -259,7 +259,7 @@ model Location {
   geolocation Geolocation?
   city        City         @relation(fields: [cityId], references: [id])
   cityId      String
-  Personal    Personal     @relation(fields: [id], references: [id])
+  personal    Personal     @relation(fields: [id], references: [id])
   personalId  String       @unique
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
@@ -301,7 +301,7 @@ model Province {
 model City {
   id         String     @id @default(cuid())
   name       String
-  Location   Location[]
+  location   Location[]
   province   Province   @relation(fields: [provinceId], references: [id])
   provinceId String
 }
@@ -311,7 +311,7 @@ model Chat {
   type        ChatType      @default(Direct)
   members     User[]
   messages    Message[]
-  ChatMembers ChatMembers[]
+  chatMembers ChatMembers[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 }
