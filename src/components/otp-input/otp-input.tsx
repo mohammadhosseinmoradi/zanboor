@@ -1,6 +1,10 @@
 "use client";
 
-import { OTPInput, OTPInputProps, SlotProps as InputOtpSlotProps } from "input-otp";
+import {
+  OTPInput,
+  OTPInputProps,
+  SlotProps as InputOtpSlotProps
+} from "input-otp";
 import { cn } from "@/lib/utils";
 import { forwardRef, Fragment } from "react";
 
@@ -11,7 +15,14 @@ type OtpInputProps = {
   invalid?: boolean;
 } & Pick<
   OTPInputProps,
-  "onComplete" | "inputMode" | "autoFocus" | "name" | "type" | "required" | "onBlur" | "id"
+  | "onComplete"
+  | "inputMode"
+  | "autoFocus"
+  | "name"
+  | "type"
+  | "required"
+  | "onBlur"
+  | "id"
 >;
 
 const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>((props, ref) => {
@@ -30,7 +41,9 @@ const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>((props, ref) => {
         <div className="flex items-center gap-1.5">
           {slots.map((slot, index) => (
             <Fragment key={index}>
-              {index !== 0 && <div className="bg-border h-px w-2 rounded-full" />}
+              {index !== 0 && (
+                <div className="bg-border h-px w-2 rounded-full" />
+              )}
               <Slot key={index} {...slot} invalid={invalid} />
             </Fragment>
           ))}
@@ -63,7 +76,7 @@ function Slot(props: SlotProps) {
           "border-primary": props.isActive && !props.invalid,
 
           "border-error/50": props.invalid,
-          "border-error": props.isActive && props.invalid,
+          "border-error": props.isActive && props.invalid
         }
       )}
     >

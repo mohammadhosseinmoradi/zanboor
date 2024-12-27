@@ -8,7 +8,7 @@ export default Object.assign(Tab, {
   Group,
   List,
   Panels,
-  Panel,
+  Panel
 });
 
 /**

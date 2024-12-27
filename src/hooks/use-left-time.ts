@@ -18,8 +18,13 @@ type UseLeftTimeProps = {
  * @param deadline The target date for the countdown.
  * @param onTimeEnd An optional callback function to be executed when the timer reaches zero.
  */
-export default function useLeftTime({ deadline, onReachedEnd }: UseLeftTimeProps) {
-  const [leftTime, setLeftTime] = useState<LeftTime>(calculateLeftTime(deadline));
+export default function useLeftTime({
+  deadline,
+  onReachedEnd
+}: UseLeftTimeProps) {
+  const [leftTime, setLeftTime] = useState<LeftTime>(
+    calculateLeftTime(deadline)
+  );
 
   // Set up an effect to update the time left at one-second intervals.
   useEffect(() => {
@@ -43,7 +48,7 @@ export default function useLeftTime({ deadline, onReachedEnd }: UseLeftTimeProps
       days: 0,
       hours: 0,
       minutes: 0,
-      seconds: 0,
+      seconds: 0
     };
 
     // Calculate the time difference between the 'deadline' and the current time.
@@ -54,7 +59,7 @@ export default function useLeftTime({ deadline, onReachedEnd }: UseLeftTimeProps
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor(difference / 1000 / 60) % 60,
-        seconds: Math.floor((difference / 1000) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
       };
     }
 

@@ -1,5 +1,8 @@
 import { forwardRef } from "react";
-import { Radio as HeadlessRadio, RadioProps as HeadlessRadioProps } from "@headlessui/react";
+import {
+  Radio as HeadlessRadio,
+  RadioProps as HeadlessRadioProps
+} from "@headlessui/react";
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "cva";
 
@@ -11,12 +14,12 @@ const radio = cva({
   variants: {
     color: {
       primary: "",
-      secondary: "",
+      secondary: ""
     },
     disabled: {
       true: "",
-      false: "",
-    },
+      false: ""
+    }
   },
   compoundVariants: [
     {
@@ -30,7 +33,7 @@ const radio = cva({
         "[&:hover>[data-slot=check]]:flex",
         "[&[data-checked]>[data-slot=check]]:flex",
         "[&[data-checked]>[data-slot=check]]:bg-primary"
-      ),
+      )
     },
     {
       color: "secondary",
@@ -43,7 +46,7 @@ const radio = cva({
         "[&:hover>[data-slot=check]]:flex",
         "[&[data-checked]>[data-slot=check]]:flex",
         "[&[data-checked]>[data-slot=check]]:bg-secondary"
-      ),
+      )
     },
     {
       disabled: true,
@@ -53,13 +56,13 @@ const radio = cva({
         "[&>[data-slot=check]]:hidden",
         "[&[data-checked]>[data-slot=check]]:flex",
         "[&[data-checked]>[data-slot=check]]:bg-fg-disabled"
-      ),
-    },
+      )
+    }
   ],
   defaultVariants: {
     color: "primary",
-    disabled: false,
-  },
+    disabled: false
+  }
 });
 
 type RadioProps = HeadlessRadioProps<"button"> & VariantProps<typeof radio>;
@@ -75,7 +78,7 @@ const Radio = forwardRef<HTMLDivElement, RadioProps>((props, ref) => {
       className={cn(
         radio({
           color,
-          disabled,
+          disabled
         }),
         className
       )}

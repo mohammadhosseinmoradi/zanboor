@@ -43,7 +43,7 @@ export function EnterPhoneForm(props: EnterPhoneProps) {
 
   const form = useForm<EnterPhone>({
     disabled: isPending,
-    resolver: zodResolver(enterPhoneSchema),
+    resolver: zodResolver(enterPhoneSchema)
   });
 
   useEffect(() => {
@@ -59,14 +59,17 @@ export function EnterPhoneForm(props: EnterPhoneProps) {
       setOtp({
         countryCode: data.countryCode,
         phone: data.phone,
-        otpExpiresAt: result.data.otpExpiresAt,
+        otpExpiresAt: result.data.otpExpiresAt
       });
       router.push(withCallbackUrl(routes.auth.enterOtp, callbackUrl));
     });
   });
 
   return (
-    <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
+    <form
+      className={cn("pointer-events-auto flex flex-col", className)}
+      onSubmit={handleSubmit}
+    >
       <Link href="/" className="mx-auto">
         <ThemeImage
           srcLight="/images/logo-with-text.png"
@@ -150,7 +153,11 @@ export function EnterPhoneForm(props: EnterPhoneProps) {
         </Button>
       </div>
       <Divider className="my-6">یا</Divider>
-      <Button color="secondary" className="w-full shrink-0" disabled={isPending}>
+      <Button
+        color="secondary"
+        className="w-full shrink-0"
+        disabled={isPending}
+      >
         <svg
           data-slot="icon"
           width="800px"

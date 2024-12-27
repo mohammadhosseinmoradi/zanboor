@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const descriptionList = cva({
-  base: "grid text-sm",
+  base: "grid text-sm"
 });
 
 type DescriptionListProps = {

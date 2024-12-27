@@ -1,5 +1,10 @@
 import { motion } from "framer-motion";
-import { Disclosure, DisclosureButton, DisclosurePanel, DisclosureProps } from "@headlessui/react";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  DisclosureProps
+} from "@headlessui/react";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon } from "lucide-react";
 import { Fragment, useMemo, useState } from "react";
@@ -23,7 +28,7 @@ export function ShowMore(props: ShowMoreProps) {
 
   const ourProps = useMemo(() => {
     return {
-      ...(closed ? { "data-closed": "" } : {}),
+      ...(closed ? { "data-closed": "" } : {})
     };
   }, [closed]);
 
@@ -44,11 +49,11 @@ export function ShowMore(props: ShowMoreProps) {
             animate={open ? "open" : "closed"}
             variants={{
               closed: {
-                height: "var(--closed)",
+                height: "var(--closed)"
               },
               open: {
-                height: "auto",
-              },
+                height: "auto"
+              }
             }}
           >
             <DisclosurePanel static>{children}</DisclosurePanel>
@@ -56,7 +61,7 @@ export function ShowMore(props: ShowMoreProps) {
               className={cn(
                 "pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-transparent to-white transition-opacity duration-300",
                 {
-                  "opacity-0": open,
+                  "opacity-0": open
                 },
                 overlayClassName
               )}
@@ -73,7 +78,7 @@ export function ShowMore(props: ShowMoreProps) {
             <ChevronDownIcon
               data-slot="icon"
               className={cn("size-4 transition group-data-[open]:rotate-180", {
-                buttonClassName,
+                buttonClassName
               })}
             />
           </DisclosureButton>

@@ -22,13 +22,14 @@ export function useAuth() {
     router.push(routes.auth.enterPhone);
   };
 
-  const signIn = async () => router.push(withCallbackUrl(routes.auth.enterPhone, pathname));
+  const signIn = async () =>
+    router.push(withCallbackUrl(routes.auth.enterPhone, pathname));
 
   return {
     user,
     mutate,
     signOut,
     signIn,
-    ...rest,
+    ...rest
   };
 }

@@ -19,31 +19,31 @@ export default function FullscreenLoading(props: FullScreenLoadingProps) {
           <motion.div
             className="bg-backdrop fixed inset-0 z-50 flex items-center justify-center backdrop-blur-xs"
             initial={{
-              opacity: 0,
+              opacity: 0
             }}
             animate={{
-              opacity: 1,
+              opacity: 1
             }}
             exit={{
-              opacity: 0,
+              opacity: 0
             }}
           >
             <motion.div
               className="bg-surface flex flex-col items-center justify-center rounded-lg p-4 shadow"
               initial={{
                 opacity: 0,
-                scale: 0.9,
+                scale: 0.9
               }}
               animate={{
                 opacity: 1,
                 scale: 1,
                 transition: {
-                  delay: 0.1,
-                },
+                  delay: 0.1
+                }
               }}
               exit={{
                 opacity: 0,
-                scale: 0.9,
+                scale: 0.9
               }}
             >
               <ThemeImage

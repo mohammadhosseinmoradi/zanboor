@@ -10,6 +10,9 @@ export const ListboxContext = createContext<ListboxContextProps | null>(null);
 
 export function useListboxContext() {
   const context = useContext(ListboxContext);
-  if (!context) throw new Error("useListboxContext most be used inside ListboxContext.Provider");
+  if (!context)
+    throw new Error(
+      "useListboxContext most be used inside ListboxContext.Provider"
+    );
   return context;
 }

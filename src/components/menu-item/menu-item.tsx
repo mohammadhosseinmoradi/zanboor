@@ -10,7 +10,9 @@ type MenuItemRenderPropArg = {
   className?: string;
 };
 
-export type MenuItemProps<TTag extends ElementType = typeof DEFAULT_MENU_ITEM_TAG> = Props<
+export type MenuItemProps<
+  TTag extends ElementType = typeof DEFAULT_MENU_ITEM_TAG
+> = Props<
   TTag,
   object,
   never,
@@ -24,9 +26,9 @@ export type MenuItemProps<TTag extends ElementType = typeof DEFAULT_MENU_ITEM_TA
   }
 >;
 
-export default function MenuItem<TTag extends ElementType = typeof DEFAULT_MENU_ITEM_TAG>(
-  props: MenuItemProps<TTag>
-) {
+export default function MenuItem<
+  TTag extends ElementType = typeof DEFAULT_MENU_ITEM_TAG
+>(props: MenuItemProps<TTag>) {
   const {
     ref,
     as = DEFAULT_MENU_ITEM_TAG,
@@ -58,11 +60,13 @@ export default function MenuItem<TTag extends ElementType = typeof DEFAULT_MENU_
           {title}
         </div>
         {description && (
-          <Text className="col-start-2 row-start-2 mt-1 line-clamp-1 text-sm">{description}</Text>
+          <Text className="col-start-2 row-start-2 mt-1 line-clamp-1 text-sm">
+            {description}
+          </Text>
         )}
         {endSlot && endSlot({ className: "col-start-3 row-span-2 ms-2" })}
       </>
-    ),
+    )
   };
 
   return render({
@@ -70,6 +74,6 @@ export default function MenuItem<TTag extends ElementType = typeof DEFAULT_MENU_
     theirProps,
     slot: {},
     defaultTag: DEFAULT_MENU_ITEM_TAG,
-    name: "MenuItem",
+    name: "MenuItem"
   });
 }

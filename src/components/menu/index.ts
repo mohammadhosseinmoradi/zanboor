@@ -14,7 +14,7 @@ const Menu = Object.assign(_Menu, {
   Label,
   Shortcut,
   Description,
-  Separator,
+  Separator
 });
 
 export { Menu };

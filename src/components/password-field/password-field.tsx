@@ -19,37 +19,41 @@ type PasswordFieldProps = InputFieldProps &
  *
  * @constructor
  */
-export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>((props, ref) => {
-  const { label, className, style, error, ...otherProps } = props;
+export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
+  (props, ref) => {
+    const { label, className, style, error, ...otherProps } = props;
 
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  return (
-    <InputField className={className} style={style}>
-      {label && <Label>{label}</Label>}
-      <InputGroup>
-        <Input
-          ref={ref}
-          type={isPasswordVisible ? "text" : "password"}
-          className="[direction:ltr] rtl:[&_input]:text-right"
-          invalid={!!error}
-          {...otherProps}
-        />
-        <Button
-          variant="plain"
-          color="secondary"
-          size="sm"
-          onClick={() => setIsPasswordVisible((isPasswordVisible) => !isPasswordVisible)}
-          tabIndex={-1}
-          className="m-1.5"
-        >
-          {!isPasswordVisible && <EyeIcon data-slot="icon" />}
-          {isPasswordVisible && <EyeOffIcon data-slot="icon" />}
-        </Button>
-      </InputGroup>
-      <ErrorMessage>{error}</ErrorMessage>
-    </InputField>
-  );
-});
+    return (
+      <InputField className={className} style={style}>
+        {label && <Label>{label}</Label>}
+        <InputGroup>
+          <Input
+            ref={ref}
+            type={isPasswordVisible ? "text" : "password"}
+            className="[direction:ltr] rtl:[&_input]:text-right"
+            invalid={!!error}
+            {...otherProps}
+          />
+          <Button
+            variant="plain"
+            color="secondary"
+            size="sm"
+            onClick={() =>
+              setIsPasswordVisible((isPasswordVisible) => !isPasswordVisible)
+            }
+            tabIndex={-1}
+            className="m-1.5"
+          >
+            {!isPasswordVisible && <EyeIcon data-slot="icon" />}
+            {isPasswordVisible && <EyeOffIcon data-slot="icon" />}
+          </Button>
+        </InputGroup>
+        <ErrorMessage>{error}</ErrorMessage>
+      </InputField>
+    );
+  }
+);
 
 PasswordField.displayName = "PasswordField";

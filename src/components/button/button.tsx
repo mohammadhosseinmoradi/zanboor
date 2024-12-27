@@ -1,6 +1,9 @@
 "use client";
 
-import { Button as HeadlessButton, ButtonProps as HeadlessButtonProps } from "@headlessui/react";
+import {
+  Button as HeadlessButton,
+  ButtonProps as HeadlessButtonProps
+} from "@headlessui/react";
 import { ElementType, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "cva";
@@ -30,7 +33,7 @@ const button = cva({
       filled: "",
       filledTonal: "",
       outlined: "after:absolute after:inset-0 after:border after:rounded-lg",
-      plain: "focus:ring-offset-0",
+      plain: "focus:ring-offset-0"
     },
     color: {
       primary: "",
@@ -38,7 +41,7 @@ const button = cva({
       error: "",
       warning: "",
       success: "",
-      info: "",
+      info: ""
     },
     size: {
       sm: cn(
@@ -55,7 +58,7 @@ const button = cva({
         "px-4 py-3 text-base/6 sm:text-sm/5 gap-2 [&:has([data-slot=icon])]:px-3 [&>*[data-slot=dropdown-icon]]:size-4 [&>*[data-slot$=icon]]:size-6 sm:[&>*[data-slot$=icon]]:size-5 [&>*[data-slot$=icon]]:stroke-[1.5px]",
         // Badge offset
         "[&_*[data-slot=badge]]:[--badge-offset:calc(theme(spacing[4])+2px)]"
-      ),
+      )
     },
     edge: {
       all: "-mx-3 -my-2",
@@ -67,12 +70,12 @@ const button = cva({
       "bottom start": "-mb-2 -ms-3",
       "bottom end": "-mb-2 -me-3",
       y: "-my-2",
-      x: "-mx-3",
+      x: "-mx-3"
     },
     disabled: {
       true: "cursor-not-allowed",
-      false: "cursor-pointer",
-    },
+      false: "cursor-pointer"
+    }
   },
   compoundVariants: [
     // -----------------------------------------------------------------------------------------------------------------
@@ -81,84 +84,84 @@ const button = cva({
       color: "primary",
       disabled: false,
       className:
-        "bg-primary text-on-primary [&_div[data-slot=loading]]:text-on-primary [&_*[data-slot=dropdown-icon]]:text-on-primary-muted",
+        "bg-primary text-on-primary [&_div[data-slot=loading]]:text-on-primary [&_*[data-slot=dropdown-icon]]:text-on-primary-muted"
     },
     {
       variant: "filled",
       color: "primary",
       disabled: true,
       className:
-        "bg-primary/60 text-on-primary-disabled [&_div[data-slot=loading]]:text-on-primary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-primary-disabled",
+        "bg-primary/60 text-on-primary-disabled [&_div[data-slot=loading]]:text-on-primary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-primary-disabled"
     },
     {
       variant: "filled",
       color: "secondary",
       disabled: false,
       className:
-        "bg-secondary text-on-secondary [&_div[data-slot=loading]]:text-on-secondary [&_*[data-slot=dropdown-icon]]:text-on-secondary-muted",
+        "bg-secondary text-on-secondary [&_div[data-slot=loading]]:text-on-secondary [&_*[data-slot=dropdown-icon]]:text-on-secondary-muted"
     },
     {
       variant: "filled",
       color: "secondary",
       disabled: true,
       className:
-        "bg-secondary/60 text-on-secondary-disabled [&_div[data-slot=loading]]:text-on-secondary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-secondary-disabled",
+        "bg-secondary/60 text-on-secondary-disabled [&_div[data-slot=loading]]:text-on-secondary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-secondary-disabled"
     },
     {
       variant: "filled",
       color: "error",
       disabled: false,
       className:
-        "bg-error text-on-error [&_div[data-slot=loading]]:text-on-error [&_*[data-slot=dropdown-icon]]:text-on-error-muted",
+        "bg-error text-on-error [&_div[data-slot=loading]]:text-on-error [&_*[data-slot=dropdown-icon]]:text-on-error-muted"
     },
     {
       variant: "filled",
       color: "error",
       disabled: true,
       className:
-        "bg-error/60 text-on-error-disabled [&_div[data-slot=loading]]:text-on-error cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-error-disabled",
+        "bg-error/60 text-on-error-disabled [&_div[data-slot=loading]]:text-on-error cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-error-disabled"
     },
     {
       variant: "filled",
       color: "warning",
       disabled: false,
       className:
-        "bg-warning text-on-warning [&_div[data-slot=loading]]:text-on-warning [&_*[data-slot=dropdown-icon]]:text-on-warning-muted",
+        "bg-warning text-on-warning [&_div[data-slot=loading]]:text-on-warning [&_*[data-slot=dropdown-icon]]:text-on-warning-muted"
     },
     {
       variant: "filled",
       color: "warning",
       disabled: true,
       className:
-        "bg-warning/60 text-on-warning-disabled [&_div[data-slot=loading]]:text-on-warning cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-warning-disabled",
+        "bg-warning/60 text-on-warning-disabled [&_div[data-slot=loading]]:text-on-warning cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-warning-disabled"
     },
     {
       variant: "filled",
       color: "success",
       disabled: false,
       className:
-        "bg-success text-on-success [&_div[data-slot=loading]]:text-on-success [&_*[data-slot=dropdown-icon]]:text-on-success-muted",
+        "bg-success text-on-success [&_div[data-slot=loading]]:text-on-success [&_*[data-slot=dropdown-icon]]:text-on-success-muted"
     },
     {
       variant: "filled",
       color: "success",
       disabled: true,
       className:
-        "bg-success/60 text-on-success-disabled [&_div[data-slot=loading]]:text-on-success cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-success-disabled",
+        "bg-success/60 text-on-success-disabled [&_div[data-slot=loading]]:text-on-success cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-success-disabled"
     },
     {
       variant: "filled",
       color: "info",
       disabled: false,
       className:
-        "bg-info text-on-info [&_div[data-slot=loading]]:text-on-info [&_*[data-slot=dropdown-icon]]:text-on-info-muted",
+        "bg-info text-on-info [&_div[data-slot=loading]]:text-on-info [&_*[data-slot=dropdown-icon]]:text-on-info-muted"
     },
     {
       variant: "filled",
       color: "info",
       disabled: true,
       className:
-        "bg-info/60 text-on-info-disabled [&_div[data-slot=loading]]:text-on-info cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-info-disabled",
+        "bg-info/60 text-on-info-disabled [&_div[data-slot=loading]]:text-on-info cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-info-disabled"
     },
     // -----------------------------------------------------------------------------------------------------------------
     {
@@ -166,84 +169,84 @@ const button = cva({
       color: "primary",
       disabled: false,
       className:
-        "text-primary [&_div[data-slot=loading]]:text-primary [&_*[data-slot=dropdown-icon]]:text-primary/60",
+        "text-primary [&_div[data-slot=loading]]:text-primary [&_*[data-slot=dropdown-icon]]:text-primary/60"
     },
     {
       variant: "plain",
       color: "primary",
       disabled: true,
       className:
-        "text-primary/60 [&_div[data-slot=loading]]:text-primary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-primary/60",
+        "text-primary/60 [&_div[data-slot=loading]]:text-primary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-primary/60"
     },
     {
       variant: "plain",
       color: "secondary",
       disabled: false,
       className:
-        "text-on-surface [&_div[data-slot=loading]]:text-on-surface [&_*[data-slot=dropdown-icon]]:text-on-surface-variant",
+        "text-on-surface [&_div[data-slot=loading]]:text-on-surface [&_*[data-slot=dropdown-icon]]:text-on-surface-variant"
     },
     {
       variant: "plain",
       color: "secondary",
       disabled: true,
       className:
-        "text-on-surface-disabled [&_div[data-slot=loading]]:text-on-surface cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-surface-disabled",
+        "text-on-surface-disabled [&_div[data-slot=loading]]:text-on-surface cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-on-surface-disabled"
     },
     {
       variant: "plain",
       color: "error",
       disabled: false,
       className:
-        "text-error [&_div[data-slot=loading]]:text-error [&_*[data-slot=dropdown-icon]]:text-error/60",
+        "text-error [&_div[data-slot=loading]]:text-error [&_*[data-slot=dropdown-icon]]:text-error/60"
     },
     {
       variant: "plain",
       color: "error",
       disabled: true,
       className:
-        "text-error/60 [&_div[data-slot=loading]]:text-error cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-error/60",
+        "text-error/60 [&_div[data-slot=loading]]:text-error cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-error/60"
     },
     {
       variant: "plain",
       color: "warning",
       disabled: false,
       className:
-        "text-warning [&_div[data-slot=loading]]:text-warning [&_*[data-slot=dropdown-icon]]:text-warning/60",
+        "text-warning [&_div[data-slot=loading]]:text-warning [&_*[data-slot=dropdown-icon]]:text-warning/60"
     },
     {
       variant: "plain",
       color: "warning",
       disabled: true,
       className:
-        "text-warning/60 [&_div[data-slot=loading]]:text-warning cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-warning/60",
+        "text-warning/60 [&_div[data-slot=loading]]:text-warning cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-warning/60"
     },
     {
       variant: "plain",
       color: "success",
       disabled: false,
       className:
-        "text-success [&_div[data-slot=loading]]:text-success [&_*[data-slot=dropdown-icon]]:text-success/60",
+        "text-success [&_div[data-slot=loading]]:text-success [&_*[data-slot=dropdown-icon]]:text-success/60"
     },
     {
       variant: "plain",
       color: "success",
       disabled: true,
       className:
-        "text-success/60 [&_div[data-slot=loading]]:text-success cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-success/60",
+        "text-success/60 [&_div[data-slot=loading]]:text-success cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-success/60"
     },
     {
       variant: "plain",
       color: "info",
       disabled: false,
       className:
-        "text-info [&_div[data-slot=loading]]:text-info [&_*[data-slot=dropdown-icon]]:text-info/60",
+        "text-info [&_div[data-slot=loading]]:text-info [&_*[data-slot=dropdown-icon]]:text-info/60"
     },
     {
       variant: "plain",
       color: "info",
       disabled: true,
       className:
-        "text-info/60 [&_div[data-slot=loading]]:text-info cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-info/60",
+        "text-info/60 [&_div[data-slot=loading]]:text-info cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-info/60"
     },
     // -----------------------------------------------------------------------------------------------------------------
     {
@@ -251,28 +254,28 @@ const button = cva({
       color: "secondary",
       disabled: false,
       className:
-        "text-on-secondary after:border-on-secondary/15 [&_div[data-slot=loading]]:text-secondary [&_*[data-slot=dropdown-icon]]:text-secondary/60",
+        "text-on-secondary after:border-on-secondary/15 [&_div[data-slot=loading]]:text-secondary [&_*[data-slot=dropdown-icon]]:text-secondary/60"
     },
     {
       variant: "outlined",
       color: "secondary",
       disabled: true,
       className:
-        "text-secondary/60 after:border-secondary/15 [&_div[data-slot=loading]]:text-secondary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-secondary/60",
-    },
+        "text-secondary/60 after:border-secondary/15 [&_div[data-slot=loading]]:text-secondary cursor-not-allowed [&_*[data-slot=dropdown-icon]]:text-secondary/60"
+    }
   ],
   defaultVariants: {
     variant: "filled",
     color: "primary",
     size: "md",
-    disabled: false,
-  },
+    disabled: false
+  }
 });
 
 type DEFAULT_BUTTON_TAG = "button";
 
-export type ButtonProps<TTag extends ElementType = DEFAULT_BUTTON_TAG> = HeadlessButtonProps<TTag> &
-  VariantProps<typeof button>;
+export type ButtonProps<TTag extends ElementType = DEFAULT_BUTTON_TAG> =
+  HeadlessButtonProps<TTag> & VariantProps<typeof button>;
 
 function ButtonFn<TTag extends ElementType = DEFAULT_BUTTON_TAG>(
   props: ButtonProps<TTag>,
@@ -299,7 +302,7 @@ function ButtonFn<TTag extends ElementType = DEFAULT_BUTTON_TAG>(
           color,
           size,
           edge,
-          disabled,
+          disabled
         }),
         className
       )}
@@ -316,6 +319,8 @@ interface _internal_ComponentButton extends HasDisplayName {
   ): ReactNode;
 }
 
-const Button = forwardRefWithAs(ButtonFn) as unknown as _internal_ComponentButton;
+const Button = forwardRefWithAs(
+  ButtonFn
+) as unknown as _internal_ComponentButton;
 
 export { Button };

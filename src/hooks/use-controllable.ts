@@ -13,13 +13,21 @@ export function useControllable<T>(
   const didWarnOnUncontrolledToControlled = useRef(false);
   const didWarnOnControlledToUncontrolled = useRef(false);
 
-  if (isControlled && !wasControlled.current && !didWarnOnUncontrolledToControlled.current) {
+  if (
+    isControlled &&
+    !wasControlled.current &&
+    !didWarnOnUncontrolledToControlled.current
+  ) {
     didWarnOnUncontrolledToControlled.current = true;
     wasControlled.current = isControlled;
     console.error(
       "A component is changing from uncontrolled to controlled. This may be caused by the value changing from undefined to a defined value, which should not happen."
     );
-  } else if (!isControlled && wasControlled.current && !didWarnOnControlledToUncontrolled.current) {
+  } else if (
+    !isControlled &&
+    wasControlled.current &&
+    !didWarnOnControlledToUncontrolled.current
+  ) {
     didWarnOnControlledToUncontrolled.current = true;
     wasControlled.current = isControlled;
     console.error(
@@ -36,6 +44,6 @@ export function useControllable<T>(
         setInternalValue(value);
         return onChange?.(value);
       }
-    }),
+    })
   ] as const;
 }

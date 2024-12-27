@@ -4,7 +4,11 @@ import { cn } from "@/lib/utils";
 import { ProfileDto } from "@/modules/profile/types";
 import { Avatar } from "@/components/avatar";
 import { Text } from "@/components/text";
-import { BadgeCheckIcon, CircleDollarSignIcon, UserRoundPenIcon } from "lucide-react";
+import {
+  BadgeCheckIcon,
+  CircleDollarSignIcon,
+  UserRoundPenIcon
+} from "lucide-react";
 import { Heading } from "@/components/heading";
 import { Button } from "@/components/button";
 import { getGenderTranslated } from "@/modules/utils";
@@ -26,7 +30,7 @@ export function ProfileHeader(props: ProfileHeaderProps) {
           className="size-16 shrink-0"
           data={{
             personalId: data.id,
-            src: data.personal.image,
+            src: data.personal.image
           }}
         />
         <Heading as="h4" variant="h4">
@@ -39,7 +43,12 @@ export function ProfileHeader(props: ProfileHeaderProps) {
       </div>
       <Text className="mt-4">{data.personal.bio}</Text>
       <div className="mt-4 grid grid-cols-[auto_1fr] gap-2 lg:grid-cols-[auto_auto]">
-        <Button as={Link} href={routes.profile.edit} variant="outlined" color="secondary">
+        <Button
+          as={Link}
+          href={routes.profile.edit}
+          variant="outlined"
+          color="secondary"
+        >
           <UserRoundPenIcon data-slot="icon" />
           <span className="max-lg:hidden">ویرایش</span>
         </Button>

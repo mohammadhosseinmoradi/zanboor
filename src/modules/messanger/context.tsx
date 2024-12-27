@@ -47,7 +47,7 @@ export function MessengerProvider(props: MessengerProviderProps) {
   const setChatId = (chatId: string) => {
     setState((prevState) => ({
       ...prevState,
-      chatId,
+      chatId
     }));
   };
 

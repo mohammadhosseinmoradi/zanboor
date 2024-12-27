@@ -5,7 +5,7 @@ import {
   personalDtoSchema,
   physicalAttributesDtoSchema,
   profileDtoSchema,
-  userDtoSchema,
+  userDtoSchema
 } from "@/modules/profile/schema";
 
 export type UserDto = z.infer<typeof userDtoSchema>;
@@ -18,4 +18,6 @@ export type PhysicalAttributesDto = z.infer<typeof physicalAttributesDtoSchema>;
 
 export type EducationAndCareerDto = z.infer<typeof educationAndCareerDtoSchema>;
 
-export type MarriagePreferencesDto = z.infer<typeof marriagePreferencesDtoSchema>;
+export type MarriagePreferencesDto = z.infer<
+  typeof marriagePreferencesDtoSchema
+>;

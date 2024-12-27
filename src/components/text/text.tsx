@@ -3,7 +3,12 @@
 import { ElementType, ReactNode, Ref, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "cva";
-import { forwardRefWithAs, HasDisplayName, RefProp, render } from "@/lib/utils/render";
+import {
+  forwardRefWithAs,
+  HasDisplayName,
+  RefProp,
+  render
+} from "@/lib/utils/render";
 import { Props } from "@/lib/utils/render/types";
 
 const text = cva({
@@ -12,24 +17,25 @@ const text = cva({
     variant: {
       body: "text-base",
       regular: "text-sm",
-      caption: "text-xs",
-    },
+      caption: "text-xs"
+    }
   },
   defaultVariants: {
-    variant: "regular",
-  },
+    variant: "regular"
+  }
 });
 
 const DEFAULT_TEXT_TAG = "p";
 
-export type TextProps<TTag extends ElementType = typeof DEFAULT_TEXT_TAG> = Props<
-  TTag,
-  object,
-  never,
-  {
-    children: ReactNode;
-  } & VariantProps<typeof text>
->;
+export type TextProps<TTag extends ElementType = typeof DEFAULT_TEXT_TAG> =
+  Props<
+    TTag,
+    object,
+    never,
+    {
+      children: ReactNode;
+    } & VariantProps<typeof text>
+  >;
 
 type TextRenderPropArg = object;
 
@@ -37,18 +43,21 @@ function TextFn<TTag extends ElementType = typeof DEFAULT_TEXT_TAG>(
   props: TextProps<TTag>,
   ref: Ref<HTMLElement>
 ) {
-  const { className, variant, ...otherProps } = props as TextProps<typeof DEFAULT_TEXT_TAG>;
+  const { className, variant, ...otherProps } = props as TextProps<
+    typeof DEFAULT_TEXT_TAG
+  >;
 
   const slot = useMemo(() => {
     return {} satisfies TextRenderPropArg;
   }, []);
 
-  const resolvedClassName = typeof className === "function" ? className(slot) : className;
+  const resolvedClassName =
+    typeof className === "function" ? className(slot) : className;
 
   const ourProps = {
     ref,
     "data-slot": "text",
-    className: cn(text({ variant }), resolvedClassName),
+    className: cn(text({ variant }), resolvedClassName)
   };
 
   return render({
@@ -56,7 +65,7 @@ function TextFn<TTag extends ElementType = typeof DEFAULT_TEXT_TAG>(
     theirProps: otherProps,
     slot,
     defaultTag: DEFAULT_TEXT_TAG,
-    name: "Text",
+    name: "Text"
   });
 }
 

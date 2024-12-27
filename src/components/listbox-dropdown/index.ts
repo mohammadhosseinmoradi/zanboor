@@ -6,7 +6,7 @@ import { Option } from "@/components/listbox-dropdown/option";
 const ListboxDropdown = Object.assign(_ListboxDropdown, {
   Button,
   Options,
-  Option,
+  Option
 });
 
 export default ListboxDropdown;

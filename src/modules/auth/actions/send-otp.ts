@@ -11,37 +11,41 @@ type SendOtpResponse = {
   otpExpiresAt: Date;
 };
 
-export async function sendOtp(params: EnterPhone): Promise<Result<SendOtpResponse>> {
+export async function sendOtp(
+  params: EnterPhone
+): Promise<Result<SendOtpResponse>> {
   const { countryCode, phone } = params;
 
   if (!phone.match(PHONE_REGEX))
     return {
       error: {
         name: ErrorName.BadRequest,
-        message: "شماره موبایل اشتباه می‌باشد.",
-      },
+        message: "شماره موبایل اشتباه می‌باشد."
+      }
     };
 
   const normalizePhone = getNormalizePhone({
     countryCode,
-    phone,
+    phone
   });
 
   let otp = await prisma.otp.findFirst({
-    where: { phone: normalizePhone },
+    where: { phone: normalizePhone }
   });
 
   // const newOtp = generateOtp();
   const newOtp = "11111";
-  const newOtpExpiresAt = new Date(new Date().setSeconds(new Date().getSeconds() + 120));
+  const newOtpExpiresAt = new Date(
+    new Date().setSeconds(new Date().getSeconds() + 120)
+  );
 
   if (!otp) {
     otp = await prisma.otp.create({
       data: {
         phone: normalizePhone,
         code: newOtp,
-        expiresAt: newOtpExpiresAt,
-      },
+        expiresAt: newOtpExpiresAt
+      }
     });
   }
 
@@ -50,17 +54,17 @@ export async function sendOtp(params: EnterPhone): Promise<Result<SendOtpRespons
       data: {
         phone: normalizePhone,
         code: newOtp,
-        expiresAt: newOtpExpiresAt,
+        expiresAt: newOtpExpiresAt
       },
       where: {
-        id: otp.id,
-      },
+        id: otp.id
+      }
     });
   }
 
   return {
     data: {
-      otpExpiresAt: otp.expiresAt,
-    },
+      otpExpiresAt: otp.expiresAt
+    }
   };
 }

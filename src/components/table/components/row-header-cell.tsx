@@ -6,7 +6,12 @@ type RowHeaderCellProps = ComponentProps<"th">;
 const RowHeaderCell = forwardRef<HTMLTableCellElement, RowHeaderCellProps>(
   ({ className, ...otherProps }, ref) => {
     return (
-      <th ref={ref} scope="row" className={cn("px-4 py-3 text-start", className)} {...otherProps} />
+      <th
+        ref={ref}
+        scope="row"
+        className={cn("px-4 py-3 text-start", className)}
+        {...otherProps}
+      />
     );
   }
 );

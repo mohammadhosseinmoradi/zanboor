@@ -19,7 +19,8 @@ type PasswordFieldProps = InputFieldProps &
  * @constructor
  */
 export function PriceField(props: PasswordFieldProps) {
-  const { label, value, onChange, className, style, error, ...otherProps } = props;
+  const { label, value, onChange, className, style, error, ...otherProps } =
+    props;
 
   const formatPrice = (value?: string | number) => {
     if (!value) return "";
@@ -51,7 +52,9 @@ export function PriceField(props: PasswordFieldProps) {
           invalid={!!error}
           {...otherProps}
         />
-        <div className="text-on-surface-variant m-2 flex items-center justify-center">تومان</div>
+        <div className="text-on-surface-variant m-2 flex items-center justify-center">
+          تومان
+        </div>
       </InputGroup>
       <ErrorMessage>{error}</ErrorMessage>
     </InputField>

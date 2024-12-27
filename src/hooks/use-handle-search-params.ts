@@ -3,7 +3,9 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useTransition } from "react";
 
-export class TypeSafeSearchParams<T extends Record<string, string>> extends URLSearchParams {
+export class TypeSafeSearchParams<
+  T extends Record<string, string>
+> extends URLSearchParams {
   set(name: keyof T, value: string): void {
     super.set(name as string, value);
   }
@@ -29,7 +31,9 @@ export class TypeSafeSearchParams<T extends Record<string, string>> extends URLS
   }
 }
 
-export default function useHandleSearchParams<T extends Record<string, string>>() {
+export default function useHandleSearchParams<
+  T extends Record<string, string>
+>() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams() as TypeSafeSearchParams<T>;
@@ -45,7 +49,9 @@ export default function useHandleSearchParams<T extends Record<string, string>>(
       }
     ) =>
       startTransition(() => {
-        const updatedSearchParams = new URLSearchParams(searchParams.toString());
+        const updatedSearchParams = new URLSearchParams(
+          searchParams.toString()
+        );
 
         cb(updatedSearchParams);
 
@@ -55,12 +61,16 @@ export default function useHandleSearchParams<T extends Record<string, string>>(
 
         if (!options?.shallow) {
           router[options?.push ? "push" : "replace"](href, {
-            scroll: options?.scroll,
+            scroll: options?.scroll
           });
           return;
         }
 
-        window.history[options?.push ? "pushState" : "replaceState"](null, "", href);
+        window.history[options?.push ? "pushState" : "replaceState"](
+          null,
+          "",
+          href
+        );
       }),
     [pathname, router, searchParams]
   );

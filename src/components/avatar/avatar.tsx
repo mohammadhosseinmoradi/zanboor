@@ -3,7 +3,12 @@
 import { ElementType, ReactNode, Ref, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "cva";
-import { forwardRefWithAs, HasDisplayName, RefProp, render } from "@/lib/utils/render";
+import {
+  forwardRefWithAs,
+  HasDisplayName,
+  RefProp,
+  render
+} from "@/lib/utils/render";
 import { Props } from "@/lib/utils/render/types";
 import Image, { ImageProps } from "next/image";
 import { AVATAR_IMG } from "@/lib/constants/common";
@@ -12,24 +17,25 @@ const avatar = cva({
   base: "inline-grid shrink-0 align-middle *:col-start-1 *:row-start-1 rounded-full *:rounded-full",
   variants: {},
   compoundVariants: [],
-  defaultVariants: {},
+  defaultVariants: {}
 });
 
 const DEFAULT_AVATAR_TAG = "span";
 
-export type AvatarProps<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG> = Props<
-  TTag,
-  object,
-  never,
-  {
-    initials?: string;
-    src?: string | null;
-    alt?: string;
+export type AvatarProps<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG> =
+  Props<
+    TTag,
+    object,
+    never,
+    {
+      initials?: string;
+      src?: string | null;
+      alt?: string;
 
-    children?: never;
-  } & VariantProps<typeof avatar> &
-    Pick<ImageProps, "sizes" | "width" | "height">
->;
+      children?: never;
+    } & VariantProps<typeof avatar> &
+      Pick<ImageProps, "sizes" | "width" | "height">
+  >;
 
 function AvatarFn<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG>(
   props: AvatarProps<TTag>,
@@ -40,7 +46,8 @@ function AvatarFn<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG>(
   const { className, initials, src, alt, width, height, sizes, ...otherProps } =
     props as AvatarProps<"button">;
 
-  const resolvedClassName = typeof className === "function" ? className : className;
+  const resolvedClassName =
+    typeof className === "function" ? className : className;
 
   useEffect(() => {
     setImageError(false);
@@ -103,7 +110,7 @@ function AvatarFn<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG>(
           }
         })()}
       </>
-    ),
+    )
   };
 
   return render({
@@ -111,7 +118,7 @@ function AvatarFn<TTag extends ElementType = typeof DEFAULT_AVATAR_TAG>(
     theirProps: otherProps,
     slot: {},
     defaultTag: DEFAULT_AVATAR_TAG,
-    name: "Avatar",
+    name: "Avatar"
   });
 }
 
@@ -124,6 +131,8 @@ interface _internal_ComponentAvatar extends HasDisplayName {
 /**
  *
  */
-const Avatar = forwardRefWithAs(AvatarFn) as unknown as _internal_ComponentAvatar;
+const Avatar = forwardRefWithAs(
+  AvatarFn
+) as unknown as _internal_ComponentAvatar;
 
 export { Avatar };

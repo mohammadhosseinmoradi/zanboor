@@ -5,7 +5,7 @@ import {
   SetStateAction,
   useContext,
   useEffect,
-  useState,
+  useState
 } from "react";
 
 type GroupProps = {
@@ -44,20 +44,26 @@ const initialStateValue: StateProps = {
   activeIndex: 0,
   id: "",
   threshold: 0,
-  offsetTop: 0,
+  offsetTop: 0
 };
 
 const TabContext = createContext<ContextProps>({
   state: initialStateValue,
-  dispatch: () => {},
+  dispatch: () => {}
 });
 
-export default function Group({ className, threshold, offsetTop, id, ...otherProps }: GroupProps) {
+export default function Group({
+  className,
+  threshold,
+  offsetTop,
+  id,
+  ...otherProps
+}: GroupProps) {
   const [state, dispatch] = useState<StateProps>({
     ...initialStateValue,
     id,
     threshold: threshold ? threshold : initialStateValue.threshold,
-    offsetTop: offsetTop ? offsetTop : initialStateValue.offsetTop,
+    offsetTop: offsetTop ? offsetTop : initialStateValue.offsetTop
   });
 
   useEffect(() => {
@@ -65,7 +71,7 @@ export default function Group({ className, threshold, offsetTop, id, ...otherPro
       ...prevState,
       id,
       threshold: threshold ? threshold : prevState.threshold,
-      offsetTop: offsetTop ? offsetTop : prevState.offsetTop,
+      offsetTop: offsetTop ? offsetTop : prevState.offsetTop
     }));
   }, [threshold, offsetTop, id]);
 
@@ -73,7 +79,7 @@ export default function Group({ className, threshold, offsetTop, id, ...otherPro
     <TabContext.Provider
       value={{
         state,
-        dispatch,
+        dispatch
       }}
     >
       <div {...otherProps} className={`flex flex-col ${className}`} />

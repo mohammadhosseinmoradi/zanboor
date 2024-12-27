@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ComponentRef, CSSProperties, forwardRef, ReactNode, useMemo } from "react";
+import {
+  ComponentRef,
+  CSSProperties,
+  forwardRef,
+  ReactNode,
+  useMemo
+} from "react";
 import { useNavLink } from "@/hooks/use-nav-link";
 
 export type NavLinkRenderArgs = {
@@ -29,41 +35,45 @@ export type NavLinkProps = {
  * @param {ComponentRef<typeof Link>} ref - Forwarded ref for the Link component.
  * @returns {JSX.Element} - The rendered NavLink component.
  */
-const NavLink = forwardRef<ComponentRef<typeof Link>, NavLinkProps>((props, ref) => {
-  const { href, className, style, children, ...otherProps } = props;
+const NavLink = forwardRef<ComponentRef<typeof Link>, NavLinkProps>(
+  (props, ref) => {
+    const { href, className, style, children, ...otherProps } = props;
 
-  const { active, activeChildren } = useNavLink({
-    href,
-  });
+    const { active, activeChildren } = useNavLink({
+      href
+    });
 
-  const dataProps = useMemo(() => {
-    return {
-      ...(active ? { "data-active": "" } : {}),
-      ...(activeChildren ? { "data-active-children": "" } : {}),
-    };
-  }, [active, activeChildren]);
+    const dataProps = useMemo(() => {
+      return {
+        ...(active ? { "data-active": "" } : {}),
+        ...(activeChildren ? { "data-active-children": "" } : {})
+      };
+    }, [active, activeChildren]);
 
-  return (
-    <Link
-      ref={ref}
-      href={href}
-      className={`${
-        typeof className === "function"
-          ? className({ active, activeChildren: activeChildren })
-          : className
-      }`}
-      style={
-        typeof style === "function" ? style({ active, activeChildren: activeChildren }) : style
-      }
-      {...dataProps}
-      {...otherProps}
-    >
-      {typeof children === "function"
-        ? children({ active, activeChildren: activeChildren })
-        : children}
-    </Link>
-  );
-});
+    return (
+      <Link
+        ref={ref}
+        href={href}
+        className={`${
+          typeof className === "function"
+            ? className({ active, activeChildren: activeChildren })
+            : className
+        }`}
+        style={
+          typeof style === "function"
+            ? style({ active, activeChildren: activeChildren })
+            : style
+        }
+        {...dataProps}
+        {...otherProps}
+      >
+        {typeof children === "function"
+          ? children({ active, activeChildren: activeChildren })
+          : children}
+      </Link>
+    );
+  }
+);
 
 NavLink.displayName = "NavLink";
 

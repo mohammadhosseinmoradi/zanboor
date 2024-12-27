@@ -10,7 +10,10 @@ type ListboxDropdownField = Omit<ListboxDropdownProps, "invalid"> & {
   error?: string;
 };
 
-const ListboxDropdownField = forwardRef<HTMLButtonElement, ListboxDropdownField>((props, ref) => {
+const ListboxDropdownField = forwardRef<
+  HTMLButtonElement,
+  ListboxDropdownField
+>((props, ref) => {
   const { label, error, className, ...otherProps } = props;
 
   return (

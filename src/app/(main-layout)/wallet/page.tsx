@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <PageLayout
       header={{
-        title: "کیف پول",
+        title: "کیف پول"
       }}
     >
       <Wallet />

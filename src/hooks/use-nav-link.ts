@@ -14,12 +14,13 @@ export function useNavLink({ href }: UseNavLinkProps) {
   const hrefPathname = new URL(href as string, "https://test.com").pathname;
 
   return useMemo(() => {
-    const activeChildren = pathname !== hrefPathname && pathname.startsWith(hrefPathname);
+    const activeChildren =
+      pathname !== hrefPathname && pathname.startsWith(hrefPathname);
     const active = pathname === hrefPathname;
 
     return {
       active,
-      activeChildren,
+      activeChildren
     };
   }, [pathname, hrefPathname]);
 }

@@ -19,20 +19,20 @@ const tab = cva({
     variant: {
       highlight: "py-1",
       underline: "",
-      none: "",
+      none: ""
     },
     selected: {
       true: "",
-      false: "z-10",
-    },
+      false: "z-10"
+    }
   },
   compoundVariants: [
     {
       variant: "highlight",
       selected: false,
-      className: "text-on-surface-variant",
-    },
-  ],
+      className: "text-on-surface-variant"
+    }
+  ]
 });
 
 const tabIndicator = cva({
@@ -41,9 +41,9 @@ const tabIndicator = cva({
     variant: {
       highlight: "bg-primary-200 h-full z-[-1]",
       underline: "",
-      none: "h-[0px] bg-[transparent]",
-    },
-  },
+      none: "h-[0px] bg-[transparent]"
+    }
+  }
 });
 
 const Tab = forwardRef<HTMLDivElement, TabProps<"div">>((props, ref) => {
@@ -61,7 +61,7 @@ const Tab = forwardRef<HTMLDivElement, TabProps<"div">>((props, ref) => {
           variant !== "none" &&
             tab({
               variant,
-              selected: bag.selected,
+              selected: bag.selected
             }),
           typeof className === "function" ? className(bag) : className
         )
@@ -76,7 +76,7 @@ const Tab = forwardRef<HTMLDivElement, TabProps<"div">>((props, ref) => {
               <motion.div
                 className={cn(
                   tabIndicator({
-                    variant,
+                    variant
                   })
                 )}
                 style={{ borderRadius: 9999 }}
@@ -84,7 +84,7 @@ const Tab = forwardRef<HTMLDivElement, TabProps<"div">>((props, ref) => {
                 transition={{
                   type: "spring",
                   stiffness: 200,
-                  damping: 20,
+                  damping: 20
                 }}
               />
             )}

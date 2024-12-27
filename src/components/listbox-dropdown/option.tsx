@@ -8,14 +8,17 @@ import { useIsAnchorSelection } from "@/components/listbox-dropdown/use-is-ancho
 
 const DEFAULT_OPTION_TAG = "button";
 
-type OptionProps<TTag extends ElementType = typeof DEFAULT_OPTION_TAG> = ListboxOptionProps<
-  TTag,
-  any // eslint-disable-line
-> & {
-  ref?: Ref<HTMLElement>;
-};
+type OptionProps<TTag extends ElementType = typeof DEFAULT_OPTION_TAG> =
+  ListboxOptionProps<
+    TTag,
+    any // eslint-disable-line
+  > & {
+    ref?: Ref<HTMLElement>;
+  };
 
-function Option<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(props: OptionProps<TTag>) {
+function Option<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(
+  props: OptionProps<TTag>
+) {
   const {
     ref,
     className,
@@ -55,7 +58,7 @@ function Option<TTag extends ElementType = typeof DEFAULT_OPTION_TAG>(props: Opt
         <>
           <span
             className={cn({
-              "max-sm:hidden": isAnchorSelection,
+              "max-sm:hidden": isAnchorSelection
             })}
           >
             <CheckIcon

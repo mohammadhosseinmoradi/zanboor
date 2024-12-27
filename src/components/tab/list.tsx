@@ -10,10 +10,11 @@ const list = cva({
   variants: {
     variant: {
       underline: "border-b",
-      highlight: "bg-surface rounded-full py-1 px-4 shadow-[0_0_4px_rgba(0,0,0,0.2)]",
-      none: "",
-    },
-  },
+      highlight:
+        "bg-surface rounded-full py-1 px-4 shadow-[0_0_4px_rgba(0,0,0,0.2)]",
+      none: ""
+    }
+  }
 });
 
 const List = forwardRef<HTMLDivElement, TabListProps<"div">>((props, ref) => {
@@ -32,7 +33,7 @@ const List = forwardRef<HTMLDivElement, TabListProps<"div">>((props, ref) => {
       className={(bag) =>
         cn(
           list({
-            variant,
+            variant
           }),
           typeof className === "function" ? className(bag) : className
         )

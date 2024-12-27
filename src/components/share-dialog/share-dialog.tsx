@@ -16,8 +16,8 @@ export default function ShareDialog({
   shareItem = {
     link: "",
     title: "",
-    text: "",
-  },
+    text: ""
+  }
 }: {
   open: boolean;
   onClose: () => void;
@@ -31,7 +31,7 @@ export default function ShareDialog({
     navigator.share({
       title: shareItem.title,
       text: shareItem.text,
-      url: shareItem.link,
+      url: shareItem.link
     });
   };
 
@@ -48,7 +48,9 @@ export default function ShareDialog({
           <Dialog.Close className="-me-2" />
         </Dialog.Header>
         <Dialog.Body className="pt-0 lg:pt-0">
-          <Description className="py-2">با دوستان خود به اشتراک بگذارید!</Description>
+          <Description className="py-2">
+            با دوستان خود به اشتراک بگذارید!
+          </Description>
           <div className="mt-4 flex flex-col gap-2">
             <Button ref={shareButtonRef} onClick={handleShareClick} autoFocus>
               <ShareIcon data-slot="start-icon" />

@@ -1,6 +1,6 @@
 import {
   Popover as HeadlessPopover,
-  PopoverProps as HeadlessPopoverProps,
+  PopoverProps as HeadlessPopoverProps
 } from "@headlessui/react";
 import { PopoverContext } from "@/components/popover/context";
 import { useState } from "react";
@@ -16,7 +16,8 @@ type PopoverProps = {
 export function Popover(props: PopoverProps) {
   const { snapPoint, children, ...otherProps } = props;
 
-  const [bodyScrollState, setBodyScrollState] = useState<ScrollStateProps | null>(null);
+  const [bodyScrollState, setBodyScrollState] =
+    useState<ScrollStateProps | null>(null);
 
   return (
     <HeadlessPopover {...otherProps}>
@@ -27,7 +28,7 @@ export function Popover(props: PopoverProps) {
             snapPoint,
             close: bag.close,
             bodyScrollState,
-            setBodyScrollState,
+            setBodyScrollState
           }}
         >
           {typeof children === "function" ? children(bag) : children}

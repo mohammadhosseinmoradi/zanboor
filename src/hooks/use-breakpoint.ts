@@ -11,7 +11,7 @@ const breakpointMap = {
   "max-md": "(max-width:768px)",
   "max-lg": "(max-width:1024px)",
   "max-xl": "(max-width:1280px)",
-  "max-2xl": "(max-width:1536px)",
+  "max-2xl": "(max-width:1536px)"
 };
 
 /**
@@ -26,7 +26,10 @@ export default function useBreakpoint(breakpoint: string, options?: Options) {
     const breakpoints = breakpoint.split(":");
     return breakpoints
       .reduce<string[]>((previousValue, currentValue) => {
-        return [...previousValue, breakpointMap[currentValue as keyof typeof breakpointMap]];
+        return [
+          ...previousValue,
+          breakpointMap[currentValue as keyof typeof breakpointMap]
+        ];
       }, [])
       .join(" and ");
   }, [breakpoint]);

@@ -4,7 +4,7 @@ export default function Page() {
   return (
     <PageLayout
       header={{
-        title: "کاربران بلاک شده",
+        title: "کاربران بلاک شده"
       }}
     ></PageLayout>
   );

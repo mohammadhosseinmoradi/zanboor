@@ -8,7 +8,11 @@ const Header = forwardRef<HTMLTableSectionElement, HeaderProps>(
     return (
       <thead
         ref={ref}
-        className={cn("[&>tr]:border-b [&>tr:last-child]:border-b-0", "border-b", className)}
+        className={cn(
+          "[&>tr]:border-b [&>tr:last-child]:border-b-0",
+          "border-b",
+          className
+        )}
         {...otherProps}
       />
     );

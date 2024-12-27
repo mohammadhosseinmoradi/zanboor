@@ -1,4 +1,7 @@
-import { Description as HeadlessDescription, DescriptionProps } from "@headlessui/react";
+import {
+  Description as HeadlessDescription,
+  DescriptionProps
+} from "@headlessui/react";
 import { cn } from "@/lib/utils";
 import { cva } from "cva";
 
@@ -7,12 +10,12 @@ const description = cva({
   variants: {
     variant: {
       regular: "text-sm",
-      caption: "text-xs",
-    },
+      caption: "text-xs"
+    }
   },
   defaultVariants: {
-    variant: "regular",
-  },
+    variant: "regular"
+  }
 });
 
 /**

@@ -22,7 +22,7 @@ export async function Profile(props: ProfileProps) {
     <PageLayout
       header={{
         title: "پروفایل",
-        actions: <Actions />,
+        actions: <Actions />
       }}
       className={cn("grow", className)}
     >

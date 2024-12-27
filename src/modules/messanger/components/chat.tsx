@@ -24,9 +24,9 @@ export function Chat(props: ChatProps) {
         title: <ChatInfo />,
         actions: <ChatActions />,
         backButton: {
-          className: "lg:hidden",
+          className: "lg:hidden"
         },
-        className: "border-b bg-surface-bright lg:ps-4",
+        className: "border-b bg-surface-bright lg:ps-4"
       }}
     >
       <ChatBody className="h-0 grow overflow-auto p-2 pb-0.5" />

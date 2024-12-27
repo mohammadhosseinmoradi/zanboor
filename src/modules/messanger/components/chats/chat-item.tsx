@@ -26,7 +26,10 @@ export function ChatItem(props: ChatItemProps) {
       )}
       {...(selected && { "data-selected": "" })}
     >
-      <Avatar src="/images/users/07.jpg" className="border-surface-container size-12 border-2" />
+      <Avatar
+        src="/images/users/07.jpg"
+        className="border-surface-container size-12 border-2"
+      />
       <div className="flex grow flex-col">
         <div className="flex gap-2">
           <Heading as="h3" variant="h5" className="line-clamp-1 grow">

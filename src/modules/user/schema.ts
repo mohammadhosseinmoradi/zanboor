@@ -12,7 +12,7 @@ import {
   PersonalityType,
   Role,
   SkinColor,
-  StyleLevel,
+  StyleLevel
 } from "@prisma/client";
 import { z } from "zod";
 import { LocationDtoCreateInputParamsSchema } from "@/modules/profile/schema";
@@ -28,7 +28,7 @@ export const familyInfoUserDtoSchema = z.object({
   sistersCount: z.number().int(),
   hasMarriedSiblings: z.boolean().nullable().optional(),
   createdAt: z.date(),
-  updatedAt: z.date(),
+  updatedAt: z.date()
 });
 
 export const marriagePreferencesUserDtoSchema = z.object({
@@ -49,7 +49,7 @@ export const marriagePreferencesUserDtoSchema = z.object({
   preferredPersonalityTypes: z.array(z.nativeEnum(PersonalityType)),
   additionalNote: z.string().nullable().optional(),
   createdAt: z.date(),
-  updatedAt: z.date(),
+  updatedAt: z.date()
 });
 
 export const profilePersonalUserDtoSchema = z.object({
@@ -66,7 +66,7 @@ export const profilePersonalUserDtoSchema = z.object({
   greatestChildAge: z.number().nullable().optional(),
   location: LocationDtoCreateInputParamsSchema.nullable().optional(),
   createdAt: z.date(),
-  updatedAt: z.date(),
+  updatedAt: z.date()
 });
 
 export const profileEducationAndCareerUserDtoSchema = z.object({
@@ -76,7 +76,7 @@ export const profileEducationAndCareerUserDtoSchema = z.object({
   fieldOfStudy: z.string(),
   jobTitle: z.string(),
   createdAt: z.date(),
-  updatedAt: z.date(),
+  updatedAt: z.date()
 });
 
 export const profilePhysicalAttributesUserDtoSchema = z.object({
@@ -87,7 +87,7 @@ export const profilePhysicalAttributesUserDtoSchema = z.object({
   beautyLevel: z.nativeEnum(BeautyLevel),
   styleLevel: z.nativeEnum(StyleLevel),
   createdAt: z.date(),
-  updatedAt: z.date(),
+  updatedAt: z.date()
 });
 
 export const profileFinancialStatusUserDtoSchema = z.object({
@@ -96,7 +96,7 @@ export const profileFinancialStatusUserDtoSchema = z.object({
   housingStatus: z.nativeEnum(HousingStatus),
   carStatus: z.nativeEnum(CarStatus),
   createdAt: z.date(),
-  updatedAt: z.date(),
+  updatedAt: z.date()
 });
 
 export const profileUserDtoSchema = z.object({
@@ -108,12 +108,12 @@ export const profileUserDtoSchema = z.object({
   financialStatus: profileFinancialStatusUserDtoSchema,
   marriagePreferences: marriagePreferencesUserDtoSchema,
   createdAt: z.date(),
-  updatedAt: z.date(),
+  updatedAt: z.date()
 });
 
 export const userDtoSchema = z.object({
   id: z.string(),
   phoneVerifiedAt: z.date().nullable().optional(),
   role: z.nativeEnum(Role),
-  profile: profileUserDtoSchema,
+  profile: profileUserDtoSchema
 });

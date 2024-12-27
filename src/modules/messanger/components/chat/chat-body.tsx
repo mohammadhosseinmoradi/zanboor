@@ -16,7 +16,7 @@ export function ChatBody(props: ChatBodyProps) {
   const bodyRef = useRef<HTMLDivElement | null>(null);
 
   const { scrollY } = useScroll({
-    container: bodyRef,
+    container: bodyRef
   });
 
   useMotionValueEvent(scrollY, "change", (latestValue) => {
@@ -26,19 +26,38 @@ export function ChatBody(props: ChatBodyProps) {
   return (
     <div ref={bodyRef} className={cn("relative flex flex-col", className)}>
       <div className="mx-auto flex w-full max-w-200 flex-col gap-2">
-        <Badge variant="filled" size="lg" className="sticky top-0 self-center shadow">
+        <Badge
+          variant="filled"
+          size="lg"
+          className="sticky top-0 self-center shadow"
+        >
           امروز
         </Badge>
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />
-        <ChatBubbleGroup type="receiver" className="max-w-[calc(100%-4rem)] self-end" />
+        <ChatBubbleGroup
+          type="receiver"
+          className="max-w-[calc(100%-4rem)] self-end"
+        />
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />
-        <ChatBubbleGroup type="receiver" className="max-w-[calc(100%-4rem)] self-end" />
+        <ChatBubbleGroup
+          type="receiver"
+          className="max-w-[calc(100%-4rem)] self-end"
+        />
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />
-        <ChatBubbleGroup type="receiver" className="max-w-[calc(100%-4rem)] self-end" />
+        <ChatBubbleGroup
+          type="receiver"
+          className="max-w-[calc(100%-4rem)] self-end"
+        />
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />
-        <ChatBubbleGroup type="receiver" className="max-w-[calc(100%-4rem)] self-end" />
+        <ChatBubbleGroup
+          type="receiver"
+          className="max-w-[calc(100%-4rem)] self-end"
+        />
         <ChatBubbleGroup type="sender" className="max-w-[calc(100%-4rem)]" />
-        <ChatBubbleGroup type="receiver" className="max-w-[calc(100%-4rem)] self-end" />
+        <ChatBubbleGroup
+          type="receiver"
+          className="max-w-[calc(100%-4rem)] self-end"
+        />
       </div>
       {/*<Button size='lg' color='secondary' className='fixed bottom-16 end-2 rounded-full'>*/}
       {/*  <ArrowDownIcon data-slot='icon' />*/}

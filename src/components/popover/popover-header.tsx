@@ -2,7 +2,10 @@ import { ComponentPropsWithoutRef, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { usePopoverContext } from "@/components/popover/context";
 
-const PopoverHeader = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<"div">>((props, ref) => {
+const PopoverHeader = forwardRef<
+  HTMLDivElement,
+  ComponentPropsWithoutRef<"div">
+>((props, ref) => {
   const { className, children, ...otherProps } = props;
 
   const { bodyScrollState } = usePopoverContext();
@@ -15,7 +18,8 @@ const PopoverHeader = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<"div">
         "relative shrink-0",
         "max-lg:min-h-4 [&>[data-slot=description]]:text-sm [&>[data-slot=title]+[data-slot=description]]:mt-1.5",
         {
-          "shadow-lg": !!bodyScrollState?.isScrolled && !bodyScrollState?.isBeginning,
+          "shadow-lg":
+            !!bodyScrollState?.isScrolled && !bodyScrollState?.isBeginning
         },
         className
       )}

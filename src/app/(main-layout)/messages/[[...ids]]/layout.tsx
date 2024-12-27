@@ -18,7 +18,7 @@ export default async function Layout(props: Props) {
   return (
     <MessengerProvider
       initialData={{
-        chatId,
+        chatId
       }}
     >
       {children}

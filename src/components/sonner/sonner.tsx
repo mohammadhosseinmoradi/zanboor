@@ -20,13 +20,13 @@ export function Toaster(props: ToasterProps) {
       dir="rtl"
       icons={{
         success: <CircleCheckIcon className="text-success size-5" />,
-        error: <CircleAlertIcon className="text-error size-5" />,
+        error: <CircleAlertIcon className="text-error size-5" />
       }}
       toastOptions={{
         classNames: {
           title: "text-on-surface",
-          toast: "shadow rounded-lg select-none",
-        },
+          toast: "shadow rounded-lg select-none"
+        }
       }}
       {...props}
     />

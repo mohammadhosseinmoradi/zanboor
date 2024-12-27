@@ -35,7 +35,12 @@ export function RequireAuth(props: RequiredAuthProps) {
         <span> ابتدا وارد حساب خود شوید.</span>
       </Text>
       <div className="flex items-center gap-2">
-        <Button as={Link} href={routes.home} className="mt-6 self-center" color="secondary">
+        <Button
+          as={Link}
+          href={routes.home}
+          className="mt-6 self-center"
+          color="secondary"
+        >
           <SlashIcon data-slot="start-icon" />
           ویترین
         </Button>

@@ -12,7 +12,7 @@ import {
   SunMoonIcon,
   Trash2Icon,
   UserRoundPenIcon,
-  UserRoundXIcon,
+  UserRoundXIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/switch";
@@ -26,7 +26,7 @@ export default function Page() {
   return (
     <PageLayout
       header={{
-        title: "تنظیمات",
+        title: "تنظیمات"
       }}
       className="grow"
     >
@@ -37,7 +37,10 @@ export default function Page() {
             title="+989862624"
             description="موبایل"
             startSlot={({ className, ...otherProps }) => (
-              <PhoneIcon className={cn("text-on-surface-variant", className)} {...otherProps} />
+              <PhoneIcon
+                className={cn("text-on-surface-variant", className)}
+                {...otherProps}
+              />
             )}
             endSlot={(props) => (
               <Button
@@ -77,10 +80,17 @@ export default function Page() {
             title="اعلانات"
             description={"دریافت اعلان‌ برای پیام‌های جدید"}
             startSlot={({ className, ...otherProps }) => (
-              <BellIcon className={cn("text-on-surface-variant", className)} {...otherProps} />
+              <BellIcon
+                className={cn("text-on-surface-variant", className)}
+                {...otherProps}
+              />
             )}
             endSlot={({ className, ...otherProps }) => (
-              <Switch checked={false} className={cn("", className)} {...otherProps} />
+              <Switch
+                checked={false}
+                className={cn("", className)}
+                {...otherProps}
+              />
             )}
           />
           <MenuItem
@@ -109,7 +119,10 @@ export default function Page() {
             title="علاقمندی‌ها"
             description="۱۶ نفر"
             startSlot={({ className, ...otherProps }) => (
-              <HeartIcon className={cn("text-on-surface-variant", className)} {...otherProps} />
+              <HeartIcon
+                className={cn("text-on-surface-variant", className)}
+                {...otherProps}
+              />
             )}
             endSlot={({ className, ...otherProps }) => (
               <ChevronLeftIcon

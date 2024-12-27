@@ -10,13 +10,13 @@ type LoadingProps = {
 const sizes: Record<Size, string> = {
   sm: "w-[0.25rem] h-[0.25rem]",
   md: "w-[0.3rem] h-[0.3rem]",
-  lg: "w-[0.35rem] h-[0.35rem]",
+  lg: "w-[0.35rem] h-[0.35rem]"
 };
 
 const gaps: Record<Size, string> = {
   sm: "gap-[0.12rem]",
   md: "gap-[0.15rem]",
-  lg: "gap-[0.2rem]",
+  lg: "gap-[0.2rem]"
 };
 
 /**

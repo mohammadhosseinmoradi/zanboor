@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   DescriptionDetails,
   DescriptionList,
-  DescriptionTerm,
+  DescriptionTerm
 } from "@/components/description-list";
 import {
   getEducationLevelTranslated,
@@ -15,7 +15,7 @@ import {
   getTheirCarStatusTranslated,
   getTheirChildrenStatusTranslated,
   getTheirHousingStatusTranslated,
-  hasChildrenStatus,
+  hasChildrenStatus
 } from "@/modules/utils";
 import { MarriagePreferencesUserDto } from "@/modules/user/types";
 
@@ -31,9 +31,13 @@ export function MarriagePreferences(props: MarriagePreferencesProps) {
     <div className={cn("flex w-full flex-col", className)}>
       <DescriptionList className="grid w-full grid-cols-2 gap-x-4 gap-y-4 lg:grid-cols-[auto_1fr_auto_1fr]">
         <DescriptionTerm>سن</DescriptionTerm>
-        <DescriptionDetails>{[data.ageMin, "تا", data.ageMax].join(" ")}</DescriptionDetails>
+        <DescriptionDetails>
+          {[data.ageMin, "تا", data.ageMax].join(" ")}
+        </DescriptionDetails>
         <DescriptionTerm>قد</DescriptionTerm>
-        <DescriptionDetails>{[data.heightMin, "تا", data.heightMax].join(" ")}</DescriptionDetails>
+        <DescriptionDetails>
+          {[data.heightMin, "تا", data.heightMax].join(" ")}
+        </DescriptionDetails>
         <DescriptionTerm>رنگ پوست</DescriptionTerm>
         <DescriptionDetails>
           {data.skinColors.map(getSkinColorTranslated).join("، ")}
@@ -61,7 +65,9 @@ export function MarriagePreferences(props: MarriagePreferencesProps) {
         <DescriptionTerm>تیپ‌ شخصیتی</DescriptionTerm>
         <DescriptionDetails>
           {!data.preferredPersonalityTypes.length && "مهم نیست"}
-          {data.preferredPersonalityTypes.map(getPersonalityTypeTranslated).join("، ")}
+          {data.preferredPersonalityTypes
+            .map(getPersonalityTypeTranslated)
+            .join("، ")}
         </DescriptionDetails>
         <div className="col-span-full border-b" />
         <DescriptionTerm>تحصیلات</DescriptionTerm>

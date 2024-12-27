@@ -1,6 +1,9 @@
 import { useSearchParams } from "next/navigation";
 
-export function withCallbackUrl(href: string, callback?: string | null): string {
+export function withCallbackUrl(
+  href: string,
+  callback?: string | null
+): string {
   const [pathname, search] = href.split("?");
   const searchParams = new URLSearchParams(search);
   if (callback) searchParams.set("callback", callback);

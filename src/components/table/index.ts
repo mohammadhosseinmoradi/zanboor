@@ -6,4 +6,12 @@ import { Header as TableHeader } from "./components/header";
 import { Row as TableRow } from "./components/row";
 import { RowHeaderCell as RowHeaderCell } from "./components/row-header-cell";
 
-export { Table, TableBody, TableCell, TableColumnHeaderCell, TableHeader, TableRow, RowHeaderCell };
+export {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumnHeaderCell,
+  TableHeader,
+  TableRow,
+  RowHeaderCell
+};

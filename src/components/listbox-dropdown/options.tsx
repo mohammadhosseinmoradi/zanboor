@@ -18,8 +18,8 @@ const options = cva({
   variants: {
     anchorSelection: {
       true: "",
-      false: "",
-    },
+      false: ""
+    }
   },
   compoundVariants: [
     {
@@ -27,7 +27,7 @@ const options = cva({
       className: cn(
         "[--anchor-offset:-0.3rem] sm:[--anchor-offset:-1.8rem]",
         "min-w-[calc(var(--button-width)+0.65rem)] sm:min-w-[calc(var(--button-width)+2.12rem)]"
-      ),
+      )
     },
     {
       anchorSelection: false,
@@ -50,12 +50,12 @@ const options = cva({
         "data-[anchor~=left]:data-[anchor~=center]:origin-right",
         "data-[anchor~=left]:data-[anchor~=start]:origin-top-right",
         "data-[anchor~=left]:data-[anchor~=end]:origin-bottom-right"
-      ),
-    },
+      )
+    }
   ],
   defaultVariants: {
-    anchorSelection: true,
-  },
+    anchorSelection: true
+  }
 });
 
 type ListboxOptionsRenderPropArg = {
@@ -77,12 +77,16 @@ function OptionsFn(props: OptionsProps, ref?: Ref<HTMLDivElement>) {
       ref={ref}
       transition
       anchor={{
-        to: isAnchorSelection ? "selection start" : typeof anchor == "string" ? anchor : "bottom",
-        ...(typeof anchor == "object" ? anchor : {}),
+        to: isAnchorSelection
+          ? "selection start"
+          : typeof anchor == "string"
+            ? anchor
+            : "bottom",
+        ...(typeof anchor == "object" ? anchor : {})
       }}
       className={cn(
         options({
-          anchorSelection: isAnchorSelection,
+          anchorSelection: isAnchorSelection
         }),
         className
       )}
@@ -101,11 +105,15 @@ function OptionsFn(props: OptionsProps, ref?: Ref<HTMLDivElement>) {
             if (typeof children === "function")
               return children({
                 options: listboxContext.options,
-                ...bag,
+                ...bag
               });
 
             return listboxContext.options.map((option, index) => (
-              <DropdownOption key={index} value={option.value} disabled={option?.disabled}>
+              <DropdownOption
+                key={index}
+                value={option.value}
+                disabled={option?.disabled}
+              >
                 {option.label}
               </DropdownOption>
             ));

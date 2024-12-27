@@ -43,7 +43,7 @@ export function EnterOtpForm(props: EnterPhoneProps) {
 
   const form = useForm<EnterOtp>({
     disabled: isPending,
-    resolver: zodResolver(enterOtpSchema),
+    resolver: zodResolver(enterOtpSchema)
   });
 
   const [expiresAt, setExpiresAt] = useState<Date | null>(null);
@@ -56,7 +56,12 @@ export function EnterOtpForm(props: EnterPhoneProps) {
     form.setValue("phone", authContext.phone);
     form.setValue("iAcceptTerms", true);
     setExpiresAt(authContext?.otpExpiresAt || null);
-  }, [authContext.countryCode, authContext.phone, authContext?.otpExpiresAt, form]);
+  }, [
+    authContext.countryCode,
+    authContext.phone,
+    authContext?.otpExpiresAt,
+    form
+  ]);
 
   const handleSubmit = form.handleSubmit((data) => {
     startTransition(async () => {
@@ -66,7 +71,7 @@ export function EnterOtpForm(props: EnterPhoneProps) {
           case ErrorName.InvalidOtp: {
             form.setValue("otp", "");
             form.setError("otp", {
-              message: session.error.message,
+              message: session.error.message
             });
             setTimeout(() => {
               form.setFocus("otp");
@@ -80,10 +85,14 @@ export function EnterOtpForm(props: EnterPhoneProps) {
     });
   });
 
-  if (!authContext.countryCode || !authContext?.phone) redirect(routes.auth.enterPhone);
+  if (!authContext.countryCode || !authContext?.phone)
+    redirect(routes.auth.enterPhone);
 
   return (
-    <form className={cn("pointer-events-auto flex flex-col", className)} onSubmit={handleSubmit}>
+    <form
+      className={cn("pointer-events-auto flex flex-col", className)}
+      onSubmit={handleSubmit}
+    >
       <Link href="/" className="mx-auto">
         <ThemeImage
           srcLight="/images/logo-with-text.png"
@@ -101,7 +110,11 @@ export function EnterOtpForm(props: EnterPhoneProps) {
           return (
             <InputField className="mt-6" required>
               <Label htmlFor="otp" className="text-center">
-                {["کد یکبار مصرف ارسال شده به", authContext.phone, "را وارد کنید."].join(" ")}
+                {[
+                  "کد یکبار مصرف ارسال شده به",
+                  authContext.phone,
+                  "را وارد کنید."
+                ].join(" ")}
               </Label>
               <OtpInput
                 id="otp"
@@ -113,7 +126,9 @@ export function EnterOtpForm(props: EnterPhoneProps) {
                 invalid={!!fieldState.error?.message}
                 {...field}
               />
-              <ErrorMessage className="text-center">{fieldState.error?.message}</ErrorMessage>
+              <ErrorMessage className="text-center">
+                {fieldState.error?.message}
+              </ErrorMessage>
             </InputField>
           );
         }}
@@ -121,7 +136,10 @@ export function EnterOtpForm(props: EnterPhoneProps) {
       <div className="mt-6 flex h-9 items-center justify-center">
         {expiresAt && (
           <Text className="flex gap-1 text-sm">
-            <LeftTime deadline={expiresAt} onReachedEnd={() => setExpiresAt(null)} />
+            <LeftTime
+              deadline={expiresAt}
+              onReachedEnd={() => setExpiresAt(null)}
+            />
             مانده تا دریافت مجدد
           </Text>
         )}
@@ -131,7 +149,7 @@ export function EnterOtpForm(props: EnterPhoneProps) {
             data={{
               countryCode: authContext.countryCode,
               phone: authContext.phone,
-              iAcceptTerms: true,
+              iAcceptTerms: true
             }}
             onSuccess={() => {
               form.clearErrors();
@@ -205,7 +223,7 @@ function SendOtpButton(props: SendOtpButtonProps) {
       onSuccess();
       toast.success("کد یکبار مصرف با موفقیت ارسال شد.");
       updateOtpExpiresAt({
-        otpExpiresAt: res.data.otpExpiresAt,
+        otpExpiresAt: res.data.otpExpiresAt
       });
     });
 
@@ -236,7 +254,7 @@ function LeftTime(props: LeftTimeProps) {
 
   const { minutes, seconds } = useLeftTime({
     deadline: deadline,
-    onReachedEnd,
+    onReachedEnd
   });
 
   return (
@@ -268,15 +286,15 @@ function Animate({ value }: { value: string | number }) {
           key={value}
           initial={{
             y: -20,
-            opacity: 0,
+            opacity: 0
           }}
           animate={{
             y: 0,
-            opacity: 1,
+            opacity: 1
           }}
           exit={{
             y: 20,
-            opacity: 0,
+            opacity: 0
           }}
         >
           {value}

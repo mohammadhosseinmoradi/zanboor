@@ -8,7 +8,7 @@ import {
   LucideProps,
   MessageSquareTextIcon,
   SlashIcon,
-  UserRoundIcon,
+  UserRoundIcon
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/badge";
@@ -31,16 +31,36 @@ export default function NavBar(props: MobileBottomNavBarProps) {
         )}
         suppressHydrationWarning
       >
-        <Item href={routes.home} icon={SlashIcon} label="ویترین" layoutId={id} />
-        <Item href={routes.counselor} icon={HeadsetIcon} label="مشاور" layoutId={id} />
-        <Item href={routes.favorites} icon={HeartIcon} label="علاقمندی‌ها" layoutId={id} />
+        <Item
+          href={routes.home}
+          icon={SlashIcon}
+          label="ویترین"
+          layoutId={id}
+        />
+        <Item
+          href={routes.counselor}
+          icon={HeadsetIcon}
+          label="مشاور"
+          layoutId={id}
+        />
+        <Item
+          href={routes.favorites}
+          icon={HeartIcon}
+          label="علاقمندی‌ها"
+          layoutId={id}
+        />
         <Item
           href={routes.messages.index}
           icon={MessageSquareTextIcon}
           label="پیام‌ها"
           layoutId={id}
         />
-        <Item href={routes.profile.index} icon={UserRoundIcon} label="پروفایل" layoutId={id} />
+        <Item
+          href={routes.profile.index}
+          icon={UserRoundIcon}
+          label="پروفایل"
+          layoutId={id}
+        />
       </div>
     </>
   );
@@ -84,7 +104,7 @@ function Item(props: ItemProps) {
               transition={{
                 type: "spring",
                 stiffness: 200,
-                damping: 20,
+                damping: 20
               }}
             />
           )}

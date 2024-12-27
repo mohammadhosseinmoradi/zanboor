@@ -10,8 +10,8 @@ export async function getUser(id: string): Promise<Result<UserDto>> {
     where: {
       id,
       profile: {
-        isNot: null,
-      },
+        isNot: null
+      }
     },
     include: {
       profile: {
@@ -21,15 +21,15 @@ export async function getUser(id: string): Promise<Result<UserDto>> {
           physicalAttributes: true,
           familyInfo: true,
           financialStatus: true,
-          marriagePreferences: true,
-        },
-      },
-    },
+          marriagePreferences: true
+        }
+      }
+    }
   });
 
   const userDto = userDtoSchema.parse(user);
 
   return {
-    data: userDto,
+    data: userDto
   };
 }

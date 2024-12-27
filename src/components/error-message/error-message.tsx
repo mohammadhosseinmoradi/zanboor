@@ -21,15 +21,15 @@ export default function ErrorMessage(props: ErrorMessageProps) {
           variants={{
             open: {
               y: 0,
-              opacity: 1,
+              opacity: 1
             },
             closed: {
               y: -4,
-              opacity: 0,
-            },
+              opacity: 0
+            }
           }}
           transition={{
-            duration: 0.1,
+            duration: 0.1
           }}
         >
           <p className="text-error text-sm">{children}</p>

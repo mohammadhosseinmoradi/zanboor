@@ -1,6 +1,11 @@
 import { Menu } from "@/components/menu";
 import { Fragment } from "react";
-import { ChevronDownIcon, MonitorSmartphoneIcon, MoonIcon, SunIcon } from "lucide-react";
+import {
+  ChevronDownIcon,
+  MonitorSmartphoneIcon,
+  MoonIcon,
+  SunIcon
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button, ButtonProps } from "@/components/button";
 

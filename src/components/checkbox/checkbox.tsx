@@ -11,12 +11,12 @@ const checkbox = cva({
   ),
   variants: {
     color: {
-      primary: "",
+      primary: ""
     },
     disabled: {
       true: "",
-      false: "",
-    },
+      false: ""
+    }
   },
   compoundVariants: [
     {
@@ -31,7 +31,7 @@ const checkbox = cva({
         "[&:hover>[data-slot=check]]:flex",
         "[&[data-checked]>[data-slot=check]]:flex",
         "[&[data-checked]>[data-slot=check]]:text-bg"
-      ),
+      )
     },
     {
       disabled: true,
@@ -42,37 +42,39 @@ const checkbox = cva({
         "[&>[data-slot=check]]:hidden",
         "[&[data-checked]>[data-slot=check]]:flex",
         "[&[data-checked]>[data-slot=check]]:text-white"
-      ),
-    },
+      )
+    }
   ],
   defaultVariants: {
     color: "primary",
-    disabled: false,
-  },
+    disabled: false
+  }
 });
 
-const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps<"button">>((props, ref) => {
-  const { className, disabled, as = "button", ...otherProps } = props;
+const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps<"button">>(
+  (props, ref) => {
+    const { className, disabled, as = "button", ...otherProps } = props;
 
-  return (
-    <HeadlessCheckbox
-      ref={ref}
-      as={as}
-      data-slot="control"
-      className={cn(
-        checkbox({
-          disabled,
-        }),
-        className
-      )}
-      disabled={disabled}
-      {...otherProps}
-      type="button"
-    >
-      <CheckIcon data-slot="check" className="size-3.5 stroke-[2.5px]" />
-    </HeadlessCheckbox>
-  );
-});
+    return (
+      <HeadlessCheckbox
+        ref={ref}
+        as={as}
+        data-slot="control"
+        className={cn(
+          checkbox({
+            disabled
+          }),
+          className
+        )}
+        disabled={disabled}
+        {...otherProps}
+        type="button"
+      >
+        <CheckIcon data-slot="check" className="size-3.5 stroke-[2.5px]" />
+      </HeadlessCheckbox>
+    );
+  }
+);
 
 Checkbox.displayName = HeadlessCheckbox.displayName;
 

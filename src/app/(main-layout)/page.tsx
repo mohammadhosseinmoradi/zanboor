@@ -17,7 +17,13 @@ export default async function Home() {
         )}
       >
         {users.data.map((user) => {
-          return <UserCard key={user.id} data={user} className="transition hover:shadow" />;
+          return (
+            <UserCard
+              key={user.id}
+              data={user}
+              className="transition hover:shadow"
+            />
+          );
         })}
       </div>
     </div>

@@ -33,17 +33,17 @@ const item = cva({
   variants: {
     variant: {
       outlined: "border",
-      plain: "",
-    },
+      plain: ""
+    }
   },
   compoundVariants: [],
   defaultVariants: {
-    variant: "plain",
-  },
+    variant: "plain"
+  }
 });
 
-export type ItemProps<TTag extends ElementType = typeof DEFAULT_ITEM_TAG> = MenuItemProps<TTag> &
-  VariantProps<typeof item> & {};
+export type ItemProps<TTag extends ElementType = typeof DEFAULT_ITEM_TAG> =
+  MenuItemProps<TTag> & VariantProps<typeof item> & {};
 
 function ItemFn<TTag extends ElementType = typeof DEFAULT_ITEM_TAG>(
   props: ItemProps<TTag>,
@@ -62,11 +62,16 @@ function ItemFn<TTag extends ElementType = typeof DEFAULT_ITEM_TAG>(
       ref={ref as Ref<HTMLButtonElement>}
       as={as}
       className={(bag) =>
-        cn(item({ variant }), typeof className === "function" ? className(bag) : className)
+        cn(
+          item({ variant }),
+          typeof className === "function" ? className(bag) : className
+        )
       }
       {...otherProps}
     >
-      {(bag) => <>{typeof children === "function" ? children(bag) : children}</>}
+      {(bag) => (
+        <>{typeof children === "function" ? children(bag) : children}</>
+      )}
     </MenuItem>
   );
 }

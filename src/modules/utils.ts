@@ -11,7 +11,7 @@ import {
   MaritalStatus,
   PersonalityType,
   SkinColor,
-  StyleLevel,
+  StyleLevel
 } from "@prisma/client";
 
 export function getGenderTranslated(gender: Gender): string {
@@ -28,7 +28,9 @@ export function getGenderTranslated(gender: Gender): string {
   }
 }
 
-export function getMaritalStatusTranslated(maritalStatus: MaritalStatus): string {
+export function getMaritalStatusTranslated(
+  maritalStatus: MaritalStatus
+): string {
   switch (maritalStatus) {
     case MaritalStatus.Single: {
       return "مجرد";
@@ -62,7 +64,9 @@ export function getSkinColorTranslated(skinColor: SkinColor): string {
   }
 }
 
-export function getEmploymentStatusTranslated(employmentStatus: EmploymentStatus): string {
+export function getEmploymentStatusTranslated(
+  employmentStatus: EmploymentStatus
+): string {
   switch (employmentStatus) {
     case EmploymentStatus.Employed: {
       return "شاغل";
@@ -73,7 +77,9 @@ export function getEmploymentStatusTranslated(employmentStatus: EmploymentStatus
   }
 }
 
-export function getEducationLevelTranslated(educationLevel: EducationLevel): string {
+export function getEducationLevelTranslated(
+  educationLevel: EducationLevel
+): string {
   switch (educationLevel) {
     case EducationLevel.NoEducation: {
       return "فاقد تحصیلات رسمی";
@@ -161,7 +167,9 @@ export function getTheirCarStatusTranslated(carStatus: CarStatus): string {
   }
 }
 
-export function getHousingStatusTranslated(housingStatus: HousingStatus): string {
+export function getHousingStatusTranslated(
+  housingStatus: HousingStatus
+): string {
   switch (housingStatus) {
     case HousingStatus.NoHouse: {
       return "ندارم";
@@ -178,7 +186,9 @@ export function getHousingStatusTranslated(housingStatus: HousingStatus): string
   }
 }
 
-export function getTheirHousingStatusTranslated(housingStatus: HousingStatus): string {
+export function getTheirHousingStatusTranslated(
+  housingStatus: HousingStatus
+): string {
   switch (housingStatus) {
     case HousingStatus.NoHouse: {
       return "نداشته باشه";
@@ -195,7 +205,9 @@ export function getTheirHousingStatusTranslated(housingStatus: HousingStatus): s
   }
 }
 
-export function getChildrenStatusTranslated(childrenStatus: ChildrenStatus): string {
+export function getChildrenStatusTranslated(
+  childrenStatus: ChildrenStatus
+): string {
   switch (childrenStatus) {
     case ChildrenStatus.None: {
       return "ندارم";
@@ -218,7 +230,9 @@ export function getChildrenStatusTranslated(childrenStatus: ChildrenStatus): str
   }
 }
 
-export function getTheirChildrenStatusTranslated(childrenStatus: ChildrenStatus): string {
+export function getTheirChildrenStatusTranslated(
+  childrenStatus: ChildrenStatus
+): string {
   switch (childrenStatus) {
     case ChildrenStatus.None: {
       return "نداشته باشه";
@@ -255,7 +269,9 @@ export function getHealthStatusTranslated(healthStatus: HealthStatus): string {
   }
 }
 
-export function getPersonalityTypeTranslated(personalityType: PersonalityType): string {
+export function getPersonalityTypeTranslated(
+  personalityType: PersonalityType
+): string {
   switch (personalityType) {
     case PersonalityType.Introvert: {
       return "درونگرا";

@@ -27,7 +27,9 @@ export function MainLayout(props: MainLayoutProps) {
         <main className="flex grow flex-col">{children}</main>
       </div>
       <Footer />
-      {isNavbar && <NavBar className="sticky inset-0 bottom-0 z-30 lg:hidden" />}
+      {isNavbar && (
+        <NavBar className="sticky inset-0 bottom-0 z-30 lg:hidden" />
+      )}
     </div>
   );
 }

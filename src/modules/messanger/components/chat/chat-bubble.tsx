@@ -21,15 +21,16 @@ export function ChatBubble(props: ChatBubbleProps) {
       className={cn("group relative grow px-2 py-2 drop-shadow-sm", {
         "dark:bg-primary-800 bg-primary-100 order-3 ms-2.5 rounded-e-lg rounded-t-lg not-last:rounded-b-lg":
           type == "sender",
-        "bg-surface-bright rounded-s-lg rounded-t-lg not-last:rounded-b-lg": type == "receiver",
-        className,
+        "bg-surface-bright rounded-s-lg rounded-t-lg not-last:rounded-b-lg":
+          type == "receiver",
+        className
       })}
     >
       <Corner
         className={cn("invisible group-last:visible", "absolute size-6", {
           "fill-primary-100 dark:fill-primary-800 -start-3.5 bottom-0 scale-x-[-1]":
             type == "sender",
-          "fill-surface-bright -end-4 bottom-0": type == "receiver",
+          "fill-surface-bright -end-4 bottom-0": type == "receiver"
         })}
       />
       <ChatContent />
@@ -47,11 +48,13 @@ function ChatContent(props: ChatContentProps) {
   return (
     <div className={className}>
       <div className="grid grid-cols-1">
-        <div className="text-on-surface text-sm leading-relaxed break-words">این متن پیام هست</div>
+        <div className="text-on-surface text-sm leading-relaxed break-words">
+          این متن پیام هست
+        </div>
       </div>
       <div
         className={cn("mt-1 flex items-center gap-1", {
-          "gap-2": "seen",
+          "gap-2": "seen"
         })}
       >
         <div className="relative">

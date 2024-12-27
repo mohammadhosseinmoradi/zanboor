@@ -6,7 +6,7 @@ import {
   MessageSquareTextIcon,
   SlashIcon,
   SunMoonIcon,
-  UserRoundIcon,
+  UserRoundIcon
 } from "lucide-react";
 import { ReactNode, useId } from "react";
 import { NavLink } from "@/components/nav-link";
@@ -48,16 +48,36 @@ export default function SideBar(props: SideBarProps) {
         />
       </Link>
       <div className="mt-6 flex grow flex-col">
-        <Item href={routes.home} icon={SlashIcon} label="ویترین" layoutId={id} />
-        <Item href={routes.counselor} icon={HeadsetIcon} label="مشاور" layoutId={id} />
-        <Item href={routes.favorites} icon={HeartIcon} label="علاقمندی‌ها" layoutId={id} />
+        <Item
+          href={routes.home}
+          icon={SlashIcon}
+          label="ویترین"
+          layoutId={id}
+        />
+        <Item
+          href={routes.counselor}
+          icon={HeadsetIcon}
+          label="مشاور"
+          layoutId={id}
+        />
+        <Item
+          href={routes.favorites}
+          icon={HeartIcon}
+          label="علاقمندی‌ها"
+          layoutId={id}
+        />
         <Item
           href={routes.messages.index}
           icon={MessageSquareTextIcon}
           label="پیام‌ها"
           layoutId={id}
         />
-        <Item href={routes.profile.index} icon={UserRoundIcon} label="پروفایل" layoutId={id} />
+        <Item
+          href={routes.profile.index}
+          icon={UserRoundIcon}
+          label="پروفایل"
+          layoutId={id}
+        />
       </div>
       <MenuItem
         as="label"
@@ -100,7 +120,9 @@ function Item(props: ItemProps) {
         <>
           <div className="relative z-1 flex items-center justify-start gap-4">
             <Icon className="size-6" />
-            <span className="line-clamp-1 text-start text-sm font-bold">{label}</span>
+            <span className="line-clamp-1 text-start text-sm font-bold">
+              {label}
+            </span>
           </div>
           {(active || (activeChildren && href != "/")) && (
             <motion.span
@@ -110,7 +132,7 @@ function Item(props: ItemProps) {
               transition={{
                 type: "spring",
                 stiffness: 200,
-                damping: 20,
+                damping: 20
               }}
             />
           )}

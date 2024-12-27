@@ -1,9 +1,12 @@
-import { Legend as HeadlessLegend, LegendProps as HeadlessLegendProps } from "@headlessui/react";
+import {
+  Legend as HeadlessLegend,
+  LegendProps as HeadlessLegendProps
+} from "@headlessui/react";
 import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "cva";
 
 const legend = cva({
-  base: "font-bold text-on-surface text-sm",
+  base: "font-bold text-on-surface text-sm"
 });
 
 type LegendProps = HeadlessLegendProps<"legend"> & VariantProps<typeof legend>;

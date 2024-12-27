@@ -1,6 +1,6 @@
 import {
   TabPanels as HeadlessTabPanels,
-  TabPanelsProps as HeadlessTabPanelsProps,
+  TabPanelsProps as HeadlessTabPanelsProps
 } from "@headlessui/react";
 import { ElementType, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
@@ -11,13 +11,14 @@ import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";
 
 const DEFAULT_PANEL_TAG = "div";
 
-export type TabPanelsProps<TTag extends ElementType = typeof DEFAULT_PANEL_TAG> =
-  HeadlessTabPanelsProps<TTag> & {
-    /**
-     * If true, can swipe panel and navigate between tabs.
-     */
-    swipeable?: boolean;
-  };
+export type TabPanelsProps<
+  TTag extends ElementType = typeof DEFAULT_PANEL_TAG
+> = HeadlessTabPanelsProps<TTag> & {
+  /**
+   * If true, can swipe panel and navigate between tabs.
+   */
+  swipeable?: boolean;
+};
 
 function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
   props: TabPanelsProps<TTag>,
@@ -48,17 +49,24 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
       {...otherProps}
     >
       {(bag) => {
-        const resolvedChildren = typeof children === "function" ? children(bag) : children;
+        const resolvedChildren =
+          typeof children === "function" ? children(bag) : children;
 
         const resolvedChildrenArray = (
-          Array.isArray(resolvedChildren) ? resolvedChildren : [resolvedChildren]
+          Array.isArray(resolvedChildren)
+            ? resolvedChildren
+            : [resolvedChildren]
         ) as ReactNode[];
 
         if (selectedIndex >= resolvedChildrenArray.length) return <></>;
         const selectedChild = resolvedChildrenArray[selectedIndex];
 
         return (
-          <AnimatePresence initial={false} mode="popLayout" custom={swipeDirection}>
+          <AnimatePresence
+            initial={false}
+            mode="popLayout"
+            custom={swipeDirection}
+          >
             {(() => {
               if (swipeable) {
                 return (
@@ -72,7 +80,7 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
                     drag="x"
                     dragConstraints={{
                       left: 0,
-                      right: 0,
+                      right: 0
                     }}
                     dragElastic={1}
                     onDragEnd={(e, { offset, velocity }) => {
@@ -95,7 +103,7 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
                     transition={{
                       type: "spring",
                       stiffness: 200,
-                      damping: 22,
+                      damping: 22
                     }}
                   >
                     {selectedChild}
@@ -115,7 +123,7 @@ function PanelsFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
                   transition={{
                     type: "spring",
                     stiffness: 200,
-                    damping: 22,
+                    damping: 22
                   }}
                 >
                   {selectedChild}
@@ -135,7 +143,9 @@ interface _internal_ComponentTabPanels extends HasDisplayName {
   ): ReactNode;
 }
 
-const Panels = forwardRefWithAs(PanelsFn) as unknown as _internal_ComponentTabPanels;
+const Panels = forwardRefWithAs(
+  PanelsFn
+) as unknown as _internal_ComponentTabPanels;
 
 export { Panels };
 
@@ -143,17 +153,17 @@ const variants = {
   enter: (direction: boolean) => {
     return {
       x: direction ? "-100%" : "100%",
-      opacity: 0,
+      opacity: 0
     };
   },
   center: {
     x: 0,
-    opacity: 1,
+    opacity: 1
   },
   exit: (direction: boolean) => {
     return {
       x: direction ? "100%" : "-100%",
-      opacity: 0,
+      opacity: 0
     };
-  },
+  }
 };

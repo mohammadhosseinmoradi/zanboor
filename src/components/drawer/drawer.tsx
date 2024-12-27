@@ -8,7 +8,7 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import {
   DndContext,
@@ -16,7 +16,7 @@ import {
   TouchSensor,
   useDraggable,
   useSensor,
-  useSensors,
+  useSensors
 } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { cn } from "@/lib/utils";
@@ -34,7 +34,8 @@ const AllowDragContext = createContext<AllowDragContextProps | null>(null);
 
 function useAllowDragContext() {
   const context = useContext(AllowDragContext);
-  if (context === null) throw new Error("You must use useAllowDragContext in AllowDragContext");
+  if (context === null)
+    throw new Error("You must use useAllowDragContext in AllowDragContext");
   return context;
 }
 
@@ -50,14 +51,16 @@ const modifiers = [restrictToVerticalAxis];
 export enum DrawerState {
   Open = 1,
   Closed,
-  Expended,
+  Expended
 }
 
 export type DrawerRenderArgs = {
   isFullscreen: boolean;
 };
 
-export type DrawerChildren = ReactNode | ((args: DrawerRenderArgs) => ReactNode);
+export type DrawerChildren =
+  | ReactNode
+  | ((args: DrawerRenderArgs) => ReactNode);
 
 const Drawer = forwardRef<
   HTMLDivElement,
@@ -69,104 +72,118 @@ const Drawer = forwardRef<
     snapPoint?: string;
     overlay?: ReactNode;
   }
->(({ open, onClose, children, className, overlay, snapPoint, ...otherProps }, ref) => {
-  const [state, setState] = useState<DrawerState>(open ? DrawerState.Open : DrawerState.Closed);
-  const [allowDrag, setAllowDrag] = useState(false);
+>(
+  (
+    { open, onClose, children, className, overlay, snapPoint, ...otherProps },
+    ref
+  ) => {
+    const [state, setState] = useState<DrawerState>(
+      open ? DrawerState.Open : DrawerState.Closed
+    );
+    const [allowDrag, setAllowDrag] = useState(false);
 
-  useEffect(() => {
-    setState(open ? DrawerState.Open : DrawerState.Closed);
-  }, [open]);
+    useEffect(() => {
+      setState(open ? DrawerState.Open : DrawerState.Closed);
+    }, [open]);
 
-  useEffect(() => {
-    if (state === DrawerState.Closed) {
-      onClose();
-    }
-  }, [onClose, state]);
+    useEffect(() => {
+      if (state === DrawerState.Closed) {
+        onClose();
+      }
+    }, [onClose, state]);
 
-  const tracked = useRef({
-    distance: 0,
-    timestamp: 0,
-    velocity: 0,
-  });
+    const tracked = useRef({
+      distance: 0,
+      timestamp: 0,
+      velocity: 0
+    });
 
-  const sensors = useSensors(
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        distance: 2,
-      },
-    }),
-    useSensor(MouseSensor, {
-      activationConstraint: {
-        distance: 2,
-      },
-    })
-  );
+    const sensors = useSensors(
+      useSensor(TouchSensor, {
+        activationConstraint: {
+          distance: 2
+        }
+      }),
+      useSensor(MouseSensor, {
+        activationConstraint: {
+          distance: 2
+        }
+      })
+    );
 
-  return (
-    <Portal>
-      <DndContext
-        modifiers={modifiers}
-        sensors={sensors}
-        onDragMove={({ delta }) => {
-          const timestamp = Date.now();
-          const timeDelta = timestamp - tracked.current.timestamp;
-          const distance = tracked.current.distance - delta.y;
-          const velocity = Math.round((distance / timeDelta) * 1000);
+    return (
+      <Portal>
+        <DndContext
+          modifiers={modifiers}
+          sensors={sensors}
+          onDragMove={({ delta }) => {
+            const timestamp = Date.now();
+            const timeDelta = timestamp - tracked.current.timestamp;
+            const distance = tracked.current.distance - delta.y;
+            const velocity = Math.round((distance / timeDelta) * 1000);
 
-          tracked.current = {
-            timestamp,
-            distance: delta.y,
-            velocity,
-          };
-        }}
-        onDragEnd={() => {
-          const { velocity } = tracked.current;
+            tracked.current = {
+              timestamp,
+              distance: delta.y,
+              velocity
+            };
+          }}
+          onDragEnd={() => {
+            const { velocity } = tracked.current;
 
-          if (allowDrag) {
-            if (velocity >= 200) {
-              setState(DrawerState.Expended);
-            } else if (velocity <= -200 && velocity > -2000) {
-              setState(state === DrawerState.Expended ? DrawerState.Open : DrawerState.Closed);
-            } else if (velocity <= -2000) {
-              setState(DrawerState.Closed);
+            if (allowDrag) {
+              if (velocity >= 200) {
+                setState(DrawerState.Expended);
+              } else if (velocity <= -200 && velocity > -2000) {
+                setState(
+                  state === DrawerState.Expended
+                    ? DrawerState.Open
+                    : DrawerState.Closed
+                );
+              } else if (velocity <= -2000) {
+                setState(DrawerState.Closed);
+              }
             }
-          }
 
-          tracked.current = {
-            timestamp: 0,
-            velocity: 0,
-            distance: 0,
-          };
-        }}
-      >
-        <AllowDragContext.Provider
-          value={{
-            allowDrag,
-            setAllowDrag,
+            tracked.current = {
+              timestamp: 0,
+              velocity: 0,
+              distance: 0
+            };
           }}
         >
-          <DrawerStateContext.Provider
+          <AllowDragContext.Provider
             value={{
-              drawerState: state,
-              setDrawerState: setState,
+              allowDrag,
+              setAllowDrag
             }}
           >
-            <div
-              ref={ref}
-              className={cn("fixed inset-0 flex flex-col justify-end", className)}
-              {...otherProps}
+            <DrawerStateContext.Provider
+              value={{
+                drawerState: state,
+                setDrawerState: setState
+              }}
             >
-              <Sheet value={state} snapPoint={snapPoint}>
-                {children}
-              </Sheet>
-              {overlay}
-            </div>
-          </DrawerStateContext.Provider>
-        </AllowDragContext.Provider>
-      </DndContext>
-    </Portal>
-  );
-});
+              <div
+                ref={ref}
+                className={cn(
+                  "fixed inset-0 flex flex-col justify-end",
+                  className
+                )}
+                {...otherProps}
+              >
+                <Sheet value={state} snapPoint={snapPoint}>
+                  {children}
+                </Sheet>
+                {overlay}
+              </div>
+            </DrawerStateContext.Provider>
+          </AllowDragContext.Provider>
+        </DndContext>
+      </Portal>
+    );
+  }
+);
 
 Drawer.displayName = "Drawer";
 
@@ -181,11 +198,16 @@ const Sheet = forwardRef<
   }
 >(({ value, children, snapPoint }, forwardRef) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { setNodeRef, attributes, isDragging, listeners, transform, activatorEvent } = useDraggable(
-    {
-      id: "header",
-    }
-  );
+  const {
+    setNodeRef,
+    attributes,
+    isDragging,
+    listeners,
+    transform,
+    activatorEvent
+  } = useDraggable({
+    id: "header"
+  });
   const oldY = usePrevious(transform?.y);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -229,13 +251,15 @@ const Sheet = forwardRef<
       if (element.scrollHeight > element.clientHeight) {
         if (
           element?.scrollTop >= 0 &&
-          Math.ceil(element?.scrollTop + element?.clientHeight) < element.scrollHeight &&
+          Math.ceil(element?.scrollTop + element?.clientHeight) <
+            element.scrollHeight &&
           direction === "up"
         ) {
           return true;
         } else if (
           element?.scrollTop > 0 &&
-          Math.ceil(element?.scrollTop + element?.clientHeight) <= element.scrollHeight &&
+          Math.ceil(element?.scrollTop + element?.clientHeight) <=
+            element.scrollHeight &&
           direction === "down"
         ) {
           return true;
@@ -245,7 +269,9 @@ const Sheet = forwardRef<
     }
 
     while (element && !allowDrag) {
-      if (element.attributes.getNamedItem("data-slot")?.value === "scrollable") {
+      if (
+        element.attributes.getNamedItem("data-slot")?.value === "scrollable"
+      ) {
         setAllowDrag(false);
         break;
       }
@@ -267,15 +293,15 @@ const Sheet = forwardRef<
         dragHandler: {
           setNodeRef,
           listeners,
-          attributes,
-        },
+          attributes
+        }
       }}
     >
       <motion.div
         ref={ref}
         className="pointer-events-auto relative z-50 flex max-h-dvh flex-col"
         initial={{
-          height: snapPoint || "auto",
+          height: snapPoint || "auto"
         }}
         animate={{
           height:
@@ -284,17 +310,21 @@ const Sheet = forwardRef<
               : value === DrawerState.Open
                 ? snapPoint || "auto"
                 : "0",
-          y: allowDrag ? transform?.y : undefined,
+          y: allowDrag ? transform?.y : undefined
         }}
         transition={{
           ease: "easeOut",
-          duration: isDragging ? 0 : 0.2,
+          duration: isDragging ? 0 : 0.2
         }}
       >
-        <div ref={forwardRef} className="z-20 overflow-hidden" data-slot="sheet">
+        <div
+          ref={forwardRef}
+          className="z-20 overflow-hidden"
+          data-slot="sheet"
+        >
           {typeof children === "function"
             ? children({
-                isFullscreen,
+                isFullscreen
               })
             : children}
         </div>

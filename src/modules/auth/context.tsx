@@ -18,7 +18,7 @@ const AuthDataContext = createContext<StateDefinition | null>(null);
 
 enum ActionType {
   SetOtp,
-  UpdateOtpExpiresAt,
+  UpdateOtpExpiresAt
 }
 
 type Actions =
@@ -44,15 +44,15 @@ const reducers: {
       ...state,
       countryCode: action.countryCode,
       phone: action.phone,
-      otpExpiresAt: action.otpExpiresAt,
+      otpExpiresAt: action.otpExpiresAt
     };
   },
   [ActionType.UpdateOtpExpiresAt](state, action) {
     return {
       ...state,
-      otpExpiresAt: action.otpExpiresAt,
+      otpExpiresAt: action.otpExpiresAt
     };
-  },
+  }
 };
 
 function stateReducer(state: StateDefinition, action: Actions) {
@@ -60,9 +60,14 @@ function stateReducer(state: StateDefinition, action: Actions) {
 }
 
 type AuthActionsContextProps = {
-  setOtp(params: Omit<Extract<Actions, { type: ActionType.SetOtp }>, "type">): void;
+  setOtp(
+    params: Omit<Extract<Actions, { type: ActionType.SetOtp }>, "type">
+  ): void;
   updateOtpExpiresAt(
-    params: Omit<Extract<Actions, { type: ActionType.UpdateOtpExpiresAt }>, "type">
+    params: Omit<
+      Extract<Actions, { type: ActionType.UpdateOtpExpiresAt }>,
+      "type"
+    >
   ): void;
 };
 
@@ -97,18 +102,20 @@ export function AuthProvider(props: AuthContextProviderProps) {
 
   const [state, dispatch] = useReducer(stateReducer, {});
 
-  const setOtp = useEvent((params: Parameters<AuthActionsContextProps["setOtp"]>[0]) => {
-    dispatch({
-      type: ActionType.SetOtp,
-      ...params,
-    });
-  });
+  const setOtp = useEvent(
+    (params: Parameters<AuthActionsContextProps["setOtp"]>[0]) => {
+      dispatch({
+        type: ActionType.SetOtp,
+        ...params
+      });
+    }
+  );
 
   const updateOtpExpiresAt = useEvent(
     (params: Parameters<AuthActionsContextProps["updateOtpExpiresAt"]>[0]) => {
       dispatch({
         type: ActionType.UpdateOtpExpiresAt,
-        ...params,
+        ...params
       });
     }
   );
@@ -118,7 +125,7 @@ export function AuthProvider(props: AuthContextProviderProps) {
       <AuthActionsContext.Provider
         value={{
           setOtp,
-          updateOtpExpiresAt,
+          updateOtpExpiresAt
         }}
       >
         {children}

@@ -12,7 +12,7 @@ const encodedSecretKey = new TextEncoder().encode(secretKey);
 export async function encrypt(payload: SessionPayload) {
   return new SignJWT(payload)
     .setProtectedHeader({
-      alg: "HS256",
+      alg: "HS256"
     })
     .setIssuedAt()
     .setExpirationTime("4w")
@@ -22,7 +22,7 @@ export async function encrypt(payload: SessionPayload) {
 export async function decrypt(session: string) {
   try {
     const { payload } = await jwtVerify(session, encodedSecretKey, {
-      algorithms: ["HS256"],
+      algorithms: ["HS256"]
     });
     return payload as (SessionPayload & JWTPayload) | undefined;
   } catch {
@@ -33,8 +33,8 @@ export async function decrypt(session: string) {
 export async function createSession(payload: SessionPayload) {
   const user = await prisma.user.findUnique({
     where: {
-      id: payload.userId,
-    },
+      id: payload.userId
+    }
   });
   if (!user) throw new Error("User is missing.");
   const session = await encrypt(payload);
@@ -58,11 +58,11 @@ export const auth = cache(async (): Promise<Session | null> => {
   if (sessionPayload.exp * 1000 < Date.now()) return null;
   const user = await prisma.user.findUnique({
     where: {
-      id: sessionPayload.userId,
-    },
+      id: sessionPayload.userId
+    }
   });
   if (!user) return null;
   return {
-    user,
+    user
   };
 });

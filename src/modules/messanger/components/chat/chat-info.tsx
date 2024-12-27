@@ -17,7 +17,7 @@ export function ChatInfo(props: ChatHeaderProps) {
       <AvatarZoomable
         src="/images/users/07.jpg"
         avatar={{
-          className: "bg-surface-container border size-10",
+          className: "bg-surface-container border size-10"
         }}
         initials={getInitials("زهرا کریمی")}
       />

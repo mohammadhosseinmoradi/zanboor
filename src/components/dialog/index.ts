@@ -13,7 +13,7 @@ const Dialog = Object.assign(_Dialog, {
   Header,
   Body,
   Actions,
-  Close,
+  Close
 });
 
 export { Dialog, DialogVariant };

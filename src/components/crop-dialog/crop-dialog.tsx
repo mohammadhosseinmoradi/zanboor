@@ -15,7 +15,10 @@ export type CropDialogProps = {
 
 export function CropDialog(props: CropDialogProps) {
   const { open, onClose, imageFile, onCrop } = props;
-  const imageSrc = useMemo(() => (open ? URL.createObjectURL(imageFile) : ""), [imageFile, open]);
+  const imageSrc = useMemo(
+    () => (open ? URL.createObjectURL(imageFile) : ""),
+    [imageFile, open]
+  );
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const cropperRef = useRef<CropperRef>(null);
@@ -25,7 +28,7 @@ export function CropDialog(props: CropDialogProps) {
     cropperRef.current
       .getCanvas({
         maxWidth: 1024,
-        maxHeight: 1024,
+        maxHeight: 1024
       })
       ?.toBlob(
         (blob) => {
@@ -43,7 +46,7 @@ export function CropDialog(props: CropDialogProps) {
     <Dialog open={open} onOpenChange={onClose}>
       <Dialog.Panel
         className={cn("w-full max-lg:h-dvh", {
-          "lg:max-w-lg": !isFullscreen,
+          "lg:max-w-lg": !isFullscreen
         })}
       >
         <Dialog.Header compact className="flex shrink-0 items-center gap-4">
@@ -60,7 +63,11 @@ export function CropDialog(props: CropDialogProps) {
           </Button>
           <Dialog.Close />
         </Dialog.Header>
-        <div className={cn("grid grow grid-cols-1 items-center justify-center overflow-hidden")}>
+        <div
+          className={cn(
+            "grid grow grid-cols-1 items-center justify-center overflow-hidden"
+          )}
+        >
           <Cropper
             key={isFullscreen ? "true" : "false"}
             ref={cropperRef}
@@ -69,11 +76,11 @@ export function CropDialog(props: CropDialogProps) {
             stencilComponent={CircleStencil}
             stencilProps={{
               aspectRatio: 1,
-              grid: true,
+              grid: true
             }}
             defaultSize={{
               width: Infinity,
-              height: Infinity,
+              height: Infinity
             }}
           />
         </div>

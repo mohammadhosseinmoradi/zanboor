@@ -1,4 +1,9 @@
-import { DialogPanelProps, DialogBackdrop, DialogPanel, Dialog } from "@headlessui/react";
+import {
+  DialogPanelProps,
+  DialogBackdrop,
+  DialogPanel,
+  Dialog
+} from "@headlessui/react";
 import { ElementType, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
 import { DialogVariant, useDialogContext } from "@/components/dialog/context";
@@ -15,9 +20,9 @@ const conditionDrawer = cva({
   variants: {
     variant: {
       [DialogVariant.Center]: "lg:items-center lg:justify-center",
-      [DialogVariant.Drawer]: "lg:items-end lg:justify-start lg:p-0",
-    },
-  },
+      [DialogVariant.Drawer]: "lg:items-end lg:justify-start lg:p-0"
+    }
+  }
 });
 
 const panel = cva({
@@ -25,19 +30,19 @@ const panel = cva({
   variants: {
     variant: {
       [DialogVariant.Center]: "lg:data-[closed]:scale-95",
-      [DialogVariant.Drawer]: "lg:h-full lg:data-[closed]:-translate-x-full",
+      [DialogVariant.Drawer]: "lg:h-full lg:data-[closed]:-translate-x-full"
     },
     fullscreen: {
       false:
-        "max-lg:rounded-t-[calc(theme(borderRadius[rounded])+0.5rem)] lg:rounded-[calc(theme(borderRadius[rounded])+0.5rem)]",
-    },
+        "max-lg:rounded-t-[calc(theme(borderRadius[rounded])+0.5rem)] lg:rounded-[calc(theme(borderRadius[rounded])+0.5rem)]"
+    }
   },
   compoundVariants: [
     {
       variant: DialogVariant.Drawer,
-      className: "lg:rounded-none",
-    },
-  ],
+      className: "lg:rounded-none"
+    }
+  ]
 });
 
 const DEFAULT_PANEL_TAG = "div";
@@ -75,10 +80,15 @@ function PanelFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
         snapPoint={state.snapPoint}
         className={cn(
           conditionDrawer({
-            variant: state.variant,
+            variant: state.variant
           })
         )}
-        overlay={<div className="fixed inset-0" onClick={() => state.onOpenChange(false)} />}
+        overlay={
+          <div
+            className="fixed inset-0"
+            onClick={() => state.onOpenChange(false)}
+          />
+        }
       >
         {({ isFullscreen }) => (
           <InlineComponent>
@@ -94,7 +104,7 @@ function PanelFn<TTag extends ElementType = typeof DEFAULT_PANEL_TAG>(
                   className={cn(
                     panel({
                       variant: state.variant,
-                      fullscreen: isFullscreen,
+                      fullscreen: isFullscreen
                     }),
                     className
                   )}
@@ -140,7 +150,9 @@ function ConditionDrawer(props: ConditionDrawerProps) {
     </Drawer>
   ) : (
     <div {...otherProps}>
-      {typeof children === "function" ? children({ isFullscreen: false }) : children}
+      {typeof children === "function"
+        ? children({ isFullscreen: false })
+        : children}
     </div>
   );
 }

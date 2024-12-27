@@ -22,7 +22,10 @@ export function ProfileHeader(props: ProfileHeaderProps) {
   return (
     <div className={cn("flex flex-col", className)}>
       <div className="flex items-center gap-4">
-        <AvatarZoomable src={data.personal.image} className="size-16 shrink-0" />
+        <AvatarZoomable
+          src={data.personal.image}
+          className="size-16 shrink-0"
+        />
         <Heading as="h4" variant="h4">
           {[data.personal.displayName].join(" ")}
           <span className="text-on-surface/50 ms-1.5">
@@ -37,7 +40,12 @@ export function ProfileHeader(props: ProfileHeaderProps) {
           <HeartIcon data-slot="icon" />
           <span className="max-lg:hidden">افزودن به علاقمندی‌ها</span>
         </Button>
-        <Button as={Link} href={routes.messages.chat("1")} variant="outlined" color="secondary">
+        <Button
+          as={Link}
+          href={routes.messages.chat("1")}
+          variant="outlined"
+          color="secondary"
+        >
           <MessagesSquareIcon data-slot="start-icon" />
           درخواست علاقمندی
         </Button>

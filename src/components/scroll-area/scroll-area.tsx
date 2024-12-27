@@ -20,10 +20,14 @@ export type ScrollAreaProps = {
   onScroll?: (data: ScrollStateProps) => void;
 };
 
-export function ScrollArea({ children, threshold = 0, onScroll }: ScrollAreaProps) {
+export function ScrollArea({
+  children,
+  threshold = 0,
+  onScroll
+}: ScrollAreaProps) {
   const ref = useRef<HTMLElement | null>(null);
   const { scrollY } = useScroll({
-    container: ref,
+    container: ref
   });
   const [isScrolled, setIsScrolled] = useState(() => {
     return scrollY.get() > 0;
@@ -43,14 +47,16 @@ export function ScrollArea({ children, threshold = 0, onScroll }: ScrollAreaProp
     setIsEnd(isEnd);
     if (!ref?.current?.scrollHeight) return;
     const isScrollable = ref.current.scrollHeight > ref.current.clientHeight;
-    const isScrolled = ref.current ? latestValue > 0 && isScrollable : latestValue > 0;
+    const isScrolled = ref.current
+      ? latestValue > 0 && isScrollable
+      : latestValue > 0;
     setIsScrolled(isScrolled);
 
     if (onScroll)
       onScroll({
         isScrolled,
         isBeginning,
-        isEnd,
+        isEnd
       });
   });
 
@@ -59,7 +65,7 @@ export function ScrollArea({ children, threshold = 0, onScroll }: ScrollAreaProp
       isScrolled,
       isBeginning,
       isEnd,
-      setNodeRef: ref,
+      setNodeRef: ref
     } satisfies ScrollAreaRenderPropArg;
   }, [isScrolled, isBeginning, isEnd, ref]);
 

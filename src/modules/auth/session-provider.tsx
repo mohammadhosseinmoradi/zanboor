@@ -23,8 +23,8 @@ export async function SessionProvider(props: SessionProviderProps) {
     <SWRConfig
       value={{
         fallback: {
-          [unstable_serialize(authKey)]: session,
-        },
+          [unstable_serialize(authKey)]: session
+        }
       }}
     >
       {children}

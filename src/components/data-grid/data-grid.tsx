@@ -6,7 +6,7 @@ import {
   useReactTable,
   getCoreRowModel,
   RowData,
-  flexRender,
+  flexRender
 } from "@tanstack/react-table";
 import { Pagination, PaginationParams } from "@/types/pagination";
 import { cn } from "@/lib/utils";
@@ -16,7 +16,7 @@ import {
   TableCell,
   TableColumnHeaderCell,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@/components/table";
 
 type DataGridProps<T extends RowData> = {
@@ -34,7 +34,7 @@ export function DataGrid<T extends RowData>(props: DataGridProps<T>) {
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
+    getCoreRowModel: getCoreRowModel()
   });
 
   return (
@@ -47,7 +47,10 @@ export function DataGrid<T extends RowData>(props: DataGridProps<T>) {
                 <TableColumnHeaderCell key={header.id} colSpan={header.colSpan}>
                   {header.isPlaceholder
                     ? null
-                    : flexRender(header.column.columnDef.header, header.getContext())}
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                 </TableColumnHeaderCell>
               ))}
             </TableRow>

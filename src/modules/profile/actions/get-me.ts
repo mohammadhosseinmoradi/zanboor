@@ -12,35 +12,35 @@ export async function getMe(): Promise<Result<UserDto>> {
     return {
       error: {
         name: ErrorName.Unauthorized,
-        message: ErrorMessageMap[ErrorName.Unauthorized],
-      },
+        message: ErrorMessageMap[ErrorName.Unauthorized]
+      }
     };
 
   const profile = await prisma.user.findUnique({
     where: {
-      id: session.user.id,
+      id: session.user.id
     },
     include: {
       profile: {
         include: {
           personal: {
             include: {
-              location: true,
-            },
+              location: true
+            }
           },
           educationAndCareer: true,
           physicalAttributes: true,
           familyInfo: true,
           financialStatus: true,
-          marriagePreferences: true,
-        },
-      },
-    },
+          marriagePreferences: true
+        }
+      }
+    }
   });
 
   const profileDto = userDtoSchema.parse(profile);
 
   return {
-    data: profileDto,
+    data: profileDto
   };
 }

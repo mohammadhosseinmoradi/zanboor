@@ -11,7 +11,11 @@ function Close(props: ButtonProps) {
 
   return (
     <CloseButton as={Fragment} {...otherProps}>
-      <Button className={cn("shrink-0", className)} variant="plain" color="secondary">
+      <Button
+        className={cn("shrink-0", className)}
+        variant="plain"
+        color="secondary"
+      >
         <XIcon data-slot="icon" />
       </Button>
     </CloseButton>

@@ -1,6 +1,10 @@
 import { ReactNode, useEffect, useState } from "react";
 import useUpdateEffect from "@/hooks/use-update-effect";
-import { DialogContext, DialogStateProps, DialogVariant } from "@/components/dialog/context";
+import {
+  DialogContext,
+  DialogStateProps,
+  DialogVariant
+} from "@/components/dialog/context";
 
 type DialogCommonProps = {
   children: ReactNode;
@@ -29,9 +33,9 @@ export default function Dialog(props: DialogProps) {
       : (open) => {
           setState((prevState) => ({
             ...prevState,
-            open,
+            open
           }));
-        },
+        }
   });
 
   useUpdateEffect(() => {
@@ -39,7 +43,7 @@ export default function Dialog(props: DialogProps) {
       ...prevState,
       open: otherProps.open !== undefined ? otherProps.open : prevState.open,
       onOpenChange: otherProps.onOpenChange || prevState.onOpenChange,
-      snapPoint: otherProps.snapPoint || prevState.snapPoint,
+      snapPoint: otherProps.snapPoint || prevState.snapPoint
     }));
   }, [otherProps.open, otherProps.onOpenChange, otherProps.snapPoint]);
 
@@ -47,7 +51,7 @@ export default function Dialog(props: DialogProps) {
     if (!otherProps.open) return;
     setState((prevState) => ({
       ...prevState,
-      bodyScrollState: undefined,
+      bodyScrollState: undefined
     }));
   }, [otherProps.open]);
 
@@ -55,7 +59,7 @@ export default function Dialog(props: DialogProps) {
     <DialogContext.Provider
       value={{
         state,
-        setState,
+        setState
       }}
     >
       {children}

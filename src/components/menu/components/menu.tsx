@@ -1,4 +1,7 @@
-import { Menu as HeadlessMenu, MenuProps as HeadlessMenuProps } from "@headlessui/react";
+import {
+  Menu as HeadlessMenu,
+  MenuProps as HeadlessMenuProps
+} from "@headlessui/react";
 import { MenuContext } from "@/components/menu/context";
 
 type MenuProps = {
@@ -18,7 +21,7 @@ export function Menu(props: MenuProps) {
           value={{
             open: bag.open,
             snapPoint,
-            close: bag.close,
+            close: bag.close
           }}
         >
           {typeof children === "function" ? children(bag) : children}

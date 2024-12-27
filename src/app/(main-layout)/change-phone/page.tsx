@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <PageLayout
       header={{
-        title: "تغییر شماره موبایل",
+        title: "تغییر شماره موبایل"
       }}
     ></PageLayout>
   );

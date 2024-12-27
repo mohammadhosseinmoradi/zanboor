@@ -15,7 +15,7 @@ export function Messenger(props: MessengerProps) {
     <div className={cn("flex h-full", className)}>
       <Chats
         className={cn("w-full lg:w-72 lg:border-e", {
-          "max-lg:hidden": chatId,
+          "max-lg:hidden": chatId
         })}
       />
       {chatId && <Chat id={chatId} className="grow" />}

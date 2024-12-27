@@ -12,22 +12,23 @@ export async function generateMetadata(): Promise<Metadata> {
     applicationName: APP_NAME,
     title: {
       template: `%s | ${APP_NAME}`,
-      default: "زنبور | ازدواج دائم و موقت، قرار ملاقات، چت، آشنایی با افراد جدید",
+      default:
+        "زنبور | ازدواج دائم و موقت، قرار ملاقات، چت، آشنایی با افراد جدید"
     },
     openGraph: {
       siteName: APP_NAME,
       type: "website",
-      locale: "rtl",
+      locale: "rtl"
     },
     manifest: "/manifest.json",
     icons: {
-      shortcut: "/favicon.ico",
-    },
+      shortcut: "/favicon.ico"
+    }
   };
 }
 
 export default async function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {

@@ -1,6 +1,6 @@
 import {
   TabPanel as HeadlessTabPanel,
-  TabPanelProps as HeadlessPanelProps,
+  TabPanelProps as HeadlessPanelProps
 } from "@headlessui/react";
 import { ElementType, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
@@ -38,6 +38,8 @@ interface _internal_ComponentTabPanel extends HasDisplayName {
   ): ReactNode;
 }
 
-const Panel = forwardRefWithAs(PanelFn) as unknown as _internal_ComponentTabPanel;
+const Panel = forwardRefWithAs(
+  PanelFn
+) as unknown as _internal_ComponentTabPanel;
 
 export { Panel };

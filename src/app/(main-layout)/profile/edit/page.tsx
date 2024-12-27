@@ -4,7 +4,7 @@ export default function Page() {
   return (
     <PageLayout
       header={{
-        title: "ویرایش پروفایل",
+        title: "ویرایش پروفایل"
       }}
     ></PageLayout>
   );

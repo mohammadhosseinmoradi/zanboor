@@ -8,7 +8,10 @@ const ColumnHeaderCell = forwardRef<HTMLTableCellElement, ColumnHeaderCell>(
     return (
       <th
         ref={ref}
-        className={cn("text-on-surface-variant px-4 py-2 text-start font-bold", className)}
+        className={cn(
+          "text-on-surface-variant px-4 py-2 text-start font-bold",
+          className
+        )}
         {...otherProps}
       />
     );

@@ -3,7 +3,10 @@ import { forwardRef, memo, ReactNode, Ref, useMemo, useState } from "react";
 import { button, Button } from "@/components/listbox-dropdown/button";
 import { Options } from "@/components/listbox-dropdown/options";
 import { Option } from "@/components/listbox-dropdown/types";
-import { ListboxContext, ListboxContextProps } from "@/components/listbox-dropdown/context";
+import {
+  ListboxContext,
+  ListboxContextProps
+} from "@/components/listbox-dropdown/context";
 import { toNormalizeOptions } from "@/components/listbox-dropdown/helpers";
 import { VariantProps } from "cva";
 
@@ -26,7 +29,10 @@ export type ListboxDropdownProps = {
   disableAdaptiveWidth?: boolean;
 } & VariantProps<typeof button>;
 
-function ListboxDropdownFn(props: ListboxDropdownProps, ref: Ref<HTMLButtonElement>) {
+function ListboxDropdownFn(
+  props: ListboxDropdownProps,
+  ref: Ref<HTMLButtonElement>
+) {
   const {
     children,
     name,
@@ -51,14 +57,14 @@ function ListboxDropdownFn(props: ListboxDropdownProps, ref: Ref<HTMLButtonEleme
     options,
     disableAdaptiveWidth,
     normalizeOptions: new Map(),
-    ...otherProps,
+    ...otherProps
   });
 
   return (
     <ListboxContext.Provider
       value={{
         ...state,
-        normalizeOptions: useMemo(() => toNormalizeOptions(options), [options]),
+        normalizeOptions: useMemo(() => toNormalizeOptions(options), [options])
       }}
     >
       <Listbox

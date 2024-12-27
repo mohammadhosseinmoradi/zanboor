@@ -1,11 +1,16 @@
-export function match<TValue extends string | number = string, TReturnValue = unknown>(
+export function match<
+  TValue extends string | number = string,
+  TReturnValue = unknown
+>(
   value: TValue,
   lookup: Record<TValue, TReturnValue | ((...args: any[]) => TReturnValue)>, // eslint-disable-line
   ...args: any[] // eslint-disable-line
 ): TReturnValue {
   if (value in lookup) {
     const returnValue = lookup[value];
-    return typeof returnValue === "function" ? returnValue(...args) : returnValue;
+    return typeof returnValue === "function"
+      ? returnValue(...args)
+      : returnValue;
   }
 
   const error = new Error(

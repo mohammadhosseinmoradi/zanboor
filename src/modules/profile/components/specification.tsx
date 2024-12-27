@@ -5,7 +5,7 @@ import { ProfileDto } from "@/modules/profile/types";
 import {
   DescriptionDetails,
   DescriptionList,
-  DescriptionTerm,
+  DescriptionTerm
 } from "@/components/description-list";
 import {
   getBeautyLevelTranslated,
@@ -17,7 +17,7 @@ import {
   getHousingStatusTranslated,
   getMaritalStatusTranslated,
   getSkinColorTranslated,
-  getStyleLevelTranslated,
+  getStyleLevelTranslated
 } from "@/modules/utils";
 import { differenceInYears } from "date-fns";
 
@@ -39,7 +39,9 @@ export function Specification(props: PersonalProps) {
         <DescriptionTerm>نام نمایشی</DescriptionTerm>
         <DescriptionDetails>{data.personal.displayName}</DescriptionDetails>
         <DescriptionTerm>جنسیت</DescriptionTerm>
-        <DescriptionDetails>{getGenderTranslated(data.personal.gender)}</DescriptionDetails>
+        <DescriptionDetails>
+          {getGenderTranslated(data.personal.gender)}
+        </DescriptionDetails>
         <DescriptionTerm>سن</DescriptionTerm>
         <DescriptionDetails>
           {differenceInYears(new Date(), data.personal.birthdate)}
@@ -51,9 +53,13 @@ export function Specification(props: PersonalProps) {
         </DescriptionDetails>
         <div className="col-span-full border-b" />
         <DescriptionTerm>قد</DescriptionTerm>
-        <DescriptionDetails>{data.physicalAttributes.height}</DescriptionDetails>
+        <DescriptionDetails>
+          {data.physicalAttributes.height}
+        </DescriptionDetails>
         <DescriptionTerm>وزن</DescriptionTerm>
-        <DescriptionDetails>{data.physicalAttributes.weight}</DescriptionDetails>
+        <DescriptionDetails>
+          {data.physicalAttributes.weight}
+        </DescriptionDetails>
         <DescriptionTerm>رنگ پوست</DescriptionTerm>
         <DescriptionDetails>
           {getSkinColorTranslated(data.physicalAttributes.skinColor)}
@@ -69,16 +75,22 @@ export function Specification(props: PersonalProps) {
         <div className="col-span-full border-b" />
         <DescriptionTerm>اشتغال</DescriptionTerm>
         <DescriptionDetails>
-          {getEmploymentStatusTranslated(data.educationAndCareer.employmentStatus)}
+          {getEmploymentStatusTranslated(
+            data.educationAndCareer.employmentStatus
+          )}
         </DescriptionDetails>
         <DescriptionTerm>عنوان شغلی</DescriptionTerm>
-        <DescriptionDetails>{data.educationAndCareer.jobTitle}</DescriptionDetails>
+        <DescriptionDetails>
+          {data.educationAndCareer.jobTitle}
+        </DescriptionDetails>
         <DescriptionTerm>سطح تحصیلات</DescriptionTerm>
         <DescriptionDetails>
           {getEducationLevelTranslated(data.educationAndCareer.educationLevel)}
         </DescriptionDetails>
         <DescriptionTerm>رشته تحصیلی</DescriptionTerm>
-        <DescriptionDetails>{data.educationAndCareer.fieldOfStudy}</DescriptionDetails>
+        <DescriptionDetails>
+          {data.educationAndCareer.fieldOfStudy}
+        </DescriptionDetails>
         <div className="col-span-full border-b" />
         <DescriptionTerm>حدود درآمد</DescriptionTerm>
         <DescriptionDetails>
@@ -110,13 +122,17 @@ export function Specification(props: PersonalProps) {
           {getEthnicityTranslated(data.familyInfo.motherEthnicity)}
         </DescriptionDetails>
         <DescriptionTerm>فرزند</DescriptionTerm>
-        <DescriptionDetails>{data.familyInfo.siblingPosition}</DescriptionDetails>
+        <DescriptionDetails>
+          {data.familyInfo.siblingPosition}
+        </DescriptionDetails>
         <DescriptionTerm>تعداد برادر</DescriptionTerm>
         <DescriptionDetails>{data.familyInfo.brothersCount}</DescriptionDetails>
         <DescriptionTerm>تعداد خواهر</DescriptionTerm>
         <DescriptionDetails>{data.familyInfo.sistersCount}</DescriptionDetails>
         <DescriptionTerm>خواهر یا برادر متاهل</DescriptionTerm>
-        <DescriptionDetails>{data.familyInfo.hasMarriedSiblings || "نامشخص"}</DescriptionDetails>
+        <DescriptionDetails>
+          {data.familyInfo.hasMarriedSiblings || "نامشخص"}
+        </DescriptionDetails>
       </DescriptionList>
     </div>
   );

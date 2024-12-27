@@ -1,6 +1,6 @@
 import {
   TabGroup as HeadlessTabGroup,
-  TabGroupProps as HeadlessGroupProps,
+  TabGroupProps as HeadlessGroupProps
 } from "@headlessui/react";
 import { ElementType, ReactNode, Ref, useId } from "react";
 import { cn } from "@/lib/utils";
@@ -33,7 +33,11 @@ function GroupFn<TTag extends ElementType = typeof DEFAULT_TABS_TAG>(
     ...otherProps
   } = props as TabGroupProps<typeof DEFAULT_TABS_TAG>;
 
-  const [selected, setSelected] = useControllable(selectedIndex, onChange, defaultIndex);
+  const [selected, setSelected] = useControllable(
+    selectedIndex,
+    onChange,
+    defaultIndex
+  );
 
   const id = useId();
 
@@ -43,7 +47,7 @@ function GroupFn<TTag extends ElementType = typeof DEFAULT_TABS_TAG>(
         id,
         selectedIndex: selected,
         onChange: setSelected,
-        variant,
+        variant
       }}
     >
       <HeadlessTabGroup
@@ -64,6 +68,8 @@ export interface _internal_ComponentTabGroup extends HasDisplayName {
   ): ReactNode;
 }
 
-const Group = forwardRefWithAs(GroupFn) as unknown as _internal_ComponentTabGroup;
+const Group = forwardRefWithAs(
+  GroupFn
+) as unknown as _internal_ComponentTabGroup;
 
 export { Group };

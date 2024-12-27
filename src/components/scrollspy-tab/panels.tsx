@@ -8,7 +8,11 @@ type PanelsProps = {
   children: ReactNode;
 };
 
-export default function Panels({ className, children, ...otherProps }: PanelsProps) {
+export default function Panels({
+  className,
+  children,
+  ...otherProps
+}: PanelsProps) {
   const { state, dispatch } = useTabContext();
   const [entries, setEntries] = useState<{
     [index: number]: IntersectionObserverEntry;
@@ -19,7 +23,7 @@ export default function Panels({ className, children, ...otherProps }: PanelsPro
       if (entries[index].isIntersecting) {
         dispatch((prevState) => ({
           ...prevState,
-          activeIndex: +index,
+          activeIndex: +index
         }));
         break;
       }
@@ -39,7 +43,7 @@ export default function Panels({ className, children, ...otherProps }: PanelsPro
               onChange={(inView, entry) => {
                 setEntries((prevState) => ({
                   ...prevState,
-                  [index]: entry,
+                  [index]: entry
                 }));
               }}
             >

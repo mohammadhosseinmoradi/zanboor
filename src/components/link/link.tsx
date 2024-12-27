@@ -12,12 +12,12 @@ const link = cva({
       error: "text-error",
       warning: "text-warning",
       success: "text-success",
-      info: "text-info",
-    },
+      info: "text-info"
+    }
   },
   defaultVariants: {
-    color: "primary",
-  },
+    color: "primary"
+  }
 });
 
 type LinkProps = _LinkProps &
@@ -35,7 +35,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => {
       {...otherProps}
       className={cn(
         link({
-          color,
+          color
         }),
         className
       )}

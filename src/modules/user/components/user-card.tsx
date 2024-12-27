@@ -19,7 +19,10 @@ export function UserCard(props: UserCardProps) {
   return (
     <Link
       href={routes.user.index(data.id)}
-      className={cn("bg-surface-bright overflow-hidden rounded-lg border", className)}
+      className={cn(
+        "bg-surface-bright overflow-hidden rounded-lg border",
+        className
+      )}
     >
       <div className="relative">
         <Image

@@ -31,13 +31,14 @@ export const button = cva({
   ),
   variants: {
     variant: {
-      secondary: "bg-surface-bright dark:bg-black/10 data-[invalid]:after:border-error",
+      secondary:
+        "bg-surface-bright dark:bg-black/10 data-[invalid]:after:border-error",
       plain:
-        "after:border-transparent after:focus-within:border-transparent bg-transparent data-[invalid]:text-error",
+        "after:border-transparent after:focus-within:border-transparent bg-transparent data-[invalid]:text-error"
     },
     stick: {
       start: "after:rounded-s-none",
-      end: "after:rounded-e-none",
+      end: "after:rounded-e-none"
     },
     edge: {
       all: "-mx-3 -my-2",
@@ -49,18 +50,18 @@ export const button = cva({
       "bottom start": "-mb-2 -ms-3",
       "bottom end": "-mb-2 -me-3",
       y: "-my-2",
-      x: "-mx-3",
-    },
+      x: "-mx-3"
+    }
   },
   compoundVariants: [
     {
       variant: "secondary",
-      className: "data-[invalid]:border-error",
-    },
+      className: "data-[invalid]:border-error"
+    }
   ],
   defaultVariants: {
-    variant: "secondary",
-  },
+    variant: "secondary"
+  }
 });
 
 export type ButtonProps<TTag extends ElementType = typeof DEFAULT_BUTTON_TAG> =
@@ -87,7 +88,8 @@ function ButtonFn<TTag extends ElementType = typeof DEFAULT_BUTTON_TAG>(
   } = props as ButtonProps<typeof DEFAULT_BUTTON_TAG>;
 
   const listboxContext = useListboxContext();
-  const resolvedPlaceholder = placeholder || listboxContext.placeholder || "انتخاب";
+  const resolvedPlaceholder =
+    placeholder || listboxContext.placeholder || "انتخاب";
 
   return (
     <ListboxButton
@@ -99,7 +101,7 @@ function ButtonFn<TTag extends ElementType = typeof DEFAULT_BUTTON_TAG>(
         button({
           variant: variant || listboxContext.variant,
           stick: stick || listboxContext.stick,
-          edge: edge || listboxContext.edge,
+          edge: edge || listboxContext.edge
         }),
         listboxContext.className,
         className
@@ -111,28 +113,42 @@ function ButtonFn<TTag extends ElementType = typeof DEFAULT_BUTTON_TAG>(
         <>
           <span className="line-clamp-1 grow text-start">
             {(() => {
-              const resolvedChildren = typeof children == "function" ? children(bag) : children;
+              const resolvedChildren =
+                typeof children == "function" ? children(bag) : children;
               if (resolvedChildren) return resolvedChildren;
               if (
-                listboxContext.normalizeOptions.has(listboxContext.value as string) ||
-                (Array.isArray(listboxContext.value) && listboxContext.value.length > 0)
+                listboxContext.normalizeOptions.has(
+                  listboxContext.value as string
+                ) ||
+                (Array.isArray(listboxContext.value) &&
+                  listboxContext.value.length > 0)
               ) {
                 if (listboxContext.multiple) {
-                  return Array.isArray(listboxContext.value) && listboxContext.value.length > 0 ? (
+                  return Array.isArray(listboxContext.value) &&
+                    listboxContext.value.length > 0 ? (
                     listboxContext.value
-                      .filter((value) => listboxContext.normalizeOptions.has(value))
+                      .filter((value) =>
+                        listboxContext.normalizeOptions.has(value)
+                      )
                       .map((value) => {
-                        return listboxContext.normalizeOptions.get(value)?.label;
+                        return listboxContext.normalizeOptions.get(value)
+                          ?.label;
                       })
                       .join(", ")
                   ) : (
                     <span>
-                      {listboxContext?.placeholder ? listboxContext.placeholder : "انتخاب"}
+                      {listboxContext?.placeholder
+                        ? listboxContext.placeholder
+                        : "انتخاب"}
                     </span>
                   );
                 } else {
-                  return listboxContext.normalizeOptions.has(listboxContext.value as string)
-                    ? listboxContext.normalizeOptions.get(listboxContext.value as string)?.label
+                  return listboxContext.normalizeOptions.has(
+                    listboxContext.value as string
+                  )
+                    ? listboxContext.normalizeOptions.get(
+                        listboxContext.value as string
+                      )?.label
                     : resolvedPlaceholder;
                 }
               } else {
@@ -154,7 +170,9 @@ interface _internal_ComponentButton extends HasDisplayName {
   ): ReactNode;
 }
 
-const Button = memo(forwardRefWithAs(ButtonFn) as unknown as _internal_ComponentButton);
+const Button = memo(
+  forwardRefWithAs(ButtonFn) as unknown as _internal_ComponentButton
+);
 
 Button.displayName = "Button";
 

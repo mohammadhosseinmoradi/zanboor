@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const descriptionDetails = cva({
-  base: "font-bold text-on-surface",
+  base: "font-bold text-on-surface"
 });
 
 type DescriptionDetailsProps = {
@@ -14,5 +14,7 @@ type DescriptionDetailsProps = {
 export function DescriptionDetails(props: DescriptionDetailsProps) {
   const { className, ...otherProps } = props;
 
-  return <dt className={cn(descriptionDetails({}), className)} {...otherProps} />;
+  return (
+    <dt className={cn(descriptionDetails({}), className)} {...otherProps} />
+  );
 }

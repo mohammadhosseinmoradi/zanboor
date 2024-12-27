@@ -10,7 +10,13 @@ type TabProps = {
   disable?: boolean;
 };
 
-export default function Tab({ className, index, onClick, disable, ...otherProps }: TabProps) {
+export default function Tab({
+  className,
+  index,
+  onClick,
+  disable,
+  ...otherProps
+}: TabProps) {
   const { state } = useTabContext();
   const id = state.id + index;
 
@@ -23,7 +29,10 @@ export default function Tab({ className, index, onClick, disable, ...otherProps 
         if (disable) return;
         const element = document.getElementById(id);
         if (!element) return;
-        const y = element.getBoundingClientRect().top + window.scrollY + state.offsetTop;
+        const y =
+          element.getBoundingClientRect().top +
+          window.scrollY +
+          state.offsetTop;
         window.scrollTo({ top: y, behavior: "smooth" });
       }}
       className={cn("h-full w-full shrink-0 px-4 py-2 text-sm/7", className)}

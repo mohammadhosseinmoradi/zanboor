@@ -3,7 +3,7 @@ import { ScrollStateProps } from "@/components/scroll-area";
 
 export enum DialogVariant {
   Center,
-  Drawer,
+  Drawer
 }
 
 export type DialogStateProps = {

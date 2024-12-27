@@ -7,24 +7,24 @@ const divider = cva({
   variants: {
     vertical: {
       true: "",
-      false: "",
-    },
+      false: ""
+    }
   },
   compoundVariants: [
     {
       vertical: true,
       className:
-        "flex flex-col items-center data-[children]:gap-3 [&>span:first-child]:border-s [&>span:last-child]:border-s",
+        "flex flex-col items-center data-[children]:gap-3 [&>span:first-child]:border-s [&>span:last-child]:border-s"
     },
     {
       vertical: false,
       className:
-        "flex items-center data-[children]:gap-3 [&>span:first-child]:border-t [&>span:last-child]:border-t",
-    },
+        "flex items-center data-[children]:gap-3 [&>span:first-child]:border-t [&>span:last-child]:border-t"
+    }
   ],
   defaultVariants: {
-    vertical: false,
-  },
+    vertical: false
+  }
 });
 
 export type DividerProps = {
@@ -40,7 +40,7 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>((props, ref) => {
       ref={ref}
       className={cn(
         divider({
-          vertical,
+          vertical
         }),
         className
       )}

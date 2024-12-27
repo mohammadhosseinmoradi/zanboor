@@ -9,7 +9,7 @@ import {
   type ElementType,
   type MutableRefObject,
   type ReactElement,
-  type Ref,
+  type Ref
 } from "react";
 import type { Expand, Props, XOR, __ } from "./types";
 import { match } from "@/lib/utils/match";
@@ -34,18 +34,18 @@ export enum RenderFeatures {
    * When used, this will allow the user of our component to be in control. This can be used when
    * you want to transition based on some state.
    */
-  Static = 2,
+  Static = 2
 }
 
 export enum RenderStrategy {
   Unmount,
-  Hidden,
+  Hidden
 }
 
 type PropsForFeature<
   TPassedInFeatures extends RenderFeatures,
   TForFeature extends RenderFeatures,
-  TProps,
+  TProps
 > = {
   [P in TPassedInFeatures]: P extends TForFeature ? TProps : __;
 }[TPassedInFeatures];
@@ -55,7 +55,11 @@ export type PropsForFeatures<T extends RenderFeatures> = XOR<
   PropsForFeature<T, RenderFeatures.RenderStrategy, { unmount?: boolean }>
 >;
 
-export function render<TFeature extends RenderFeatures, TTag extends ElementType, TSlot>({
+export function render<
+  TFeature extends RenderFeatures,
+  TTag extends ElementType,
+  TSlot
+>({
   ourProps,
   theirProps,
   slot,
@@ -63,7 +67,7 @@ export function render<TFeature extends RenderFeatures, TTag extends ElementType
   features,
   visible = true,
   name,
-  mergeRefs,
+  mergeRefs
 }: {
   ourProps: Expand<Props<TTag, TSlot, any> & PropsForFeatures<TFeature>> & {
     ref?: Ref<HTMLElement | ElementType>;
@@ -86,14 +90,16 @@ export function render<TFeature extends RenderFeatures, TTag extends ElementType
   let featureFlags = features ?? RenderFeatures.None;
 
   if (featureFlags & RenderFeatures.Static) {
-    let { static: isStatic = false, ...rest } = props as PropsForFeatures<RenderFeatures.Static>;
+    let { static: isStatic = false, ...rest } =
+      props as PropsForFeatures<RenderFeatures.Static>;
 
     // When the `static` prop is passed as `true`, then the user is in control, thus we don't care about anything else
     if (isStatic) return _render(rest, slot, defaultTag, name, mergeRefs);
   }
 
   if (featureFlags & RenderFeatures.RenderStrategy) {
-    let { unmount = true, ...rest } = props as PropsForFeatures<RenderFeatures.RenderStrategy>;
+    let { unmount = true, ...rest } =
+      props as PropsForFeatures<RenderFeatures.RenderStrategy>;
     let strategy = unmount ? RenderStrategy.Unmount : RenderStrategy.Hidden;
 
     return match(strategy, {
@@ -108,7 +114,7 @@ export function render<TFeature extends RenderFeatures, TTag extends ElementType
           name,
           mergeRefs!
         );
-      },
+      }
     });
   }
 
@@ -133,12 +139,16 @@ function _render<TTag extends ElementType, TSlot>(
   // This allows us to use `<HeadlessUIComponent as={MyComponent} refName="innerRef" />`
   let refRelatedProps = props.ref !== undefined ? { [refName]: props.ref } : {};
 
-  let resolvedChildren = (typeof children === "function" ? children(slot) : children) as
-    | ReactElement
-    | ReactElement[];
+  let resolvedChildren = (
+    typeof children === "function" ? children(slot) : children
+  ) as ReactElement | ReactElement[];
 
   // Allow for className to be a function with the slot as the contents
-  if ("className" in rest && rest.className && typeof rest.className === "function") {
+  if (
+    "className" in rest &&
+    rest.className &&
+    typeof rest.className === "function"
+  ) {
     rest.className = rest.className(slot);
   }
 
@@ -171,7 +181,10 @@ function _render<TTag extends ElementType, TSlot>(
   }
 
   if (Component === Fragment) {
-    if (Object.keys(compact(rest)).length > 0 || Object.keys(compact(dataAttributes)).length > 0) {
+    if (
+      Object.keys(compact(rest)).length > 0 ||
+      Object.keys(compact(dataAttributes)).length > 0
+    ) {
       if (
         !isValidElement(resolvedChildren) ||
         (Array.isArray(resolvedChildren) && resolvedChildren.length > 1)
@@ -191,10 +204,10 @@ function _render<TTag extends ElementType, TSlot>(
               "You can apply a few solutions:",
               [
                 'Add an `as="..."` prop, to ensure that we render an actual element instead of a "Fragment".',
-                "Render a single element as the child so that we can forward the props onto that element.",
+                "Render a single element as the child so that we can forward the props onto that element."
               ]
                 .map((line) => `  - ${line}`)
-                .join("\n"),
+                .join("\n")
             ].join("\n")
           );
         }
@@ -213,7 +226,10 @@ function _render<TTag extends ElementType, TSlot>(
                   (childPropsClassName as Function)(...args),
                   (rest as { className?: string }).className
                 )
-            : cn(childPropsClassName, (rest as { className?: string }).className);
+            : cn(
+                childPropsClassName,
+                (rest as { className?: string }).className
+              );
 
         let classNameProps = newClassName ? { className: newClassName } : {};
 
@@ -222,11 +238,14 @@ function _render<TTag extends ElementType, TSlot>(
           Object.assign(
             {},
             // Filter out undefined values so that they don't override the existing values
-            mergePropsAdvanced(resolvedChildren.props as any, compact(omit(rest, ["ref"]))),
+            mergePropsAdvanced(
+              resolvedChildren.props as any,
+              compact(omit(rest, ["ref"]))
+            ),
             dataAttributes,
             refRelatedProps,
             {
-              ref: mergeRefs((resolvedChildren as any).ref, refRelatedProps.ref),
+              ref: mergeRefs((resolvedChildren as any).ref, refRelatedProps.ref)
             },
             classNameProps
           )
@@ -261,7 +280,11 @@ function _render<TTag extends ElementType, TSlot>(
  * so once the ref that contains the list is updated.
  */
 export function useMergeRefsFn() {
-  type MaybeRef<T> = MutableRefObject<T> | ((value: T) => void) | null | undefined;
+  type MaybeRef<T> =
+    | MutableRefObject<T>
+    | ((value: T) => void)
+    | null
+    | undefined;
   let currentRefs = useRef<MaybeRef<any>[]>([]);
   let mergedRef = useCallback((value: any) => {
     for (let ref of currentRefs.current) {
@@ -308,7 +331,10 @@ export function mergePropsAdvanced(...listOfProps: Props<any, any>[]) {
 
   let eventHandlers: Record<
     string,
-    ((event: { defaultPrevented: boolean }, ...args: any[]) => void | undefined)[]
+    ((
+      event: { defaultPrevented: boolean },
+      ...args: any[]
+    ) => void | undefined)[]
   > = {};
 
   for (let props of listOfProps) {
@@ -328,7 +354,9 @@ export function mergePropsAdvanced(...listOfProps: Props<any, any>[]) {
   if (target.disabled || target["aria-disabled"]) {
     for (let eventName in eventHandlers) {
       // Prevent default events for `onClick`, `onMouseDown`, `onKeyDown`, etc.
-      if (/^(on(?:Click|Pointer|Mouse|Key)(?:Down|Up|Press)?)$/.test(eventName)) {
+      if (
+        /^(on(?:Click|Pointer|Mouse|Key)(?:Down|Up|Press)?)$/.test(eventName)
+      ) {
         eventHandlers[eventName] = [(e: any) => e?.preventDefault?.()];
       }
     }
@@ -337,7 +365,10 @@ export function mergePropsAdvanced(...listOfProps: Props<any, any>[]) {
   // Merge event handlers
   for (let eventName in eventHandlers) {
     Object.assign(target, {
-      [eventName](event: { nativeEvent?: Event; defaultPrevented: boolean }, ...args: any[]) {
+      [eventName](
+        event: { nativeEvent?: Event; defaultPrevented: boolean },
+        ...args: any[]
+      ) {
         let handlers = eventHandlers[eventName];
 
         for (let handler of handlers) {
@@ -350,7 +381,7 @@ export function mergePropsAdvanced(...listOfProps: Props<any, any>[]) {
 
           handler(event, ...args);
         }
-      },
+      }
     });
   }
 
@@ -361,7 +392,10 @@ export type HasDisplayName = {
   displayName: string;
 };
 
-export type RefProp<T extends Function> = T extends (props: any, ref: Ref<infer RefType>) => any
+export type RefProp<T extends Function> = T extends (
+  props: any,
+  ref: Ref<infer RefType>
+) => any
   ? { ref?: Ref<RefType> }
   : never;
 
@@ -372,7 +406,8 @@ export function mergeProps<T extends Props<any, any>[]>(...listOfProps: T) {
 
   let target: Props<any, any> = {};
 
-  let eventHandlers: Record<string, ((...args: any[]) => void | undefined)[]> = {};
+  let eventHandlers: Record<string, ((...args: any[]) => void | undefined)[]> =
+    {};
 
   for (let props of listOfProps) {
     for (let prop in props) {
@@ -396,7 +431,7 @@ export function mergeProps<T extends Props<any, any>[]>(...listOfProps: T) {
         for (let handler of handlers) {
           handler?.(...args);
         }
-      },
+      }
     });
   }
 
@@ -407,11 +442,11 @@ export function mergeProps<T extends Props<any, any>[]>(...listOfProps: T) {
  * This is a hack, but basically we want to keep the full 'API' of the component, but we do want to
  * wrap it in a forwardRef so that we _can_ passthrough the ref
  */
-export function forwardRefWithAs<T extends { name: string; displayName?: string }>(
-  component: T
-): T & { displayName: string } {
+export function forwardRefWithAs<
+  T extends { name: string; displayName?: string }
+>(component: T): T & { displayName: string } {
   return Object.assign(forwardRef(component as unknown as any) as any, {
-    displayName: component.displayName ?? component.name,
+    displayName: component.displayName ?? component.name
   });
 }
 
@@ -423,7 +458,10 @@ export function compact<T extends Record<any, any>>(object: T) {
   return clone;
 }
 
-function omit<T extends Record<any, any>>(object: T, keysToOmit: string[] = []) {
+function omit<T extends Record<any, any>>(
+  object: T,
+  keysToOmit: string[] = []
+) {
   let clone = Object.assign({}, object) as T;
   for (let key of keysToOmit) {
     if (key in clone) delete clone[key];

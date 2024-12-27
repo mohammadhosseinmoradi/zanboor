@@ -9,8 +9,8 @@ export async function getUsers(): Promise<Result<UserDto[]>> {
   const users = await prisma.user.findMany({
     where: {
       profile: {
-        isNot: null,
-      },
+        isNot: null
+      }
     },
     include: {
       profile: {
@@ -20,15 +20,15 @@ export async function getUsers(): Promise<Result<UserDto[]>> {
           physicalAttributes: true,
           familyInfo: true,
           financialStatus: true,
-          marriagePreferences: true,
-        },
-      },
-    },
+          marriagePreferences: true
+        }
+      }
+    }
   });
 
   const usersDto = users.map<UserDto>((user) => userDtoSchema.parse(user));
 
   return {
-    data: usersDto,
+    data: usersDto
   };
 }

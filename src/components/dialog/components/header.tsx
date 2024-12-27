@@ -11,7 +11,7 @@ type HeaderProps = {
 const Header = forwardRef<HTMLDivElement, HeaderProps>(
   ({ compact, className, children, ...otherProps }, ref) => {
     const {
-      state: { bodyScrollState },
+      state: { bodyScrollState }
     } = useDialogContext();
 
     return (
@@ -24,7 +24,8 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
           compact && "p-2",
           "transition [&>[data-slot=description]]:text-sm [&>[data-slot=title]+[data-slot=description]]:mt-1.5",
           {
-            "shadow-lg": !!bodyScrollState?.isScrolled && !bodyScrollState?.isBeginning,
+            "shadow-lg":
+              !!bodyScrollState?.isScrolled && !bodyScrollState?.isBeginning
           },
           className
         )}

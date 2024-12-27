@@ -28,20 +28,27 @@ export function AvatarZoomable(props: AvatarZoomableProps) {
         layoutId={id}
         className={cn("relative", {
           "z-30": isTransition || open,
-          "cursor-pointer": src,
+          "cursor-pointer": src
         })}
         onClick={() => src && setOpen(true)}
         onLayoutAnimationStart={() => setIsTransition(true)}
         onLayoutAnimationComplete={() => setIsTransition(false)}
       >
-        <Avatar className={cn("size-full", avatar?.className)} src={src} {...otherProps} />
+        <Avatar
+          className={cn("size-full", avatar?.className)}
+          src={src}
+          {...otherProps}
+        />
       </motion.div>
       {online != undefined && (
         <div className="pointer-events-none absolute inset-0 flex rotate-[225deg] justify-center">
           <div
-            className={cn("border-surface relative -top-3 size-5 rounded-full border-4", {
-              "bg-success": "online",
-            })}
+            className={cn(
+              "border-surface relative -top-3 size-5 rounded-full border-4",
+              {
+                "bg-success": "online"
+              }
+            )}
           />
         </div>
       )}
@@ -52,28 +59,28 @@ export function AvatarZoomable(props: AvatarZoomableProps) {
             <DialogPanel as={Fragment}>
               <motion.div
                 initial={{
-                  opacity: 0,
+                  opacity: 0
                 }}
                 animate={{
-                  opacity: 1,
+                  opacity: 1
                 }}
                 exit={{
-                  opacity: 0,
+                  opacity: 0
                 }}
                 className="bg-surface-bright fixed inset-0 z-30 flex items-center justify-center p-4"
               >
                 <motion.div
                   initial={{
-                    opacity: 0,
+                    opacity: 0
                   }}
                   animate={{
                     opacity: 1,
                     transition: {
-                      delay: 0.5,
-                    },
+                      delay: 0.5
+                    }
                   }}
                   exit={{
-                    opacity: 0,
+                    opacity: 0
                   }}
                 >
                   <Button

@@ -12,9 +12,13 @@ type ListProps = {
   style?: CSSProperties;
 };
 
-export default function List({ className, children, ...otherProps }: ListProps) {
+export default function List({
+  className,
+  children,
+  ...otherProps
+}: ListProps) {
   const {
-    state: { activeIndex },
+    state: { activeIndex }
   } = useTabContext();
   const swiper = useRef<SwiperClass | null>(null);
 
@@ -28,7 +32,10 @@ export default function List({ className, children, ...otherProps }: ListProps) 
   return (
     <div
       {...otherProps}
-      className={clsx("border-border bg-surface sticky flex w-full border-b", className)}
+      className={clsx(
+        "border-border bg-surface sticky flex w-full border-b",
+        className
+      )}
     >
       <Swiper
         onSwiper={(_swiper) => (swiper.current = _swiper)}
@@ -44,7 +51,7 @@ export default function List({ className, children, ...otherProps }: ListProps) 
                 key={index}
                 className={clsx("relative !w-auto", {
                   "text-on-surface-hover": index === activeIndex,
-                  "hover:text-on-surface-hover": index !== activeIndex,
+                  "hover:text-on-surface-hover": index !== activeIndex
                 })}
               >
                 <Tab
@@ -52,13 +59,19 @@ export default function List({ className, children, ...otherProps }: ListProps) 
                     swiper.current?.slideTo(index);
                   }}
                   {...tab.props}
-                  className={clsx("min-w-[4rem] text-center transition-all", tab.props?.className)}
+                  className={clsx(
+                    "min-w-[4rem] text-center transition-all",
+                    tab.props?.className
+                  )}
                   index={index}
                 >
                   {tab.props?.children}
                 </Tab>
                 {index === activeIndex && (
-                  <motion.div layoutId={id} className="bg-primary absolute bottom-0 h-0.5 w-full" />
+                  <motion.div
+                    layoutId={id}
+                    className="bg-primary absolute bottom-0 h-0.5 w-full"
+                  />
                 )}
               </SwiperSlide>
             );
