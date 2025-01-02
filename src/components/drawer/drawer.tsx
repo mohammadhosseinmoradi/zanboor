@@ -20,7 +20,7 @@ import {
 } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { DrawerContext } from "@/components/drawer/context";
 import { Portal } from "@headlessui/react";
 import { usePrevious } from "@/hooks/use-previous";

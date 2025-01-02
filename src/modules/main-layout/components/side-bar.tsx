@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { ReactNode, useId } from "react";
 import { NavLink } from "@/components/nav-link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { routes } from "@/lib/constants/routes";
 import { Link } from "@/components/link";
 import { ThemeImage } from "@/components/theme-image";

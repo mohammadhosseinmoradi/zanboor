@@ -10,7 +10,7 @@ import {
   SlashIcon,
   UserRoundIcon
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Badge } from "@/components/badge";
 
 type MobileBottomNavBarProps = {

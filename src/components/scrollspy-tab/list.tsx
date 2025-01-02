@@ -4,7 +4,7 @@ import { CSSProperties, ReactNode, useEffect, useId, useRef } from "react";
 import { useTabContext } from "@/components/scrollspy-tab/group";
 import Tab from "@/components/scrollspy-tab/tab";
 import clsx from "clsx";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 type ListProps = {
   className?: string;

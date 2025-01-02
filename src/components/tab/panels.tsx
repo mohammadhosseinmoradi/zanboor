@@ -4,7 +4,7 @@ import {
 } from "@headlessui/react";
 import { ElementType, ReactNode, Ref } from "react";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { useTabContext } from "./context";
 import { usePrevious } from "@/hooks/use-previous";
 import { forwardRefWithAs, HasDisplayName, RefProp } from "@/lib/utils/render";

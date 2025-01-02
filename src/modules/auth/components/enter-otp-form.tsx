@@ -17,7 +17,7 @@ import { enterOtpSchema } from "@/modules/auth/schema";
 import { useAuthActions, useAuthData } from "@/modules/auth/context";
 import { redirect, useRouter } from "next/navigation";
 import useLeftTime from "@/hooks/use-left-time";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { sendOtp } from "@/modules/auth/actions/send-otp";
 import { toast } from "sonner";

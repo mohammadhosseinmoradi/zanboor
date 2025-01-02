@@ -2,7 +2,7 @@
 
 import { Fragment, useId, useState } from "react";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { Avatar, AvatarProps } from "@/components/avatar";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Button } from "@/components/button";

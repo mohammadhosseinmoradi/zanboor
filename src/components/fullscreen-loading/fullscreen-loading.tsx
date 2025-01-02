@@ -1,7 +1,7 @@
 "use client";
 
 import { Portal } from "@headlessui/react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { Loading } from "@/components/loading";
 import { ThemeImage } from "@/components/theme-image";
 

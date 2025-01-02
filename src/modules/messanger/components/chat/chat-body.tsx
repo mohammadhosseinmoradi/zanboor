@@ -2,7 +2,7 @@
 
 import { ChatBubbleGroup } from "@/modules/messanger/components/chat/chat-bubble-group";
 import { cn } from "@/lib/utils";
-import { useMotionValueEvent, useScroll } from "framer-motion";
+import { useMotionValueEvent, useScroll } from "motion/react";
 import { useRef } from "react";
 import { Badge } from "@/components/badge";
 
