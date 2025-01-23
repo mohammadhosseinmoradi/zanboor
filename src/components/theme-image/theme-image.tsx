@@ -18,7 +18,10 @@ export function ThemeImage(props: ThemeImageProps) {
         {...otherProps}
       />
       <Image
-        className={cn("[&:not(.dark_*)]:hidden", className)}
+        className={cn(
+          "[&:not(:where([data-theme=dark],[data-theme=dark]_*))]:hidden",
+          className
+        )}
         src={srcDark}
         alt={alt}
         {...otherProps}

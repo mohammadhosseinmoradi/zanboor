@@ -3,7 +3,7 @@
 @plugin "tailwindcss-animate";
 @plugin "@tailwindcss/typography";
 
-@variant dark (&:where(.dark, .dark *));
+@variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
   *,
@@ -15,7 +15,7 @@
     border-color: var(--color-border);
   }
 
-  .dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
     --color-surface-dim: oklch(20% 0 0);
     --color-surface: oklch(20% 0 0);
     --color-surface-bright: oklch(26% 0 0);

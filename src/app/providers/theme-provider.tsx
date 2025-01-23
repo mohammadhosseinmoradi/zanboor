@@ -12,7 +12,7 @@ export function ThemeProvider(props: ThemeProviderProps) {
 
   return (
     <_ThemeProvider
-      attribute="class"
+      attribute="data-theme"
       enableSystem
       themes={["light", "dark"]}
       storageKey="theme"
